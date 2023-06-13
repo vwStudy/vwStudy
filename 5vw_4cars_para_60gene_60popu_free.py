@@ -285,39 +285,39 @@ class Window:
         return len(self.ga_li2)
 
     def init_Obstacles(self):
-        #左上の縦置き
-        self.Obstacle_1 = Obstacle(self.screen,0,0,0,0,"green")
-        #左上の横置き
-        self.Obstacle_2 = Obstacle(self.screen,0,0,0,0,"green")
-        #左下の縦置き
-        self.Obstacle_3 = Obstacle(self.screen,0,0,0,0,"green")
-        #左下の横置き
-        self.Obstacle_4 = Obstacle(self.screen,0,0,0,0,"green")
-        #右上の横置き
-        self.Obstacle_5 = Obstacle(self.screen,0,0,0,0,"green")
-        #右上の縦置き
-        self.Obstacle_6 = Obstacle(self.screen,0,0,0,0,"green")
-        #右下の縦
-        self.Obstacle_7 = Obstacle(self.screen,0,0,0,0,"green")
-        #右下の横
-        self.Obstacle_8 = Obstacle(self.screen,0,0,0,0,"green")
-        # self.Obstacle_9 = Obstacle(self.screen,525,425,10,10,"green")
-        # self.Obstacle_10 = Obstacle(self.screen,350,200,200,100,"green")
-        # self.Obstacle_11 = Obstacle(self.screen,670,450,120,100,"green")
-        # self.Obstacle_12 = Obstacle(self.screen,530,479,70,62,(127,255,0,128))
-        self.Obstacle_grp = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+    #     # #左上の縦置き
+    #     # self.Obstacle_1 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #左上の横置き
+    #     # self.Obstacle_2 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #左下の縦置き
+    #     # self.Obstacle_3 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #左下の横置き
+    #     # self.Obstacle_4 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #右上の横置き
+    #     # self.Obstacle_5 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #右上の縦置き
+    #     # self.Obstacle_6 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #右下の縦
+    #     # self.Obstacle_7 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # #右下の横
+    #     # self.Obstacle_8 = Obstacle(self.screen,0,0,0,0,"green")
+    #     # self.Obstacle_9 = Obstacle(self.screen,525,425,10,10,"green")
+    #     # self.Obstacle_10 = Obstacle(self.screen,350,200,200,100,"green")
+    #     # self.Obstacle_11 = Obstacle(self.screen,670,450,120,100,"green")
+    #     # self.Obstacle_12 = Obstacle(self.screen,530,479,70,62,(127,255,0,128))
+    #     self.Obstacle_grp = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+    #         self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
 
-        )
-        self.Obstacle_grp_2 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
-        )
-        self.Obstacle_grp_3 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
-        )
-        self.Obstacle_grp_4 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
-        )
+    #     )
+    #     self.Obstacle_grp_2 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+    #         self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+    #     )
+    #     self.Obstacle_grp_3 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+    #         self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+    #     )
+    #     self.Obstacle_grp_4 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+    #         self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+    #     )
         self.set_obstacles(self.ga_li,self.Obstacle_grp,(255,255,0,128))
         self.set_obstacles(self.ga_li2,self.Obstacle_grp_2,(255,20,147,128))
         self.set_obstacles(self.ga_li3,self.Obstacle_grp_3,(0,0,255,128))
@@ -510,8 +510,8 @@ model.run()
 convergence = model.report
 solution = model.result
 #print((solution['variable']),"2222") # x, y の最適値
-solution_list = []
+list11 = []
 for i in solution['variable']:
-    solution_list.append(i)
-print(solution_list)
+    list11.append(i)
+print(list11)
 print(solution['score'],"最小値") # x, y の最適値での関数の値
