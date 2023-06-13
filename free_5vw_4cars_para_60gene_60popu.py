@@ -515,7 +515,9 @@ def solution_output():
     solution_list = []
     for i in solution['variable']:
         solution_list.append(i)
-        
+    
+    return solution_list
+    
 # solution_list = []
 # for i in solution['variable']:
 #     solution_list.append(i)
