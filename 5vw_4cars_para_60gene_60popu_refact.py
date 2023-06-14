@@ -501,5 +501,9 @@ model = ga(function=f,
 model.run()
 convergence = model.report
 solution = model.result
-print((solution['variable']),"2222") # x, y の最適値
+soulution_list = []
+for i in slution['variable']:
+    solution_list.append(i)
+print(solution_list)
+#print((solution['variable']),"2222") # x, y の最適値
 print(solution['score'],"最小値") # x, y の最適値での関数の値
