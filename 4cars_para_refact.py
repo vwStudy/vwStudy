@@ -439,8 +439,6 @@ class Window:
         return self.collision_avoidance(),end_time - time_sta,self.init_Obstacles(),self.init_CarAgents()
 
 Window = Window(BOX_WIDTH, BOX_HEIGHT)
-licore = []
-lili = []
 def f(p):
     li = []
     li2 = []
@@ -501,6 +499,9 @@ model = ga(function=f,
 model.run()
 convergence = model.report
 solution = model.result
+print(VWnum+"vw")
+for key, value in params.items():
+    print(key + "：" + value)
 soulution_list = []
 for i in slution['variable']:
     solution_list.append(i)
