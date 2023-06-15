@@ -285,30 +285,29 @@ class Window:
         return len(self.ga_li2)
 
     def init_Obstacles(self):
-        self.Obstacle_1 = Obstacle(self.screen,-1100,0,1400,400,"green")
-        self.Obstacle_2 = Obstacle(self.screen,-900,-100,1400,400,"green")
-        self.Obstacle_3 = Obstacle(self.screen,-1100,500,1400,400,"green")
-        self.Obstacle_4 = Obstacle(self.screen,-900,600,1400,400,"green")
-        self.Obstacle_5 = Obstacle(self.screen,600,-100,1400,400,"green")
-        self.Obstacle_6 = Obstacle(self.screen,800,0,1400,400,"green")
-        self.Obstacle_7 = Obstacle(self.screen,800,500,1400,400,"green")
-        self.Obstacle_8 = Obstacle(self.screen,600,600,1400,400,"green")
-        self.Obstacle_9 = Obstacle(self.screen,525,425,10,10,"green")
-        self.Obstacle_10 = Obstacle(self.screen,350,200,200,100,"green")
-        self.Obstacle_11 = Obstacle(self.screen,670,450,120,100,"green")
-        self.Obstacle_12 = Obstacle(self.screen,530,479,70,62,(127,255,0,128))
-        self.Obstacle_grp = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
-
+        # self.Obstacle_1 = Obstacle(self.screen,-1100,0,1400,400,"green")
+        # self.Obstacle_2 = Obstacle(self.screen,-900,-100,1400,400,"green")
+        # self.Obstacle_3 = Obstacle(self.screen,-1100,500,1400,400,"green")
+        # self.Obstacle_4 = Obstacle(self.screen,-900,600,1400,400,"green")
+        # self.Obstacle_5 = Obstacle(self.screen,600,-100,1400,400,"green")
+        # self.Obstacle_6 = Obstacle(self.screen,800,0,1400,400,"green")
+        # self.Obstacle_7 = Obstacle(self.screen,800,500,1400,400,"green")
+        # self.Obstacle_8 = Obstacle(self.screen,600,600,1400,400,"green")
+        # self.Obstacle_9 = Obstacle(self.screen,525,425,10,10,"green")
+        # self.Obstacle_10 = Obstacle(self.screen,350,200,200,100,"green")
+        # self.Obstacle_11 = Obstacle(self.screen,670,450,120,100,"green")
+        # self.Obstacle_12 = Obstacle(self.screen,530,479,70,62,(127,255,0,128))
+        self.Obstacle_grp = pygame.sprite.Group(#self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+            #self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
         )
-        self.Obstacle_grp_2 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+        self.Obstacle_grp_2 = pygame.sprite.Group(#self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+            #self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
         )
-        self.Obstacle_grp_3 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+        self.Obstacle_grp_3 = pygame.sprite.Group(#self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+            #self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
         )
-        self.Obstacle_grp_4 = pygame.sprite.Group(self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
-            self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
+        self.Obstacle_grp_4 = pygame.sprite.Group(#self.Obstacle_1,self.Obstacle_2,self.Obstacle_3,
+            #self.Obstacle_4,self.Obstacle_5,self.Obstacle_6,self.Obstacle_7,self.Obstacle_8
         )
         self.set_obstacles(self.ga_li,self.Obstacle_grp,(255,255,0,128))
         self.set_obstacles(self.ga_li2,self.Obstacle_grp_2,(255,20,147,128))
@@ -501,7 +500,7 @@ convergence = model.report
 solution = model.result
 print(str(VWnum) + "vw")
 for key, value in params.items():
-    print(str(key) + "：" + str(value))
+    print(str(key) + ":" + str(value))
 solution_list = []
 for i in solution['variable']:
     solution_list.append(i)

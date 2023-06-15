@@ -499,11 +499,11 @@ model = ga(function=f,
 model.run()
 convergence = model.report
 solution = model.result
-print(VWnum+"vw")
+print(str(VWnum) + "vw")
 for key, value in params.items():
-    print(key + "：" + value)
-soulution_list = []
-for i in slution['variable']:
+    print(str(key) + "：" + str(value))
+solution_list = []
+for i in solution['variable']:
     solution_list.append(i)
 print(solution_list)
 #print((solution['variable']),"2222") # x, y の最適値
