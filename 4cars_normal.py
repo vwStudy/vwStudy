@@ -499,9 +499,9 @@ model = ga(function=f,
 model.run()
 convergence = model.report
 solution = model.result
-print(str(VWnum) + 'vw')
+print(str(VWnum) + "vw")
 for key, value in params.items():
-    print(key + '：' + value)
+    print(str(key) + "：" + str(value))
 solution_list = []
 for i in solution['variable']:
     solution_list.append(i)
