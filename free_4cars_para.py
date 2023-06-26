@@ -1,4 +1,5 @@
 import time
+import random
 import pygame
 from pygame.locals import *
 import numpy as np
@@ -436,7 +437,63 @@ class Window:
                 LOOP = False
 
         return self.collision_avoidance(),end_time - time_sta,self.init_Obstacles(),self.init_CarAgents()
+    
+class Area:
+    def monte_carlo(self,root,root_2,root_3,root_4):
+        self.total_point = 10000
+        point_count = []
+        for i in range(self.total_point):
+            self.x_point = random.randrange(100,1000)
+            self.y_point = random.randrange(0,900)
+            self.coordinate = (self.x_point,self.y_point)
+            point_count.append(self.crossing_number(self.coordinate,root,root_2,root_3,root_4))
+        
+        point_rate = float(sum(point_count) / self.total_point)
+        
+        return point_rate
 
+    
+    def crossing_number(self,coordinate,root,root_2,root_3,root_4):
+        self.count = 0
+        self.inside_point=0
+        root_y_list = [i[1] for i in root]
+        root2_y_list = [i[1] for i in root_2]
+        root3_y_list = [i[1] for i in root_3]
+        root4_y_list = [i[1] for i in root_4]
+        for i in range(1,len(root_y_list)):
+            if(root_y_list[i]-root_y_list[i-1]>0):
+                if(root_y_list[i]>coordinate[1] and root_y_list[i-1]<coordinate[1]):
+                    self.count+=1
+            elif (root_y_list[i]-root_y_list[i-1]<0):
+                if(root_y_list[i]<coordinate[1] and root_y_list[i-1]>coordinate[1]):
+                    self.count+=1
+        for i in range(1,len(root2_y_list)):
+            if(root2_y_list[i]-root2_y_list[i-1]>0):
+                if(root2_y_list[i]>coordinate[1] and root2_y_list[i-1]<coordinate[1]):
+                    self.count+=1
+            elif (root2_y_list[i]-root2_y_list[i-1]<0):
+                if(root2_y_list[i]<coordinate[1] and root2_y_list[i-1]>coordinate[1]):
+                    self.count+=1
+        for i in range(len(root3_y_list)):
+            if(root3_y_list[i]-root3_y_list[i-1]>0):
+                if(root3_y_list[i]>coordinate[1] and root3_y_list[i-1]<coordinate[1]):
+                    self.count+=1
+            elif (root3_y_list[i]-root3_y_list[i-1]<0):
+                if(root3_y_list[i]<coordinate[1] and root3_y_list[i-1]>coordinate[1]):
+                    self.count+=1
+        for i in range(len(root4_y_list)):
+            if(root4_y_list[i]-root4_y_list[i-1]>0):
+                if(root4_y_list[i]>coordinate[1] and root4_y_list[i-1]<coordinate[1]):
+                    self.count+=1
+            elif (root4_y_list[i]-root4_y_list[i-1]<0):
+                if(root4_y_list[i]<coordinate[1] and root4_y_list[i-1]>coordinate[1]):
+                    self.count+=1
+        
+        if(self.count%2==0):
+            self.inside_point+=1
+        
+        return self.inside_point
+    
 Window = Window(BOX_WIDTH, BOX_HEIGHT)
 def f(p):
     li = []
@@ -483,8 +540,14 @@ def f(p):
     print(collision,"衝突")
     all_distance = distance + distance_2 + distance_3 + distance_4
     print(all_distance*((total_num_obstacles/(VWnum*((VWnum**2)-1)))) + collision*1000000 + out,"ans")
+    
+    area = Area()
+    point_rate = area.monte_carlo(root,root_2,root_3,root_4)
 
-    return all_distance*((total_num_obstacles/(VWnum*((VWnum**2)-1)))) + collision*1000000 + out
+    if(point_rate>0.5):
+        return all_distance*((total_num_obstacles/(VWnum*((VWnum**2)-1))))*point_rate + collision*1000000 + out
+    elif(point_rate<0.5):
+        return all_distance*((total_num_obstacles/(VWnum*((VWnum**2)-1))))*(1-point_rate) + collision*1000000 + out
 
 var_list = [[0,2]] * (VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
 
