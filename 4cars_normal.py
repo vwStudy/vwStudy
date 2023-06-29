@@ -27,12 +27,12 @@ up_speed = 2.5
 
 # パラメータ（指定しなければデフォルト）
 params = {
-    'max_num_iteration': 60,
-    'population_size': 60,
+    'max_num_iteration': 10,
+    'population_size': 10,
 }
 
 #VWのセルを指定する変数、VWnum * VWnumのセル数になる
-VWnum = 5
+VWnum = 3
 
 class CarAgent(pygame.sprite.Sprite):# ← pygame.sprite.Sprite
     def __init__(self, screen, x, y, des,Obstacle_grp,color):
@@ -109,7 +109,7 @@ class CarAgent(pygame.sprite.Sprite):# ← pygame.sprite.Sprite
         start_posi.append((self.des_x,self.des_y))
         dijkstra = []
 
-        for obs,str, end in itertools.product(self.Obstacle_grp,start_posi, start_posi):
+        for obs in self.Obstacle_grp:
             left_ob_x = obs.rect.x
             right_ob_x = obs.rect.x + obs.width
             top_ob_y = obs.rect.y
@@ -117,6 +117,8 @@ class CarAgent(pygame.sprite.Sprite):# ← pygame.sprite.Sprite
 
             obs_posi.append((left_ob_x,top_ob_y))
             start_posi.extend([(left_ob_x,top_ob_y),(right_ob_x,top_ob_y),(left_ob_x,bottom_ob_y),(right_ob_x,bottom_ob_y)])
+
+        for obs,str, end in itertools.product(self.Obstacle_grp,start_posi, start_posi):
 
             if str[0] < end[0]:
                 if self.collision(str[0],str[1],end[0],end[1],left_ob_x,right_ob_x,top_ob_y,bottom_ob_y,str[0],end[0]) == True:
@@ -318,7 +320,7 @@ class Window:
     
     def set_obstacles(self,obs_list,Obstacle_grp,color):
         for obs in obs_list:
-            obstacles = Obstacle(self.screen,obs[0],obs[1],obs[2]*60,62,color)
+            obstacles = Obstacle(self.screen,obs[0],obs[1],obs[2]*(300/VWnum),(300/VWnum),color)
             Obstacle_grp.add(obstacles)
 
     def init_CarAgents(self):    
