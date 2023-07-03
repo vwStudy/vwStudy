@@ -597,7 +597,7 @@ def f(p):
     print(all_distance*((total_num_obstacles/(4*15))) + collision*1000000 + out,"ans")
     # print(Window.init_CarAgents())
     # return win + len(obs)*20
-    return all_distance*((total_num_obstacles/(4*15))) + collision*1000000 + out
+    return all_distance + collision*1000000 + out
 
 # varbound = np.array([
 #     [0, 2],[0, 2],[0, 2],[0, 2],[0, 2],[0, 2],
