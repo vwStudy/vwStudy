@@ -647,7 +647,15 @@ model.run()
 # solution = model.output_dict
 convergence = model.report
 solution = model.result
-print((solution['variable']),"2222") # x, y の最適値
+
+for key, value in params.items():
+    print(str(key) + "：" + str(value))
+solution_list = []
+for i in solution['variable']:
+    solution_list.append(i)
+print(solution_list)
+
+#print((solution['variable']),"2222") # x, y の最適値
 print(solution['score'],"最小値") # x, y の最適値での関数の値
 # solution = [
 #     0.07028877, 1.50537055, 0.10273636, 1.87254092, 0.10359179, 0.35257053,
