@@ -97,11 +97,11 @@ class VW{
     public:
     
 
-    void generate_vw(int vwNum);
+    void set_vw(int vwNum);
 };
 
 
-void VW::generate_vw(int vwNum){
+void VW::set_vw(int vwNum){
     random_device rd;
     std::mt19937 mt(rd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
     std::uniform_int_distribution<> rand100(0, 1);
