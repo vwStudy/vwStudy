@@ -61,55 +61,67 @@ class VW():
         return all_distance*((total_num_obstacles/(setting.VWnum*((setting.VWnum**2)-1)))) + collision*1000000 + out
 
 class Environment():
-    def set_road():
+    def __init__():
         aaaa=0
 
 
 class CarAgent():
-    def __init__(self, x: int, y: int):
-        self.x = self.dx = self.start_x = x
-        self.y = self.dy = self.start_y = y
+    def __init__(self, start_x, start_y, goal_x, goal_y):
+        self.x = self.dx = start_x
+        self.y = self.dy = start_y
         self.speed = setting.speed #根拠のある数値にする
         self.car_width = setting.car_width
         self.car_root = []
 
     def move(self,dx,dy):
-        rad = np.arctan(abs(self.dy - self.y)/abs(self.dx - self.x))
+        rad = np.arctan(abs(dy - self.y)/abs(dx - self.x))
         dig = math.degrees(rad)
-        if  self.x > des_x and self.y > des_y:
-            self.x -= (math.cos(math.radians(dig))*self.speed)
-            self.y -= (math.sin(math.radians(dig))*self.speed)
-        elif self.y > des_y:
-            self.x += (math.cos(math.radians(dig))*self.speed)
-            self.y -= (math.sin(math.radians(dig))*self.speed) 
-        elif self.x > des_x:
-            self.x -= (math.cos(math.radians(dig))*self.speed)
-            self.y += (math.sin(math.radians(dig))*self.speed)  
+        if dx == self.x and dy == self.y:
+            self.x += 0
+            self.y += 0
         else:
-            self.x += (math.cos(math.radians(dig))*self.speed)
-            self.y += (math.sin(math.radians(dig))*self.speed)
-        self.rect.x,self.rect.y =self.x,self.y
-                
+            if  dx > self.x and dy > self.y:
+                self.x += (math.cos(math.radians(dig))*self.speed)
+                self.y += (math.sin(math.radians(dig))*self.speed)
+            elif dx < self.x and dy > self.y:
+                self.x -= (math.cos(math.radians(dig))*self.speed)
+                self.y += (math.sin(math.radians(dig))*self.speed) 
+            elif dx > self.x and dy < self.y:
+                self.x += (math.cos(math.radians(dig))*self.speed)
+                self.y -= (math.sin(math.radians(dig))*self.speed)  
+            elif dx < self.dx and dy < self.dy:
+                self.x -= (math.cos(math.radians(dig))*self.speed)
+                self.y -= (math.sin(math.radians(dig))*self.speed)
+
+class Execution():
+    def set_road(self):
+        s = 10
+    def set_caragent(self):
+        self.CarAgent_1 = CarAgent(0, 50, 100, 50)
+        self.CarAgent_2 = CarAgent(50, 100, 50, 0)
+
+def main():
+    solution_list = []
+    var_list = [[0,2]] * (setting.VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
+    varbound = np.array(var_list)
+    ga_model = ga(function=VW.ga_function,
+            dimension=((setting.VWnum**2) * 4),
+            variable_type='real',
+            variable_boundaries=varbound,
+            algorithm_parameters=setting.params
+    )
+    ga_model.run()
+    convergence = ga_model.report
+    solution = ga_model.result
+    print(str(setting.VWnum) + "vw")
+    for key, value in setting.params.items():
+        print(str(key) + "：" + str(value))
+    for i in solution['variable']:
+        solution_list.append(i)
+    print(solution_list)
+    #print((solution['variable']),"2222") # x, y の最適値
+    print(solution['score'],"最小値") # x, y の最適値での関数の値
 
 
-
-var_list = [[0,2]] * (setting.VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
-varbound = np.array(var_list)
-ga_model = ga(function=VW.ga_function,
-           dimension=((setting.VWnum**2) * 4),
-           variable_type='real',
-           variable_boundaries=varbound,
-           algorithm_parameters=setting.params
-)
-ga_model.run()
-convergence = ga_model.report
-solution = ga_model.result
-print(str(setting.VWnum) + "vw")
-for key, value in setting.params.items():
-    print(str(key) + "：" + str(value))
-solution_list = []
-for i in solution['variable']:
-    solution_list.append(i)
-print(solution_list)
-#print((solution['variable']),"2222") # x, y の最適値
-print(solution['score'],"最小値") # x, y の最適値での関数の値
+if __name__ == '__main__':
+    main()
