@@ -7,10 +7,12 @@ import setting
 class VW():
     def __init__():
         a=0
-    def dijkstra():
-        i=0
+
     def visibility_graph():
         j=0
+
+    def dijkstra():
+        i=0
 
     def ga_function(p):
         car1_vw = []
@@ -61,16 +63,19 @@ class VW():
         return all_distance*((total_num_obstacles/(setting.VWnum*((setting.VWnum**2)-1)))) + collision*1000000 + out
 
 class Environment():
-    def __init__():
-        aaaa=0
-
+    def __init__(self, obstacle_x, obstacle_y, width, height):
+        self.x = obstacle_x
+        self.y = obstacle_y
+        self.width = width
+        self.height = height
+        
 
 class CarAgent():
     def __init__(self, start_x, start_y, goal_x, goal_y):
         self.x = self.dx = start_x
         self.y = self.dy = start_y
         self.speed = setting.speed #根拠のある数値にする
-        self.car_width = setting.car_width
+        self.car_width = setting.car_width #根拠のある数値にする
         self.car_root = []
 
     def move(self,dx,dy):
@@ -94,11 +99,17 @@ class CarAgent():
                 self.y -= (math.sin(math.radians(dig))*self.speed)
 
 class Execution():
-    def set_road(self):
-        s = 10
+    def set_obstacle(self):
+        self.Obstacle_1 = Environment()
+        self.Obstacle_2 = Environment()
+        self.Obstacle_3 = Environment()
+        self.Obstacle_4 = Environment()
+
     def set_caragent(self):
         self.CarAgent_1 = CarAgent(0, 50, 100, 50)
         self.CarAgent_2 = CarAgent(50, 100, 50, 0)
+        self.CarAgent_3 = CarAgent(100, 50, 0, 50)
+        self.CarAgent_4 = CarAgent(50, 0, 50, 100)
 
 def main():
     solution_list = []
