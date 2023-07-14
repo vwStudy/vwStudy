@@ -8,11 +8,6 @@ class VW():
     def __init__():
         a=0
 
-    def visibility_graph():
-        j=0
-
-    def dijkstra():
-        i=0
 
     def ga_function(p):
         car1_vw = []
@@ -111,6 +106,49 @@ class Execution():
         self.CarAgent_3 = CarAgent(100, 50, 0, 50)
         self.CarAgent_4 = CarAgent(50, 0, 50, 100)
 
+def visibility_graph(vertex_list, obstacle_line_list):
+    """
+    
+    O(n^3)の素朴な可視グラフ法を実行する関数
+    """
+
+    #変数は仮置き、listで扱うかは要相談
+
+    visibility_graph_list = []
+
+    for index, vertex_u in enumerate(vertex_list):  # 頂点とインデックスのペアを取得 O(n)
+        for vertex_v in vertex_list[index + 1:]:  # インデックスの次の頂点から順番に取り出す O(n)
+            #vertex_u, vertex_vをつなぐ線分をLineとし
+            Line = [vertex_u, vertex_v]
+            #可視グラフが重複してしまう場合を考え重複チェックをする
+            if Line in visibility_graph_list:
+                continue
+            #障害物との交差しているかのFlagを立てる
+            cross = False
+            #全ての障害物の各辺に対し
+            for obstacle_Line in obstacle_line_list: #O(n)
+                #障害物の各辺に対し衝突を判定する
+                #外積による線分交差判定
+                s = (vertex_v.x - vertex_u.x)*(obstacle_Line[0].y - vertex_u.y) - (obstacle_Line[0].x - vertex_u.x) * (vertex_v.y - vertex_u.y)#外積の計算
+                t = (vertex_v.x - vertex_u.x)*(obstacle_Line[1].y - vertex_u.y) - (obstacle_Line[1].x - vertex_u.x) * (vertex_v.y - vertex_u.y)
+                
+                if s * t < 0:
+                    #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
+                    cross = True
+                    break
+            
+            if cross == False:
+                #衝突が発生しなかった場合、経路長を計算し追加
+                Line.append(np.sqrt(((Line[1].x - Line[0].x)**2 + (Line[1].y - Line[0].y)**2)))
+
+                #可視グラフとして追加
+                visibility_graph.append(Line)
+
+    return visibility_graph
+
+def dijkstra():
+    pass
+
 def main():
     solution_list = []
     var_list = [[0,2]] * (setting.VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
@@ -132,6 +170,7 @@ def main():
     print(solution_list)
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
+
 
 
 if __name__ == '__main__':
