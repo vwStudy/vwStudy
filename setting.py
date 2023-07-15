@@ -9,5 +9,8 @@ VWnum :int = 5
 ##車のスピード
 speed :float = 3.0
 
+##車の縦幅
+car_length :float = 2.0
+ 
 ##車の横幅
 car_width :float = 1.0

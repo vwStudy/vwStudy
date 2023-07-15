@@ -5,14 +5,8 @@ from geneticalgorithm2 import geneticalgorithm2 as ga
 import setting
 
 class VW():
-    def __init__():
+    def __init__(self):
         a=0
-
-    def visibility_graph():
-        j=0
-
-    def dijkstra():
-        i=0
 
     def ga_function(p):
         car1_vw = []
@@ -76,6 +70,7 @@ class CarAgent():
         self.y = self.dy = start_y
         self.speed = setting.speed #根拠のある数値にする
         self.car_width = setting.car_width #根拠のある数値にする
+        self.car_length = setting.car_length #根拠のある数値にする
         self.car_root = []
 
     def move(self,dx,dy):
@@ -133,6 +128,11 @@ def main():
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
 
+    def visibility_graph():
+        j=0
+
+    def dijkstra():
+        i=0
 
 if __name__ == '__main__':
     main()
