@@ -1,7 +1,7 @@
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
-params = {'generation_size': 60, 'population_size': 60} 
+params = {'max_num_iteration': 60, 'population_size': 60} 
 
 ##VWの数
 VWnum :int = 5 
