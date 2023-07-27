@@ -86,16 +86,20 @@ class VW():
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
+        print("graph"+str(car1_vis_graph))
         car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car2_vw_line_list)
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car3_vw_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car4_vw_line_list)
 
+        #print(car1_vis_graph)
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
+        # print("path"+str(car1_shortest_path))
+        # print("length"+str(car1_shortest_length))
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
-        print(car1_vertex_list)
+        #print(car1_vertex_list)
             
         print("car1 :" + str(car1_shortest_path), car1_shortest_length)
         print("car2 :" + str(car2_shortest_path), car2_shortest_length)
@@ -104,10 +108,10 @@ class VW():
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
-        print(collision)
+        #print(collision)
 
         total_num_obstacles = int(len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4)
-        print(total_num_obstacles)
+        #print(total_num_obstacles)
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         
@@ -443,7 +447,7 @@ def main():
     ga_model.run(no_plot=True,)
 
     convergence = ga_model.report
-    print(convergence)
+    #print(convergence)
     solution = ga_model.result
     print(str(setting.VWnum) + "vw")
     for key, value in setting.params.items():
