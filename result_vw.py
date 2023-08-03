@@ -8,13 +8,11 @@ import vw
 import setting
 
 
-
-
 def main():
-    solution  = vw.main()
-    solution_list = solution
+
+    solution_list = vw.main()
     vw_list = np.array(solution_list).reshape(4,setting.VWnum**2).tolist()
-    #print(vw_list)
+    print(vw_list)
 
     tk = Tk()
     tk.title(u"vw_result")
@@ -113,14 +111,18 @@ def main():
 
     print("-----------------")
     
+
+    #print(vw.car1_vertex_list)
+
+
     for i in range(setting.VWnum):
         vertex = vw.Environment.set_vertex_list(vw_list[0],CarAgent_1)
-        print(vertex)
+        #print(vertex)
     visibility =  vw.Execution.visibility_graph(list1, list2) ##始まりの点から終わりの点と重さsetが入ったlistが返って来る [(はじ、おわ、重さ)・・・・・]
     #print(visibility)
-    #for i in range(len(visibility)):
+    for i in range(len(visibility)):
         #Canvas.create_line(x0,y0,x1,y1)
-        #print(visibility[i][0])
+        print(visibility[i][0])
     dijkstra_path, dijkstra_length= vw.Execution.dijkstra(visibility) ##最短経路のpath(list)と最短距離(整数型or浮動小数点型)が返って来る [0,35,32,・・・・・ ,1] vartex_list[35],（ラベルの座標））
     #print(dijkstra_path)
 

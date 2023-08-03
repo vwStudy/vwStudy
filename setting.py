@@ -3,12 +3,17 @@
 ##generation世代数,popuration遺伝子数
 params = {'max_num_iteration': 2, 'population_size': 10} 
 
+
+
+##canvasの座標は1px単位
+##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
+
 ##VWの設置範囲 n*n
-VWfield :int = 300
+VWfield :int = 120
 
 ##VWの設置範囲の開始位置(左上座標)
-VWfield_x :int = 400
-VWfield_y :int = 300
+VWfield_x :int = 380
+VWfield_y :int = 190
 
 ##VWの数
 VWnum :int = 4
@@ -26,14 +31,10 @@ car_length :float = 2.0
 car_width :float = 1.0
 
 ##車のスタートの座標とゴールの座標
-car1_start = [0,240]
-car1_goal =  [860,240]
+car1_STARTtoGOAL = [[245,240],[630,240]]##左車
 
-car2_start = [440,0]
-car2_goal =  [440,460]
+car2_STARTtoGOAL = [[440,115],[440,350]]##上車
 
-car3_start = [860,240]
-car3_goal =  [0,240]
+car3_STARTtoGOAL = [[630,240],[245,240]]##右車
 
-car4_start = [440,460]
-car4_goal =  [440,0]
+car4_STARTtoGOAL = [[440,350],[440,115]]##下車
