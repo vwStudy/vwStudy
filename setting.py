@@ -33,8 +33,10 @@ car_width :float = 1.0
 ##車のスタートの座標とゴールの座標
 car1_STARTtoGOAL = [[245,240],[630,240]]##左車
 
-car2_STARTtoGOAL = [[440,115],[440,350]]##上車
+#car2_STARTtoGOAL = [[440,115],[440,350]]##上車
+car2_STARTtoGOAL = [[460,115],[460,350]]
 
 car3_STARTtoGOAL = [[630,240],[245,240]]##右車
 
-car4_STARTtoGOAL = [[440,350],[440,115]]##下車
+#car4_STARTtoGOAL = [[440,350],[440,115]]##下車
+car4_STARTtoGOAL = [[460,115],[460,350]]

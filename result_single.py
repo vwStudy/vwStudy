@@ -45,7 +45,6 @@ def set_virtual_wall(GA_list):
         obstacles_line_list = []
         total_num_obstacles = 0
         
-        ga_list = [GA_list]
         # for i in GA_list:
         #     print(GA_list[i])
         #     if GA_list[i] >=1.0:
@@ -55,8 +54,9 @@ def set_virtual_wall(GA_list):
         # print("galist"+str(ga_list))
 
         #indexにインデックスをdeploy_checkには値(0,1)が入る.
-        for index, oneDivisionList in enumerate(ga_list):
+        for index, oneDivisionList in enumerate(GA_list):
             for twoDivisionIndex, deploy_check in enumerate(oneDivisionList):
+                print("deploy::" + str(deploy_check))
                 if deploy_check >= 1:
                     total_num_obstacles += 1
                     #VWの左上, 左下, 右上, 右下を設定
@@ -141,7 +141,7 @@ def dijkstra(visibility_graph_list):
 def main():
     #solution_list = vw.main()
     solution_list = [1.0695702545994914, 1.6037651946573193, 1.261302012940999, 1.8559202962313845, 0.08964112266102542, 1.0034029467653565, 0.2543725324587707, 0.6407055834028188, 1.6713361999050231, 1.4403173182998898, 1.4564470390511637, 1.3180911864912008, 0.09252614811730875, 0.3625927509106346, 1.5722580131175703, 0.38863335822552925]
-    vw_list = np.array(solution_list).reshape(4,setting.VWnum**2).tolist()
+    vw_list = np.array(solution_list).reshape(1,setting.VWnum**2).tolist()
     
     
     # class CarAgent():
@@ -216,62 +216,42 @@ def main():
     car4_x0 = setting.car4_STARTtoGOAL[0][0]
     car4_y0 = setting.car4_STARTtoGOAL[0][1]
         
-    ##4vw用
-    for i in range(4):
-        car_vw = np.array(vw_list[i]).reshape(setting.VWnum,setting.VWnum).tolist()
-        vw_point_x = setting.VWfield_x
-        vw_point_y = setting.VWfield_y
-        list1 = []
-        list2 = []
-        list3 = []
-        list4 = []
+    car_vw = np.array(vw_list).reshape(setting.VWnum,setting.VWnum).tolist()
+    vw_point_x = setting.VWfield_x
+    vw_point_y = setting.VWfield_y
 
-        for j in range(setting.VWnum):
-            for k in range(setting.VWnum):
-                if car_vw[j][k]>=1:
-                    if i==0:
-                        canvas.create_rectangle(vw_point_x, vw_point_y, vw_point_x+setting.VWsize, vw_point_y+setting.VWsize,fill='red')
-                        
-                    elif i==1:
-                        canvas.create_rectangle(vw_point_x, vw_point_y, vw_point_x+setting.VWsize, vw_point_y+setting.VWsize,fill='blue')
-                        
-                    elif i==2:
-                        canvas.create_rectangle(vw_point_x, vw_point_y, vw_point_x+setting.VWsize, vw_point_y+setting.VWsize,fill='yellow')
-                    
-                    elif i==3:
-                        canvas.create_rectangle(vw_point_x, vw_point_y, vw_point_x+setting.VWsize, vw_point_y+setting.VWsize,fill='black')
-                    
-                vw_point_x += setting.VWsize
-            vw_point_x = setting.VWfield_x
-            vw_point_y += setting.VWsize
+    for j in range(setting.VWnum):
+        for k in range(setting.VWnum):
+            if car_vw[j][k]>=1:
+                 canvas.create_rectangle(vw_point_x, vw_point_y, vw_point_x+setting.VWsize, vw_point_y+setting.VWsize,fill='red')
+            
+            vw_point_x += setting.VWsize
+        vw_point_x = setting.VWfield_x
+        vw_point_y += setting.VWsize
 
     print("testttt")
-    #4vw用
-    car1_VW_list, car1_vw_line_list = set_virtual_wall(vw_list[0])
-    car2_VW_list, car2_vw_line_list = set_virtual_wall(vw_list[1])
-    car3_VW_list, car3_vw_line_list = set_virtual_wall(vw_list[2])
-    car4_VW_list, car4_vw_line_list = set_virtual_wall(vw_list[3])
-
+    car_VW_list, car_vw_line_list = set_virtual_wall(vw_list)
+  
     car1_start_goal_list = setting.car1_STARTtoGOAL
     car2_start_goal_list = setting.car2_STARTtoGOAL
     car3_start_goal_list = setting.car3_STARTtoGOAL
     car4_start_goal_list = setting.car4_STARTtoGOAL
 
-    car1_vertex_list = set_vertex_list(car1_VW_list, car1_start_goal_list)
-    car2_vertex_list = set_vertex_list(car2_VW_list, car2_start_goal_list)
-    car3_vertex_list = set_vertex_list(car3_VW_list, car3_start_goal_list)
-    car4_vertex_list = set_vertex_list(car4_VW_list, car4_start_goal_list)
+    car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
+    car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
+    car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
+    car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
 
-    car1_vertex_list = set_vertex_list(car1_VW_list, car1_start_goal_list)
-    car2_vertex_list = set_vertex_list(car2_VW_list, car2_start_goal_list)
-    car3_vertex_list = set_vertex_list(car3_VW_list, car3_start_goal_list)
-    car4_vertex_list = set_vertex_list(car4_VW_list, car4_start_goal_list)
+    car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
+    car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
+    car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
+    car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
 
 
-    car1_vis_graph = visibility_graph(car1_vertex_list, car1_vw_line_list)
-    car2_vis_graph = visibility_graph(car2_vertex_list, car2_vw_line_list)
-    car3_vis_graph = visibility_graph(car3_vertex_list, car3_vw_line_list)
-    car4_vis_graph = visibility_graph(car4_vertex_list, car4_vw_line_list)
+    car1_vis_graph = visibility_graph(car1_vertex_list, car_vw_line_list)
+    car2_vis_graph = visibility_graph(car2_vertex_list, car_vw_line_list)
+    car3_vis_graph = visibility_graph(car3_vertex_list, car_vw_line_list)
+    car4_vis_graph = visibility_graph(car4_vertex_list, car_vw_line_list)
     print(car1_vis_graph)
 
     car1_shortest_path, car1_shortest_length = dijkstra(car1_vis_graph)
