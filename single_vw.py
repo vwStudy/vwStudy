@@ -29,7 +29,7 @@ class VW():
         #indexにインデックスをdeploy_checkには値(0,1)が入る.
         for index, oneDivisionList in enumerate(GA_list):
             for twoDivisionIndex, deploy_check in enumerate(oneDivisionList):
-                if 1 == deploy_check:
+                if deploy_check >= 1:
                     total_num_obstacles += 1
                     #VWの左上, 左下, 右上, 右下を設定
                     VW_LeftUp = [(field_x + (size) * twoDivisionIndex), (field_y + (size * index))]
@@ -75,20 +75,20 @@ class VW():
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list)
 
-        # print(car1_vis_graph)
-        # print(car2_vis_graph)
-        # print(car3_vis_graph)
-        #  print(car4_vis_graph)
+        #print(car1_vis_graph)
+        print(car2_vis_graph)
+        #print(car3_vis_graph)
+        print(car4_vis_graph)
 
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
-        # print("car1 :" + str(car1_shortest_path), car1_shortest_length)
-        # print("car2 :" + str(car2_shortest_path), car2_shortest_length)
-        # print("car3 :" + str(car3_shortest_path), car3_shortest_length)
-        # print("car4 :" + str(car4_shortest_path), car4_shortest_length)
+        print("car1 :" + str(car1_shortest_path), car1_shortest_length)
+        print("car2 :" + str(car2_shortest_path), car2_shortest_length)
+        print("car3 :" + str(car3_shortest_path), car3_shortest_length)
+        print("car4 :" + str(car4_shortest_path), car4_shortest_length)
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
@@ -98,7 +98,7 @@ class VW():
         # print(total_num_obstacles)
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
-        return all_path_length * (total_num_obstacles / setting.VWnum ** 2) + collision * 100000
+        return all_path_length * (total_num_obstacles / setting.VWnum ** 2) + collision * 1000000
         
     def GA_function(p):
         """
@@ -357,7 +357,7 @@ class Environment():
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 5:
+                if carTocar_distance <= 20:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
