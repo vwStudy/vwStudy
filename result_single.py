@@ -3,6 +3,7 @@ from tkinter import *
 import numpy as np
 import networkx as nx
 import math
+import copy
 from geneticalgorithm2 import geneticalgorithm2 as ga
 
 import vw
@@ -56,7 +57,6 @@ def set_virtual_wall(GA_list):
         #indexにインデックスをdeploy_checkには値(0,1)が入る.
         for index, oneDivisionList in enumerate(GA_list):
             for twoDivisionIndex, deploy_check in enumerate(oneDivisionList):
-                print("deploy::" + str(deploy_check))
                 if deploy_check >= 1:
                     total_num_obstacles += 1
                     #VWの左上, 左下, 右上, 右下を設定
@@ -69,15 +69,15 @@ def set_virtual_wall(GA_list):
                     obstacles_line_list.extend([[VW_LeftUp, VW_LeftDown], [VW_LeftUp, VW_RightUp], [VW_RightUp, VW_RightDown], [VW_RightUp, VW_LeftDown]])
         return obstacles_vertex_list, obstacles_line_list
 
-
-
-
 def set_vertex_list(obstacle_list, car_start_goal_list):
         """
         頂点のリストを作成し返す関数
         """
-        vertex_list = car_start_goal_list
+        start = car_start_goal_list[0].copy()
+        goal = car_start_goal_list[1].copy()
+        vertex_list = [start, goal]
         vertex_list.extend(obstacle_list)
+        #print("vertex"+str(vertex_list))
         return vertex_list
 
 def visibility_graph(vertex_list, obstacle_line_list):
@@ -135,14 +135,15 @@ def dijkstra(visibility_graph_list):
         #最短経路と距離をダイクストラ法により求める
         shortest_path = nx.dijkstra_path(nx_Graph,origin_node,destination_node)
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
+        
+        #print("vis"+str(visibility_graph_list))
 
         return shortest_path, shortest_length
 
 def main():
     #solution_list = vw.main()
-    solution_list = [1.0695702545994914, 1.6037651946573193, 1.261302012940999, 1.8559202962313845, 0.08964112266102542, 1.0034029467653565, 0.2543725324587707, 0.6407055834028188, 1.6713361999050231, 1.4403173182998898, 1.4564470390511637, 1.3180911864912008, 0.09252614811730875, 0.3625927509106346, 1.5722580131175703, 0.38863335822552925]
-    vw_list = np.array(solution_list).reshape(1,setting.VWnum**2).tolist()
-    
+    solution_list = [0.015786551060799736, 0.08463265059408509, 0.5932046908691588, 1.3424781995137562, 0.2691135382300509, 1.9595639699346872, 0.9680618832542314, 0.5561905924346127, 0.6868531180021922, 0.4935946664104407, 1.2436746011941202, 0.9917736878601549, 0.3770566773879407, 0.6135094131583347, 0.5568022247892899, 0.9121857747371576]
+    vw_list = np.array(solution_list).reshape(4,setting.VWnum).tolist()
     
     # class CarAgent():
     #     def __init__(self, type, start, goal):
@@ -232,48 +233,67 @@ def main():
     print("testttt")
     car_VW_list, car_vw_line_list = set_virtual_wall(vw_list)
   
-    car1_start_goal_list = setting.car1_STARTtoGOAL
-    car2_start_goal_list = setting.car2_STARTtoGOAL
-    car3_start_goal_list = setting.car3_STARTtoGOAL
-    car4_start_goal_list = setting.car4_STARTtoGOAL
+    cars_tuple = ((setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), (setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), (setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), (setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
+    #print("cars_od"+str(cars_tuple))
+    # car1_start_goal_list = setting.car1_STARTtoGOAL
+    # car2_start_goal_list = setting.car2_STARTtoGOAL
+    # car3_start_goal_list = setting.car3_STARTtoGOAL
+    # car4_start_goal_list = setting.car4_STARTtoGOAL
 
-    car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
-    car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
-    car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
-    car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
 
-    car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
-    car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
-    car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
-    car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
+    car1_vertex_list = set_vertex_list(car_VW_list, cars_tuple[0])
+    car2_vertex_list = set_vertex_list(car_VW_list, cars_tuple[1])
+    car3_vertex_list = set_vertex_list(car_VW_list, cars_tuple[2])
+    car4_vertex_list = set_vertex_list(car_VW_list, cars_tuple[3])
+
+    # car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
+    # car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
+    # car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
+    # car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
+    ##print("car1_vertex"+str(car1_vertex_list[0]))
+    ##print("car2_vertex"+str(car2_vertex_list))
+    ##print("car3_vertex"+str(car3_vertex_list))
+    ##print("car4_vertex"+str(car4_vertex_list))
+    # car1_vertex_list = set_vertex_list(car_VW_list, car1_start_goal_list)
+    # car2_vertex_list = set_vertex_list(car_VW_list, car2_start_goal_list)
+    # car3_vertex_list = set_vertex_list(car_VW_list, car3_start_goal_list)
+    # car4_vertex_list = set_vertex_list(car_VW_list, car4_start_goal_list)
 
 
     car1_vis_graph = visibility_graph(car1_vertex_list, car_vw_line_list)
     car2_vis_graph = visibility_graph(car2_vertex_list, car_vw_line_list)
     car3_vis_graph = visibility_graph(car3_vertex_list, car_vw_line_list)
     car4_vis_graph = visibility_graph(car4_vertex_list, car_vw_line_list)
-    print(car1_vis_graph)
 
     car1_shortest_path, car1_shortest_length = dijkstra(car1_vis_graph)
     car2_shortest_path, car2_shortest_length = dijkstra(car2_vis_graph)
     car3_shortest_path, car3_shortest_length = dijkstra(car3_vis_graph)
     car4_shortest_path, car4_shortest_length = dijkstra(car4_vis_graph)
     print(car1_shortest_path)
+    print(car2_shortest_path)
+    print(car3_shortest_path)
+    print(car4_shortest_path)
     print("testttt2222")
+
+
+    ##car1の可視グラフ
+    #for i in range(len(car1_vertex_list)-1):
+    #     canvas.create_line(car1_vertex_list[0][0],car1_vertex_list[0][1],car1_vertex_list[i+1][0],car1_vertex_list[i+1][1], fill = "green", width = 3)
 
     #car1の最短経路描画
     for i in range(len(car1_shortest_path)-1):
-         canvas.create_line(car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1], fill = "red", width = 5)
+         canvas.create_line(car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1], fill = "red", width = 3)    
+    
     #canvas.create_line(car1_vertex_list,car1_vertex_list, car1_vertex_list, car1_vertex_list, fill = "red", width = 5)
     #canvas.create_line(car1_vertex_list, car1_vertex_list, 860, 240, fill = "red", width = 5)
     for i in range(len(car2_shortest_path)-1):
-         canvas.create_line(car2_vertex_list[car2_shortest_path[i]][0],car2_vertex_list[car2_shortest_path[i]][1], car2_vertex_list[car2_shortest_path[i+1]][0],car2_vertex_list[car2_shortest_path[i+1]][1], fill = "blue", width = 5)
+         canvas.create_line(car2_vertex_list[car2_shortest_path[i]][0],car2_vertex_list[car2_shortest_path[i]][1], car2_vertex_list[car2_shortest_path[i+1]][0],car2_vertex_list[car2_shortest_path[i+1]][1], fill = "blue", width = 3)
     
     for i in range(len(car3_shortest_path)-1):
-         canvas.create_line(car3_vertex_list[car3_shortest_path[i]][0],car3_vertex_list[car3_shortest_path[i]][1], car3_vertex_list[car3_shortest_path[i+1]][0],car3_vertex_list[car3_shortest_path[i+1]][1], fill = "yellow", width = 5)         
+         canvas.create_line(car3_vertex_list[car3_shortest_path[i]][0],car3_vertex_list[car3_shortest_path[i]][1], car3_vertex_list[car3_shortest_path[i+1]][0],car3_vertex_list[car3_shortest_path[i+1]][1], fill = "yellow", width = 3)         
     
     for i in range(len(car4_shortest_path)-1):
-         canvas.create_line(car4_vertex_list[car4_shortest_path[i]][0],car4_vertex_list[car4_shortest_path[i]][1], car4_vertex_list[car4_shortest_path[i+1]][0],car4_vertex_list[car4_shortest_path[i+1]][1], fill = "black", width = 5)
+         canvas.create_line(car4_vertex_list[car4_shortest_path[i]][0],car4_vertex_list[car4_shortest_path[i]][1], car4_vertex_list[car4_shortest_path[i+1]][0],car4_vertex_list[car4_shortest_path[i+1]][1], fill = "black", width = 3)
          
     
     x_size=25
@@ -282,15 +302,26 @@ def main():
     #計算部分
     while True:
         #CarAgent_1.move(270,0)
+
+            #car1_mv = abs(car1_vertex_list[car1_shortest_path[i]][0]-car1_vertex_list[car1_shortest_path[i+1]][0])
+            #car1_x0+=car1_mv 
+        
         canvas.coords(car1, car1_x0, car1_y0, car1_x0+x_size, car1_y0+y_size)
         canvas.coords(car2, car2_x0, car2_y0, car2_x0+y_size, car2_y0+x_size)
         canvas.coords(car3, car3_x0, car3_y0, car3_x0+x_size, car3_y0+y_size)
         canvas.coords(car4, car4_x0, car4_y0, car4_x0+y_size, car4_y0+x_size)
-        car1_x0+=5
-        car2_y0+=5
-        car3_x0-=5
-        car4_y0-=5
-        time.sleep(0.02)
+
+
+        for i in range(len(car1_shortest_path)-1):
+            #canvas.coords(car1, car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1])
+            canvas.move(car1, car1_vertex_list[car1_shortest_path[i+1]][0] - car1_vertex_list[car1_shortest_path[i]][0], car1_vertex_list[car1_shortest_path[i+1]][1] - car1_vertex_list[car1_shortest_path[i]][1])
+            canvas.after(10000, move)
+
+        #car1_x0+=5
+        #car2_y0+=5
+        #car3_x0-=5
+        #car4_y0-=5
+        #time.sleep(0.02)
         tk.update() #ウインド画面を更新
         
         if car1_x0 >= 630:

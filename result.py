@@ -140,7 +140,7 @@ def dijkstra(visibility_graph_list):
 
 def main():
     #solution_list = vw.main()
-    solution_list = [1.0695702545994914, 1.6037651946573193, 1.261302012940999, 1.8559202962313845, 0.08964112266102542, 1.0034029467653565, 0.2543725324587707, 0.6407055834028188, 1.6713361999050231, 1.4403173182998898, 1.4564470390511637, 1.3180911864912008, 0.09252614811730875, 0.3625927509106346, 1.5722580131175703, 0.38863335822552925]
+    solution_list = [0.15180780696053775, 0.8073581697399996, 1.477140413972299, 1.7997473606463872, 1.0130161896814958, 0.26786757982117493, 1.0266994861594445, 0.4157493750389958, 0.010426577803933412, 0.9765359409995915, 1.8540325152413883, 1.1274910728838243, 1.319590569693116, 1.449654406400599, 0.7196989355074781, 0.40116572861447586, 1.103637222919178, 0.6316405381188614, 1.8954056909891641, 1.4433933049373924, 1.9603248808320768, 0.437992781451644, 1.346275285338597, 1.690349870159493, 1.7552874033168995, 1.9486448531247733, 0.8688180227629614, 0.7212801312284212, 1.741517473148413, 0.8485090716355492, 0.3994523653006583, 1.6528081659718425, 1.1258270971857633, 1.8550045699408813, 1.462493894194725, 1.9709985177161566, 0.9894612303823174, 1.6528036258281, 0.40434071749076805, 0.08032099437243967, 1.277660414263412, 0.6809461778289496, 0.6245100542117898, 1.9633590339998621, 1.2463694298511374, 1.5782856369275582, 1.7220368477728998, 1.7435997734660043, 1.0716963642320276, 0.18906432709643428, 1.9294901555002868, 1.6542194682350937, 1.6763364360574062, 0.5223517545529688, 0.16544317976261103, 1.3738313562569902, 0.6211227771028829, 1.0955529700729336, 0.6052226082282239, 0.17161299756871373, 1.2232498457569274, 0.2584960988345433, 1.4834255322762293, 0.7920366501625498]
     vw_list = np.array(solution_list).reshape(4,setting.VWnum**2).tolist()
     
     
@@ -216,7 +216,6 @@ def main():
     car4_x0 = setting.car4_STARTtoGOAL[0][0]
     car4_y0 = setting.car4_STARTtoGOAL[0][1]
         
-    ##4vw用
     for i in range(4):
         car_vw = np.array(vw_list[i]).reshape(setting.VWnum,setting.VWnum).tolist()
         vw_point_x = setting.VWfield_x
@@ -246,7 +245,6 @@ def main():
             vw_point_y += setting.VWsize
 
     print("testttt")
-    #4vw用
     car1_VW_list, car1_vw_line_list = set_virtual_wall(vw_list[0])
     car2_VW_list, car2_vw_line_list = set_virtual_wall(vw_list[1])
     car3_VW_list, car3_vw_line_list = set_virtual_wall(vw_list[2])
@@ -286,16 +284,7 @@ def main():
          canvas.create_line(car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1], fill = "red", width = 5)
     #canvas.create_line(car1_vertex_list,car1_vertex_list, car1_vertex_list, car1_vertex_list, fill = "red", width = 5)
     #canvas.create_line(car1_vertex_list, car1_vertex_list, 860, 240, fill = "red", width = 5)
-    for i in range(len(car2_shortest_path)-1):
-         canvas.create_line(car2_vertex_list[car2_shortest_path[i]][0],car2_vertex_list[car2_shortest_path[i]][1], car2_vertex_list[car2_shortest_path[i+1]][0],car2_vertex_list[car2_shortest_path[i+1]][1], fill = "blue", width = 5)
-    
-    for i in range(len(car3_shortest_path)-1):
-         canvas.create_line(car3_vertex_list[car3_shortest_path[i]][0],car3_vertex_list[car3_shortest_path[i]][1], car3_vertex_list[car3_shortest_path[i+1]][0],car3_vertex_list[car3_shortest_path[i+1]][1], fill = "yellow", width = 5)         
-    
-    for i in range(len(car4_shortest_path)-1):
-         canvas.create_line(car4_vertex_list[car4_shortest_path[i]][0],car4_vertex_list[car4_shortest_path[i]][1], car4_vertex_list[car4_shortest_path[i+1]][0],car4_vertex_list[car4_shortest_path[i+1]][1], fill = "black", width = 5)
-         
-    
+
     x_size=25
     y_size=10
 
@@ -313,7 +302,7 @@ def main():
         time.sleep(0.02)
         tk.update() #ウインド画面を更新
         
-        if car1_x0 >= 630:
+        if car1_x0 >= 500:
             break
         
 
