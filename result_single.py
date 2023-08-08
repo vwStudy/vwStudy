@@ -203,11 +203,6 @@ def main():
     car3=canvas.create_rectangle(0,0, 25, 10,fill='yellow')##右車
     car4=canvas.create_rectangle(0,0, 10, 25,fill='black')##下車
 
-    # CarAgent_1 = CarAgent(car1, setting.car1_start, setting.car1_goal)
-    # CarAgent_2 = CarAgent(car2, setting.car2_start, setting.car2_goal)
-    # CarAgent_3 = CarAgent(car3, setting.car3_start, setting.car3_goal)
-    # CarAgent_4 = CarAgent(car4, setting.car4_start, setting.car4_goal)
-
     car1_x0 = setting.car1_STARTtoGOAL[0][0]
     car1_y0 = setting.car1_STARTtoGOAL[0][1]
     car2_x0 = setting.car2_STARTtoGOAL[0][0]
