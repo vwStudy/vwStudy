@@ -33,7 +33,7 @@ class VW():
                 if deploy_check >= 1:
                     total_num_obstacles += 1
                     #VWの左上, 左下, 右上, 右下を設定
-                    VW_LeftUp = [(field_x + (size) * twoDivisionIndex), (field_y + (size * index))]
+                    VW_LeftUp = [(field_x + (size * twoDivisionIndex)), (field_y + (size * index))]
                     VW_LeftDown = [VW_LeftUp[0], VW_LeftUp[1] + size]
                     VW_RightUp = [VW_LeftUp[0] + size, VW_LeftUp[1]]
                     VW_RightDown = [VW_LeftUp[0] + size, VW_LeftUp[1] + size]
@@ -67,15 +67,18 @@ class VW():
 
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
-    
-        #print(setting.car1_STARTtoGOAL[0], setting.car1_STARTtoGOAL[1])
-        #print(setting.car2_STARTtoGOAL[0], setting.car2_STARTtoGOAL[1])
+        #print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
+        #print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
+
+        wall_edge, wall_line = Environment.set_wall()
 
         #頂点のlistを作成
-        car1_vertex_list = Environment.set_vertex_list(car1_VW_list, cars_tuple[0])
-        car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1])
-        car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2])
-        car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3])
+        car1_vertex_list = Environment.set_vertex_list(car1_VW_list, cars_tuple[0], wall_edge)
+        car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge)
+        car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge)
+        car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge)
+        print(car1_vertex_list)
+        # print(car2_vertex_list)
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
@@ -83,8 +86,11 @@ class VW():
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car3_vw_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car4_vw_line_list)
 
-        #print(car1_vis_graph)
-        
+        # print(car1_vis_graph)
+        print(car2_vis_graph)
+        #print(car3_vis_graph)
+        # print(car4_vis_graph)
+
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
@@ -133,15 +139,11 @@ class Environment():
     def set_wall():
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
+        wall_edge_list = setting.wall_edge
 
-        return wall_edge_list
-    
-    # def collison_Wall(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path):
-    #     colision = 0
+        wall_line_list = setting.wall_line
+        return wall_edge_list, wall_line_list
 
-    #     for index in range(0, len(car1_shortest_path)-1):
-    #         car1_vertex = car1_vertex_list[car1_shortest_path[index]]
-    #         if(car1_vertex )
 
     def collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path):
         """
@@ -301,53 +303,54 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
         #print("car1:"+str(collision))
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
         #print("car2:"+str(collision))
 
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 35:
+                if carTocar_distance <= 25:
                     collision += 1
         #print("car3:"+str(collision))
 
         return collision
 
-    def set_vertex_list(obstacle_list, carAgent):
+    def set_vertex_list(obstacle_list, carAgent, wall_edge):
         """
+        
         頂点のリストを作成し返す関数
         """
         start = carAgent.start.copy()
         goal = carAgent.goal.copy()
         vertex_list = [start, goal]
-        new_vertex_list = vertex_list.copy()
-        new_vertex_list.extend(obstacle_list)
 
+        vertex_list.extend(obstacle_list)
+        vertex_list.extend(wall_edge)
         #print("ver"+str(vertex_list))
-        return new_vertex_list
+        return vertex_list
 
 class CarAgent():
     def __init__(self, start, goal):
