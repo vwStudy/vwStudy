@@ -33,16 +33,21 @@ car_num :int = 4
 
 ##車のスタートの座標とゴールの座標
 #car1_STARTtoGOAL = [[245,240],[630,240]]##左車
-car1_STARTtoGOAL = [[245,260],[630,260]]
+# car1_STARTtoGOAL = [[245,260],[630,260]]
 #car1_STARTtoGOAL = [[245,260],[680,260]]
+car1_STARTtoGOAL : float = [[257.0, 250.0],[642.0, 250.0]]
 
-car2_STARTtoGOAL = [[460,115],[460,460]]##上車
+car2_STARTtoGOAL : float = [[450.0, 147.0],[450.0, 363.0]]
+#car2_STARTtoGOAL = [[460,115],[460,460]]##上車
 #car2_STARTtoGOAL = [[440,115],[440,350]]
-
 
 #car3_STARTtoGOAL = [[630,240],[245,240]]##右車
 #car3_STARTtoGOAL = [[630,260],[0,240]]
-car3_STARTtoGOAL = [[630,250],[245,250]]
+car3_STARTtoGOAL : float = [[642.0, 250.0],[257.0, 250.0]]
 
-car4_STARTtoGOAL = [[460,370],[460,115]]##下車
+car4_STARTtoGOAL : float = [[450.0, 363.0],[450.0, 147.0]]
+#car4_STARTtoGOAL = [[460,370],[460,115]]##下車
 #car4_STARTtoGOAL = [[440,350],[440,115]]
+
+wall_edge = [[430,160],[270,160],[270,230],[470,160],[630,160],[630,230],[270,270],[270,350],[430,350],[630,270],[630,350],[470,350]]
+wall_line = []

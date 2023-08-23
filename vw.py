@@ -126,8 +126,10 @@ class Environment():
     def set_wall():
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
+        wall_edge_list = setting.wall_edge
 
-        return wall_edge_list
+        wall_line_list = setting.wall_line
+        return wall_edge_list, wall_line_list
 
     def collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path):
         """
