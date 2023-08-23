@@ -203,11 +203,6 @@ def main():
     car3=canvas.create_rectangle(0,0, 25, 10,fill='yellow')##右車
     car4=canvas.create_rectangle(0,0, 10, 25,fill='black')##下車
 
-    # CarAgent_1 = CarAgent(car1, setting.car1_start, setting.car1_goal)
-    # CarAgent_2 = CarAgent(car2, setting.car2_start, setting.car2_goal)
-    # CarAgent_3 = CarAgent(car3, setting.car3_start, setting.car3_goal)
-    # CarAgent_4 = CarAgent(car4, setting.car4_start, setting.car4_goal)
-
     car1_x0 = setting.car1_STARTtoGOAL[0][0]
     car1_y0 = setting.car1_STARTtoGOAL[0][1]
     car2_x0 = setting.car2_STARTtoGOAL[0][0]
@@ -234,6 +229,7 @@ def main():
     car_VW_list, car_vw_line_list = set_virtual_wall(vw_list)
   
     cars_tuple = ((setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), (setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), (setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), (setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
+    #print("cars_od"+str(cars_tuple))
     # car1_start_goal_list = setting.car1_STARTtoGOAL
     # car2_start_goal_list = setting.car2_STARTtoGOAL
     # car3_start_goal_list = setting.car3_STARTtoGOAL
@@ -282,9 +278,7 @@ def main():
     #car1の最短経路描画
     for i in range(len(car1_shortest_path)-1):
          canvas.create_line(car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1], fill = "red", width = 3)    
-    
-    #canvas.create_line(car1_vertex_list,car1_vertex_list, car1_vertex_list, car1_vertex_list, fill = "red", width = 5)
-    #canvas.create_line(car1_vertex_list, car1_vertex_list, 860, 240, fill = "red", width = 5)
+
     for i in range(len(car2_shortest_path)-1):
          canvas.create_line(car2_vertex_list[car2_shortest_path[i]][0],car2_vertex_list[car2_shortest_path[i]][1], car2_vertex_list[car2_shortest_path[i+1]][0],car2_vertex_list[car2_shortest_path[i+1]][1], fill = "blue", width = 3)
     
