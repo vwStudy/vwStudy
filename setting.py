@@ -49,38 +49,7 @@ car2_STARTtoGOAL = ([440,115],[440,460])
 
 car3_STARTtoGOAL = ([630,240],[245,240])
 
-<<<<<<< Updated upstream
-# car3_STARTtoGOAL = ([630,240],[245,240])
-
-# car4_STARTtoGOAL = ([440,350],[440,115])
-
-##出力用カウント
-cnt = 0
-
-
-# car1_STARTtoGOAL = ([170,240],[860,240])
-
-# car2_STARTtoGOAL = ([440,0],[440,460])
-
-# car3_STARTtoGOAL = ([770,240],[0,240])
-
-# car4_STARTtoGOAL = ([440,460],[440,0])
-
-##車のスタートの座標とゴールの座標
-car1_STARTtoGOAL : float = [[245.0,260.0],[680.0,260.0]]
-
-car2_STARTtoGOAL : float = [[460.0,115.0],[460.0,460.0]]##上車 
-#car2_STARTtoGOAL = [[440,115],[440,350]]
-
-
-#car3_STARTtoGOAL = [[630,240],[245,240]]##右車
-car3_STARTtoGOAL : float = [[630.0,260.0],[245.0,240.0]]
-
-car4_STARTtoGOAL : float = [[460.0,370.0],[460.0,115.0]]##下車
-#car4_STARTtoGOAL = [[440,350],[440,115]]
-=======
 car4_STARTtoGOAL = ([440,460],[440,0])
->>>>>>> Stashed changes
 
 wall_edge = [[430,160],[270,160],[270,230],[470,160],[630,160],[630,230],[270,270],[270,350],[430,350],[630,270],[630,350],[470,350]]
 
