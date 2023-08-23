@@ -84,6 +84,11 @@ class VW():
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
+        print("car1 :" + str(car1_shortest_path))
+        print("car2 :" + str(car2_shortest_path))
+        print("car3 :" + str(car3_shortest_path))
+        print("car4 :" + str(car4_shortest_path))
+
         #print("car1 :" + str(car1_shortest_path), car1_shortest_length)
         #print("car2 :" + str(car2_shortest_path), car2_shortest_length)
         #print("car3 :" + str(car3_shortest_path), car3_shortest_length)
@@ -149,10 +154,10 @@ class VW():
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
-        #print("car1 :" + str(car1_shortest_path), car1_shortest_length)
-        #print("car2 :" + str(car2_shortest_path), car2_shortest_length)
-        #print("car3 :" + str(car3_shortest_path), car3_shortest_length)
-        #print("car4 :" + str(car4_shortest_path), car4_shortest_length)
+        # print("car1 :" + str(car1_shortest_path))
+        # print("car2 :" + str(car2_shortest_path))
+        # print("car3 :" + str(car3_shortest_path))
+        # print("car4 :" + str(car4_shortest_path))
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
@@ -335,36 +340,47 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                #if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
                     collision += 1
-            
+            #print("Car1toCar2_colision"+str(collision))
+
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
+                #if carTocar_distance <= 20:
                     collision += 1
-            
+            #print("Car1toCar3_colision"+str(collision))
+
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
+                #if carTocar_distance <= 20:
                     collision += 1
+            #print("Car1toCar4_colision"+str(collision))
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
+                #if carTocar_distance <= 20:
                     collision += 1
-            
+            #print("Car2toCar3_colision"+str(collision))
+
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
+                #if carTocar_distance <= 20:
                     collision += 1
-        
+            #print("Car2toCar4_colision"+str(collision))
+
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 10:
+                #if carTocar_distance <= 20:
                     collision += 1
-            
+            #print("Car3toCar4_colision_::"+str(collision))
         return collision
 
     def set_vertex_list(obstacle_list, carAgent):
@@ -472,7 +488,7 @@ class Execution():
         shortest_path = nx.dijkstra_path(nx_Graph,origin_node,destination_node)
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
         #print("vis"+str(visibility_graph_list))
-
+        #print("short::"+str(shortest_path))
         return shortest_path, shortest_length
 
 def main():

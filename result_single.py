@@ -10,28 +10,28 @@ import vw
 import setting
 
 
-def move(x, y, dx, dy):
-            rad = np.arctan(abs(dy - y)/abs(dx - x))
-            dig = math.degrees(rad)
+# def move(x, y, dx, dy):
+#             rad = np.arctan(abs(dy - y)/abs(dx - x))
+#             dig = math.degrees(rad)
 
-            if dx == x and dy == y:
-                x += 0
-                y += 0
-            else:
-                #print("testttt")
-                if  dx > x and dy > y:
-                    x += (math.cos(math.radians(dig))*setting.speed)
-                    y += (math.sin(math.radians(dig))*setting.speed)
-                elif dx < x and dy > y:
-                    x -= (math.cos(math.radians(dig))*setting.speed)
-                    y += (math.sin(math.radians(dig))*setting.speed) 
-                elif dx > x and dy < y:
-                    x += (math.cos(math.radians(dig))*setting.speed)
-                    y -= (math.sin(math.radians(dig))*setting.speed)  
-                elif dx < x and dy < y:
-                    x -= (math.cos(math.radians(dig))*setting.speed)
-                    y -= (math.sin(math.radians(dig))*setting.speed)
-            return [x,y]
+#             if dx == x and dy == y:
+#                 x += 0
+#                 y += 0
+#             else:
+#                 #print("testttt")
+#                 if  dx > x and dy > y:
+#                     x += (math.cos(math.radians(dig))*setting.speed)
+#                     y += (math.sin(math.radians(dig))*setting.speed)
+#                 elif dx < x and dy > y:
+#                     x -= (math.cos(math.radians(dig))*setting.speed)
+#                     y += (math.sin(math.radians(dig))*setting.speed) 
+#                 elif dx > x and dy < y:
+#                     x += (math.cos(math.radians(dig))*setting.speed)
+#                     y -= (math.sin(math.radians(dig))*setting.speed)  
+#                 elif dx < x and dy < y:
+#                     x -= (math.cos(math.radians(dig))*setting.speed)
+#                     y -= (math.sin(math.radians(dig))*setting.speed)
+#             return [x,y]
 
 
 
@@ -142,7 +142,7 @@ def dijkstra(visibility_graph_list):
 
 def main():
     #solution_list = vw.main()
-    solution_list = [0.015786551060799736, 0.08463265059408509, 0.5932046908691588, 1.3424781995137562, 0.2691135382300509, 1.9595639699346872, 0.9680618832542314, 0.5561905924346127, 0.6868531180021922, 0.4935946664104407, 1.2436746011941202, 0.9917736878601549, 0.3770566773879407, 0.6135094131583347, 0.5568022247892899, 0.9121857747371576]
+    solution_list = [0.12807571169837018, 1.446460077397614, 0.21220710989775826, 0.919509667225882, 0.4725977492749429, 0.76309856975463, 0.8894529019224491, 0.1834743585238885, 1.9831858421554305, 0.1619855834570696, 0.6264130728301109, 0.6319109273592178, 0.250855702892377, 0.40470334989922785, 0.3935632407029115, 0.035516500784098515]
     vw_list = np.array(solution_list).reshape(4,setting.VWnum).tolist()
     
     # class CarAgent():
@@ -305,10 +305,10 @@ def main():
         canvas.coords(car4, car4_x0, car4_y0, car4_x0+y_size, car4_y0+x_size)
 
 
-        for i in range(len(car1_shortest_path)-1):
-            #canvas.coords(car1, car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1])
-            canvas.move(car1, car1_vertex_list[car1_shortest_path[i+1]][0] - car1_vertex_list[car1_shortest_path[i]][0], car1_vertex_list[car1_shortest_path[i+1]][1] - car1_vertex_list[car1_shortest_path[i]][1])
-            canvas.after(10000, move)
+        # for i in range(len(car1_shortest_path)-1):
+        #     #canvas.coords(car1, car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1])
+        #     canvas.move(car1, car1_vertex_list[car1_shortest_path[i+1]][0] - car1_vertex_list[car1_shortest_path[i]][0], car1_vertex_list[car1_shortest_path[i+1]][1] - car1_vertex_list[car1_shortest_path[i]][1])
+        #     canvas.after(10000, move)
 
         #car1_x0+=5
         #car2_y0+=5
