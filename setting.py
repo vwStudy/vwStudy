@@ -34,19 +34,22 @@ car_width :float = 20
 car_num :int = 4
 
 ##車のスタートの座標とゴールの座標
-# car1_STARTtoGOAL = ([245,260],[630,260])
+# car1_STARTtoGOAL : float = [[245.0,260.0],[680.0,260.0]]
 
-# car2_STARTtoGOAL = ([460,115],[460,370])
+# car2_STARTtoGOAL : float = [[460.0,115.0],[460.0,460.0]]##上車
 
-# car3_STARTtoGOAL = ([630,250],[245,250])
+# car3_STARTtoGOAL : float = [[630.0,260.0],[245.0,240.0]]
 
-# car4_STARTtoGOAL = ([460,350],[460,115])
+# car4_STARTtoGOAL : float = [[460.0,370.0],[460.0,115.0]]##下車
 
+#ラウンドアバウト用
+car1_STARTtoGOAL = ([245,260],[680,260])
 
-# car1_STARTtoGOAL = ([245,260],[630,240])
+car2_STARTtoGOAL = ([440,115],[440,460])
 
-# car2_STARTtoGOAL = ([440,115],[440,350])
+car3_STARTtoGOAL = ([630,240],[245,240])
 
+<<<<<<< Updated upstream
 # car3_STARTtoGOAL = ([630,240],[245,240])
 
 # car4_STARTtoGOAL = ([440,350],[440,115])
@@ -75,6 +78,9 @@ car3_STARTtoGOAL : float = [[630.0,260.0],[245.0,240.0]]
 
 car4_STARTtoGOAL : float = [[460.0,370.0],[460.0,115.0]]##下車
 #car4_STARTtoGOAL = [[440,350],[440,115]]
+=======
+car4_STARTtoGOAL = ([440,460],[440,0])
+>>>>>>> Stashed changes
 
 wall_edge = [[430,160],[270,160],[270,230],[470,160],[630,160],[630,230],[270,270],[270,350],[430,350],[630,270],[630,350],[470,350]]
 

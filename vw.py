@@ -52,20 +52,28 @@ class VW():
             for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
-        print(car_ga_array)
-
+        
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         car1_VW_list, car1_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
         car2_VW_list, car2_vw_line_list = VW.set_virtual_wall(car_ga_array[1])
         car3_VW_list, car3_vw_line_list = VW.set_virtual_wall(car_ga_array[2])
         car4_VW_list, car4_vw_line_list = VW.set_virtual_wall(car_ga_array[3])
-        print(car2_VW_list)
+
+        print("car1 : " ,car1_VW_list)
+        print("car2 : " ,car2_VW_list)
+        print("car3 : " ,car3_VW_list)
+        print("car4 : " ,car4_VW_list)
+
+
+        # print("car1 : " ,car1_vw_line_list)
+        # print("car2 : " ,car2_vw_line_list)
+        # print("car3 : " ,car3_vw_line_list)
+        # print("car4 : " ,car4_vw_line_list)
+
 
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
-        # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
-        # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
 
         wall_edge, wall_line = Environment.set_wall()
 
@@ -74,8 +82,8 @@ class VW():
         car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge)
         car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge)
         car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge)
+
         print(car1_vertex_list)
-        # print(car2_vertex_list)
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
@@ -83,10 +91,10 @@ class VW():
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car3_vw_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car4_vw_line_list)
 
-        print(car1_vis_graph)
-        print(car2_vis_graph)
-        print(car3_vis_graph)
-        print(car4_vis_graph)
+        # print(car1_vis_graph)
+        # print(car2_vis_graph)
+        # print(car3_vis_graph)
+        # print(car4_vis_graph)
 
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
         # print("path"+str(car1_shortest_path))
@@ -99,6 +107,18 @@ class VW():
         print("car2 :" + str(car2_shortest_path), car2_shortest_length)
         print("car3 :" + str(car3_shortest_path), car3_shortest_length)
         print("car4 :" + str(car4_shortest_path), car4_shortest_length)
+
+        for path in car1_shortest_path:
+            print("car1 :",car1_vertex_list[path])
+
+        for path in car2_shortest_path:
+            print("car2 :",car2_vertex_list[path])
+        
+        for path in car3_shortest_path:
+            print("car3 :",car3_vertex_list[path])
+
+        for path in car4_shortest_path:
+            print("car4 :",car4_vertex_list[path])
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
@@ -391,12 +411,39 @@ class Execution():
                     #外積による線分交差判定
                     s = (vertex_v[0] - vertex_u[0])*(obstacle_Line[0][1] - vertex_u[1]) - (obstacle_Line[0][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])#外積の計算
                     t = (vertex_v[0] - vertex_u[0])*(obstacle_Line[1][1] - vertex_u[1]) - (obstacle_Line[1][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])
+
+                    # tc1 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[0][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[0][0] - vertex_u[0])
+                    # tc2 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[1][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[1][0] - vertex_u[0])
                     
+<<<<<<< Updated upstream
                     if s * t < 0.0:
+=======
+                    # td1 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_u[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_u[0] - obstacle_Line[0][0])
+                    # td2 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_v[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_v[0] - obstacle_Line[0][0])
+
+                    if s * t < 0:
+>>>>>>> Stashed changes
                         #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
                         cross = True
-                        break
-                
+                        continue
+                    # if (tc1 * tc2) > 0 and (td1 * td2) > 0:
+                    #     cross = True
+                    #     continue
+                    
+                    # if vertex_u[0] - vertex_v[0] == 0 or vertex_u[1] - vertex_v[1] == 0:
+                    #     cross = True
+                    #     continue
+                    # #傾きと切片
+                    # slope = (vertex_v[1] - vertex_u[1]) / (vertex_v[0] - vertex_u[0])
+                    # intercept = vertex_u[1] - (slope * vertex_u[0])
+
+                    # check1 = (slope * obstacle_Line[0][0]) - obstacle_Line[0][1] + intercept
+                    # check2 = (slope * obstacle_Line[1][0]) - obstacle_Line[1][1] + intercept
+
+                    # if (check1 * check2) > 0:
+                    #     cross = True
+                    #     continue
+
                 if cross == False:
                     #衝突が発生しなかった場合、経路長を計算し追加
                     Line.append(np.sqrt(((vertex_v[0] - vertex_u[0])**2 + (vertex_v[1] - vertex_u[1])**2)))
