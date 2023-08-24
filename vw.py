@@ -304,34 +304,34 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 32:
+                if carTocar_distance <= 15:
                     collision += 1
             
         return collision
@@ -414,15 +414,10 @@ class Execution():
 
                     # tc1 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[0][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[0][0] - vertex_u[0])
                     # tc2 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[1][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[1][0] - vertex_u[0])
-                    
-<<<<<<< Updated upstream
-                    if s * t < 0.0:
-=======
                     # td1 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_u[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_u[0] - obstacle_Line[0][0])
                     # td2 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_v[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_v[0] - obstacle_Line[0][0])
 
                     if s * t < 0:
->>>>>>> Stashed changes
                         #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
                         cross = True
                         continue

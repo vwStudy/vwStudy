@@ -1,7 +1,7 @@
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
-params = {'max_num_iteration': 30, 'population_size': 30} 
+params = {'max_num_iteration': 2, 'population_size': 10} 
 
 
 
@@ -33,16 +33,16 @@ car_width :float = 20
 ##車の数
 car_num :int = 4
 
-##車のスタートの座標とゴールの座標
-# car1_STARTtoGOAL : float = [[245.0,260.0],[680.0,260.0]]
+#車のスタートの座標とゴールの座標
+# car1_STARTtoGOAL : float = [[257.0,250.0],[642.0,250.0]]
 
-# car2_STARTtoGOAL : float = [[460.0,115.0],[460.0,460.0]]##上車
+# car2_STARTtoGOAL : float = [[450.0,147.0],[460.0,363.0]]##上車
 
-# car3_STARTtoGOAL : float = [[630.0,260.0],[245.0,240.0]]
+# car3_STARTtoGOAL : float = [[642.0,250.0],[257.0,250.0]]
 
-# car4_STARTtoGOAL : float = [[460.0,370.0],[460.0,115.0]]##下車
+# car4_STARTtoGOAL : float = [[450.0,363.0],[450.0,147.0]]##下車
 
-#ラウンドアバウト用
+# #ラウンドアバウト用
 car1_STARTtoGOAL = ([245,260],[680,260])
 
 car2_STARTtoGOAL = ([440,115],[440,370])
