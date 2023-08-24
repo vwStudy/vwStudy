@@ -365,11 +365,6 @@ class Environment():
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
-            if index <= len(car1_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car1_node_move_list[index][0] - move_pos[0])**2) + ((car1_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
-
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
                 if carTocar_distance <= 29:
@@ -381,37 +376,12 @@ class Environment():
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
-            if index <= len(car2_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
-
-            if index <= len(car1_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car1_node_move_list[index][0] - move_pos[0])**2) + ((car1_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
     
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
                 if carTocar_distance <= 29:
                     collision += 1
 
-        for index, move_pos in enumerate(car4_node_move_list):
-            if index <= len(car1_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car1_node_move_list[index][0] - move_pos[0])**2) + ((car1_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
-            
-            if index <= len(car2_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
-            
-            if index <= len(car3_node_move_list)-1: 
-                carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
-                    collision += 1
-            
         return collision
 
     def set_vertex_list(obstacle_list, carAgent, wall_edge):
@@ -549,7 +519,7 @@ def main():
     for i in solution['variable']:
         solution_list.append(i)
     print(solution_list)
-    #print((solution['variable']),"2222") # x, y の最適値
+    print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
 
 
