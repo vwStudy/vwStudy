@@ -499,7 +499,8 @@ def main():
     print(solution['score'],"最小値") # x, y の最適値での関数の値
     
     f = open('data.txt', 'w', encoding='UTF-8')
-    
+    f.writelines("gene::"+str(setting.params['max_num_iteration'])+" "+"popu::"+str(setting.params['population_size']))
+    f.writelines('\n')
     total_num_obstacles = 0
     for sol in solution['variable']:
         if sol >= 1:
