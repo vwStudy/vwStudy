@@ -40,18 +40,18 @@ def set_virtual_wall(GA_list):
 
 
 
-def set_vertex_list(obstacle_list, carAgent):
+def set_vertex_list(obstacle_list, carAgent, wall_edge):
         """
         頂点のリストを作成し返す関数
         """
         start = carAgent[0].copy()
         goal = carAgent[1].copy()
         vertex_list = [start, goal]
-        new_vertex_list = vertex_list.copy()
-        new_vertex_list.extend(obstacle_list)
 
+        vertex_list.extend(obstacle_list)
+        vertex_list.extend(wall_edge)
         #print("ver"+str(vertex_list))
-        return new_vertex_list
+        return vertex_list
 
 
 def visibility_graph(vertex_list, obstacle_line_list):
@@ -80,7 +80,7 @@ def visibility_graph(vertex_list, obstacle_line_list):
                 s = (vertex_v[0] - vertex_u[0])*(obstacle_Line[0][1] - vertex_u[1]) - (obstacle_Line[0][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])#外積の計算
                 t = (vertex_v[0] - vertex_u[0])*(obstacle_Line[1][1] - vertex_u[1]) - (obstacle_Line[1][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])
                 
-                if s * t > 0.0:
+                if s * t < 0.0:
                     #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
                     cross = True
                     continue
@@ -112,17 +112,219 @@ def dijkstra(visibility_graph_list):
 
     return shortest_path, shortest_length
 
+
+def set_wall():
+        wall_edge_list = []
+        #設置する壁の考慮すべきエッジをlistにまとめる
+        wall_edge_list = setting.wall_edge
+
+        wall_line_list = setting.wall_line
+        return wall_edge_list, wall_line_list
+
+
+def collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path):
+    """
+    
+    車同士の衝突判定
+    """
+    collision = 0
+
+    #同じ速度で目標地点に動いた場合の予測地点をlistにまとめる
+
+    car1_node_move_list = []
+    for index in range(0, len(car1_shortest_path)-1):
+        start = car1_vertex_list[car1_shortest_path[index]]
+        node = car1_vertex_list[car1_shortest_path[index + 1]]
+        car_position = start
+        while car_position != node:
+            if node[0] == start[0]:
+                if  start[0] > node[0] and start[1] > node[1]:
+                    car_position[1] -= (setting.speed)
+                elif start[1] > node[1]:
+                    car_position[1] -= (setting.speed) 
+                elif start[0] > node[0]:
+                    car_position[1] += (setting.speed)  
+                else:
+                    car_position[1] += (setting.speed)
+            else:
+                #移動角度の計算
+                rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                if  start[0] > node[0] and start[1] > node[1]:    
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[1] > node[1]:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[0] > node[0]:
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+                else:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+            if car_position[0] >= node[0]:
+                car_position[0] = node[0]
+            if car_position[1] >= node[1]:
+                car_position[1] = node[1]
+            car1_node_move_list.append([int(car_position[0]),int(car_position[1])])
+
+    car2_node_move_list = []
+    for index in range(0, len(car2_shortest_path)-1):
+        start = car2_vertex_list[car2_shortest_path[index]]
+        node = car2_vertex_list[car2_shortest_path[index + 1]]
+        car_position = start
+        while car_position != node:
+            if node[0] == start[0]:
+                if  start[0] > node[0] and start[1] > node[1]:
+                    car_position[1] -= (setting.speed)
+                elif start[1] > node[1]:
+                    car_position[1] -= (setting.speed) 
+                elif start[0] > node[0]:
+                    car_position[1] += (setting.speed)  
+                else:
+                    car_position[1] += (setting.speed)
+            else:
+                #移動角度の計算
+                rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0])) 
+                if  start[0] > node[0] and start[1] > node[1]:    
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[1] > node[1]:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[0] > node[0]:
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+                else:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+            if car_position[0] >= node[0]:
+                car_position[0] = node[0]
+            if car_position[1] >= node[1]:
+                car_position[1] = node[1]
+            car2_node_move_list.append([int(car_position[0]),int(car_position[1])])
+    
+    car3_node_move_list = []
+    for index in range(0, len(car3_shortest_path)-1):
+        start = car3_vertex_list[car3_shortest_path[index]]
+        node = car3_vertex_list[car3_shortest_path[index + 1]]
+        car_position = start
+        while car_position != node:
+            if node[0] == start[0]:
+                if  start[0] > node[0] and start[1] > node[1]:
+                    car_position[1] -= (setting.speed)
+                elif start[1] > node[1]:
+                    car_position[1] -= (setting.speed) 
+                elif start[0] > node[0]:
+                    car_position[1] += (setting.speed)  
+                else:
+                    car_position[1] += (setting.speed)
+            else:
+                #移動角度の計算
+                rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                if  start[0] > node[0] and start[1] > node[1]:    
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[1] > node[1]:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[0] > node[0]:
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+                else:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+            if car_position[0] >= node[0]:
+                car_position[0] = node[0]
+            if car_position[1] >= node[1]:
+                car_position[1] = node[1]
+            car3_node_move_list.append([int(car_position[0]),int(car_position[1])])
+    
+    car4_node_move_list = []
+    for index in range(0, len(car4_shortest_path)-1):
+        start = car4_vertex_list[car4_shortest_path[index]]
+        node = car4_vertex_list[car4_shortest_path[index + 1]]
+        car_position = start
+        while car_position != node:
+            if node[0] == start[0]:
+                if  start[0] > node[0] and start[1] > node[1]:
+                    car_position[1] -= (setting.speed)
+                elif start[1] > node[1]:
+                    car_position[1] -= (setting.speed) 
+                elif start[0] > node[0]:
+                    car_position[1] += (setting.speed)  
+                else:
+                    car_position[1] += (setting.speed)
+            else:
+                #移動角度の計算
+                rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                if  start[0] > node[0] and start[1] > node[1]:    
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[1] > node[1]:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] -= np.sin(rad) * setting.speed
+                elif start[0] > node[0]:
+                    car_position[0] -= np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+                else:
+                    car_position[0] += np.cos(rad) * setting.speed
+                    car_position[1] += np.sin(rad) * setting.speed
+            if car_position[0] >= node[0]:
+                car_position[0] = node[0]
+            if car_position[1] >= node[1]:
+                car_position[1] = node[1]
+            car4_node_move_list.append([int(car_position[0]),int(car_position[1])])
+
+    #同じ速度で動いた場合の予測地点のlistが存在する場合、同じindexで車同士の距離が閾値以下になった時、衝突したといえる
+
+    for index, move_pos in enumerate(car1_node_move_list):
+        if index <= len(car2_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+        
+        if index <= len(car3_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+        
+        if index <= len(car4_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+    
+    for index, move_pos in enumerate(car2_node_move_list):
+        if index <= len(car3_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+        
+        if index <= len(car4_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+    
+    for index, move_pos in enumerate(car3_node_move_list):
+        if index <= len(car4_node_move_list)-1: 
+            carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
+            if carTocar_distance <= 27:
+                collision += 1
+        
+    return collision
+
+
+
+
 def main():
     #solution_list = vw.main()
-    solution_list = [0.20215090027283056, 1.0566014282448348, 1.3885020983510046, 0.3971648920122779, 1.8630355821907254, 0.744020442987432, 0.9745939410124411, 1.7099085201902229, 0.7755187065765918, 0.7260274554586996, 0.6671916681302179, 1.8636167364290654, 1.1948455491431678, 0.649513065385138, 0.272059496066934, 0.3401995019448063, 0.5679161564814266, 1.147590309144392, 0.3887412635545928, 0.3274022857363379, 1.2045598286603163, 0.11295360615385941, 1.7530550606914117, 0.8975886782798923, 1.4228788189599568, 0.7362528165216882, 0.33299652440184824, 0.9936882012697048, 0.07020780204066379, 0.6559213200693816, 0.7196814204025823, 0.3614035042838655, 0.3493507301855796, 1.2342308616853868, 0.8544287080111321, 0.9290589212858591, 0.1810554375509359, 0.23925930540825724, 1.8568452156806983, 1.7365592721155751, 0.9913381942452903, 0.09805713676577255, 1.2336330608748016, 0.19871418058168655, 1.3806560454502605, 0.624639326415199, 0.30325479350118045, 0.4040229124791417, 0.09363339931603765, 0.6889288872950761, 1.3987773586218681, 1.3202028924993812, 0.27371821341708813, 0.4950627269317718, 0.048539911442471384, 1.1447175324923018, 0.45567576503318374, 0.9277801104117644, 1.505772010708494, 0.2723937545841497, 0.39197505780772635, 1.3827164698058725, 0.8719094340798184, 0.6194327093681027]
+    solution_list = [0.9954823030028079, 0.832286318735352, 0.3641213972722781, 0.8647723318860676, 0.7979267000200745, 0.45658060701060643, 0.9394462620977604, 1.7931876118387886, 0.6986748957850217, 0.7587682173217307, 0.7972479881704786, 0.5525695347563149, 0.2817552245806145, 1.931992619456184, 0.574021212542051, 0.5770309784401376, 1.4528326504049842, 0.5792397391638529, 0.6266923225726821, 0.39779341084143116, 0.9257062579739788, 0.5720807479594718, 0.480349620638995, 0.3296449678855504, 1.3786686302763864, 0.4088429436619103, 0.33511683388365676, 0.6178251459873814, 0.6603345914982242, 1.252975224059661, 0.6655806667228041, 0.8974334422774133, 0.4592140520185599, 0.49859466688964793, 1.0856580477727933, 0.40778713316268034, 1.621819583786396, 0.8216769581416217, 0.8838159066081368, 0.8722908988945908, 0.09786653613521493, 0.49056246255551317, 0.42811948296923247, 0.6720378336341677, 0.46089904553772365, 1.1487598817034301, 0.7817966728011436, 0.5430969388502669, 0.4241381309736889, 0.9840257733972383, 0.7552422614200132, 0.5871473946067254, 0.5711417651409059, 0.26390258318671156, 0.522910946849841, 1.4039757838986457, 0.9983043363134751, 0.5517164685006619, 0.6007241252072055, 0.010634808939372409, 0.7006192938211628, 0.2472207188103599, 1.106666826125733, 0.8533603421327431, 0.2580861024180425, 0.38290647759780194, 1.0375531238924702, 0.25100238238491945, 0.8603423897862392, 1.6521807206156565, 0.571760707830099, 0.9658456237699324, 1.6903022833833852, 0.2895911728076035, 0.9860166668457369, 0.12276944794117783, 0.847165069802164, 0.260133317164569, 0.6595248555159996, 0.42347590606738694, 0.11618717240065904, 0.3714022537007877, 0.8073173167897405, 1.0556488492082003, 0.3039812481881108, 0.6479035749057656, 1.3751196721744163, 0.687651645045099, 0.4008302907609378, 0.12243240485747497, 0.535357908255567, 0.20323612395483942, 0.6534294831171206, 0.06049749368756174, 1.2401150037042297, 0.6227517431230052, 0.9316661810591109, 1.0610985355591176, 0.03314360884395251, 0.9660677111566573]
     #vw_list = np.array(solution_list)
     #vw_list = np.array(solution_list).reshape(4,setting.VWnum**2).tolist()
-    vw_list = np.array(solution_list).reshape(4,4,4).tolist()
+    vw_list = np.array(solution_list).reshape(4,5,5).tolist()
     print(vw_list)
 
-    f = open('data.txt', 'w', encoding='UTF-8')
+    f = open('data.txt', 'a', encoding='UTF-8')
     f.writelines(str(vw_list))
-    f.writelines('\n')
     f.writelines('\n')
 
     
@@ -233,10 +435,15 @@ def main():
     car2_VW_list, car2_vw_line_list = set_virtual_wall(vw_list[1])
     car3_VW_list, car3_vw_line_list = set_virtual_wall(vw_list[2])
     car4_VW_list, car4_vw_line_list = set_virtual_wall(vw_list[3])
-    print("car1_vw:"+str(car1_VW_list))
-    print("car2_vw:"+str(car2_VW_list))
-    print("car3_vw:"+str(car3_VW_list))
-    print("car4_vw:"+str(car4_VW_list))
+    
+    
+    vw_num = len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4
+    f.writelines("vw_num::"+str(vw_num))
+    f.writelines('\n')
+    # print("car1_vw:"+str(car1_VW_list))
+    # print("car2_vw:"+str(car2_VW_list))
+    # print("car3_vw:"+str(car3_VW_list))
+    # print("car4_vw:"+str(car4_VW_list))
 
     # car1_start_goal_list = setting.car1_STARTtoGOAL
     # car2_start_goal_list = setting.car2_STARTtoGOAL
@@ -245,10 +452,14 @@ def main():
 
     cars_tuple = ((setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), (setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), (setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), (setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
 
-    car1_vertex_list = set_vertex_list(car1_VW_list, cars_tuple[0])
-    car2_vertex_list = set_vertex_list(car2_VW_list, cars_tuple[1])
-    car3_vertex_list = set_vertex_list(car3_VW_list, cars_tuple[2])
-    car4_vertex_list = set_vertex_list(car4_VW_list, cars_tuple[3])
+
+
+    wall_edge, wall_line = set_wall()
+
+    car1_vertex_list = set_vertex_list(car1_VW_list, cars_tuple[0], wall_edge)
+    car2_vertex_list = set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge)
+    car3_vertex_list = set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge)
+    car4_vertex_list = set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge)
 
 
     car1_vis_graph = visibility_graph(car1_vertex_list, car1_vw_line_list)
@@ -260,8 +471,6 @@ def main():
     car2_shortest_path, car2_shortest_length = dijkstra(car2_vis_graph)
     car3_shortest_path, car3_shortest_length = dijkstra(car3_vis_graph)
     car4_shortest_path, car4_shortest_length = dijkstra(car4_vis_graph)
-
-
     
     # f.writelines("car1_vw:"+str(car1_VW_list))
     # f.writelines('\n')
@@ -295,7 +504,12 @@ def main():
     all_len = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
     f.writelines("all_len::"+str(all_len))
     f.writelines('\n')
-    
+
+    collision = collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
+    f.writelines("collision::"+str(collision))
+    f.writelines('\n')
+
+
     f.close()
 
     
