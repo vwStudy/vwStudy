@@ -1,7 +1,7 @@
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
-params = {'max_num_iteration': 20, 'population_size': 20} 
+params = {'max_num_iteration': 160, 'population_size': 160} 
 
 
 

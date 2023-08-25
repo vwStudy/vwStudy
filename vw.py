@@ -19,7 +19,7 @@ class VW():
         """
         遺伝的アルゴリズムの結果に対応したVWを設置する関数,VWの4つの頂点のlistと障害物の線分のlistを返す
         """
-        print("galist"+str(GA_list))
+        #print("galist"+str(GA_list))
         size = setting.VWsize
         field_x = setting.VWfield_x
         field_y = setting.VWfield_y
@@ -46,9 +46,9 @@ class VW():
         GeneticalAlgorism用の関数
         """
 
-        car_ga_array = [[], [], [], [], []]
+        car_ga_array = [[], [], [], []]
         for car_number in range(setting.car_num):
-            car_ga_array[car_number].extend([[], [], [], [], []]) 
+            car_ga_array[car_number].extend([[], [], [], []]) 
             for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
@@ -93,18 +93,17 @@ class VW():
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
-        # for i in range(len(car1_shortest_path)):
-        #     #print("car1_path::"+"x:"+str(car1_vertex_list[car1_shortest_path[i]][0])+"y:"+str(car1_vertex_list[car1_shortest_path[i]][1]))
-        #     #print("car1_path::"+str())
-        
-        # for i in range(len(car2_shortest_path)):
-        #     #print("car2_path::"+"x:"+str(car2_vertex_list[car2_shortest_path[i]][0])+"y:"+str(car2_vertex_list[car2_shortest_path[i]][1]))
+        for i in range(len(car1_shortest_path)):
+            print("car1_path::"+"x:"+str(car1_vertex_list[car1_shortest_path[i]][0])+"y:"+str(car1_vertex_list[car1_shortest_path[i]][1]))
+            
+        for i in range(len(car2_shortest_path)):
+            print("car2_path::"+"x:"+str(car2_vertex_list[car2_shortest_path[i]][0])+"y:"+str(car2_vertex_list[car2_shortest_path[i]][1]))
     
-        # for i in range(len(car3_shortest_path)):
-        #     #print("car3_path::"+"x:"+str(car3_vertex_list[car3_shortest_path[i]][0])+"y:"+str(car3_vertex_list[car3_shortest_path[i]][1]))
+        for i in range(len(car3_shortest_path)):
+            print("car3_path::"+"x:"+str(car3_vertex_list[car3_shortest_path[i]][0])+"y:"+str(car3_vertex_list[car3_shortest_path[i]][1]))
 
-        # for i in range(len(car4_shortest_path)):
-        ##    #print("car4_path::"+"x:"+str(car4_vertex_list[car4_shortest_path[i]][0])+"y:"+str(car4_vertex_list[car4_shortest_path[i]][1]))
+        for i in range(len(car4_shortest_path)):
+            print("car4_path::"+"x:"+str(car4_vertex_list[car4_shortest_path[i]][0])+"y:"+str(car4_vertex_list[car4_shortest_path[i]][1]))
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
@@ -498,7 +497,7 @@ def main():
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
     
-    f = open('data.txt', 'w', encoding='UTF-8')
+    f = open('data2.txt', 'a', encoding='UTF-8')
     f.writelines("gene::"+str(setting.params['max_num_iteration'])+" "+"popu::"+str(setting.params['population_size']))
     f.writelines('\n')
     total_num_obstacles = 0
