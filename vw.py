@@ -132,7 +132,7 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
 
         s = all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + (collision * 100000)
-
+        print(s)
         return s
 class Environment():
     def __init__(self, obstacle_x, obstacle_y, width, height):
@@ -483,22 +483,44 @@ def main():
             variable_boundaries=varbound,
             algorithm_parameters=setting.params
     )
-    ga_model.run(no_plot=True,)
 
-    convergence = ga_model.report
-    #print(convergence)
+    ga_model.checked_reports.extend(
+    [
+        ('report_average', np.mean),
+        ('report_25', lambda arr: np.quantile(arr, 0.25)),
+        ('report_50', np.median)
+    ]
+)
+
+    ga_model.run(no_plot=True)
+
     solution = ga_model.result
+    print(solution)
+    print(solution.last_generation.scores)
+    sum = 0
+    for i in solution.last_generation.scores:
+        sum += i
+    
+    print(i/(len(solution.last_generation.scores)))
     print(str(setting.VWnum) + "vw")
     for key, value in setting.params.items():
         print(str(key) + "：" + str(value))
     for i in solution['variable']:
         solution_list.append(i)
-    print(convergence)
+
     print(solution_list)
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
 
-
+    names = [name for name, _ in ga_model.checked_reports[::-1]]
+    ga.plot_several_lines(
+    lines=[getattr(model, name) for name in names],
+    colors=('green', 'black', 'red', 'blue'),
+    labels=['median value', '25% quantile', 'mean of population', 'best pop score'],
+    linewidths=(1, 1.5, 1, 2),
+    title="Several custom reports with base reports",
+    save_as='./output/report.png'
+    )
 
 if __name__ == '__main__':
     main()

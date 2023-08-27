@@ -1,9 +1,7 @@
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
-params = {'max_num_iteration': 2, 'population_size': 10} 
-
-
+params = {'max_num_iteration': 10, 'population_size': 10} 
 
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
@@ -42,12 +40,12 @@ car_num :int = 4
 
 # car4_STARTtoGOAL : float = [[450.0,363.0],[450.0,147.0]]##下車
 
-# #ラウンドアバウト用
-car1_STARTtoGOAL = ([245,260],[680,260])
+#ラウンドアバウト用
+car1_STARTtoGOAL = ([270,260],[630,260])
 
-car2_STARTtoGOAL = ([440,115],[440,370])
+car2_STARTtoGOAL = ([440,160],[440,370])
 
-car3_STARTtoGOAL = ([630,240],[245,240])
+car3_STARTtoGOAL = ([630,350],[245,240])
 
 car4_STARTtoGOAL = ([460,370],[460,115])
 

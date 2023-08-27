@@ -63,6 +63,8 @@ class VW():
 
         wall_edge, wall_line = Environment.set_wall()
 
+        # car_vw_line_list.extend(wall_line)
+
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge)
         car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge)
