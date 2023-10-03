@@ -19,7 +19,7 @@ class VW():
         """
         遺伝的アルゴリズムの結果に対応したVWを設置する関数,VWの4つの頂点のlistと障害物の線分のlistを返す
         """
-        #print("galist"+str(GA_list))
+        print("galist"+str(GA_list))
         size = setting.VWsize
         field_x = setting.VWfield_x
         field_y = setting.VWfield_y
@@ -29,7 +29,7 @@ class VW():
         #indexにインデックスをdeploy_checkには値(0,1)が入る.
         for index, oneDivisionList in enumerate(GA_list):
             for twoDivisionIndex, deploy_check in enumerate(oneDivisionList):
-                if deploy_check >= 1:
+                if 1 == deploy_check:
                     total_num_obstacles += 1
                     #VWの左上, 左下, 右上, 右下を設定
                     VW_LeftUp = [(field_x + (size * twoDivisionIndex)), (field_y + (size * index))]
@@ -52,20 +52,30 @@ class VW():
             for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
-        #print("vw"+str(car_ga_array[0]))
 
+        print(car_ga_array)
+        
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         car1_VW_list, car1_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
         car2_VW_list, car2_vw_line_list = VW.set_virtual_wall(car_ga_array[1])
         car3_VW_list, car3_vw_line_list = VW.set_virtual_wall(car_ga_array[2])
         car4_VW_list, car4_vw_line_list = VW.set_virtual_wall(car_ga_array[3])
-        #print("car1::"+str(car1_VW_list))
+
+        print("car1 : " ,car1_VW_list)
+        print("car2 : " ,car2_VW_list)
+        print("car3 : " ,car3_VW_list)
+        print("car4 : " ,car4_VW_list)
+
+
+        # print("car1 : " ,car1_vw_line_list)
+        # print("car2 : " ,car2_vw_line_list)
+        # print("car3 : " ,car3_vw_line_list)
+        # print("car4 : " ,car4_vw_line_list)
+
 
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
-        # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
-        # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
 
         wall_edge, wall_line = Environment.set_wall()
 
@@ -74,8 +84,8 @@ class VW():
         car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge)
         car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge)
         car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge)
-        #print(car1_vertex_list)
-        # print(car2_vertex_list)
+
+        print(car1_vertex_list)
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
@@ -89,36 +99,41 @@ class VW():
         # print(car4_vis_graph)
 
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
+        # print("path"+str(car1_shortest_path))
+        # print("length"+str(car1_shortest_length))
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
-        for i in range(len(car1_shortest_path)):
-            print("car1_path::"+"x:"+str(car1_vertex_list[car1_shortest_path[i]][0])+"y:"+str(car1_vertex_list[car1_shortest_path[i]][1]))
-            
-        for i in range(len(car2_shortest_path)):
-            print("car2_path::"+"x:"+str(car2_vertex_list[car2_shortest_path[i]][0])+"y:"+str(car2_vertex_list[car2_shortest_path[i]][1]))
-    
-        for i in range(len(car3_shortest_path)):
-            print("car3_path::"+"x:"+str(car3_vertex_list[car3_shortest_path[i]][0])+"y:"+str(car3_vertex_list[car3_shortest_path[i]][1]))
+        print("car1 :" + str(car1_shortest_path), car1_shortest_length)
+        print("car2 :" + str(car2_shortest_path), car2_shortest_length)
+        print("car3 :" + str(car3_shortest_path), car3_shortest_length)
+        print("car4 :" + str(car4_shortest_path), car4_shortest_length)
 
-        for i in range(len(car4_shortest_path)):
-            print("car4_path::"+"x:"+str(car4_vertex_list[car4_shortest_path[i]][0])+"y:"+str(car4_vertex_list[car4_shortest_path[i]][1]))
+        for path in car1_shortest_path:
+            print("car1 :",car1_vertex_list[path])
+
+        for path in car2_shortest_path:
+            print("car2 :",car2_vertex_list[path])
+        
+        for path in car3_shortest_path:
+            print("car3 :",car3_vertex_list[path])
+
+        for path in car4_shortest_path:
+            print("car4 :",car4_vertex_list[path])
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
-        #print(collision)
+        print(collision)
 
-        total_num_obstacles = len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4
+        total_num_obstacles = int(len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4)
         #print(total_num_obstacles)
-        
-        print("collision::"+str(collision))
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
-        print("all_len::"+str(all_path_length))
-        
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 100000
-    
+
+        s = all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + (collision * 100000)
+        return s
+
     def GA_function_8cars(p):
         """
         GeneticalAlgorism用の関数
@@ -126,7 +141,7 @@ class VW():
 
         car_ga_array = [[], [], [], [], [], [], [], []]
         for car_number in range(setting.car_num):
-            car_ga_array[car_number].extend([[], [], [], []]) 
+            car_ga_array[car_number].extend([[], [], [], [], []]) 
             for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
@@ -227,18 +242,17 @@ class VW():
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, 
                                                    car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path,
-                                                   car4_vertex_list, car4_shortest_path, car5_vertex_list, car5_shortest_path,
-                                                   car6_vertex_list, car6_shortest_path, car7_vertex_list, car7_shortest_path,
-                                                   car8_vertex_list, car8_shortest_path)
+                                                   car5_vertex_list, car5_shortest_path, car6_vertex_list, car6_shortest_path, 
+                                                   car7_vertex_list, car7_shortest_path, car8_vertex_list, car8_shortest_path)
         
         print(collision)
 
-        total_num_obstacles = int(len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4,
-                                  len(car5_VW_list)/4 + len(car6_VW_list)/4 + len(car7_VW_list)/4 + len(car8_VW_list)/4,
-                                  )
+        total_num_obstacles = int(len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4 +
+                                  len(car5_VW_list)/4 + len(car6_VW_list)/4 + len(car7_VW_list)/4 + len(car8_VW_list)/4)
         #print(total_num_obstacles)
         #全ての経路長を足す
-        all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
+        all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length + car5_shortest_length + car6_shortest_length + car7_shortest_length + car8_shortest_length
+                          
 
         s = all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + (collision * 100000)
         return s
@@ -260,7 +274,8 @@ class Environment():
 
 
     def collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, 
-                           car4_vertex_list, car4_shortest_path):
+                           car4_vertex_list, car4_shortest_path, car5_vertex_list, car5_shortest_path, car6_vertex_list, car6_shortest_path,
+                           car7_vertex_list, car7_shortest_path, car8_vertex_list, car8_shortest_path,):
         """
         
         車同士の衝突判定
@@ -413,42 +428,298 @@ class Environment():
                     car_position[1] = node[1]
                 car4_node_move_list.append([int(car_position[0]),int(car_position[1])])
 
+        car5_node_move_list = []
+        for index in range(0, len(car5_shortest_path)-1):
+            start = car5_vertex_list[car5_shortest_path[index]]
+            node = car5_vertex_list[car5_shortest_path[index + 1]]
+            car_position = start
+            while car_position != node:
+                if node[0] == start[0]:
+                    if  start[0] > node[0] and start[1] > node[1]:
+                        car_position[1] -= (setting.speed)
+                    elif start[1] > node[1]:
+                        car_position[1] -= (setting.speed) 
+                    elif start[0] > node[0]:
+                        car_position[1] += (setting.speed)  
+                    else:
+                        car_position[1] += (setting.speed)
+                else:
+                    #移動角度の計算
+                    rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                    if  start[0] > node[0] and start[1] > node[1]:    
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[1] > node[1]:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[0] > node[0]:
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                    else:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                if car_position[1] >= node[1]:
+                    car_position[1] = node[1]
+                car5_node_move_list.append([int(car_position[0]),int(car_position[1])])
+
+        car6_node_move_list = []
+        for index in range(0, len(car6_shortest_path)-1):
+            start = car6_vertex_list[car6_shortest_path[index]]
+            node = car6_vertex_list[car6_shortest_path[index + 1]]
+            car_position = start
+            while car_position != node:
+                if node[0] == start[0]:
+                    if  start[0] > node[0] and start[1] > node[1]:
+                        car_position[1] -= (setting.speed)
+                    elif start[1] > node[1]:
+                        car_position[1] -= (setting.speed) 
+                    elif start[0] > node[0]:
+                        car_position[1] += (setting.speed)  
+                    else:
+                        car_position[1] += (setting.speed)
+                else:
+                    #移動角度の計算
+                    rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                    if  start[0] > node[0] and start[1] > node[1]:    
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[1] > node[1]:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[0] > node[0]:
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                    else:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                if car_position[1] >= node[1]:
+                    car_position[1] = node[1]
+                car6_node_move_list.append([int(car_position[0]),int(car_position[1])])
+        
+        car7_node_move_list = []
+        for index in range(0, len(car7_shortest_path)-1):
+            start = car7_vertex_list[car7_shortest_path[index]]
+            node = car7_vertex_list[car7_shortest_path[index + 1]]
+            car_position = start
+            while car_position != node:
+                if node[0] == start[0]:
+                    if  start[0] > node[0] and start[1] > node[1]:
+                        car_position[1] -= (setting.speed)
+                    elif start[1] > node[1]:
+                        car_position[1] -= (setting.speed) 
+                    elif start[0] > node[0]:
+                        car_position[1] += (setting.speed)  
+                    else:
+                        car_position[1] += (setting.speed)
+                else:
+                    #移動角度の計算
+                    rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                    if  start[0] > node[0] and start[1] > node[1]:    
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[1] > node[1]:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[0] > node[0]:
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                    else:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                if car_position[1] >= node[1]:
+                    car_position[1] = node[1]
+                car7_node_move_list.append([int(car_position[0]),int(car_position[1])])
+
+        car8_node_move_list = []
+        for index in range(0, len(car8_shortest_path)-1):
+            start = car8_vertex_list[car8_shortest_path[index]]
+            node = car8_vertex_list[car8_shortest_path[index + 1]]
+            car_position = start
+            while car_position != node:
+                if node[0] == start[0]:
+                    if  start[0] > node[0] and start[1] > node[1]:
+                        car_position[1] -= (setting.speed)
+                    elif start[1] > node[1]:
+                        car_position[1] -= (setting.speed) 
+                    elif start[0] > node[0]:
+                        car_position[1] += (setting.speed)  
+                    else:
+                        car_position[1] += (setting.speed)
+                else:
+                    #移動角度の計算
+                    rad = np.arctan(abs(node[1] - start[1])/abs(node[0] - start[0]))
+                    if  start[0] > node[0] and start[1] > node[1]:    
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[1] > node[1]:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] -= np.sin(rad) * setting.speed
+                    elif start[0] > node[0]:
+                        car_position[0] -= np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                    else:
+                        car_position[0] += np.cos(rad) * setting.speed
+                        car_position[1] += np.sin(rad) * setting.speed
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                if car_position[1] >= node[1]:
+                    car_position[1] = node[1]
+                car8_node_move_list.append([int(car_position[0]),int(car_position[1])])
         #同じ速度で動いた場合の予測地点のlistが存在する場合、同じindexで車同士の距離が閾値以下になった時、衝突したといえる
 
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car5_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car6_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car5_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car6_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 15:
                     collision += 1
 
-        #print("collision::"+str(collision))    
+            if index <= len(car5_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car6_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+        
+        for index, move_pos in enumerate(car4_node_move_list):
+            if index <= len(car5_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car6_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+
+        for index, move_pos in enumerate(car5_node_move_list):
+            if index <= len(car6_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+        for index, move_pos in enumerate(car6_node_move_list):
+            if index <= len(car7_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+            
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+
+        for index, move_pos in enumerate(car7_node_move_list):
+            if index <= len(car8_node_move_list)-1: 
+                carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
+                if carTocar_distance <= 15:
+                    collision += 1
+    
         return collision
 
     def set_vertex_list(obstacle_list, carAgent, wall_edge):
@@ -505,37 +776,6 @@ class Execution():
         self.Obstacle_4 = Environment()
 
     def visibility_graph(vertex_list, obstacle_line_list):
-        
-        # cross = False
-        # visibility_graph_list = []
-        # for index, vertex_u in enumerate(vertex_list):
-        #     for goal_index, vertex_v in enumerate(vertex_list[index + 1:], index + 1):
-        #         Line = [index,goal_index]
-
-        #         for obstacle_Line in obstacle_line_list:
-        #             a = (vertex_v[1]-vertex_u[1])/(vertex_v[0]-vertex_u[0])
-        #             b = vertex_u[1] - (a * vertex_v[0])
-        #             #print(a)
-        #             #print(obstacle_line_list[0][0][0])
-                    
-        #             check1 = (a * obstacle_Line[0][0]) + b - obstacle_Line[0][1]
-        #             check2 = (a * obstacle_Line[1][0]) + b - obstacle_Line[1][1]
-
-        #             if(check1 * check2) < 0:
-        #                 cross = True
-        #                 break
-
-        #         if cross == False:
-        #             Line.append(np.sqrt(((vertex_v[0] - vertex_u[0])**2 + (vertex_v[1] - vertex_u[1])**2)))
-            
-        #             visibility_graph_list.append(tuple(Line))
-
-        # return visibility_graph_list
-                
-                
-
-
-
         """
     
         O(n^3)の素朴な可視グラフ法を実行し可視グラフのリストを返す関数
@@ -557,12 +797,34 @@ class Execution():
                     #外積による線分交差判定
                     s = (vertex_v[0] - vertex_u[0])*(obstacle_Line[0][1] - vertex_u[1]) - (obstacle_Line[0][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])#外積の計算
                     t = (vertex_v[0] - vertex_u[0])*(obstacle_Line[1][1] - vertex_u[1]) - (obstacle_Line[1][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])
-                    
+
+                    # tc1 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[0][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[0][0] - vertex_u[0])
+                    # tc2 = (vertex_v[0] - vertex_u[0]) * (obstacle_Line[1][1] - vertex_u[1]) - (vertex_v[1] - vertex_u[1]) * (obstacle_Line[1][0] - vertex_u[0])
+                    # td1 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_u[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_u[0] - obstacle_Line[0][0])
+                    # td2 = (obstacle_Line[1][0] - obstacle_Line[0][0]) * (vertex_v[1] - obstacle_Line[0][1]) - (obstacle_Line[1][1] - obstacle_Line[0][1]) * (vertex_v[0] - obstacle_Line[0][0])
+
                     if s * t < 0:
                         #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
                         cross = True
                         continue
-                
+                    # if (tc1 * tc2) > 0 and (td1 * td2) > 0:
+                    #     cross = True
+                    #     continue
+                    
+                    # if vertex_u[0] - vertex_v[0] == 0 or vertex_u[1] - vertex_v[1] == 0:
+                    #     cross = True
+                    #     continue
+                    # #傾きと切片
+                    # slope = (vertex_v[1] - vertex_u[1]) / (vertex_v[0] - vertex_u[0])
+                    # intercept = vertex_u[1] - (slope * vertex_u[0])
+
+                    # check1 = (slope * obstacle_Line[0][0]) - obstacle_Line[0][1] + intercept
+                    # check2 = (slope * obstacle_Line[1][0]) - obstacle_Line[1][1] + intercept
+
+                    # if (check1 * check2) > 0:
+                    #     cross = True
+                    #     continue
+
                 if cross == False:
                     #衝突が発生しなかった場合、経路長を計算し追加
                     Line.append(np.sqrt(((vertex_v[0] - vertex_u[0])**2 + (vertex_v[1] - vertex_u[1])**2)))
@@ -603,24 +865,26 @@ def main():
             variable_boundaries=varbound,
             algorithm_parameters=setting.params
     )
-    ga_model.run(no_plot=True,)
 
-    convergence = ga_model.report
-    print(convergence)
+    ga_model.run(no_plot=True)
 
     solution = ga_model.result
+    print(solution)
+    print(solution.last_generation.scores)
+    sum = 0
+    for i in solution.last_generation.scores:
+        sum += i
     
-    # print("sol"+str(solution))
+    print(i/(len(solution.last_generation.scores)))
     print(str(setting.VWnum) + "vw")
-    
     for key, value in setting.params.items():
         print(str(key) + "：" + str(value))
-    # for i in solution['variable']:
-    #     i = round(i ,8)
-    #     solution_list.append(i)
-    # print(solution_list)
+    for i in solution['variable']:
+        solution_list.append(i)
+
+    print(solution_list)
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
-    
+
 if __name__ == '__main__':
     main()

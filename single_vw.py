@@ -47,14 +47,14 @@ class VW():
         共通VW用の関数
         GeneticalAlgorsm用の関数
         """
-        car_ga_array = [[[], [], [], [], []]]
+        car_ga_array = [[[], [], [], []]]
         for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[0][i].append(int(p[i+j*setting.VWnum]))
         # print(car_ga_array)
 
         car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
-        # print(car_VW_list)
+        print(car_VW_list)
 
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
@@ -92,6 +92,19 @@ class VW():
         print("car3 :" + str(car3_shortest_path), car3_shortest_length)
         print("car4 :" + str(car4_shortest_path), car4_shortest_length)
         
+        for i in range(len(car1_shortest_path)):
+            print("car1_path::"+"x:"+str(car1_vertex_list[car1_shortest_path[i]][0])+"y:"+str(car1_vertex_list[car1_shortest_path[i]][1]))
+            
+        for i in range(len(car2_shortest_path)):
+            print("car2_path::"+"x:"+str(car2_vertex_list[car2_shortest_path[i]][0])+"y:"+str(car2_vertex_list[car2_shortest_path[i]][1]))
+    
+        for i in range(len(car3_shortest_path)):
+            print("car3_path::"+"x:"+str(car3_vertex_list[car3_shortest_path[i]][0])+"y:"+str(car3_vertex_list[car3_shortest_path[i]][1]))
+
+        for i in range(len(car4_shortest_path)):
+            print("car4_path::"+"x:"+str(car4_vertex_list[car4_shortest_path[i]][0])+"y:"+str(car4_vertex_list[car4_shortest_path[i]][1]))
+  
+
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
         print(collision)
@@ -280,34 +293,34 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 34:
                     collision += 1
             
         return collision
