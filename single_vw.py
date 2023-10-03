@@ -113,9 +113,8 @@ class VW():
         # print(total_num_obstacles)
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
-
         return all_path_length * (total_num_obstacles / setting.VWnum ** 2) + collision * 1000000
-        
+
 class Environment():
     def __init__(self, obstacle_x, obstacle_y, width, height):
         self.x = obstacle_x
@@ -430,6 +429,7 @@ class Execution():
         #最短経路と距離をダイクストラ法により求める
         shortest_path = nx.dijkstra_path(nx_Graph,origin_node,destination_node)
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
+        #print("vis"+str(visibility_graph_list))
 
         return shortest_path, shortest_length
 

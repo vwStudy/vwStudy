@@ -1,7 +1,11 @@
+import random
+
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
+
 params = {'max_num_iteration': 20, 'population_size': 20} 
+
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
 
@@ -13,13 +17,12 @@ VWfield_x :int = 380
 VWfield_y :int = 200
 
 ##VWの数
-VWnum :int = 5
+VWnum :int = 4
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
 
 ##車のスピード
-#speed :int = 3
 speed :float = 3.0
 
 ##車の縦幅
@@ -31,6 +34,9 @@ car_width :float = 20
 #車の数
 car_num :int = 4
 # car_num :int = 8
+
+##車の数
+car_num :int = 4
 
 ##車のスタートの座標とゴールの座標
 # car1_STARTtoGOAL = ([245,260],[630,260])
