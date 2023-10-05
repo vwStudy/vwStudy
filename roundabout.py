@@ -58,7 +58,7 @@ class VW():
         # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
         # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
 
-        wall_edge, wall_line = Environment.set_wall()
+        wall_edge_list, wall_line_list = Environment.set_wall()
 
         # 十字型ラウンドアバウト
         # car_VW_list = [[430,190],[430,310],[470,190],[470,310],[380,230],[380,270],[520,230],[520,270]]
@@ -75,17 +75,17 @@ class VW():
         # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
         # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
 
-        wall_edge, wall_line = Environment.set_wall()
+        wall_edge_list, wall_line_list = Environment.set_wall()
 
         # car_vw_line_list.extend([[[380,230],[500,230]],[[380,290],[500,290]],[[410,200],[410,320]],[[470,200],[470,320]]])
 
         car_vw_line_list.extend([[[380,248],[500,248]],[[380,272],[500,272]],[[428,200],[428,320]],[[452,200],[452,320]],[[404,224],[404,296]],[[476,224],[476,296]],[[404,224],[476,224]],[[404,296],[476,296]]])
 
         #頂点のlistを作成
-        car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge)
-        car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge)
-        car3_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[2], wall_edge)
-        car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge)
+        car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
+        car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge_list)
+        car3_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[2], wall_edge_list)
+        car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge_list)
 
         print(car1_vertex_list)
 
@@ -151,9 +151,9 @@ class Environment():
     def set_wall():
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
-        wall_edge_list = setting.wall_edge
+        wall_edge_list = setting.wall_edge_list
 
-        wall_line_list = setting.wall_line
+        wall_line_list = setting.wall_line_list
         return wall_edge_list, wall_line_list
 
 
