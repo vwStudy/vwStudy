@@ -1,7 +1,9 @@
 ###パラメーター####
 
 ##generation世代数,popuration遺伝子数
-params = {'max_num_iteration': 30, 'population_size': 30} 
+#params = {'max_num_iteration': 30, 'population_size': 30}
+generation_size = 30 #世代数
+population_size = 30 #遺伝子数
 
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
@@ -18,6 +20,8 @@ VWnum :int = 4
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
+
+genom_size = ((VWnum**2) * 4)
 
 ##車のスピード
 speed :int = 3

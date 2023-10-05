@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
-
-from geneticalgorithm2 import geneticalgorithm2 as ga
+import ga
+#from geneticalgorithm2 import geneticalgorithm2 as ga
 import setting
 
 class VW():
@@ -430,30 +430,32 @@ class Execution():
 def main():
     solution_list = []
 
-    varbound_list = [[0,2]] * (setting.VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
+    #varbound_list = [[0,2]] * (setting.VWnum**2 * 4) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
 
-    varbound = np.array(varbound_list)
+    #varbound = np.array(varbound_list)
 
-    ga_model = ga(function=VW.GA_function,
-            dimension=((setting.VWnum**2) * 4),
-            variable_type='real',
-            variable_boundaries=varbound,
-            algorithm_parameters=setting.params
-    )
-    ga_model.run(no_plot=True,)
+    # ga_model = ga(function=VW.GA_function,
+    #         dimension=((setting.VWnum**2) * 4),
+    #         variable_type='real',
+    #         variable_boundaries=varbound,
+    #         algorithm_parameters=setting.params
+    # )
+    # ga_model.run(no_plot=True,)
 
-    convergence = ga_model.report
+    #convergence = ga_model.report
     #print(convergence)
-    solution = ga_model.result
+    #solution = ga_model.result
     print(str(setting.VWnum) + "vw")
-    for key, value in setting.params.items():
-        print(str(key) + "：" + str(value))
-    for i in solution['variable']:
+    for i in ga.ga_solve():
         solution_list.append(i)
     print(solution_list)
-    #print((solution['variable']),"2222") # x, y の最適値
-    print(solution['score'],"最小値") # x, y の最適値での関数の値
-
+    # for key, value in setting.params.items():
+    #     print(str(key) + "：" + str(value))
+    # for i in solution['variable']:
+    #     solution_list.append(i)
+    # print(solution_list)
+    # #print((solution['variable']),"2222") # x, y の最適値
+    # print(solution['score'],"最小値") # x, y の最適値での関数の値
 
 
 if __name__ == '__main__':
