@@ -19,7 +19,7 @@ class VW():
         """
         遺伝的アルゴリズムの結果に対応したVWを設置する関数,VWの4つの頂点のlistと障害物の線分のlistを返す
         """
-        print("galist"+str(GA_list))
+        # print("galist"+str(GA_list))
         size = setting.VWsize
         field_x = setting.VWfield_x
         field_y = setting.VWfield_y
@@ -77,13 +77,13 @@ class VW():
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
 
-        wall_edge, wall_line = Environment.set_wall()
+        wall_edge_list, wall_line_list = Environment.set_wall()
 
         #頂点のlistを作成
-        car1_vertex_list = Environment.set_vertex_list(car1_VW_list, cars_tuple[0], wall_edge)
-        car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge)
-        car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge)
-        car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge)
+        car1_vertex_list = Environment.set_vertex_list(car1_VW_list, cars_tuple[0], wall_edge_list)
+        car2_vertex_list = Environment.set_vertex_list(car2_VW_list, cars_tuple[1], wall_edge_list)
+        car3_vertex_list = Environment.set_vertex_list(car3_VW_list, cars_tuple[2], wall_edge_list)
+        car4_vertex_list = Environment.set_vertex_list(car4_VW_list, cars_tuple[3], wall_edge_list)
 
         print(car1_vertex_list)
 
@@ -189,7 +189,7 @@ class VW():
         car7_vertex_list = Environment.set_vertex_list(car7_VW_list, cars_tuple[6], wall_edge)
         car8_vertex_list = Environment.set_vertex_list(car8_VW_list, cars_tuple[7], wall_edge)
 
-        print(car1_vertex_list)
+        # print(car1_vertex_list)
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
@@ -267,9 +267,9 @@ class Environment():
     def set_wall():
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
-        wall_edge_list = setting.wall_edge
+        wall_edge_list = setting.wall_edge_list
 
-        wall_line_list = setting.wall_line
+        wall_line_list = setting.wall_line_list
         return wall_edge_list, wall_line_list
 
 
