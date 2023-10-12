@@ -135,6 +135,10 @@ class Environment():
         self.height = height
     
     def set_wall():
+        """
+        
+        
+        """
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
         wall_edge_list = setting.wall_edge_list

@@ -4,7 +4,7 @@ import random
 
 ##generation世代数,popuration遺伝子数
 
-params = {'max_num_iteration': 20, 'population_size': 20} 
+params = {'max_num_iteration': 320, 'population_size': 320} 
 
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
@@ -33,11 +33,8 @@ car_length :float = 25
 car_width :float = 20
 
 #車の数
-car_num :int = 4
-# car_num :int = 8
-
-##車の数
-car_num :int = 4
+#car_num :int = 4
+car_num :int = 8
 
 ##車のスタートの座標とゴールの座標
 # car1_STARTtoGOAL : float = [[257.0, 250.0],[642.0, 250.0]]##左車
@@ -80,6 +77,7 @@ car_num :int = 4
 # wall_line_list = [[[270,160],[270,230]],[[270,160],[430,160]],[[630,160],[630,230]],[[630,160],[470,160]],[[270,350],[270,270]],[[270,350],[430,350]],[[630,350],[630,270]],[[630,350],[470,350]]]
 
 #実世界の道路基準(1/1000スケール)
+#3.5m * 3車線の広さ(102px)
 wall_edge_list = [[349,199],[399,149] #左上の壁の角
                  ,[551,199],[501,149] #右上の壁の角
                  ,[349,301],[399,351] #左下の壁の角
