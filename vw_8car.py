@@ -914,5 +914,46 @@ def main():
     #print((solution['variable']),"2222") # x, y の最適値
     print(solution['score'],"最小値") # x, y の最適値での関数の値
 
+    f = open('data.txt', 'w', encoding='UTF-8')
+    f.writelines("gene::"+str(setting.params['max_num_iteration'])+" "+"popu::"+str(setting.params['population_size']))
+    f.writelines('\n')
+    total_num_obstacles = 0
+    for sol in solution['variable']:
+        if sol >= 1:
+            total_num_obstacles += 1
+    
+    f.writelines("vw_list"+str(solution['variable']))
+    f.writelines('\n')
+    f.writelines("score"+str(solution['score']))
+    f.writelines('\n')
+    f.writelines("vw_num::"+str(total_num_obstacles))
+    f.writelines('\n')
+
+    print(total_num_obstacles)
+    
+    if solution['score'] < 100000:
+        collision = 0
+        f.writelines("collision::"+str(collision))
+        f.writelines('\n')
+  
+        all_path_length = (solution['score'] - collision * 100000) / (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2)))     
+        print(all_path_length)
+        f.writelines("all_len::"+str(all_path_length))
+        f.writelines('\n')
+        f.writelines('\n')
+
+    else:
+        collision = solution['score']/100000
+        f.writelines("collision::"+str(collision))
+        f.writelines('\n')
+        
+        all_path_length = (solution['score'] - collision * 100000) / (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2)))     
+        print(all_path_length)
+        f.writelines("all_len::"+str(all_path_length))
+        f.writelines('\n')
+        f.writelines('\n')
+    
+    f.close()
+
 if __name__ == '__main__':
     main()
