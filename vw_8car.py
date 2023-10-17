@@ -576,148 +576,176 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar2")
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar3")
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar4")
                     collision += 1
             
             if index <= len(car5_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar5")
                     collision += 1
             
             if index <= len(car6_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar6")
                     collision += 1
             
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car1tocar8")
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar3")
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar4")
                     collision += 1
             
             if index <= len(car5_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar5")
                     collision += 1
             
             if index <= len(car6_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar6")
                     collision += 1
             
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car2tocar8")
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car3tocar4")
                     collision += 1
 
             if index <= len(car5_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car3tocar5")
                     collision += 1
             
             if index <= len(car6_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car3tocar6")
                     collision += 1
             
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car3tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car3tocar8")
                     collision += 1
         
         for index, move_pos in enumerate(car4_node_move_list):
             if index <= len(car5_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car5_node_move_list[index][0] - move_pos[0])**2) + ((car5_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car4tocar5")
                     collision += 1
             
             if index <= len(car6_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car4tocar6")
                     collision += 1
             
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car4tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car4tocar8")
                     collision += 1
 
         for index, move_pos in enumerate(car5_node_move_list):
             if index <= len(car6_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car6_node_move_list[index][0] - move_pos[0])**2) + ((car6_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car5tocar6")
                     collision += 1
             
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car5tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car5tocar8")
                     collision += 1
             
         for index, move_pos in enumerate(car6_node_move_list):
             if index <= len(car7_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car7_node_move_list[index][0] - move_pos[0])**2) + ((car7_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car6tocar7")
                     collision += 1
             
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car6tocar8")
                     collision += 1
 
         for index, move_pos in enumerate(car7_node_move_list):
             if index <= len(car8_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car8_node_move_list[index][0] - move_pos[0])**2) + ((car8_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 29:
+                if carTocar_distance <= 12:
+                    print("car7tocar8")
                     collision += 1
     
         return collision
