@@ -122,12 +122,12 @@ wall = [[0,0], #左上の壁
 # car4_STARTtoGOAL : float = [[424.5,500],[900,224.5]] #下から右へ
 
 ##車両のスタート位置
-car1_STARTtoGOAL : float = [[349,224.5],[551,224.5]] #左から右へ
-car2_STARTtoGOAL : float = [[450,149],[450,351]] #上から下へ
-car3_STARTtoGOAL : float = [[551,250],[349,250]] #右から左へ
-car4_STARTtoGOAL : float = [[424.5,351],[424.5,149]] #下から上へ
+car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
+car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
+car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
+car4_STARTtoGOAL : float = [[424.5,376],[424.5,124]] #下から上へ
 
-car5_STARTtoGOAL : float = [[349,250],[551,250]] #左から右へ
-car6_STARTtoGOAL : float = [[424.5,149],[424.5,351]] #上から下へ
-car7_STARTtoGOAL : float = [[551,224.5],[349,224.5]] #右から左へ
-car8_STARTtoGOAL : float = [[450,351],[450,149]] #下から上へ
+car5_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
+car6_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
+car7_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
+car8_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
