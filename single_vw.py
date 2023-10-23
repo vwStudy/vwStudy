@@ -51,7 +51,7 @@ class VW():
         for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[0][i].append(int(p[i+j*setting.VWnum]))
-        # print(car_ga_array)
+        print(car_ga_array)
 
         car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
         print(car_VW_list)
@@ -125,9 +125,9 @@ class Environment():
     def set_wall():
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
-        wall_edge_list = setting.wall_edge
+        wall_edge_list = setting.wall_edge_list
 
-        wall_line_list = setting.wall_line
+        wall_line_list = setting.wall_line_list
         return wall_edge_list, wall_line_list
 
     def collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path):
