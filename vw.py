@@ -75,8 +75,8 @@ class VW():
         car2 = CarAgent(setting.car2_STARTtoGOAL[0], setting.car2_STARTtoGOAL[1])
         car3 = CarAgent(setting.car3_STARTtoGOAL[0], setting.car3_STARTtoGOAL[1])
         car4 = CarAgent(setting.car4_STARTtoGOAL[0], setting.car4_STARTtoGOAL[1])
-        print(setting.car1_STARTtoGOAL[0], setting.car1_STARTtoGOAL[1])
-        print(setting.car2_STARTtoGOAL[0], setting.car2_STARTtoGOAL[1])
+        #print(setting.car1_STARTtoGOAL[0], setting.car1_STARTtoGOAL[1])
+        #print(setting.car2_STARTtoGOAL[0], setting.car2_STARTtoGOAL[1])
 
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car1_VW_list, car1)
@@ -86,6 +86,7 @@ class VW():
 
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car1_vw_line_list)
+        #print("graph"+str(car1_vis_graph))
         car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car2_vw_line_list)
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car3_vw_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car4_vw_line_list)
@@ -100,10 +101,10 @@ class VW():
 
         #print(car1_vertex_list)
             
-        print("car1 :" + str(car1_shortest_path), car1_shortest_length)
-        print("car2 :" + str(car2_shortest_path), car2_shortest_length)
-        print("car3 :" + str(car3_shortest_path), car3_shortest_length)
-        print("car4 :" + str(car4_shortest_path), car4_shortest_length)
+        print("car1 :" + str(car1_shortest_path))
+        print("car2 :" + str(car2_shortest_path))
+        print("car3 :" + str(car3_shortest_path))
+        print("car4 :" + str(car4_shortest_path))
         
         #車両の衝突判定
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
@@ -114,7 +115,7 @@ class VW():
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         
-        return all_path_length * (total_num_obstacles / (4 * 25)) + collision * 100000 
+        return all_path_length * (total_num_obstacles / (setting.car_num *  setting.VWnum)) + collision * 100000 
 
 class Environment():
     def __init__(self, obstacle_x, obstacle_y, width, height):
@@ -287,34 +288,34 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 20:
+                if carTocar_distance <= 12:
                     collision += 1
             
         return collision
@@ -423,7 +424,6 @@ class Execution():
         #最短経路と距離をダイクストラ法により求める
         shortest_path = nx.dijkstra_path(nx_Graph,origin_node,destination_node)
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
-
         return shortest_path, shortest_length
 
 def main():

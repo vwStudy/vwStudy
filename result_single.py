@@ -142,7 +142,11 @@ def dijkstra(visibility_graph_list):
 
 def main():
     #solution_list = vw.main()
+<<<<<<< HEAD
     solution_list = [0.12807571169837018, 1.446460077397614, 0.21220710989775826, 0.919509667225882, 0.4725977492749429, 0.76309856975463, 0.8894529019224491, 0.1834743585238885, 1.9831858421554305, 0.1619855834570696, 0.6264130728301109, 0.6319109273592178, 0.250855702892377, 0.40470334989922785, 0.3935632407029115, 0.035516500784098515]
+=======
+    solution_list = [0.5076311447131427, 0.7563196660654035, 0.7254599797399031, 0.49421900182459266, 0.6392765104528157, 0.5494367629618895, 1.5466656320930698, 1.3446976077799442, 0.7945376667338466, 1.654188859713017, 0.23270557992566587, 0.5944521344152265, 0.7332902007851281, 0.27097563263181734, 0.6721005822570647, 0.9500005032307233]
+>>>>>>> 22250fd67639fa38eee7cd2106ea5664055c30be
     vw_list = np.array(solution_list).reshape(4,setting.VWnum).tolist()
     
     # class CarAgent():
@@ -305,10 +309,17 @@ def main():
         canvas.coords(car4, car4_x0, car4_y0, car4_x0+y_size, car4_y0+x_size)
 
 
+<<<<<<< HEAD
         # for i in range(len(car1_shortest_path)-1):
         #     #canvas.coords(car1, car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1])
         #     canvas.move(car1, car1_vertex_list[car1_shortest_path[i+1]][0] - car1_vertex_list[car1_shortest_path[i]][0], car1_vertex_list[car1_shortest_path[i+1]][1] - car1_vertex_list[car1_shortest_path[i]][1])
         #     canvas.after(10000, move)
+=======
+        for i in range(len(car1_shortest_path)-1):
+            #canvas.coords(car1, car1_vertex_list[car1_shortest_path[i]][0],car1_vertex_list[car1_shortest_path[i]][1], car1_vertex_list[car1_shortest_path[i+1]][0],car1_vertex_list[car1_shortest_path[i+1]][1])
+            canvas.move(car1, car1_vertex_list[car1_shortest_path[i+1]][0] - car1_vertex_list[car1_shortest_path[i]][0], car1_vertex_list[car1_shortest_path[i+1]][1] - car1_vertex_list[car1_shortest_path[i]][1])
+            #canvas.after(10000, canvas.move)
+>>>>>>> 22250fd67639fa38eee7cd2106ea5664055c30be
 
         #car1_x0+=5
         #car2_y0+=5

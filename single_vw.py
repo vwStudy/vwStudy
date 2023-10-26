@@ -385,7 +385,6 @@ class Environment():
 
     def set_vertex_list(obstacle_list, carAgent):
         """
-        
         頂点のリストを作成し返す関数
         """
         start = carAgent.start.copy()
