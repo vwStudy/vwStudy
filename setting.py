@@ -4,27 +4,30 @@ import random
 
 ##generation世代数,popuration遺伝子数
 
-params = {'max_num_iteration': 160, 'population_size': 160} 
+params = {'max_num_iteration': 20, 'population_size': 20} 
 
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
 ##車線の幅を3.5mだと考え，幅17pxとする
 
 ##VWの設置範囲 n*n
-VWfield :int = 102
+# VWfield :int = 102
+VWfield :int = 140
 
 ##VWの設置範囲の開始位置(左上座標)
-VWfield_x :int = 399
-VWfield_y :int = 199
+#VWfield_x :int = 399
+# VWfield_y :int = 199
+VWfield_x :int = 380
+VWfield_y :int = 180
 
 ##VWの数
-VWnum :int = 4
+VWnum :int = 5
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
 
 ##車のスピード
-speed :float = 3.0
+speed :float = 1
 
 ##車の縦幅
 car_length :float = 25
@@ -33,11 +36,11 @@ car_length :float = 25
 car_width :float = 20
 
 #車の数
-# car_num :int = 4
-car_num :int = 8
+#car_num :int = 4
+car_num :int = 4
 
-population_size = 20
-generation_size = 20
+population_size = 10
+generation_size = 10
 genom_size = ((VWnum**2) * car_num)
 
 ##車のスタートの座標とゴールの座標
@@ -103,9 +106,9 @@ wall_line_list = [[[0,199],[399,199]],[[399,0],[399,199]] #左上の壁の辺
                  ,[[501,301],[900,301]],[[501,500],[501,301]]] #右下の壁の辺
 
 #表示用壁の左上座標
-wall = [[0,0], #左上の壁
+wall = [[0,0],[0,0], #左上の壁
         [501,0],[551,0], #右上の壁
-        [0,301], #左下の壁
+        [0,301],[0,351], #左下の壁
         [551,301],[501,351]] #右下の壁
 
 #左上座標
@@ -122,12 +125,19 @@ wall = [[0,0], #左上の壁
 # car4_STARTtoGOAL : float = [[424.5,500],[900,224.5]] #下から右へ
 
 ##車両のスタート位置
-car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
+car1_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
 car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
 car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
-car4_STARTtoGOAL : float = [[424.5,376],[424.5,124]] #下から上へ
+car4_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
 
-car5_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
-car6_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
-car7_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
-car8_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
+
+
+# car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
+# car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
+# car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
+# car4_STARTtoGOAL : float = [[424.5,376],[424.5,124]] #下から上へ
+
+# car5_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
+# car6_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
+# car7_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
+# car8_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
