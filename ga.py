@@ -3,25 +3,32 @@ import setting
 import change_ga_vw
 
 class Individual:
-    def __init__(self, genom):
+    def __init__(self, genom, fitness):
         self.genom = genom
-        self.fitness = self.fitness = change_ga_vw.VW.GA_function(self.genom)
-        self.set_fitness()
+        self.fitness = fitness
+        self.set_fitness(self.fitness)
     
-    def set_fitness(self):
-        self.fitness = change_ga_vw.VW.GA_function(self.genom)
-    
+    def set_fitness(self, fitness):
+        self.fitness = fitness
     def get_fitness(self):
         return self.fitness
 
-def create_generation(popu_size, genoms):
+def create_generation(popu_size, genoms, fitness = change_ga_vw.VW.single_GA_function):
     #popu_size:1世代の個体数
     #genoms:遺伝子数の長さ
     population = []
     for _ in range(popu_size):
-        individual = Individual(np.random.randint(0, 2, genoms))
+        individual = Individual(np.random.randint(0, 2, genoms), fitness(np.random.randint(0, 2, genoms)))
         population.append(individual)
     return population
+
+def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness = change_ga_vw.VW.two_steps_ga_function):
+    population = []
+    for _ in range(popu_size):
+        individual = Individual(np.random.randint(0, 2, genoms), fitness(np.random.randint(0, 2, genoms), two_steps_list, zeros_list))
+        population.append(individual)
+    return population
+    
 
 # def select_roulette(populations):
 #     function = [popu.get_fitness() for popu in populations]
@@ -96,7 +103,8 @@ def ga_solve(populations, gene_size, popu_size):
         children = mutate(children)
         populations[0] = children[0]
         populations[1] = children[1]
-    return best
+    best_gene = min(best, key=Individual.get_fitness)
+    return best, best_gene
 
 def main():
     popu_size = setting.population_size#1世代の遺伝子数
@@ -105,5 +113,15 @@ def main():
     populations = create_generation(popu_size, genom_size)
     return ga_solve(populations, gene_size, popu_size)
 
+def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list):
+    popu_size = popu_size#1世代の遺伝子数
+    gene_size = gene_size#世代数
+    genom_size = genom_size#遺伝子の長さ
+    two_steps_list = two_steps_list
+    zeros_list = zeros_list
+    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list)
+    return ga_solve(populations, gene_size, popu_size)
+
 if __name__ == '__main__':
     main()
+    

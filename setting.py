@@ -21,7 +21,7 @@ VWfield_x :int = 380
 VWfield_y :int = 180
 
 ##VWの数
-VWnum :int = 5
+VWnum :int = 3
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -36,8 +36,8 @@ car_length :float = 25
 car_width :float = 20
 
 #車の数
-#car_num :int = 4
-car_num :int = 4
+car_num :int = 1
+# car_num :int = 8
 
 population_size = 10
 generation_size = 10
