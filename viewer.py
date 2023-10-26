@@ -182,27 +182,26 @@ def car_move(car_pos, line_list, path_list, num):
                 #car_pos.x -= np.cos(rad) * setting.speed
                 car_pos.y -= abs(line_list[path_list[num]][1] - car_pos.y) * setting.speed
                 #car_pos.y -= np.sin(rad) * setting.speed
-                print("testtttt")
+                
             
             elif car_pos.y > line_list[path_list[num]][1] and car_pos.x < line_list[path_list[num]][0]:
                 car_pos.x += abs(line_list[path_list[num]][0] - car_pos.x) * setting.speed
                 #car_pos.x += np.cos(rad) * setting.speed
                 car_pos.y -= abs(line_list[path_list[num]][1] - car_pos.y) * setting.speed
                 #car_pos.y -= np.sin(rad) * setting.speed
-                print("testtttt2")
+                
 
             elif car_pos.x > line_list[path_list[num]][0] and car_pos.y < line_list[path_list[num]][1]:
                 car_pos.x -= abs(line_list[path_list[num]][0] - car_pos.x) * setting.speed
                 #car_pos.x -= np.cos(rad) * setting.speed
                 car_pos.y += abs(line_list[path_list[num]][1] - car_pos.y) * setting.speed
                 #car_pos.y += np.sin(rad) * setting.speed
-                print("testtttt3")
+                
             elif car_pos.x < line_list[path_list[num]][0] and car_pos.y < line_list[path_list[num]][1]:
                 car_pos.x += abs(line_list[path_list[num]][0] - car_pos.x) * setting.speed
                 #car_pos.x += np.cos(rad) * setting.speed
                 car_pos.y += abs(line_list[path_list[num]][1] - car_pos.y) * setting.speed
                 #car_pos.y += np.sin(rad) * setting.speed
-                print("testtttt4")
 
         return car_pos
 
