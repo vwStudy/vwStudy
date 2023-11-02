@@ -1,17 +1,27 @@
 import numpy as np
 import setting
 import change_ga_vw
+import matplotlib.pyplot as plt
 
 class Individual:
     def __init__(self, genom, fitness):
         self.genom = genom
         self.fitness = fitness
+        self.collision = 0
+        self.all_path_length = 0
         self.set_fitness(self.fitness)
     
     def set_fitness(self, fitness):
-        self.fitness = fitness
+        self.fitness, self.collision, self.all_path_length = fitness
+
     def get_fitness(self):
         return self.fitness
+    
+    def get_collision(self):
+        return self.collision
+
+    def get_all_path_length(self):
+        return self.all_path_length
 
 def create_generation(popu_size, genoms, fitness = change_ga_vw.VW.single_GA_function):
     #popu_size:1世代の個体数
@@ -58,7 +68,6 @@ def cross_uniform(child1, child2):
             new_child2 = child2
     return new_child1, new_child2
 
-
 # def crossover(selected1, selected2, popu_size):
 #     children = []
 #     Cross_PB=0.5
@@ -95,16 +104,18 @@ def mutate(children):
 
 def ga_solve(populations, gene_size, popu_size):
     best = []
+    generation_list = []
     for i in range(gene_size):
         best_popu = min(populations, key=Individual.get_fitness)
         best.append(best_popu)
+        generation_list.append(populations)
         selected = select_roulette(populations)
         children = crossover(selected)
         children = mutate(children)
         populations[0] = children[0]
         populations[1] = children[1]
     best_gene = min(best, key=Individual.get_fitness)
-    return best, best_gene
+    return best, best_gene, generation_list
 
 def main():
     popu_size = setting.population_size#1世代の遺伝子数
@@ -121,6 +132,31 @@ def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list)
     zeros_list = zeros_list
     populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list)
     return ga_solve(populations, gene_size, popu_size)
+
+def create_graph_best(best):
+    l = []
+    for gene in best:
+        l.append(gene.get_fitness())
+
+    left  = [x for x in range(len(best))]
+    height = l
+    plt.plot(left, height)
+    plt.show()
+
+def create_graph_generations(genelation_list, genelation_number):
+    l = []
+    for gene in genelation_list[genelation_number]:
+        l.append(gene.get_fitness())
+
+    left  = [x for x in range(len(genelation_list))]
+    height = l
+    plt.plot(left, height)
+    plt.show()
+
+def skip_generation():
+    """
+    世代を修了させる関数
+    """
 
 if __name__ == '__main__':
     main()
