@@ -234,7 +234,9 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        print(all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length)
+        print("fitness::",all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, 
+              "collision::",collision,
+              "path_length::",all_path_length)
 
         return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length
 
@@ -822,6 +824,7 @@ def main():
     print("path_length::" , best_gene.get_all_path_length())
     # グラフ表示関数
     ga.create_graph_best(best)
+    print("genelation_size::", len(genelation_list))
     for i in range(len(genelation_list)):
         print(i)
         ga.create_graph_generations(genelation_list, i)
