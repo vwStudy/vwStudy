@@ -142,7 +142,7 @@ class VW():
         """
         GeneticalAlgorism用の関数
         """
-        car_ga_array = [[[],[],[],[],[]]]
+        car_ga_array = [[[],[],[],[]]]
         ga_array = np.array(genom.reshape(1, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
@@ -160,8 +160,12 @@ class VW():
         print("VW_list" , len(car_VW_list))
         print("VW_line_list:" , len(car_vw_line_list))
 
+        combine_vw_start= time.time()
         car_VW_list = combining_vw(car_VW_list)
         car_vw_line_list = combining_vw(car_vw_line_list)
+        combine_vw_end = time.time()
+        combine_time_diff = combine_vw_end - combine_vw_start
+        print("combine_vw_time" , combine_time_diff)
 
         print("combined" , len(car_VW_list))
         print("combined" , len(car_vw_line_list))

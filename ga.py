@@ -114,9 +114,7 @@ def ga_solve(populations, gene_size, popu_size):
         children = mutate(children)
         populations[0] = children[0]
         populations[1] = children[1]
-        if best_popu.get_fitness() == best[i-1].get_fitness() and best_popu.get_fitness() == best[i-2].get_fitness() and best_popu.get_fitness() < 1000000 and len(generation_list) >= 2:
-            print(True)
-            break
+
     best_gene = min(best, key=Individual.get_fitness)
     return best, best_gene, generation_list
 
