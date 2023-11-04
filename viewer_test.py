@@ -1,33 +1,35 @@
-import numpy as np
 import pygame
-import sys
-from pygame.locals import *
 
-import pygame
-import sys
-
-# Pygameの初期化
+# 初期化
 pygame.init()
 
-# ウィンドウのサイズを指定
-window_size = (400, 400)
-screen = pygame.display.set_mode(window_size)
-screen.fill((255, 255, 255))
+# ウィンドウのサイズ
+width, height = 800, 600
 
-# 半透明の赤い四角を描画するSurfaceを作成
-surface = pygame.Surface((80, 500), pygame.SRCALPHA)
-pygame.draw.rect(surface, (255, 0, 0, 100), pygame.Rect(50, 50, 100, 100))  # 赤い四角 (128はアルファ値)
+# ウィンドウの作成
+screen = pygame.display.set_mode((width, height))
 
-# ウィンドウにSurfaceを描画
-screen.blit(surface, (200, 200))  # Surfaceをウィンドウ上の指定位置に描画
+# サーフェスを作成し、RGBAフォーマットに設定
+surface = pygame.Surface((80, 80), pygame.SRCALPHA)
 
-# ゲームループ
+# 半透明の色 (RGBA形式)
+color = (255, 0, 0, 128)  # この場合、赤色でアルファ値が128（半透明）
+
+# 正方形を描画
+pygame.draw.rect(surface, color, pygame.Rect(0, 0, 80, 80))
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+    # ウィンドウをクリア
+    screen.fill((255, 255, 255))
+
+    # サーフェスをウィンドウに描画
+    screen.blit(surface, (360, 420))
+
     pygame.display.flip()
 
-
+pygame.quit()
