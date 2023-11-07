@@ -142,7 +142,7 @@ class VW():
         """
         GeneticalAlgorism用の関数
         """
-        car_ga_array = [[[],[],[],[]]]
+        car_ga_array = [[[],[],[],[],[],[],[],[],[]]]
         ga_array = np.array(genom.reshape(1, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
@@ -421,7 +421,7 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000
+        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length
 
     def two_steps_ga_setting(best):
         """
@@ -805,11 +805,11 @@ class Execution():
         return shortest_path, shortest_length
 
 # def main():
-#     best, best_gene = ga.main()
+#     best, best_gene, genelation_list = ga.main()
 #     print(best_gene.genom)
 #     two_steps_list, zeros_list = VW.two_steps_ga_setting(best_gene.genom)
 #     gene_size=len(two_steps_list*9)
-#     two_steps_best, two_steps_best_gene = ga.set_paramater_ga(setting.population_size, setting.generation_size, gene_size, two_steps_list, zeros_list)
+#     two_steps_best, two_steps_best_gene, genelation_list = ga.set_paramater_ga(setting.population_size, setting.generation_size, gene_size, two_steps_list, zeros_list)
     
 #     ga_resalt = zeros_list
     
@@ -819,6 +819,9 @@ class Execution():
 #         ga_resalt[0][two_steps_list[i]] = list(best_genom[0][i])
 
 #     print("best_genom:" , ga_resalt)
+#     print("fitness::" , two_steps_best_gene.get_fitness())
+#     print("collision::" , two_steps_best_gene.get_collision())
+#     print("path_length::" , two_steps_best_gene.get_all_path_length())
 
 def main():
     best, best_gene, genelation_list = ga.main()
@@ -827,11 +830,11 @@ def main():
     print("collision::" , best_gene.get_collision())
     print("path_length::" , best_gene.get_all_path_length())
     # グラフ表示関数
-    ga.create_graph_best(best)
-    print("genelation_size::", len(genelation_list))
-    for i in range(len(genelation_list)):
-        print(i)
-        ga.create_graph_generations(genelation_list, i)
+    # ga.create_graph_best(best)
+    # print("genelation_size::", len(genelation_list))
+    # for i in range(len(genelation_list)):
+    #     print(i)
+    #     ga.create_graph_generations(genelation_list, i)
 
 def combining_vw(Vw_list):
     """

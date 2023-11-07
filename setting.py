@@ -21,7 +21,7 @@ VWfield_x :int = 380
 VWfield_y :int = 180
 
 ##VWの数
-VWnum :int = 5
+VWnum :int = 9
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -39,8 +39,8 @@ car_width :float = 20
 car_num :int = 1
 # car_num :int = 8
 
-population_size = 320
-generation_size = 320
+population_size = 80
+generation_size = 80
 genom_size = ((VWnum**2) * car_num)
 
 ##車のスタートの座標とゴールの座標
