@@ -131,7 +131,6 @@ car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
 car4_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
 
 
-
 # car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
 # car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
 # car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ

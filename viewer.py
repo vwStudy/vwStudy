@@ -55,18 +55,14 @@ class Environment:
 class VW:
 
     def create_VW(screen, color, left_up, right_down):
-        screen = pygame.display.set_mode((900, 500))
-        screen.fill((255,255,255))
 
         ##pygame.draw.rect(screen, color, (left_up[0], left_up[1], abs(right_down[0]-left_up[0]), abs(right_down[1]-left_up[1])))
         
-        rect1 = pygame.Rect(left_up[0], left_up[1], abs(right_down[0]-left_up[0]), abs(right_down[1]-left_up[1]))
-        surface = pygame.Surface(left_up[0], left_up[1], pygame.SRCALPHA)##四角の大きさと透明を定義
+        surface = pygame.Surface((setting.VWsize, setting.VWsize), pygame.SRCALPHA)##四角の大きさと透明を定義
         surface.fill(color)
-        screen.blit(surface, rect1)
-        
-        #pygame.draw.rect(surface, color, rect1)
-        #screen.blit(surface, rect1)
+        surface = pygame.transform.scale(surface, (setting.VWsize,setting.VWsize))
+        pygame.draw.rect(surface, color, pygame.Rect(left_up[0], left_up[1],setting.VWsize,setting.VWsize))
+        screen.blit(surface, (left_up[0], left_up[1]))
         
         
     
@@ -95,6 +91,7 @@ class VW:
                     VW_RightDown = [VW_LeftUp[0] + size, VW_LeftUp[1] + size]
                     
                     VW.create_VW(screen, color, VW_LeftUp, VW_RightDown)
+                    
                     obstacles_vertex_list.extend([VW_LeftUp, VW_LeftDown, VW_RightUp, VW_RightDown])
                     obstacles_line_list.extend([[VW_LeftUp, VW_LeftDown], [VW_LeftUp, VW_RightUp], [VW_RightUp, VW_RightDown], [VW_RightDown, VW_LeftDown]])
         return obstacles_vertex_list, obstacles_line_list
@@ -238,15 +235,15 @@ def main():
     rightdown_wall1 = Environment(screen, setting.wall[6][0], setting.wall[6][1], 900, 199)
     rightdown_wall2 = Environment(screen, setting.wall[7][0], setting.wall[7][1], 900, 199)
 
-    leftup_wall1.create_wall()
-    leftup_wall2.create_wall()
-    rightup_wall1.create_wall()
-    rightup_wall2.create_wall()
-    leftdown_wall1.create_wall()
-    leftdown_wall2.create_wall()
-    rightdown_wall1.create_wall()
-    rightdown_wall2.create_wall()
-    
+    # leftup_wall1.create_wall()
+    # leftup_wall2.create_wall()
+    # rightup_wall1.create_wall()
+    # rightup_wall2.create_wall()
+    # leftdown_wall1.create_wall()
+    # leftdown_wall2.create_wall()
+    # rightdown_wall1.create_wall()
+    # rightdown_wall2.create_wall()
+                    
     car1 = CarAgent(screen, 'red', setting.car1_STARTtoGOAL[0][0], setting.car1_STARTtoGOAL[0][1], setting.car1_STARTtoGOAL[1][0], setting.car1_STARTtoGOAL[1][1], setting.car_length, setting.car_width)
     car2 = CarAgent(screen, 'blue', setting.car2_STARTtoGOAL[0][0], setting.car2_STARTtoGOAL[0][1], setting.car2_STARTtoGOAL[1][0], setting.car2_STARTtoGOAL[1][1], setting.car_width, setting.car_length)
     car3 = CarAgent(screen, 'yellow', setting.car3_STARTtoGOAL[0][0], setting.car3_STARTtoGOAL[0][1], setting.car3_STARTtoGOAL[1][0], setting.car3_STARTtoGOAL[1][1], setting.car_length, setting.car_width)
@@ -292,10 +289,10 @@ def main():
     num2=0
     num3=0
     num4=0
-    #rect_surface = pygame.Surface((setting.car_length, setting.car_width), pygame.SRCALPHA)
+
     vw_red = (255, 0, 0, 128) 
-    vw_blue = (0, 0, 255, 100)
-    vw_green = (0, 255, 0, 100)
+    vw_blue = (0, 0, 255, 128)
+    vw_green = (0, 255, 0, 128)
     vw_yellow = (255, 255, 0, 128)
     
     red = 'red' 
@@ -303,16 +300,46 @@ def main():
     green = 'green'
     yellow = 'yellow'
 
-    screen = pygame.display.set_mode((900, 500))
-    screen.fill((255, 255, 255))
-    frame_delay = 700
-
+    frame_delay=600
     while True:
 
+        screen = pygame.display.set_mode((900, 500))
+        screen.fill((255, 255, 255))
+       
         VW.set_virtual_wall(screen, vw_red, car_ga[0])
         VW.set_virtual_wall(screen, vw_blue, car_ga[1])
         VW.set_virtual_wall(screen, vw_green, car_ga[2])
         VW.set_virtual_wall(screen, vw_yellow, car_ga[3])
+
+
+
+
+        # size = setting.VWsize
+        # field_x = setting.VWfield_x
+        # field_y = setting.VWfield_y
+        # obstacles_vertex_list = []
+        # obstacles_line_list = []
+        # total_num_obstacles = 0
+
+        # ga_list = np.reshape(car_ga[0], (setting.VWnum, setting.VWnum))
+        # #indexにインデックスをdeploy_checkには値(0,1)が入る.
+        
+        # for index, oneDivisionList in enumerate(ga_list):
+        #     for twoDivisionIndex, deploy_check in enumerate(oneDivisionList):
+        #         if deploy_check >= 1:
+        #             total_num_obstacles += 1
+        #             #VWの左上, 左下, 右上, 右下を設定
+        #             VW_LeftUp = [(field_x + (size * twoDivisionIndex)), (field_y + (size * index))]
+        #             VW_LeftDown = [VW_LeftUp[0], VW_LeftUp[1] + size]
+        #             VW_RightUp = [VW_LeftUp[0] + size, VW_LeftUp[1]]
+        #             VW_RightDown = [VW_LeftUp[0] + size, VW_LeftUp[1] + size]
+                    
+        #             # VW.create_VW(screen, color, VW_LeftUp, VW_RightDown)
+        #             surface = pygame.Surface((setting.VWsize, setting.VWsize), pygame.SRCALPHA)##四角の大きさと透明を定義
+        #             surface.fill(vw_red)
+        #             surface = pygame.transform.scale(surface, (setting.VWsize,setting.VWsize))
+        #             pygame.draw.rect(surface, vw_red, pygame.Rect(VW_LeftUp[0], VW_LeftUp[1],setting.VWsize,setting.VWsize))
+        #             screen.blit(surface, (VW_LeftUp[0], VW_LeftUp[1]))
 
         leftup_wall1.create_wall()
         leftup_wall2.create_wall()
@@ -361,7 +388,7 @@ def main():
             num4+=1
 
         cnt+=1
-        if cnt==50000:
+        if cnt==10000:
             break
 
     
