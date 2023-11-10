@@ -162,13 +162,13 @@ class VW():
 
         combine_vw_start= time.time()
         car_VW_list = combining_vw(car_VW_list)
-        car_vw_line_list = combining_vw(car_vw_line_list)
+        # car_vw_line_list = combining_vw(car_vw_line_list)
         combine_vw_end = time.time()
         combine_time_diff = combine_vw_end - combine_vw_start
         print("combine_vw_time" , combine_time_diff)
 
         print("combined" , len(car_VW_list))
-        print("combined" , len(car_vw_line_list))
+        # print("combined" , len(car_vw_line_list))
 
         #CarAgentにODを設定
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
@@ -177,12 +177,7 @@ class VW():
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
-        # car1_vw_line_list.extend(wall_line_list)
-        # car2_vw_line_list.extend(wall_line_list)
-        # car3_vw_line_list.extend(wall_line_list)
-        # car4_vw_line_list.extend(wall_line_list)
-
-
+        # car_vw_line_list.extend(wall_line_list)
         # print(car1_VW_list)
         
         create_vertex_start = time.time()
@@ -214,17 +209,27 @@ class VW():
         dijkstra_time_diff = dijkstra_end - dijkstra_start
         print("dijkstra::",dijkstra_time_diff)        
 
+        cars_path_list = []
+        car_path_tmp_list = []
         for path in car1_shortest_path:
             print("car1 :",car1_vertex_list[path])
-
+            car_path_tmp_list.append(car1_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        
         for path in car2_shortest_path:
             print("car2 :",car2_vertex_list[path])
+            car_path_tmp_list.append(car2_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         for path in car3_shortest_path:
             print("car3 :",car3_vertex_list[path])
+            car_path_tmp_list.append(car3_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
 
         for path in car4_shortest_path:
             print("car4 :",car4_vertex_list[path])
+            car_path_tmp_list.append(car4_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
 
@@ -242,13 +247,11 @@ class VW():
               "collision::",collision,
               "path_length::",all_path_length)
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles
-
-
+        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
 
     # def GA_function(genom):
     #     """
-        
+    #
     #     """
     #     car_ga_array = [[[],[],[],[]],[[],[],[],[]],[[],[],[],[]],[[],[],[],[]]]
     #     ga_array = np.array(genom.reshape(4, 4, 4))
@@ -397,17 +400,27 @@ class VW():
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
+        cars_path_list = []
+        car_path_tmp_list = []
         for path in car1_shortest_path:
             print("car1 :",car1_vertex_list[path])
-
+            car_path_tmp_list.append(car1_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        
         for path in car2_shortest_path:
             print("car2 :",car2_vertex_list[path])
+            car_path_tmp_list.append(car2_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         for path in car3_shortest_path:
             print("car3 :",car3_vertex_list[path])
+            car_path_tmp_list.append(car3_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
 
         for path in car4_shortest_path:
             print("car4 :",car4_vertex_list[path])
+            car_path_tmp_list.append(car4_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
 
@@ -421,7 +434,7 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles
+        return all_path_length * (total_num_obstacles / (setting.car_num * (9 ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
 
     def two_steps_ga_setting(best):
         """
@@ -804,42 +817,71 @@ class Execution():
 
         return shortest_path, shortest_length
 
-def main():
-    """
-    2段階VW用のmain
-    """
-    best, best_gene, genelation_list = ga.main()
-    print(best_gene.genom)
-    two_steps_list, zeros_list = VW.two_steps_ga_setting(best_gene.genom)
-    gene_size=len(two_steps_list*9)
-    two_steps_best, two_steps_best_gene, genelation_list = ga.set_paramater_ga(setting.population_size, setting.generation_size, gene_size, two_steps_list, zeros_list)
-    
-    ga_resalt = zeros_list
-    
-    best_genom = np.array(two_steps_best_gene.genom.reshape(1, len(two_steps_list), 9))
-
-    for i in range(len(two_steps_list)):
-        ga_resalt[0][two_steps_list[i]] = list(best_genom[0][i])
-
-    print("best_genom:" , ga_resalt)
-    print("fitness::" , two_steps_best_gene.get_fitness())
-    print("collision::" , two_steps_best_gene.get_collision())
-    print("path_length::" , two_steps_best_gene.get_all_path_length())
-    print("tota;_num_obstacles" , two_steps_best_gene.get_total_num_obstacles())
-
 # def main():
+#     """
+#     2段階VW用のmain
+#     """
 #     best, best_gene, genelation_list = ga.main()
-#     print("genom::" , best_gene.genom)
-#     print("fitness::" , best_gene.get_fitness())
-#     print("collision::" , best_gene.get_collision())
-#     print("path_length::" , best_gene.get_all_path_length())
-#     # グラフ表示関数
-#     # ga.create_graph_best(best)
-#     # print("genelation_size::", len(genelation_list))
-#     # for i in range(len(genelation_list)):
-#     #     print(i)
-#     #     ga.create_graph_generations(genelation_list, i)
+#     print(best_gene.genom)
+#     two_steps_list, zeros_list = VW.two_steps_ga_setting(best_gene.genom)
+#     gene_size=len(two_steps_list*9)
+#     two_steps_best, two_steps_best_gene, genelation_list = ga.set_paramater_ga(setting.population_size, setting.generation_size, gene_size, two_steps_list, zeros_list)
+    
+#     ga_resalt = zeros_list
+    
+#     best_genom = np.array(two_steps_best_gene.genom.reshape(1, len(two_steps_list), 9))
 
+#     for i in range(len(two_steps_list)):
+#         ga_resalt[0][two_steps_list[i]] = list(best_genom[0][i])
+
+#     print("best_genom:" , ga_resalt)
+#     print("fitness::" , two_steps_best_gene.get_fitness())
+#     print("collision::" , two_steps_best_gene.get_collision())
+#     print("path_length::" , two_steps_best_gene.get_all_path_length())
+#     print("tota;_num_obstacles" , int(two_steps_best_gene.get_total_num_obstacles()))
+#     cars_path = two_steps_best_gene.get_cars_path()
+#     for path in cars_path[0]:
+#         print("car1 :",path)
+    
+#     for path in cars_path[1]:
+#         print("car2 :",path)
+    
+#     for path in cars_path[2]:
+#         print("car3 :",path)
+    
+#     for path in cars_path[3]:
+#         print("car4 :",path)
+
+#   return two_steps_best, two_steps_best_gene, genelation_list
+    
+def main():
+    best, best_gene, genelation_list = ga.main()
+    print("genom::" , best_gene.genom)
+    print("fitness::" , best_gene.get_fitness())
+    print("collision::" , best_gene.get_collision())
+    print("path_length::" , best_gene.get_all_path_length())
+    print("total_num_obstacles", int(best_gene.get_total_num_obstacles()))
+    # グラフ表示関数
+    # ga.create_graph_best(best)
+    # print("genelation_size::", len(genelation_list))
+    # for i in range(len(genelation_list)):
+    #     print(i)
+    #     ga.create_graph_generations(genelation_list, i)
+    cars_path = best_gene.get_cars_path()
+    for path in cars_path[0]:
+        print("car1 :",path)
+    
+    for path in cars_path[1]:
+        print("car2 :",path)
+    
+    for path in cars_path[2]:
+        print("car3 :",path)
+    
+    for path in cars_path[3]:
+        print("car4 :",path)
+    
+    return best, best_gene, genelation_list
+        
 def combining_vw(Vw_list):
     """
     
@@ -849,10 +891,26 @@ def combining_vw(Vw_list):
     return [position for position in Vw_list if position not in seen and not seen.append(position)]
 
 if __name__ == '__main__':
-    start = time.time()
-    main()
-    end = time.time()
+    # for i in range(100):
+        start = time.time()
+        best, best_gene, genelation_list = main()
+        end = time.time()
 
-    time_diff = end - start
-    print("time:" , time_diff)
-    
+        time_diff = end - start
+        print("time:" , time_diff)
+        
+        #結果のファイルへの書き込み処理      
+        f = open('data_2steps_vw.txt', 'a', encoding='UTF-8')
+        f.writelines('\n')
+        f.writelines("genelation_size::" + str(setting.generation_size) + "," + "population_size::" + str(setting.population_size) + "," + "number" + str(i))
+        f.writelines('\n')
+        f.writelines("genom::" + str(best_gene.genom))
+        f.writelines('\n')
+        f.writelines("fitness::"+str(best_gene.get_fitness()))
+        f.writelines('\n')
+        f.writelines("collision::"+str(best_gene.get_collision()))
+        f.writelines('\n')
+        f.writelines("path_length::"+str(best_gene.get_all_path_length()))
+        f.writelines('\n')
+        f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
+        f.writelines('\n')

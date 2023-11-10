@@ -12,7 +12,7 @@ class Individual:
         self.set_fitness(self.fitness)
     
     def set_fitness(self, fitness):
-        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles = fitness
+        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles, self.cars_path = fitness
 
     def get_fitness(self):
         return self.fitness
@@ -25,6 +25,9 @@ class Individual:
     
     def get_total_num_obstacles(self):
         return self.total_num_obstacles
+
+    def get_cars_path(self):
+        return self.cars_path
 
 def create_generation(popu_size, genoms, fitness = change_ga_vw.VW.single_GA_function):
     #popu_size:1世代の個体数
