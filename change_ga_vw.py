@@ -891,6 +891,11 @@ def combining_vw(Vw_list):
     return [position for position in Vw_list if position not in seen and not seen.append(position)]
 
 if __name__ == '__main__':
+    sum_fitness = 0
+    sum_collision = 0
+    sum_all_path_length = 0
+    sum_total_num_obstacles = 0
+    sum_time = 0
     for i in range(100):
         start = time.time()
         best, best_gene, genelation_list = main()
@@ -898,6 +903,7 @@ if __name__ == '__main__':
 
         time_diff = end - start
         print("time:" , time_diff)
+        sum_time += time_diff
         
         #結果のファイルへの書き込み処理      
         f = open('data_2steps_vw_9x9.txt', 'a', encoding='UTF-8')
@@ -914,3 +920,15 @@ if __name__ == '__main__':
         f.writelines('\n')
         f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
         f.writelines('\n')
+        sum_fitness += best_gene.get_fitness()
+        sum_collision += best_gene.get_collision()
+        sum_all_path_length += best_gene.get_all_path_length()
+        sum_total_num_obstacles += best_gene.get_total_num_obstacles()
+    ave_fitness = sum_fitness/100
+    ave_collision = sum_collision/100
+    ave_all_path_length = sum_all_path_length/100
+    ave_total_num_obstacles = sum_total_num_obstacles/100
+    ave_time = sum_time/100
+    
+        
+
