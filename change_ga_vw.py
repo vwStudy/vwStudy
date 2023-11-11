@@ -852,7 +852,7 @@ class Execution():
 #     for path in cars_path[3]:
 #         print("car4 :",path)
 
-#   return two_steps_best, two_steps_best_gene, genelation_list
+#     return two_steps_best, two_steps_best_gene, genelation_list
     
 def main():
     best, best_gene, genelation_list = ga.main()
@@ -891,7 +891,7 @@ def combining_vw(Vw_list):
     return [position for position in Vw_list if position not in seen and not seen.append(position)]
 
 if __name__ == '__main__':
-    # for i in range(100):
+    for i in range(100):
         start = time.time()
         best, best_gene, genelation_list = main()
         end = time.time()
@@ -900,7 +900,7 @@ if __name__ == '__main__':
         print("time:" , time_diff)
         
         #結果のファイルへの書き込み処理      
-        f = open('data_2steps_vw.txt', 'a', encoding='UTF-8')
+        f = open('data_2steps_vw_9x9.txt', 'a', encoding='UTF-8')
         f.writelines('\n')
         f.writelines("genelation_size::" + str(setting.generation_size) + "," + "population_size::" + str(setting.population_size) + "," + "number" + str(i))
         f.writelines('\n')

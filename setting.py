@@ -40,7 +40,7 @@ car_num :int = 1
 # car_num :int = 8
 
 population_size = 20
-generation_size = 20
+generation_size = 40
 genom_size = ((VWnum**2) * car_num)
 
 ##車のスタートの座標とゴールの座標
