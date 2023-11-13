@@ -906,9 +906,9 @@ if __name__ == '__main__':
         sum_time += time_diff
         
         #結果のファイルへの書き込み処理      
-        f = open('data_2steps_vw_9x9.txt', 'a', encoding='UTF-8')
+        f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
         f.writelines('\n')
-        f.writelines("genelation_size::" + str(setting.generation_size) + "," + "population_size::" + str(setting.population_size) + "," + "number" + str(i))
+        f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
         f.writelines('\n')
         f.writelines("genom::" + str(best_gene.genom))
         f.writelines('\n')
@@ -929,6 +929,17 @@ if __name__ == '__main__':
     ave_all_path_length = sum_all_path_length/100
     ave_total_num_obstacles = sum_total_num_obstacles/100
     ave_time = sum_time/100
+    f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
+    f.writelines('\n')
+    f.writelines("ave_fitness::"+str(ave_fitness))
+    f.writelines('\n')
+    f.writelines("ave_collision::"+str(ave_collision))
+    f.writelines('\n')
+    f.writelines("ave_path_length::"+str(ave_all_path_length))
+    f.writelines('\n')
+    f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
+    f.writelines('\n')
+    f.writelines("ave_time::" + str(ave_time))
     
         
 
