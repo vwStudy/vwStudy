@@ -246,8 +246,16 @@ class VW():
         print("fitness::",all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, 
               "collision::",collision,
               "path_length::",all_path_length)
+        
+        f = open("data_generation_pathlength.txt","a",encoding="UTF-8")
+        f.writelines('\n')
+        f.writelines(str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
+        f = open("data_generation_fitness.txt","a",encoding="UTF-8")
+        f.writelines('\n')
+        f.writelines(str(all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000))
+
+        return all_path_length, collision, all_path_length, total_num_obstacles, cars_path_list
 
     # def GA_function(genom):
     #     """
@@ -695,34 +703,34 @@ class Environment():
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= 13:
                     collision += 1
 
         #print("collision::"+str(collision))    
@@ -851,6 +859,7 @@ class Execution():
     
 #     for path in cars_path[3]:
 #         print("car4 :",path)
+    
 
 #     return two_steps_best, two_steps_best_gene, genelation_list
     
@@ -896,50 +905,51 @@ if __name__ == '__main__':
     sum_all_path_length = 0
     sum_total_num_obstacles = 0
     sum_time = 0
-    for i in range(100):
-        start = time.time()
-        best, best_gene, genelation_list = main()
-        end = time.time()
+    # for i in range(100):
+    start = time.time()
+    best, best_gene, genelation_list = main()
+    end = time.time()
 
-        time_diff = end - start
-        print("time:" , time_diff)
-        sum_time += time_diff
+    time_diff = end - start
+    print("time:" , time_diff)
+    sum_time += time_diff
+    
+    # ga.create_graph_best(best)
+    # ga.create_graph_best_fitness(best)
         
         #結果のファイルへの書き込み処理      
-        f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
-        f.writelines('\n')
-        f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
-        f.writelines('\n')
-        f.writelines("genom::" + str(best_gene.genom))
-        f.writelines('\n')
-        f.writelines("fitness::"+str(best_gene.get_fitness()))
-        f.writelines('\n')
-        f.writelines("collision::"+str(best_gene.get_collision()))
-        f.writelines('\n')
-        f.writelines("path_length::"+str(best_gene.get_all_path_length()))
-        f.writelines('\n')
-        f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
-        f.writelines('\n')
-        sum_fitness += best_gene.get_fitness()
-        sum_collision += best_gene.get_collision()
-        sum_all_path_length += best_gene.get_all_path_length()
-        sum_total_num_obstacles += best_gene.get_total_num_obstacles()
-    ave_fitness = sum_fitness/100
-    ave_collision = sum_collision/100
-    ave_all_path_length = sum_all_path_length/100
-    ave_total_num_obstacles = sum_total_num_obstacles/100
-    ave_time = sum_time/100
-    f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
-    f.writelines('\n')
-    f.writelines("ave_fitness::"+str(ave_fitness))
-    f.writelines('\n')
-    f.writelines("ave_collision::"+str(ave_collision))
-    f.writelines('\n')
-    f.writelines("ave_path_length::"+str(ave_all_path_length))
-    f.writelines('\n')
-    f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    f.writelines('\n')
-    f.writelines("ave_time::" + str(ave_time))
-    
-        
+    # f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
+    # f.writelines('\n')
+    # f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + "str(i)")
+    # f.writelines('\n')
+    # f.writelines("genom::" + str(best_gene.genom))
+    # f.writelines('\n')
+    # f.writelines("fitness::"+str(best_gene.get_fitness()))
+    # f.writelines('\n')
+    # f.writelines("collision::"+str(best_gene.get_collision()))
+    # f.writelines('\n')
+    # f.writelines("path_length::"+str(best_gene.get_all_path_length()))
+    # f.writelines('\n')
+    # f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
+    # f.writelines('\n')
+    # sum_fitness += best_gene.get_fitness()
+    # sum_collision += best_gene.get_collision()
+    # sum_all_path_length += best_gene.get_all_path_length()
+    # sum_total_num_obstacles += best_gene.get_total_num_obstacles()
+    # ave_fitness = sum_fitness/100
+    # ave_collision = sum_collision/100
+    # ave_all_path_length = sum_all_path_length/100
+    # ave_total_num_obstacles = sum_total_num_obstacles/100
+    # ave_time = sum_time/100
+    # f = open('data_2steps_vw_9x9_40_20.txt', 'a', encoding='UTF-8')
+    # f.writelines('\n')
+    # f.writelines("ave_fitness::"+str(ave_fitness))
+    # f.writelines('\n')
+    # f.writelines("ave_collision::"+str(ave_collision))
+    # f.writelines('\n')
+    # f.writelines("ave_path_length::"+str(ave_all_path_length))
+    # f.writelines('\n')
+    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
+    # f.writelines('\n')
+    # f.writelines("ave_time::" + str(ave_time))
 

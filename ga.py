@@ -4,7 +4,7 @@ import change_ga_vw
 import matplotlib.pyplot as plt
 
 class Individual:
-    def __init__(self, genom, fitness):
+    def __init__(self, genom, fitness = change_ga_vw.VW.single_GA_function):
         self.genom = genom
         self.fitness = fitness
         self.collision = 0
@@ -38,7 +38,7 @@ def create_generation(popu_size, genoms, fitness = change_ga_vw.VW.single_GA_fun
         population.append(individual)
     return population
 
-def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness = change_ga_vw.VW.two_steps_ga_function):
+def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness = change_ga_vw.VW.single_GA_function):
     population = []
     for _ in range(popu_size):
         individual = Individual(np.random.randint(0, 2, genoms), fitness(np.random.randint(0, 2, genoms), two_steps_list, zeros_list))
@@ -55,24 +55,31 @@ def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness
 #     selected2 = np.random.choice(populations, size=len(populations), p=probability)
 #     return selected1, selected2
 
-def select_roulette(generation):
+def select_roulette(population_list):
     '''選択の関数(ルーレット方式)'''
-    selected = []
-    weights = [ind.get_fitness() for ind in generation]
-    norm_weights = [ind.get_fitness() / sum(weights) for ind in generation]
-    selected = np.random.choice(generation, size=len(generation), p=norm_weights)
-    return selected
+    selected_gene_list = []
+    for _ in range(2):
+        weights = [ind.get_fitness() for ind in population_list]
+        norm_weights = [ind.get_fitness() / sum(weights) for ind in population_list]
+        selected_gene_list.append(np.random.choice(population_list, size=len(population_list), p=norm_weights))
+    return selected_gene_list
 
-def cross_uniform(child1, child2):
-    mask = [np.random.randint(0,1) for _ in range(setting.population_size)]
-    for i in range(setting.population_size):
-        if mask[i]==0:
-            new_child1 = child1
-            new_child2 = child1
-        elif mask[i]==1:
-            new_child1 = child2
-            new_child2 = child2
-    return new_child1, new_child2
+def cross_uniform(parent1_genom, parent2_genom):
+    print("child1::" ,type(parent1_genom))
+    new_child1 = []
+    new_child2 = []
+    for par1, par2 in zip(parent1_genom, parent2_genom):
+        if np.random.rand() <= setting.change_rate:
+            new_child2.append(par1)
+            new_child1.append(par2)
+        else:
+            new_child1.append(par2)
+            new_child2.append(par1)
+    new_child1 = np.array(new_child1)
+    new_child2 = np.array(new_child2) 
+    children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(new_child1))
+    children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(new_child2))
+    return children1, children2
 
 # def crossover(selected1, selected2, popu_size):
 #     children = []
@@ -86,17 +93,16 @@ def cross_uniform(child1, child2):
 #     children.append(child1)
 #     return children
 
-def crossover(selected):
+def crossover(selected_gene_list):
     '''交叉の関数'''
-    children = []
-    if setting.population_size % 2:
-        selected.append(selected[0])
-    for child1, child2 in zip(selected[::2], selected[1::2]):
-        if np.random.rand() < 0.8:
-            child1, child2 = cross_uniform(child1, child2)
-        children.append(child1)
-        children.append(child2)
-    children = children[:setting.population_size]
+    # if setting.population_size % 2:
+    #     selected_gene_individual.append(selected_gene_individual[0])
+    for parent1, parent2 in zip(selected_gene_list[0], selected_gene_list[1]):
+        if np.random.rand() <= setting.crossover_rate:
+            children1, children2 = cross_uniform(parent1.genom, parent2.genom)
+        else:
+            children1, children2 = parent1, parent2
+    children = [children1, children2]
     return children
         
 def mutate(children):
@@ -143,6 +149,16 @@ def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list)
 def create_graph_best(best):
     l = []
     for gene in best:
+        l.append(gene.get_all_path_length())
+
+    left  = [x for x in range(len(best))]
+    height = l
+    plt.plot(left, height)
+    plt.show()
+
+def create_graph_best_fitness(best):
+    l = []
+    for gene in best:
         l.append(gene.get_fitness())
 
     left  = [x for x in range(len(best))]
@@ -153,10 +169,16 @@ def create_graph_best(best):
 def create_graph_generations(genelation_list, genelation_number):
     l = []
     for gene in genelation_list[genelation_number]:
-        l.append(gene.get_fitness())
+        l.append(gene.get_all_path_length())
 
     left  = [x for x in range(len(genelation_list[genelation_number]))]
     height = l
+    plt.plot(left, height)
+    plt.show()
+
+def create_graph(x_list):
+    left  = [x for x in range(len(x_list))]
+    height = x_list
     plt.plot(left, height)
     plt.show()
 

@@ -21,7 +21,7 @@ VWfield_x :int = 399 + 10 #左上の壁の角のx座標 + 車の幅の半分
 VWfield_y :int = 182 + 10 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 9
+VWnum :int = 3
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -39,10 +39,15 @@ car_width :float = 20
 car_num :int = 1
 # car_num :int = 8
 
-population_size = 40
-generation_size = 20
+population_size = 20
+generation_size = 50
+
+two_steps_population_size = 20
+two_steps_generation_size = 20
 genom_size = ((VWnum**2) * car_num)
 
+crossover_rate = 1.0
+change_rate = 0
 ##車のスタートの座標とゴールの座標
 # car1_STARTtoGOAL : float = [[257.0, 250.0],[642.0, 250.0]]##左車
 
