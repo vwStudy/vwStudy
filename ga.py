@@ -36,6 +36,7 @@ def create_generation(popu_size, genoms, fitness = change_ga_vw.VW.single_GA_fun
     for _ in range(popu_size):
         individual = Individual(np.random.randint(0, 2, genoms), fitness(np.random.randint(0, 2, genoms)))
         population.append(individual)
+    print("population::", population)
     return population
 
 def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness = change_ga_vw.VW.single_GA_function):
@@ -65,7 +66,6 @@ def select_roulette(population_list):
     return selected_gene_list
 
 def cross_uniform(parent1_genom, parent2_genom):
-    print("child1::" ,type(parent1_genom))
     new_child1 = []
     new_child2 = []
     for par1, par2 in zip(parent1_genom, parent2_genom):
@@ -73,8 +73,8 @@ def cross_uniform(parent1_genom, parent2_genom):
             new_child2.append(par1)
             new_child1.append(par2)
         else:
-            new_child1.append(par2)
-            new_child2.append(par1)
+            new_child1.append(par1)
+            new_child2.append(par2)
     new_child1 = np.array(new_child1)
     new_child2 = np.array(new_child2) 
     children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(new_child1))
@@ -97,12 +97,13 @@ def crossover(selected_gene_list):
     '''交叉の関数'''
     # if setting.population_size % 2:
     #     selected_gene_individual.append(selected_gene_individual[0])
+    children = []
     for parent1, parent2 in zip(selected_gene_list[0], selected_gene_list[1]):
         if np.random.rand() <= setting.crossover_rate:
             children1, children2 = cross_uniform(parent1.genom, parent2.genom)
         else:
             children1, children2 = parent1, parent2
-    children = [children1, children2]
+        children.extend([children1,children2])
     return children
         
 def mutate(children):
@@ -110,24 +111,35 @@ def mutate(children):
     for child in children:
         # 一定の確率で突然変異させる
         if np.random.rand() < MUTATION_PB:
-            child = np.random.randint(0,1)
-    children.append(child)
+            children = []
+            for i in range(setting.genom_size):
+                child.genom[i] = np.random.randint(0,1)
+            mutate_child = Individual(child.genom, change_ga_vw.VW.single_GA_function(child.genom))
+            children.append(mutate_child)
+
     return children
 
 def ga_solve(populations, gene_size, popu_size):
     best = []
     generation_list = []
+    tmp = []
     for i in range(gene_size):
         best_popu = min(populations, key=Individual.get_fitness)
-        best.append(best_popu)
+        best.append(best_popu.get_all_path_length())
+        print("all_path_length::",best_popu.get_all_path_length())
+        print("best::",best)
         generation_list.append(populations)
         selected = select_roulette(populations)
         children = crossover(selected)
         children = mutate(children)
-        populations[0] = children[0]
-        populations[1] = children[1]
+        print("len_populations::", len(populations))
+        populations = children
+        # print("len_populations::", len(populations))
+        # populations[selected[1]] = children[1]
+    print("best::",best)
 
-    best_gene = min(best, key=Individual.get_fitness)
+    best_gene = 0
+    # min(best, key=Individual.get_fitness)
     return best, best_gene, generation_list
 
 def main():

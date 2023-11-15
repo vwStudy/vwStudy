@@ -865,29 +865,29 @@ class Execution():
     
 def main():
     best, best_gene, genelation_list = ga.main()
-    print("genom::" , best_gene.genom)
-    print("fitness::" , best_gene.get_fitness())
-    print("collision::" , best_gene.get_collision())
-    print("path_length::" , best_gene.get_all_path_length())
-    print("total_num_obstacles", int(best_gene.get_total_num_obstacles()))
+    # print("genom::" , best_gene.genom)
+    # print("fitness::" , best_gene.get_fitness())
+    # print("collision::" , best_gene.get_collision())
+    # print("path_length::" , best_gene.get_all_path_length())
+    # print("total_num_obstacles", int(best_gene.get_total_num_obstacles()))
     # グラフ表示関数
     # ga.create_graph_best(best)
     # print("genelation_size::", len(genelation_list))
     # for i in range(len(genelation_list)):
     #     print(i)
     #     ga.create_graph_generations(genelation_list, i)
-    cars_path = best_gene.get_cars_path()
-    for path in cars_path[0]:
-        print("car1 :",path)
+    # cars_path = best_gene.get_cars_path()
+    # for path in cars_path[0]:
+    #     print("car1 :",path)
     
-    for path in cars_path[1]:
-        print("car2 :",path)
+    # for path in cars_path[1]:
+    #     print("car2 :",path)
     
-    for path in cars_path[2]:
-        print("car3 :",path)
+    # for path in cars_path[2]:
+    #     print("car3 :",path)
     
-    for path in cars_path[3]:
-        print("car4 :",path)
+    # for path in cars_path[3]:
+    #     print("car4 :",path)
     
     return best, best_gene, genelation_list
         
@@ -914,7 +914,7 @@ if __name__ == '__main__':
     print("time:" , time_diff)
     sum_time += time_diff
     
-    # ga.create_graph_best(best)
+    ga.create_graph(best)
     # ga.create_graph_best_fitness(best)
         
         #結果のファイルへの書き込み処理      
