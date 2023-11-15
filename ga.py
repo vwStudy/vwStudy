@@ -62,7 +62,8 @@ def select_roulette(population_list):
     for _ in range(2):
         weights = [ind.get_fitness() for ind in population_list]
         norm_weights = [ind.get_fitness() / sum(weights) for ind in population_list]
-        selected_gene_list.append(np.random.choice(population_list, size=len(population_list), p=norm_weights))
+        selected_gene_list.append(np.random.choice(population_list, size=(int(len(population_list)/2)), p=norm_weights))
+    print("selected_gene_list::",selected_gene_list)
     return selected_gene_list
 
 def cross_uniform(parent1_genom, parent2_genom):
@@ -104,18 +105,17 @@ def crossover(selected_gene_list):
         else:
             children1, children2 = parent1, parent2
         children.extend([children1,children2])
+    print("children::",children)
     return children
         
 def mutate(children):
     MUTATION_PB = 0.1
-    for child in children:
+    for num_children in range(len(children)):
         # 一定の確率で突然変異させる
         if np.random.rand() < MUTATION_PB:
-            children = []
+            # children = []
             for i in range(setting.genom_size):
-                child.genom[i] = np.random.randint(0,1)
-            mutate_child = Individual(child.genom, change_ga_vw.VW.single_GA_function(child.genom))
-            children.append(mutate_child)
+                children[num_children].genom[i] = np.random.randint(0,1)
 
     return children
 
@@ -126,13 +126,19 @@ def ga_solve(populations, gene_size, popu_size):
     for i in range(gene_size):
         best_popu = min(populations, key=Individual.get_fitness)
         best.append(best_popu.get_all_path_length())
-        print("all_path_length::",best_popu.get_all_path_length())
-        print("best::",best)
+        # print("all_path_length::",best_popu.get_all_path_length())
+        # print("best::",best)
         generation_list.append(populations)
+        print("len_best::",len(best))
         selected = select_roulette(populations)
+        print("selected::",selected)
+        print("len_selected::",len(selected))
+        print("len_selected_inList::",len(selected[0]))
         children = crossover(selected)
+        print("len_children::",len(children))
         children = mutate(children)
-        print("len_populations::", len(populations))
+        print("len_mutate_children::",len(children))
+        # print("len_populations::", len(populations))
         populations = children
         # print("len_populations::", len(populations))
         # populations[selected[1]] = children[1]
