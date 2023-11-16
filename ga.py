@@ -113,9 +113,8 @@ def mutate(children):
     for num_children in range(len(children)):
         # 一定の確率で突然変異させる
         if np.random.rand() < MUTATION_PB:
-            # children = []
-            for i in range(setting.genom_size):
-                children[num_children].genom[i] = np.random.randint(0,1)
+            random_number = np.random.randint(0,setting.genom_size)
+            children[num_children].genom[random_number] = abs(children[num_children].genom[random_number] - 1)
 
     return children
 
