@@ -142,7 +142,7 @@ class VW():
         """
         GeneticalAlgorism用の関数
         """
-        car_ga_array = [[[],[],[],[],[],[],[],[],[]]]
+        car_ga_array = [[[],[],[]]]
         ga_array = np.array(genom.reshape(1, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
@@ -914,13 +914,13 @@ if __name__ == '__main__':
     print("time:" , time_diff)
     sum_time += time_diff
     
-    ga.create_graph(best)
+    ga.create_graph_best_all_path_length(best)
     # ga.create_graph_best_fitness(best)
         
         #結果のファイルへの書き込み処理      
-    f = open('data_2steps_vw_9x9_160_160.txt', 'a', encoding='UTF-8')
+    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
     f.writelines('\n')
-    f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
+    f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size))
     f.writelines('\n')
     f.writelines("genom::" + str(best_gene.genom))
     f.writelines('\n')
@@ -946,7 +946,7 @@ if __name__ == '__main__':
     ave_all_path_length = sum_all_path_length/100
     ave_total_num_obstacles = sum_total_num_obstacles/100
     ave_time = sum_time/100
-    f = open('data_2steps_vw_9x9_160_160.txt', 'a', encoding='UTF-8')
+    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
     f.writelines('\n')
     f.writelines("ave_fitness::"+str(ave_fitness))
     f.writelines('\n')
@@ -957,161 +957,3 @@ if __name__ == '__main__':
     f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
     f.writelines('\n')
     f.writelines("ave_time::" + str(ave_time))
-    
-    # sum_fitness = 0
-    # sum_collision = 0
-    # sum_all_path_length = 0
-    # sum_total_num_obstacles = 0
-    # sum_time = 0
-    # setting.population_size = 160
-    # setting.generation_size = 40
-    # for i in range(1):
-    #     start = time.time()
-    #     best, best_gene, genelation_list = main()
-    #     end = time.time()
-
-    #     time_diff = end - start
-    #     print("time:" , time_diff)
-    #     sum_time += time_diff
-        
-    #     #結果のファイルへの書き込み処理      
-    #     f = open('data_2steps_vw_9x9_160_160.txt', 'a', encoding='UTF-8')
-    #     f.writelines('\n')
-    #     f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
-    #     f.writelines('\n')
-    #     f.writelines("genom::" + str(best_gene.genom))
-    #     f.writelines('\n')
-    #     f.writelines("fitness::"+str(best_gene.get_fitness()))
-    #     f.writelines('\n')
-    #     f.writelines("collision::"+str(best_gene.get_collision()))
-    #     f.writelines('\n')
-    #     f.writelines("path_length::"+str(best_gene.get_all_path_length()))
-    #     f.writelines('\n')
-    #     f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
-    #     f.writelines('\n')
-    #     sum_fitness += best_gene.get_fitness()
-    #     sum_collision += best_gene.get_collision()
-    #     sum_all_path_length += best_gene.get_all_path_length()
-    #     sum_total_num_obstacles += best_gene.get_total_num_obstacles()
-    # ave_fitness = sum_fitness/100
-    # ave_collision = sum_collision/100
-    # ave_all_path_length = sum_all_path_length/100
-    # ave_total_num_obstacles = sum_total_num_obstacles/100
-    # ave_time = sum_time/100
-    # f = open('data_2steps_vw_9x9_160_40.txt', 'a', encoding='UTF-8')
-    # f.writelines('\n')
-    # f.writelines("ave_fitness::"+str(ave_fitness))
-    # f.writelines('\n')
-    # f.writelines("ave_collision::"+str(ave_collision))
-    # f.writelines('\n')
-    # f.writelines("ave_path_length::"+str(ave_all_path_length))
-    # f.writelines('\n')
-    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    # f.writelines('\n')
-    # f.writelines("ave_time::" + str(ave_time))
-        
-    # sum_fitness = 0
-    # sum_collision = 0
-    # sum_all_path_length = 0
-    # sum_total_num_obstacles = 0
-    # sum_time = 0
-    # setting.population_size = 160
-    # setting.generation_size = 80
-    # for i in range(100):
-    #     start = time.time()
-    #     best, best_gene, genelation_list = main()
-    #     end = time.time()
-
-    #     time_diff = end - start
-    #     print("time:" , time_diff)
-    #     sum_time += time_diff
-        
-    #     #結果のファイルへの書き込み処理      
-    #     f = open('data_2steps_vw_9x9_160_80.txt', 'a', encoding='UTF-8')
-    #     f.writelines('\n')
-    #     f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
-    #     f.writelines('\n')
-    #     f.writelines("genom::" + str(best_gene.genom))
-    #     f.writelines('\n')
-    #     f.writelines("fitness::"+str(best_gene.get_fitness()))
-    #     f.writelines('\n')
-    #     f.writelines("collision::"+str(best_gene.get_collision()))
-    #     f.writelines('\n')
-    #     f.writelines("path_length::"+str(best_gene.get_all_path_length()))
-    #     f.writelines('\n')
-    #     f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
-    #     f.writelines('\n')
-    #     sum_fitness += best_gene.get_fitness()
-    #     sum_collision += best_gene.get_collision()
-    #     sum_all_path_length += best_gene.get_all_path_length()
-    #     sum_total_num_obstacles += best_gene.get_total_num_obstacles()
-    # ave_fitness = sum_fitness/100
-    # ave_collision = sum_collision/100
-    # ave_all_path_length = sum_all_path_length/100
-    # ave_total_num_obstacles = sum_total_num_obstacles/100
-    # ave_time = sum_time/100
-    # f = open('data_2steps_vw_9x9_160_80.txt', 'a', encoding='UTF-8')
-    # f.writelines('\n')
-    # f.writelines("ave_fitness::"+str(ave_fitness))
-    # f.writelines('\n')
-    # f.writelines("ave_collision::"+str(ave_collision))
-    # f.writelines('\n')
-    # f.writelines("ave_path_length::"+str(ave_all_path_length))
-    # f.writelines('\n')
-    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    # f.writelines('\n')
-    # f.writelines("ave_time::" + str(ave_time))
-
-    # sum_fitness = 0
-    # sum_collision = 0
-    # sum_all_path_length = 0
-    # sum_total_num_obstacles = 0
-    # sum_time = 0
-    # setting.population_size = 160
-    # setting.generation_size = 160
-    # for i in range(100):
-    #     start = time.time()
-    #     best, best_gene, genelation_list = main()
-    #     end = time.time()
-
-    #     time_diff = end - start
-    #     print("time:" , time_diff)
-    #     sum_time += time_diff
-        
-    #     #結果のファイルへの書き込み処理      
-    #     f = open('data_2steps_vw_9x9_160_160.txt', 'a', encoding='UTF-8')
-    #     f.writelines('\n')
-    #     f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size) + "," + "number" + str(i))
-    #     f.writelines('\n')
-    #     f.writelines("genom::" + str(best_gene.genom))
-    #     f.writelines('\n')
-    #     f.writelines("fitness::"+str(best_gene.get_fitness()))
-    #     f.writelines('\n')
-    #     f.writelines("collision::"+str(best_gene.get_collision()))
-    #     f.writelines('\n')
-    #     f.writelines("path_length::"+str(best_gene.get_all_path_length()))
-    #     f.writelines('\n')
-    #     f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
-    #     f.writelines('\n')
-    #     sum_fitness += best_gene.get_fitness()
-    #     sum_collision += best_gene.get_collision()
-    #     sum_all_path_length += best_gene.get_all_path_length()
-    #     sum_total_num_obstacles += best_gene.get_total_num_obstacles()
-    # ave_fitness = sum_fitness/100
-    # ave_collision = sum_collision/100
-    # ave_all_path_length = sum_all_path_length/100
-    # ave_total_num_obstacles = sum_total_num_obstacles/100
-    # ave_time = sum_time/100
-    # f = open('data_2steps_vw_9x9_160_160.txt', 'a', encoding='UTF-8')
-    # f.writelines('\n')
-    # f.writelines("ave_fitness::"+str(ave_fitness))
-    # f.writelines('\n')
-    # f.writelines("ave_collision::"+str(ave_collision))
-    # f.writelines('\n')
-    # f.writelines("ave_path_length::"+str(ave_all_path_length))
-    # f.writelines('\n')
-    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    # f.writelines('\n')
-    # f.writelines("ave_time::" + str(ave_time))
-
-

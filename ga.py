@@ -124,7 +124,7 @@ def ga_solve(populations, gene_size, popu_size):
     tmp = []
     for i in range(gene_size):
         best_popu = min(populations, key=Individual.get_fitness)
-        best.append(best_popu.get_all_path_length())
+        best.append(best_popu)
         # print("all_path_length::",best_popu.get_all_path_length())
         # print("best::",best)
         generation_list.append(populations)
@@ -143,8 +143,7 @@ def ga_solve(populations, gene_size, popu_size):
         # populations[selected[1]] = children[1]
     print("best::",best)
 
-    best_gene = 0
-    # min(best, key=Individual.get_fitness)
+    best_gene = min(best, key=Individual.get_fitness)
     return best, best_gene, generation_list
 
 def main():
@@ -173,14 +172,17 @@ def create_graph_best(best):
     plt.plot(left, height)
     plt.show()
 
-def create_graph_best_fitness(best):
+def create_graph_best_all_path_length(best):
     l = []
     for gene in best:
-        l.append(gene.get_fitness())
+        l.append(gene.get_all_path_length())
 
     left  = [x for x in range(len(best))]
     height = l
     plt.plot(left, height)
+    
+    plt.savefig("./fig/" + str(setting.VWnum) + "x" + str(setting.VWnum) + "_pop" + str(setting.population_size) + "_gen" + str(setting.generation_size) + ".png")
+    
     plt.show()
 
 def create_graph_generations(genelation_list, genelation_number):

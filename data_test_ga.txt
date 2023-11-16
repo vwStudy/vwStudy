@@ -1,0 +1,13 @@
+
+population_size::32,generation_size::32
+genom::[0 1 1 1 1 1 1 0 0]
+fitness::1008.0
+collision::21
+path_length::1008.0
+total_num_obstacles::3
+
+ave_fitness::10.08
+ave_collision::0.21
+ave_path_length::10.08
+ave_total_num_obstacles::0.03
+ave_time::0.12278954029083251
