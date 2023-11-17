@@ -53,7 +53,8 @@ class VW():
             for i in range(setting.VWnum):
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
-        #print("vw"+str(car_ga_array[0]))
+
+        print("vw"+str(car_ga_array))
 
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
@@ -135,6 +136,10 @@ class Environment():
         self.height = height
     
     def set_wall():
+        """
+        
+        
+        """
         wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
         wall_edge_list = setting.wall_edge_list

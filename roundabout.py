@@ -35,8 +35,8 @@ class VW():
                     VW_LeftUp = [(field_x + (size * twoDivisionIndex)), (field_y + (size * index))]
                     VW_LeftDown = [VW_LeftUp[0], VW_LeftUp[1] + size]
                     VW_RightUp = [VW_LeftUp[0] + size, VW_LeftUp[1]]
-                    VW_RightDown = [VW_LeftUp[0] + size, VW_LeftUp[1] + size]
-                    
+                    VW_RightDown = [VW_LeftUp[0] + size, VW_LeftUp[1] + size] 
+
                     obstacles_vertex_list.extend([VW_LeftUp, VW_LeftDown, VW_RightUp, VW_RightDown])
                     obstacles_line_list.extend([[VW_LeftUp, VW_LeftDown], [VW_LeftUp, VW_RightUp], [VW_RightUp, VW_RightDown], [VW_RightDown, VW_LeftDown]])
         return obstacles_vertex_list, obstacles_line_list
@@ -70,16 +70,9 @@ class VW():
 
         # car_vw_line_list = [[[438,199],[438,320]],[[438,320],[462,320]],[[462,320],[462,199]],[[462,199],[438,199]],[[390,247],[510,247]],[[510,247],[510,271]],[[510,271],[390,271]],[[390,271],[390,247]],[[414,233],[414,295]],[[414,295],[486,295]],[[486,295],[486,223]],[[486,223],[414,223]]]
 
-        #CarAgentにODを設定
-        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
-        # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
-        # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
-
-        wall_edge_list, wall_line_list = Environment.set_wall()
-
         # car_vw_line_list.extend([[[380,230],[500,230]],[[380,290],[500,290]],[[410,200],[410,320]],[[470,200],[470,320]]])
 
-        car_vw_line_list.extend([[[380,248],[500,248]],[[380,272],[500,272]],[[428,200],[428,320]],[[452,200],[452,320]],[[404,224],[404,296]],[[476,224],[476,296]],[[404,224],[476,224]],[[404,296],[476,296]]])
+        car_VW_list = combining_vw(car_VW_list)
 
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
@@ -491,6 +484,14 @@ class Execution():
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
 
         return shortest_path, shortest_length
+    
+def combining_vw(Vw_list):
+    """
+    
+    list内の重複を消す関数,VWの4点のいずれかが重複していたら削除しVWの疑似的な結合を行う
+    """
+    seen = []
+    return [position for position in Vw_list if position not in seen and not seen.append(position)]
 
 def main():
     VW.round_about_function()
