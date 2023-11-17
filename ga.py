@@ -307,6 +307,11 @@ def create_graph(x_list):
 
 if __name__ == '__main__':
     populist=setting.poulation #8
-    
-    for i in range(10):
-        main()
+    generation = setting.generation #8
+    for _ in range(4):
+        for _ in range(4):
+            for i in range(10):
+                main(populist, generation)
+            generation *= 2
+        populist *= 2
+
