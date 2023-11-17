@@ -3,7 +3,8 @@ import setting
 import random
 import change_ga_vw
 import matplotlib.pyplot as plt
-import heapq
+import csv
+import time
 
 class Individual:
     def __init__(self,genom, fitness):
@@ -35,11 +36,10 @@ def create_generation(popu_size, genoms, fitness):
     #popu_size:1世代の個体数
     #genoms:遺伝子数の長さ
     population = []
-    for i in range(popu_size):
-        id = i 
+    for _ in range(popu_size):
         rnd = np.random.randint(0, 2, genoms)
         individual = Individual(rnd, fitness(rnd))
-        population.append(individual)#0or1
+        population.append(individual)
     
     #print("population::", population[0].genom)#8個のインスタンスが入った1次元リストだけど、individualの中にvwnum*2の大きさのリストある
     return population
@@ -132,7 +132,7 @@ def cross_uniform(parent1_genom, parent2_genom):
 #     return children
 
 
-def crossover(selected_gene_list):
+def crossover(selected_gene_list,populations):
     '''交叉の関数'''
     # if setting.population_size % 2:
     #     selected_gene_individual.append(selected_gene_individual[0])
@@ -140,7 +140,7 @@ def crossover(selected_gene_list):
     parent1 = selected_gene_list[0]
     parent2 = selected_gene_list[1]
 
-    for _ in range(int(setting.population_size/2)):
+    for _ in range(int(len(populations)/2)):
         if np.random.rand() <= setting.crossover_rate:
             children1, children2 = cross_uniform(parent1.genom, parent2.genom)
         else:
@@ -207,10 +207,9 @@ def mutate(children):
             children[num_children].genom[random_number] = abs(children[num_children].genom[random_number] - 1)
     return children
 
-def ga_solve(populations, gene_size, popu_size):
+def ga_solve(populations, gene_size):
     best = []
     generation_list = []
-    cnt=0
     for i in range(gene_size):
         
         best_popu = min(populations, key=Individual.get_fitness)
@@ -220,12 +219,10 @@ def ga_solve(populations, gene_size, popu_size):
         #print("best::",best)
         generation_list.append(populations)
         selected = select_tonament(populations)
-        cnt+=1
-        children = crossover(selected)
+        children = crossover(selected, populations)
         print("len_children::",len(children))
         children = mutate(children)
         populations = children
-
         print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
         # populations[selected[1]] = children[1]
@@ -237,30 +234,24 @@ def ga_solve(populations, gene_size, popu_size):
         print("best::",best[i].get_fitness())
         print("best_vw::", best[i].genom)
         print("best_path::", best[i].get_all_path_length())
-        f = open("testttt.txt","a",encoding="UTF-8")
-        f.writelines('\n')
-        f.writelines(str(best[i].get_fitness()))
-    create_graph_best(best)
+
+        # f = open("testttt.txt","a",encoding="UTF-8")
+        # f.writelines('\n')
+        # f.writelines(str(best[i].get_fitness()))
+        
+    # create_graph_best(best)
 
     f.writelines('\n')
     f.writelines('\n')
-    best_gene = 0
     # min(best, key=Individual.get_fitness)
-    return best, best_gene, generation_list
+    return best
 
-<<<<<<< HEAD
-def main(popu_size,gene_size):
-    popu_size = popu_size#1世代の遺伝子数
-    gene_size = setting.generation_size#世代数
-    genom_size = setting.genom_size#遺伝子の長さ
-=======
 def main(popu_size, gene_size, genom_size):
->>>>>>> 7625f0e288f452493f5d0022ef06dadeba519e15
     fitness = change_ga_vw.VW.single_GA_function
     
     populations = create_generation(popu_size, genom_size, fitness)
     # print("populations", populations)インスタンスが入ってる1次元リスト
-    return ga_solve(populations, gene_size, popu_size)
+    return ga_solve(populations, gene_size)
 
 #def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list):
     popu_size = popu_size#1世代の遺伝子数
@@ -311,22 +302,31 @@ def create_graph(x_list):
     plt.show()
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    populist=setting.poulation #8
-    
-    for i in range(4):
-        for j in range(4):
-            for k in range(10):
-                main(populist)
-    populist*=2
-=======
     populist=setting.population_size #8
     generation = setting.generation_size #8
-    for _ in range(4):
+    genom_size= setting.genom_size
+    with open('./data_folder/comon_onestep.csv', 'a', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f)
         for _ in range(4):
-            for i in range(10):
-                main(populist, generation)
-            generation *= 2
-        populist *= 2
+            for _ in range(4):
+                for i in range(10):
+                    writer.writerow(["popu_size", populist])
+                    writer.writerow(["gene_size", generation])
+                    start = time.time()
+                    best=main(populist, generation , genom_size)
+                    end = time.time()
+                    diff = end - start
+                    writer.writerow(["time:", diff])
+                    for i in range(len(best)):
+                        writer.writerow(["best_length:", best[i].get_all_path_length()])
+                
+                writer.writerow([""])
+                generation *= 2
 
->>>>>>> 7625f0e288f452493f5d0022ef06dadeba519e15
+            populist *= 2
+            generation = setting.generation_size
+        
+        
+
+        
+       
