@@ -222,6 +222,7 @@ def ga_solve(populations, gene_size, popu_size):
         selected = select_tonament(populations)
         cnt+=1
         children = crossover(selected)
+        print("len_children::",len(children))
         children = mutate(children)
         populations = children
 
@@ -275,14 +276,17 @@ def create_graph_best(best):
     plt.plot(left, height)
     plt.show()
 
-def create_graph_best_fitness(best):
+def create_graph_best_all_path_length(best):
     l = []
     for gene in best:
-        l.append(gene.get_fitness())
+        l.append(gene.get_all_path_length())
 
     left  = [x for x in range(len(best))]
     height = l
     plt.plot(left, height)
+    
+    plt.savefig("./fig/" + str(setting.VWnum) + "x" + str(setting.VWnum) + "_pop" + str(setting.population_size) + "_gen" + str(setting.generation_size) + ".png")
+    
     plt.show()
 
 def create_graph_generations(genelation_list, genelation_number):

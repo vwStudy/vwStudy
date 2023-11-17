@@ -50,8 +50,8 @@ two_steps_population_size = 20
 two_steps_generation_size = 20
 #genom_size = ((VWnum**2) * car_num)
 
-crossover_rate = 1.0
-change_rate = 0.5
+crossover_rate = 1.0 #クロスオーバー発生率
+change_rate = 0.5 #ユニフォームクロスオーバーの際の確率
 ##車のスタートの座標とゴールの座標
 # car1_STARTtoGOAL : float = [[257.0, 250.0],[642.0, 250.0]]##左車
 

@@ -1,0 +1,906 @@
+
+population_size::40,generation_size::80,number0
+genom::[0 0 0 0 0 1 0 1 0 1 1 0 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 1 1 1 1 1
+ 0 1 1 0 0 0 0 1 0 1 1 0 1 1 1 0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0 0 0 1 0 0 1
+ 0 0 1 0 0 0 1]
+fitness::361.9907129428574
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number1
+genom::[0 0 1 0 1 0 0 1 1 1 0 1 1 0 0 0 0 1 0 0 0 1 1 1 0 1 0 0 1 0 1 1 1 0 0 1 1
+ 1 0 1 0 0 1 1 1 1 1 0 0 0 1 0 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 0 1 1 0 0 1 1
+ 0 0 1 1 1 1 1]
+fitness::292.5782270493095
+collision::0
+path_length::1142.1125971563404
+total_num_obstacles::20
+
+population_size::40,generation_size::80,number2
+genom::[1 1 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 1 1 0 0 0 0 1 1 0 1 1 0 1 0 1 1 0 1 1
+ 0 1 1 1 1 1 1 0 0 0 0 1 1 0 0 1 1 0 0 0 0 0 0 0 1 0 0 1 1 0 0 1 0 1 1 1 1
+ 0 1 1 0 1 1 0]
+fitness::338.9597129157169
+collision::0
+path_length::1156.0310208914975
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number3
+genom::[0 1 1 1 1 0 1 0 1 0 0 1 1 1 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0 0 0 1 1 1 0 0
+ 0 0 1 1 1 0 0 0 1 1 0 0 1 0 0 0 0 0 1 1 1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1
+ 0 1 1 0 1 1 0]
+fitness::313.9295116383129
+collision::0
+path_length::1142.8445142788019
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number4
+genom::[0 1 1 1 1 0 0 0 1 0 1 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 0 1 0 0 1 0 1 1 1 1
+ 1 1 0 1 1 0 0 1 1 1 0 0 0 0 1 1 0 1 0 0 0 1 1 0 1 1 0 1 0 1 1 1 0 1 1 1 1
+ 0 1 0 1 0 0 0]
+fitness::326.8602138770331
+collision::0
+path_length::1126.624566980412
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number5
+genom::[1 0 0 1 1 1 0 0 1 0 0 0 1 1 0 1 0 1 1 1 0 0 0 1 1 0 0 1 1 0 1 0 1 1 0 0 0
+ 0 0 1 0 1 0 0 0 1 1 0 0 1 0 1 0 1 1 1 0 1 1 1 0 0 1 0 0 0 1 1 0 1 1 1 0 0
+ 0 0 1 0 1 0 0]
+fitness::329.2813970592248
+collision::0
+path_length::1088.6446188488655
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number6
+genom::[1 0 0 0 0 1 0 1 1 1 1 0 1 0 1 0 0 0 0 1 0 0 1 1 1 1 1 1 0 1 0 1 1 1 0 1 1
+ 0 1 0 1 0 1 0 0 0 1 1 0 1 0 1 1 1 0 1 0 1 0 0 0 0 0 0 1 0 1 1 1 0 0 1 0 0
+ 0 0 0 1 0 0 1]
+fitness::322.5318817164772
+collision::0
+path_length::1135.8731486536806
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number7
+genom::[0 0 0 0 0 0 0 0 1 1 0 1 1 0 0 0 0 0 0 0 1 1 0 0 1 0 1 1 1 0 0 0 1 1 0 0 1
+ 1 0 1 1 1 1 1 1 0 1 1 0 0 0 1 0 0 1 0 1 0 0 0 0 0 0 1 1 0 1 1 0 1 1 0 1 0
+ 0 1 0 0 0 1 1]
+fitness::353.72953148968395
+collision::0
+path_length::1157.6602848753291
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number8
+genom::[0 0 0 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0 0 1 0 0 1 0 1 1 0 1
+ 0 1 1 1 0 1 0 1 1 1 1 1 0 1 1 1 1 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 0 0 0 1 0
+ 1 1 0 0 0 0 0]
+fitness::346.9382118607374
+collision::0
+path_length::1102.0390259105775
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number9
+genom::[1 0 1 1 0 1 0 0 1 1 1 0 0 1 1 0 1 1 1 1 0 0 1 0 0 1 0 1 0 1 1 0 1 0 0 1 1
+ 0 1 1 1 0 0 0 0 1 0 1 1 0 0 0 1 1 0 0 0 1 1 0 1 0 0 1 1 0 1 1 0 0 1 0 0 0
+ 0 1 1 1 1 1 0]
+fitness::357.30255706028674
+collision::0
+path_length::1157.6602848753291
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number10
+genom::[0 0 1 1 0 1 0 1 0 0 1 1 1 1 0 1 1 1 1 1 1 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
+ 0 1 1 1 0 1 1 1 1 0 0 0 0 0 1 0 0 0 1 1 0 1 0 1 0 1 1 0 0 0 0 1 1 0 1 0 0
+ 1 0 0 1 0 0 1]
+fitness::327.67929713467095
+collision::0
+path_length::1154.001002952537
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number11
+genom::[0 0 0 0 0 0 1 0 1 0 0 1 1 1 1 1 0 1 1 0 1 1 1 0 0 1 0 0 1 0 1 1 0 0 0 1 0
+ 1 0 1 0 1 0 1 0 1 0 0 0 1 0 1 0 1 1 0 0 1 1 1 1 0 1 0 0 0 1 0 1 0 1 1 1 0
+ 1 0 0 0 1 1 1]
+fitness::302.3128217019001
+collision::0
+path_length::1166.0637408501862
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number12
+genom::[0 0 0 0 1 0 1 1 0 0 0 0 1 1 0 1 0 0 0 1 1 0 0 0 1 0 1 1 0 0 0 0 1 0 1 1 1
+ 1 0 1 1 1 1 0 1 1 1 0 0 1 1 0 1 1 0 1 0 1 1 1 1 1 0 0 1 0 1 0 0 1 1 1 0 0
+ 1 0 0 1 1 0 0]
+fitness::338.36428016612797
+collision::0
+path_length::1154.0002818297417
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number13
+genom::[1 1 1 0 1 0 1 0 1 1 1 1 0 1 1 0 1 0 1 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1 0 1
+ 0 1 1 0 0 1 1 0 1 1 0 1 1 0 1 1 1 0 1 0 0 1 0 0 0 1 1 1 1 1 1 0 0 1 0 0 0
+ 1 0 0 0 1 0 0]
+fitness::367.1693320540232
+collision::0
+path_length::1143.8736883221493
+total_num_obstacles::26
+
+population_size::40,generation_size::80,number14
+genom::[1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 0 0 0 0 0 1 1 1 1 1 0 1 0 1 0 1 0 1 1 0 0 1
+ 0 1 0 1 1 0 1 0 1 1 0 1 0 1 1 1 0 1 0 1 1 0 1 1 1 0 1 1 1 0 1 1 1 1 0 1 1
+ 1 0 1 0 1 1 1]
+fitness::335.3950629339636
+collision::0
+path_length::1143.8736883221493
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number15
+genom::[1 1 0 0 0 0 1 1 0 0 1 1 0 1 0 0 1 1 0 1 1 0 1 0 0 1 0 1 1 0 1 1 1 0 1 0 0
+ 1 1 1 0 1 1 0 1 0 0 0 1 0 1 0 1 0 0 1 1 1 1 1 0 0 0 0 0 1 0 0 1 1 1 1 0 1
+ 0 0 0 0 1 0 0]
+fitness::302.51413072176695
+collision::0
+path_length::1139.704399463401
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number16
+genom::[1 0 0 1 1 1 0 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 0 1 0 1 1 0 1 1 1 1 1 0 1 0 0
+ 1 1 1 1 1 1 0 1 0 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 1 0 1 1 1
+ 0 1 1 1 0 0 1]
+fitness::336.6513630368574
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number17
+genom::[0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 1 1 0 1 1 1 1 1 0 0 1 1 0 0 0 0 0 1 1 1
+ 0 1 1 1 0 0 0 1 1 0 1 1 0 1 1 1 0 0 1 1 1 0 0 1 0 1 0 0 0 1 1 0 0 0 1 1 1
+ 1 0 1 0 1 0 0]
+fitness::340.5627650485483
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number18
+genom::[0 1 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 0 0 1 0 0 0 0 0 1 1 0 1 1
+ 0 0 0 1 1 0 1 0 0 1 0 0 1 0 0 0 0 1 1 0 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0
+ 1 1 1 0 0 1 1]
+fitness::333.89557680346235
+collision::0
+path_length::1150.8741157906575
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number19
+genom::[1 0 0 1 0 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 1 1 0 1 1 0 0 0 0
+ 0 1 1 1 1 1 1 1 0 0 1 1 0 1 1 1 1 1 0 0 1 1 1 1 0 0 1 1 1 0 0 0 1 0 1 0 0
+ 1 0 0 0 0 0 0]
+fitness::330.2466037895387
+collision::0
+path_length::1114.5822877896933
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number20
+genom::[1 0 0 0 1 1 0 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 1 0 1 0 0 0 1 0 0 0 0 0 0
+ 0 1 0 1 0 0 1 0 1 0 1 1 1 0 1 1 1 1 1 0 0 0 1 0 0 1 0 1 1 1 0 1 0 1 1 1 0
+ 0 0 0 1 1 1 0]
+fitness::371.8389373489252
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::26
+
+population_size::40,generation_size::80,number21
+genom::[0 0 0 0 0 1 0 1 1 0 1 0 0 1 1 1 0 0 1 0 0 0 1 0 0 1 1 0 1 1 0 1 0 1 0 1 0
+ 1 1 1 0 0 1 1 0 1 0 0 0 0 1 1 1 1 0 1 0 1 1 1 1 0 0 1 0 0 1 1 0 0 0 0 0 0
+ 0 1 0 1 1 0 0]
+fitness::343.1664924890268
+collision::0
+path_length::1100.8509264004424
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number22
+genom::[0 1 1 1 1 1 0 1 0 0 1 1 0 0 1 1 0 0 1 0 1 0 0 0 1 0 0 1 1 1 0 0 0 0 1 0 1
+ 1 1 0 1 1 0 1 0 1 1 0 1 1 0 0 1 1 0 1 1 1 0 1 0 1 0 1 1 1 0 1 1 1 0 1 0 1
+ 1 0 0 1 1 0 1]
+fitness::342.98727423756327
+collision::0
+path_length::1157.582050551776
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number23
+genom::[0 1 0 0 1 1 1 0 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 1 1 1 1 1
+ 1 1 1 1 0 0 1 1 0 0 0 1 1 0 0 0 1 1 0 1 0 0 1 0 0 0 0 1 0 1 1 1 0 0 0 0 1
+ 1 1 1 1 1 1 0]
+fitness::289.1006410935373
+collision::0
+path_length::1128.5374423410371
+total_num_obstacles::20
+
+population_size::40,generation_size::80,number24
+genom::[1 0 1 1 0 1 0 1 1 0 1 1 1 1 0 1 0 1 0 1 1 1 0 1 0 0 1 1 1 0 1 0 1 1 1 1 0
+ 1 0 0 0 0 1 1 1 0 0 1 1 0 1 0 0 1 0 1 1 1 1 1 0 1 1 0 0 1 0 0 1 1 1 0 0 1
+ 1 0 1 0 0 0 0]
+fitness::318.10675785547704
+collision::0
+path_length::1158.0515679233097
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number25
+genom::[1 0 1 1 0 1 1 0 0 0 0 0 1 0 0 1 1 1 1 1 0 0 0 1 0 1 1 1 0 1 0 1 0 1 1 1 1
+ 1 1 1 0 0 1 0 1 1 0 1 1 1 0 0 1 0 1 0 0 0 0 0 1 1 0 1 1 0 1 1 0 0 0 0 0 0
+ 1 1 0 0 0 1 1]
+fitness::324.11756564407676
+collision::0
+path_length::1154.001002952537
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number26
+genom::[1 0 0 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 0 1 1 1 0 0 0 1 0 1 0 1 1 0 0 1 0 1 0
+ 0 1 0 0 0 0 0 1 1 1 0 0 1 1 1 1 0 0 0 1 0 0 0 1 0 1 0 0 1 1 0 0 1 1 1 1 1
+ 1 1 1 1 0 0 1]
+fitness::330.8436264780771
+collision::0
+path_length::1140.3546274350742
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number27
+genom::[0 0 0 0 1 0 1 0 1 1 1 1 1 0 0 1 1 0 1 1 0 1 1 1 0 0 1 1 0 0 0 1 1 1 1 0 0
+ 0 1 0 0 0 1 0 0 1 0 1 1 0 1 0 1 1 0 0 0 1 0 0 0 1 1 0 1 0 0 0 1 1 1 0 1 0
+ 1 0 0 1 0 0 1]
+fitness::334.7034811699608
+collision::0
+path_length::1166.0637408501862
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number28
+genom::[0 1 1 1 1 1 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1 1 1 0 1 0 1 1 0 0 0 0 0 1 0
+ 1 0 1 0 0 0 1 1 1 1 0 1 0 1 1 1 1 0 0 0 1 0 0 1 0 1 0 1 1 1 0 0 1 0 0 0 0
+ 1 1 0 1 1 0 1]
+fitness::351.13099155457166
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number29
+genom::[1 1 1 1 0 0 0 0 0 1 0 0 1 1 1 1 1 0 0 0 1 0 1 1 0 1 0 1 0 1 1 0 0 0 1 1 1
+ 1 1 1 1 0 1 1 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 1 1 0 0 1 0 1 0 1 0 0 1 0 1
+ 0 1 1 0 0 0 1]
+fitness::277.8344684887292
+collision::0
+path_length::1111.3378739549169
+total_num_obstacles::20
+
+population_size::40,generation_size::80,number30
+genom::[1 1 0 0 1 1 0 1 1 0 0 1 1 0 1 0 0 1 1 0 1 1 0 1 1 0 1 1 1 0 1 1 1 0 0 0 1
+ 1 1 0 0 1 0 1 0 1 0 0 1 0 1 1 1 1 0 1 1 1 0 0 0 1 0 1 1 1 1 0 0 1 1 1 0 1
+ 0 1 1 0 1 0 0]
+fitness::285.52570952637205
+collision::0
+path_length::1114.5822877896933
+total_num_obstacles::20
+
+population_size::40,generation_size::80,number31
+genom::[0 0 1 0 1 0 0 1 1 1 1 0 0 0 0 1 1 1 1 0 0 0 1 0 1 0 0 1 1 1 1 1 0 1 1 1 0
+ 0 0 0 0 1 1 0 1 0 0 0 0 1 1 0 1 1 0 1 1 1 1 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1
+ 1 1 1 1 1 1 1]
+fitness::322.18163650709505
+collision::0
+path_length::1147.1082442670197
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number32
+genom::[0 0 1 1 1 0 1 1 0 1 0 0 0 0 1 0 0 1 0 0 1 0 1 0 1 0 0 0 1 0 0 0 1 1 0 0 0
+ 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 0 0 0 1 0 0 0 1 1 0 0 1 1 0 0 1 0
+ 1 1 0 0 0 1 0]
+fitness::361.9907129428574
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number33
+genom::[1 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 1 1 1 0 1 1 0 1 0 1 1 0 0 0 1 0 0 0 1
+ 1 1 0 1 0 0 0 1 0 1 0 1 0 0 1 1 0 1 0 0 1 1 1 1 1 0 1 1 1 0 1 0 1 1 1 0 1
+ 0 1 0 0 0 0 1]
+fitness::334.5059648272748
+collision::0
+path_length::1140.8413958319686
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number34
+genom::[0 0 1 1 1 1 1 0 0 1 1 0 1 1 1 0 0 0 1 1 1 0 0 1 0 1 0 1 1 0 1 1 0 1 1 1 0
+ 1 1 0 1 1 1 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1 1 1 0 1 0 0 1 0 1 1 0 0 0 0 0 1
+ 0 1 0 0 1 1 0]
+fitness::353.70562655748716
+collision::0
+path_length::1157.582050551776
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number35
+genom::[1 0 1 1 1 1 0 1 0 1 1 1 1 1 1 1 1 0 1 0 0 1 0 1 0 1 1 0 1 1 0 0 1 1 0 1 0
+ 1 0 0 1 0 0 1 0 0 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 1 1 1 1 1 0 1 0 1 0 1 1 0
+ 0 1 1 1 0 0 0]
+fitness::350.9881558153406
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number36
+genom::[1 1 0 0 0 1 1 1 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1
+ 1 0 0 1 0 1 1 0 0 1 0 1 1 0 0 1 1 0 1 1 1 1 1 1 0 1 1 1 1 0 0 0 1 0 1 1 1
+ 0 1 1 0 1 0 0]
+fitness::348.19378458806017
+collision::0
+path_length::1139.5432950154695
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number37
+genom::[1 1 0 0 0 1 0 0 0 1 0 1 1 1 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 1 1 1 0 0 0 1 0
+ 1 1 1 1 0 0 0 1 0 0 1 1 1 1 1 1 0 1 0 1 1 1 0 0 0 1 1 0 0 1 0 1 0 1 0 1 0
+ 1 1 1 1 1 0 0]
+fitness::302.33633223697655
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number38
+genom::[0 0 1 1 1 0 0 0 1 0 1 0 1 1 0 1 0 1 1 0 1 0 0 1 1 1 1 0 1 0 1 0 0 1 1 0 1
+ 0 0 0 1 0 0 1 1 0 0 1 0 0 0 1 0 0 0 1 0 1 1 1 1 0 1 1 0 1 1 1 1 1 1 0 1 1
+ 0 1 0 1 0 0 0]
+fitness::325.79164164857167
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number39
+genom::[1 1 0 1 0 0 1 1 1 1 1 0 0 0 0 1 0 0 1 0 0 0 1 1 1 0 1 0 0 0 0 1 1 1 1 1 0
+ 1 1 1 1 0 1 1 1 0 0 1 0 0 1 0 1 0 1 1 0 0 0 1 0 1 0 1 0 0 1 0 1 1 1 1 0 0
+ 0 1 1 0 0 1 0]
+fitness::325.14532692486097
+collision::0
+path_length::1157.6602848753291
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number40
+genom::[0 0 0 0 1 1 1 0 0 1 0 0 0 0 0 1 1 0 0 1 0 0 1 1 1 0 1 1 1 0 1 1 0 0 0 0 1
+ 0 1 1 0 1 1 0 1 1 1 1 1 1 0 0 0 1 0 1 1 1 1 0 0 1 0 0 1 1 0 1 1 1 0 0 1 1
+ 1 0 0 1 0 1 0]
+fitness::306.7978335119461
+collision::0
+path_length::1155.8430006729131
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number41
+genom::[1 1 0 1 1 1 1 0 1 1 0 0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 1 1 1 1 1 1 0 0 1 0 0
+ 0 0 0 1 1 1 1 1 0 0 1 1 0 0 0 1 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 0 1 1 0 1 0
+ 0 0 1 1 1 1 0]
+fitness::361.9907129428574
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number42
+genom::[0 0 0 0 1 1 1 0 1 0 0 0 0 1 0 1 1 0 1 1 0 1 0 0 1 1 1 1 1 0 1 0 1 1 1 0 1
+ 1 1 0 0 1 1 0 1 0 1 0 1 1 1 1 1 1 1 0 0 1 0 1 0 1 0 1 1 0 0 0 0 1 0 1 1 1
+ 0 0 1 1 0 0 1]
+fitness::271.7284445941919
+collision::0
+path_length::1114.4305828926351
+total_num_obstacles::19
+
+population_size::40,generation_size::80,number43
+genom::[0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 0 1 0 0 0 1 0 1 0 1 0 0 0 0 0 1 0 1 1 1
+ 1 1 1 1 1 1 1 0 1 1 1 1 0 0 1 1 1 1 0 0 1 0 0 1 1 0 1 0 1 0 1 0 0 1 0 0 1
+ 0 0 1 0 0 1 1]
+fitness::344.0994881333185
+collision::0
+path_length::1093.0219034823058
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number44
+genom::[1 0 0 0 0 1 1 1 1 1 1 0 0 0 0 1 0 0 1 1 1 0 1 0 1 1 1 0 0 1 0 0 0 1 1 1 0
+ 1 0 1 0 1 1 1 0 0 0 1 0 1 0 0 1 0 0 0 1 0 1 1 0 1 0 0 0 0 0 0 0 1 0 1 1 1
+ 0 1 1 1 0 1 1]
+fitness::330.2016541904104
+collision::0
+path_length::1114.4305828926351
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number45
+genom::[0 0 1 0 1 1 0 1 1 1 0 0 1 0 1 0 1 1 1 0 1 1 0 1 0 1 0 1 1 0 1 1 0 0 1 1 1
+ 0 0 1 1 1 0 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 1 0 1 1 0 1 1 1 0 1 0 0 0
+ 0 0 0 1 1 0 0]
+fitness::324.0566511004645
+collision::0
+path_length::1141.2429886581576
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number46
+genom::[1 0 0 0 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 1 1 0 0 1 1 1 1 1 0 1
+ 0 1 0 1 1 0 0 1 1 1 0 0 0 0 1 0 1 0 1 1 1 0 1 0 0 0 0 0 1 1 1 1 0 1 1 0 0
+ 0 1 0 1 1 0 0]
+fitness::350.9881558153406
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number47
+genom::[1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 1 0 0
+ 0 1 0 1 0 1 0 1 1 1 0 1 1 0 1 1 0 0 1 1 0 0 1 1 1 0 0 1 0 1 1 1 0 0 0 1 1
+ 1 0 1 1 1 1 0]
+fitness::357.52845740672547
+collision::0
+path_length::1158.3922019977906
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number48
+genom::[0 0 0 0 0 0 0 1 1 0 0 0 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 0 1 0 0 1 1 1 1 1 0
+ 0 1 1 0 1 0 0 0 1 1 1 1 1 1 0 1 1 0 0 0 1 1 0 1 0 0 1 0 1 0 1 1 0 0 1 1 0
+ 1 0 0 1 1 0 0]
+fitness::330.3434961991702
+collision::0
+path_length::1150.8741157906575
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number49
+genom::[0 1 1 0 1 1 1 1 0 0 0 0 1 1 0 1 1 1 1 1 0 0 0 0 1 1 0 1 1 0 0 0 1 0 1 1 0
+ 1 1 1 0 1 1 0 1 1 1 1 1 0 1 1 0 1 1 1 1 0 1 1 1 0 0 1 0 1 0 1 0 0 0 0 1 0
+ 1 0 1 0 0 1 1]
+fitness::313.046259842167
+collision::0
+path_length::1114.5822877896933
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number50
+genom::[1 1 1 0 1 1 1 0 1 1 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 1 1 1 1 0 0 0 0 1 1
+ 1 1 1 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 1 1 0 0 0 0 0 0 0 1 1 0 1 1 1 1 0 1
+ 0 1 1 1 1 1 0]
+fitness::348.103899220631
+collision::0
+path_length::1150.8741157906575
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number51
+genom::[1 1 1 0 1 0 1 0 0 1 1 0 0 1 1 1 0 0 1 1 0 0 0 0 0 1 1 1 0 1 0 0 1 1 1 1 0
+ 1 0 1 0 1 0 1 1 0 0 1 1 1 1 0 0 1 1 1 0 0 1 0 1 0 1 1 0 1 0 1 1 1 0 0 1 0
+ 1 1 0 0 1 0 0]
+fitness::331.02101780813075
+collision::0
+path_length::1105.6784512354059
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number52
+genom::[0 0 0 0 1 0 0 0 1 0 1 1 1 0 1 1 0 1 1 0 0 1 0 0 0 0 1 0 1 0 0 0 1 1 1 1 1
+ 1 1 0 1 1 1 0 1 0 1 0 1 1 1 0 0 0 1 0 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 0
+ 1 0 0 0 1 0 0]
+fitness::340.99973801204663
+collision::0
+path_length::1150.8741157906575
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number53
+genom::[1 0 0 0 0 1 1 0 0 0 0 1 0 0 1 1 1 0 0 1 0 1 0 1 1 1 0 1 0 0 1 1 0 1 1 0 1
+ 1 0 1 0 0 0 1 1 0 0 0 0 1 1 0 1 1 0 1 1 1 1 0 0 0 0 1 0 1 1 1 0 1 1 0 0 1
+ 1 1 0 1 0 1 1]
+fitness::335.6949694672461
+collision::0
+path_length::1157.0762777381674
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number54
+genom::[0 1 1 1 0 1 0 1 1 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 0 1 0 1 1 1 0 1 0 1 1 0 1
+ 0 0 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 1 0 1 0 0 1 0 0 0 1 1 1 1 0 1 1 1 0 1 0
+ 1 0 1 1 0 1 1]
+fitness::303.421893410077
+collision::0
+path_length::1143.1243426147087
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number55
+genom::[1 1 1 1 1 1 1 0 0 0 1 1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 0 1 1 0 0 0 1 1
+ 1 0 1 1 1 1 0 0 0 0 1 0 0 0 1 1 0 0 1 0 1 1 0 1 1 0 1 1 0 0 0 1 1 0 1 1 0
+ 0 1 0 1 0 1 1]
+fitness::343.4874825015305
+collision::0
+path_length::1159.2702534426655
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number56
+genom::[0 0 1 0 0 1 0 0 0 1 1 1 1 1 0 1 1 1 0 1 0 0 0 1 0 1 0 1 1 0 0 0 1 1 1 1 0
+ 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 0 0 1 1 1 1 0 1 1 1 1 1 1
+ 1 0 0 1 1 1 1]
+fitness::349.09932982243225
+collision::0
+path_length::1166.0637408501862
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number57
+genom::[0 1 0 1 1 0 1 1 1 1 0 1 1 0 1 1 0 0 1 0 0 0 1 1 0 0 1 0 1 1 0 1 1 0 1 0 1
+ 1 0 0 0 1 1 0 0 1 0 1 1 0 1 1 1 1 0 0 0 1 0 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0
+ 1 0 0 0 0 0 1]
+fitness::350.91092900754717
+collision::0
+path_length::1114.6582450827968
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number58
+genom::[0 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 0 0 1 1 0 1 0 0 1 1 0 1 0 1 0 1 0 0 1 1 0
+ 1 1 1 1 0 1 1 1 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 1 0 0 1 1
+ 1 1 1 1 0 1 0]
+fitness::375.1676849133011
+collision::0
+path_length::1157.6602848753291
+total_num_obstacles::26
+
+population_size::40,generation_size::80,number59
+genom::[1 0 0 0 1 1 0 1 0 1 1 0 1 1 0 0 1 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0 0 0 1 1 1
+ 0 1 0 1 0 1 1 0 1 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 0 1 1 0
+ 0 0 1 1 1 1 1]
+fitness::357.48320403586644
+collision::0
+path_length::1158.2455810762074
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number60
+genom::[1 1 1 0 0 0 1 0 0 1 0 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 1 1 1 0 0 1 1 1 0 0
+ 1 1 1 0 1 0 1 1 0 0 1 1 0 0 1 1 1 0 0 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 1 0
+ 0 1 1 0 1 1 1]
+fitness::332.5014653882547
+collision::0
+path_length::1158.3922019977906
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number61
+genom::[1 0 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 0 1 1 1 0 0 1 0 0 0 1 0 1 1 0 1 0 1
+ 0 1 1 1 0 0 1 1 1 1 0 0 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 0 0 1 0 1 0 1 1 0 1
+ 0 0 0 1 0 0 0]
+fitness::369.23910332046705
+collision::0
+path_length::1161.4899949109836
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number62
+genom::[1 0 0 0 0 0 1 1 1 0 1 1 1 1 1 1 1 0 1 0 1 0 0 1 0 1 1 0 1 1 0 0 1 0 1 0 1
+ 0 1 1 0 1 1 1 1 1 0 1 0 1 1 1 0 1 1 0 1 0 0 0 1 1 0 1 0 1 1 1 0 1 0 0 1 0
+ 1 0 1 0 0 1 0]
+fitness::324.3454398730398
+collision::0
+path_length::1154.8123353721417
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number63
+genom::[0 1 1 0 0 1 0 1 1 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0 0 1 1 1 1 0 1 0 0 1 1 1 1
+ 0 1 0 1 0 1 1 1 0 0 1 1 1 0 1 1 1 1 0 0 1 1 0 0 1 0 0 0 0 1 0 1 0 0 0 1 1
+ 1 1 0 0 1 1 1]
+fitness::296.5772264263575
+collision::0
+path_length::1104.4944984154004
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number64
+genom::[1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 1 1 1 1 1 0 1 1 0 1 0 0 1 1 0 1 1 1 0
+ 0 1 0 0 1 1 1 0 0 1 1 1 1 1 0 0 0 1 1 0 0 1 0 0 0 0 1 0 1 1 0 1 1 1 0 0 1
+ 0 0 0 0 0 0 0]
+fitness::343.1838758744318
+collision::0
+path_length::1158.2455810762074
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number65
+genom::[1 1 0 0 1 1 0 0 0 0 1 1 0 0 0 1 0 1 1 1 0 0 1 0 1 0 1 1 0 0 0 0 1 0 0 1 0
+ 0 0 1 0 0 1 0 1 1 0 0 0 0 1 1 1 1 0 0 1 0 0 1 1 1 0 0 1 0 1 1 1 1 0 0 0 1
+ 1 0 0 1 1 1 1]
+fitness::321.73488363227983
+collision::0
+path_length::1158.2455810762074
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number66
+genom::[0 0 1 1 1 0 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 0 1 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+ 0 0 1 0 1 1 0 1 1 0 0 0 1 1 1 1 0 1 0 1 0 1 0 1 0 1 1 1 1 0 1 0 0 0 0 1 1
+ 1 0 0 0 0 1 1]
+fitness::342.23688829126456
+collision::0
+path_length::1143.1417711996878
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number67
+genom::[0 1 0 1 1 0 1 0 0 0 1 1 0 0 1 0 1 1 1 1 0 1 0 1 0 0 1 1 0 0 0 0 1 0 1 1 1
+ 0 0 1 0 0 0 0 0 1 1 0 1 1 1 0 0 0 0 0 0 1 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0
+ 0 0 1 0 0 1 0]
+fitness::344.0068789474362
+collision::0
+path_length::1114.5822877896933
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number68
+genom::[0 1 1 0 0 0 0 1 1 0 0 0 1 1 0 0 1 0 1 1 0 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1
+ 1 1 0 1 0 1 0 0 1 0 0 0 0 0 1 1 1 1 0 0 0 1 1 0 0 1 0 1 0 1 0 0 1 0 1 1 1
+ 1 1 1 0 1 0 0]
+fitness::354.9229298401378
+collision::0
+path_length::1161.5659522040871
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number69
+genom::[0 0 0 1 1 0 0 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 0 1 0 1 1 1 1 0 1
+ 0 1 0 1 1 1 1 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 1 0
+ 0 1 0 1 0 0 1]
+fitness::338.51015835009815
+collision::0
+path_length::1119.1560337288959
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number70
+genom::[1 0 1 1 1 0 1 0 1 0 1 0 0 1 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 0 1 0 1 1 1
+ 0 1 1 0 0 1 1 0 1 1 0 1 1 0 1 0 1 1 1 1 1 0 0 0 0 1 1 0 1 1 1 1 0 1 0 1 0
+ 1 0 0 0 0 0 1]
+fitness::338.89298971464916
+collision::0
+path_length::1098.0132866754634
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number71
+genom::[1 0 1 0 1 0 1 1 0 0 0 0 0 1 0 1 0 1 0 1 1 1 0 1 1 0 1 0 1 1 0 1 1 0 0 0 1
+ 1 1 0 1 0 1 0 0 1 1 0 1 0 0 1 1 1 0 1 1 0 1 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0
+ 0 1 0 0 1 1 1]
+fitness::316.2368532593663
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number72
+genom::[1 0 0 1 1 0 1 1 0 0 1 0 1 1 1 0 1 0 1 1 1 0 1 1 1 0 1 0 1 0 0 1 1 0 0 1 1
+ 0 1 1 0 1 0 1 1 1 0 1 0 1 0 0 1 0 0 1 1 0 0 0 1 0 1 0 1 0 0 0 0 0 0 0 0 1
+ 0 1 1 1 1 1 1]
+fitness::335.8593319243157
+collision::0
+path_length::1088.184235434783
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number73
+genom::[1 0 1 0 0 0 0 1 0 1 0 1 1 1 0 1 1 0 1 1 1 1 0 0 0 0 1 0 0 0 0 1 1 1 1 1 1
+ 0 0 1 1 1 1 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 1 1 1 0 1 1 0 1 1 1 0 0 0 0
+ 1 0 1 1 0 1 0]
+fitness::348.5329758818675
+collision::0
+path_length::1140.6533756133845
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number74
+genom::[1 0 1 1 1 1 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 1 0 0 1 1 0 1 0 1 0 1 0 0 0 0 1
+ 1 0 1 0 1 0 1 1 0 0 0 1 1 0 1 1 1 1 1 1 0 1 0 0 0 1 1 0 1 1 0 0 1 0 0 1 1
+ 1 1 0 1 1 0 0]
+fitness::325.4926976121415
+collision::0
+path_length::1146.300369851455
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number75
+genom::[0 0 0 0 1 0 0 1 0 1 1 1 1 0 1 0 1 1 1 0 0 0 1 0 1 0 0 1 1 1 1 1 0 0 1 0 0
+ 1 0 0 1 0 1 0 1 1 1 0 0 1 0 0 0 1 0 1 1 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0
+ 1 0 0 0 0 0 1]
+fitness::355.4809178115509
+collision::0
+path_length::1140.3546274350742
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number76
+genom::[0 0 0 1 0 1 1 1 1 1 1 1 1 0 1 0 1 1 0 0 0 1 0 1 0 0 0 1 1 1 0 1 0 1 1 0 1
+ 0 1 0 0 1 0 0 1 1 1 0 1 1 0 0 1 1 1 0 1 1 1 1 0 0 0 0 1 0 1 0 0 0 1 0 0 1
+ 0 1 0 1 0 1 0]
+fitness::323.71695366334717
+collision::0
+path_length::1127.7880966335965
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number77
+genom::[0 1 1 0 1 0 1 0 1 0 0 1 0 0 0 1 1 1 0 1 0 0 1 0 0 0 1 1 0 0 1 1 1 1 1 0 0
+ 0 1 1 1 1 1 0 0 1 0 1 0 1 1 1 1 1 0 0 1 0 1 1 0 1 0 0 1 1 1 1 0 1 0 0 1 1
+ 1 1 1 0 0 1 1]
+fitness::341.21660234462774
+collision::0
+path_length::1151.6060329131187
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number78
+genom::[0 1 1 0 1 1 0 1 0 1 1 1 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 1 0 1 1 1 1
+ 0 1 0 0 1 1 1 1 0 0 0 1 1 0 1 1 1 0 0 1 1 0 1 0 0 1 0 0 0 0 1 0 0 1 1 0 0
+ 1 0 1 0 1 0 0]
+fitness::345.7391471902299
+collision::0
+path_length::1143.0559560166785
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number79
+genom::[0 1 0 0 1 1 0 1 1 1 0 1 0 1 0 0 1 1 0 0 1 0 0 0 1 1 1 1 0 0 1 1 1 0 0 0 0
+ 0 1 1 0 0 0 1 1 0 1 1 0 1 0 0 0 0 1 0 0 0 1 1 0 0 1 0 1 1 1 1 0 1 0 1 1 0
+ 0 0 0 0 0 0 1]
+fitness::355.20806042921527
+collision::0
+path_length::1150.8741157906575
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number80
+genom::[0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 0 1 0 0 1 1 0 0 0 1 1 1 1 0
+ 0 1 0 0 0 0 0 1 0 0 0 1 1 0 1 1 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 0 1 0
+ 1 0 0 1 1 1 1]
+fitness::360.87558263088965
+collision::0
+path_length::1157.6602848753291
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number81
+genom::[1 0 1 0 0 0 1 1 1 0 0 1 0 0 1 0 0 0 0 1 1 0 1 1 1 1 0 0 0 1 0 0 0 1 1 0 0
+ 1 0 1 0 0 1 0 0 0 1 0 0 1 0 1 1 1 0 0 1 0 0 0 1 0 1 1 1 0 0 0 0 1 0 0 0 1
+ 1 1 0 0 0 0 0]
+fitness::321.17516473928896
+collision::0
+path_length::1131.0951453861917
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number82
+genom::[1 0 0 1 1 1 0 0 1 1 0 0 1 0 0 0 1 0 1 0 1 0 0 1 0 1 1 0 1 1 0 1 0 1 0 1 1
+ 0 0 1 0 1 0 1 0 0 1 1 0 0 0 1 0 0 1 0 0 0 1 0 1 1 0 1 1 0 0 1 1 0 1 0 0 0
+ 0 0 1 0 1 0 1]
+fitness::326.220955360801
+collision::0
+path_length::1161.4899949109836
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number83
+genom::[1 0 1 0 1 0 1 1 1 0 1 1 1 1 1 0 1 0 0 0 0 1 0 1 1 0 1 1 1 0 1 1 0 1 1 1 0
+ 0 1 1 0 0 1 0 1 0 0 0 1 1 0 0 1 1 1 1 0 0 0 0 1 0 1 1 0 0 0 1 0 0 1 1 0 1
+ 0 1 1 0 1 0 1]
+fitness::321.0675001869203
+collision::0
+path_length::1155.8430006729131
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number84
+genom::[0 0 0 1 1 1 1 0 0 0 1 1 1 1 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 0 1 0 1 0 0 1 1
+ 1 1 0 1 0 0 0 1 0 1 1 1 0 0 0 0 1 1 1 1 1 1 1 1 0 1 1 0 0 0 1 0 0 1 1 0 1
+ 0 0 0 1 1 1 0]
+fitness::361.9907129428574
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number85
+genom::[0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 1 1 0 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 1 1
+ 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 0 1 1 0 1 0 0 0 0 1 1 0 1 1 1 1
+ 1 0 1 0 1 1 0]
+fitness::313.9326668494332
+collision::0
+path_length::1155.8430006729131
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number86
+genom::[1 0 1 0 1 0 1 0 0 1 1 0 0 1 1 0 0 0 0 1 1 0 0 0 1 1 1 0 0 0 1 1 0 0 1 1 1
+ 1 1 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 1 0 0 1 0 1 1 1 0 0
+ 0 0 1 1 0 1 1]
+fitness::303.23041684320253
+collision::0
+path_length::1155.8430006729131
+total_num_obstacles::21
+
+population_size::40,generation_size::80,number87
+genom::[1 0 1 0 1 1 1 0 1 1 1 0 1 0 0 1 0 0 0 0 1 0 0 1 1 1 1 0 1 0 0 1 1 1 0 0 1
+ 0 1 0 0 1 1 1 1 1 1 0 1 1 1 1 0 1 0 0 1 1 1 0 0 0 1 1 1 0 1 1 1 1 0 0 0 0
+ 1 1 1 1 1 1 1]
+fitness::331.3422205693212
+collision::0
+path_length::1095.4579537189804
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number88
+genom::[0 1 1 0 0 1 1 0 0 0 1 1 1 1 0 0 0 0 0 0 0 1 1 0 0 1 0 1 1 0 0 0 1 1 0 1 0
+ 0 0 0 1 1 1 0 0 1 1 1 0 0 1 0 0 1 1 1 1 1 1 0 1 1 1 0 0 1 1 1 0 1 0 1 1 1
+ 0 1 1 0 1 1 0]
+fitness::332.48401188921963
+collision::0
+path_length::1158.3313962592167
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number89
+genom::[0 1 1 0 1 1 1 1 0 1 1 1 1 0 1 1 0 1 0 0 0 0 0 0 1 1 0 0 1 1 1 1 0 1 0 0 1
+ 0 1 1 0 0 0 0 1 1 0 0 1 0 0 0 1 0 0 0 1 0 0 1 0 1 0 1 1 0 0 0 0 1 1 1 0 0
+ 1 0 0 1 1 1 1]
+fitness::339.6445540300607
+collision::0
+path_length::1146.300369851455
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number90
+genom::[1 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 1 1 1 0 0 0 1 1 0 1 0 0 1 0 1 1
+ 1 1 0 0 0 0 1 0 1 1 0 1 0 1 0 1 1 0 0 0 1 1 0 0 0 1 1 0 1 0 0 1 0 1 0 0 0
+ 0 0 0 1 0 0 1]
+fitness::335.3917159376567
+collision::0
+path_length::1156.0310208914975
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number91
+genom::[1 1 1 0 0 0 0 1 0 0 1 0 0 0 1 1 1 0 1 1 1 0 0 0 0 1 0 1 0 0 0 0 1 0 0 0 1
+ 1 0 0 1 1 0 0 0 1 0 1 0 0 1 1 0 0 1 1 0 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 1 1
+ 0 1 0 0 0 1 0]
+fitness::332.4593797533558
+collision::0
+path_length::1158.2455810762074
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number92
+genom::[0 1 1 1 0 0 1 1 1 1 1 1 1 0 1 1 0 1 0 1 1 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 0
+ 0 1 1 1 1 1 0 1 1 0 1 1 1 0 0 1 1 0 1 0 1 1 1 1 0 0 1 1 0 1 1 1 1 0 0 0 0
+ 0 0 1 0 0 0 0]
+fitness::341.8655598172726
+collision::0
+path_length::1107.6444138079632
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number93
+genom::[0 1 1 1 1 0 0 0 1 1 0 1 0 0 1 1 0 0 1 0 0 1 0 0 1 1 0 0 1 1 1 0 1 1 0 0 0
+ 0 1 0 0 1 0 0 0 0 1 1 0 1 0 1 1 0 1 0 0 0 1 1 0 0 1 0 0 1 1 0 0 0 1 0 0 1
+ 0 0 0 0 1 0 1]
+fitness::347.97014324508575
+collision::0
+path_length::1138.8113778930078
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number94
+genom::[1 0 0 0 0 1 1 0 0 0 1 1 1 0 1 1 0 0 0 1 0 0 1 0 1 0 1 0 0 1 0 1 1 1 0 1 0
+ 1 0 1 0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 0 1 0 1 0 0 1
+ 1 0 1 1 1 0 1]
+fitness::318.5518273897145
+collision::0
+path_length::1172.849909934858
+total_num_obstacles::22
+
+population_size::40,generation_size::80,number95
+genom::[1 0 1 1 1 0 1 1 1 1 0 0 1 1 1 0 1 0 0 0 0 1 1 0 1 1 1 0 1 0 1 1 1 0 1 1 1
+ 1 1 0 0 1 1 0 0 1 0 1 0 1 1 1 0 1 0 0 0 1 0 0 1 1 1 0 1 1 0 0 1 1 1 0 1 1
+ 0 1 1 0 0 1 0]
+fitness::347.844467440747
+collision::0
+path_length::1138.4000752606264
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number96
+genom::[0 1 1 1 1 1 0 1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 1 1
+ 1 1 0 0 0 0 1 1 0 1 0 0 1 1 0 0 0 1 0 0 1 1 1 0 0 1 0 1 1 1 0 0 0 0 0 0 0
+ 1 0 0 0 1 0 1]
+fitness::357.93841632653545
+collision::0
+path_length::1125.9422028135677
+total_num_obstacles::25
+
+population_size::40,generation_size::80,number97
+genom::[1 0 0 0 1 1 1 1 1 0 1 0 0 1 0 1 1 1 1 0 1 1 0 0 1 1 0 0 0 1 0 0 1 1 0 0 0
+ 1 0 1 1 1 0 1 1 1 0 0 1 1 0 0 1 1 1 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1 0 0 0 1
+ 0 0 1 0 0 0 1]
+fitness::336.9975293431611
+collision::0
+path_length::1161.5659522040871
+total_num_obstacles::23
+
+population_size::40,generation_size::80,number98
+genom::[0 0 1 1 1 1 0 1 1 1 1 0 0 0 1 0 0 0 0 1 1 0 1 1 1 1 1 0 1 1 0 0 0 0 0 1 0
+ 0 1 1 1 0 1 1 0 1 0 0 0 0 1 0 1 1 0 0 1 0 0 1 1 0 0 0 1 0 0 0 1 1 0 0 0 1
+ 0 0 1 1 1 1 0]
+fitness::343.38343728342034
+collision::0
+path_length::1146.9714812353423
+total_num_obstacles::24
+
+population_size::40,generation_size::80,number99
+genom::[1 0 0 1 0 1 1 1 0 0 0 1 1 0 1 1 1 1 1 0 1 1 0 1 1 0 1 0 1 1 0 0 0 1 1 1 1
+ 1 0 1 0 1 1 0 1 0 0 0 1 1 1 0 0 1 1 0 0 0 1 0 0 0 1 0 1 1 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 1]
+fitness::330.39568437160494
+collision::0
+path_length::1138.8106567702127
+total_num_obstacles::23
+
+ave_fitness::334.37656947596355
+ave_collision::0.0
+ave_path_length::1142.0659887067443
+ave_total_num_obstacles::23.7175
+ave_time::62.98769597053528
