@@ -248,10 +248,14 @@ def ga_solve(populations, gene_size, popu_size):
     # min(best, key=Individual.get_fitness)
     return best, best_gene, generation_list
 
+<<<<<<< HEAD
 def main(popu_size,gene_size):
     popu_size = popu_size#1世代の遺伝子数
     gene_size = setting.generation_size#世代数
     genom_size = setting.genom_size#遺伝子の長さ
+=======
+def main(popu_size, gene_size, genom_size):
+>>>>>>> 7625f0e288f452493f5d0022ef06dadeba519e15
     fitness = change_ga_vw.VW.single_GA_function
     
     populations = create_generation(popu_size, genom_size, fitness)
@@ -307,6 +311,7 @@ def create_graph(x_list):
     plt.show()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     populist=setting.poulation #8
     
     for i in range(4):
@@ -314,3 +319,14 @@ if __name__ == '__main__':
             for k in range(10):
                 main(populist)
     populist*=2
+=======
+    populist=setting.population_size #8
+    generation = setting.generation_size #8
+    for _ in range(4):
+        for _ in range(4):
+            for i in range(10):
+                main(populist, generation)
+            generation *= 2
+        populist *= 2
+
+>>>>>>> 7625f0e288f452493f5d0022ef06dadeba519e15

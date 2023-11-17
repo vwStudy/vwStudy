@@ -44,7 +44,11 @@ car_num :int = 1
 
 genom_size = VWnum**2 * car_num
 population_size = 8
+<<<<<<< HEAD
 generation_size = 64
+=======
+generation_size = 8
+>>>>>>> 7625f0e288f452493f5d0022ef06dadeba519e15
 
 two_steps_population_size = 20
 two_steps_generation_size = 20
