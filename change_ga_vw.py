@@ -47,8 +47,8 @@ class VW():
         """
         GeneticalAlgorism用の関数
         """
-        car_ga_array = [[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]]]
-        ga_array = np.array(genom.reshape(4, 3, 3))
+        car_ga_array = [[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]
+        ga_array = np.array(genom.reshape(4, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
                 l = list(ga_array[i][j])
@@ -65,7 +65,7 @@ class VW():
         car3_VW_list, car3_vw_line_list = VW.set_virtual_wall(car_ga_array[2])
         car4_VW_list, car4_vw_line_list = VW.set_virtual_wall(car_ga_array[3])
 
-        print(car1_VW_list)
+        # print(car1_VW_list)
         # print(car2_VW_list)
 
         #CarAgentにODを設定
@@ -112,17 +112,27 @@ class VW():
         dijkstra_time_diff = dijkstra_end - dijkstra_start
         print("dijkstra::",dijkstra_time_diff)        
 
+        cars_path_list = []
+        car_path_tmp_list = []
         for path in car1_shortest_path:
-            print("car1 :",car1_vertex_list[path])
-
+            #print("car1 :",car1_vertex_list[path])
+            car_path_tmp_list.append(car1_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        
         for path in car2_shortest_path:
-            print("car2 :",car2_vertex_list[path])
+            #print("car2 :",car2_vertex_list[path])
+            car_path_tmp_list.append(car2_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         for path in car3_shortest_path:
-            print("car3 :",car3_vertex_list[path])
+            #print("car3 :",car3_vertex_list[path])
+            car_path_tmp_list.append(car3_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
 
         for path in car4_shortest_path:
-            print("car4 :",car4_vertex_list[path])
+            #print("car4 :",car4_vertex_list[path])
+            car_path_tmp_list.append(car4_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
         
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
 
@@ -136,14 +146,14 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000
+        return all_path_length * (total_num_obstacles / (4 * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
 
     def single_GA_function(genom):
         """
         GeneticalAlgorism用の関数
         """
         #print("genom2::::::", genom)
-        car_ga_array = [[[],[],[],[],[],[],[],[],[]]]
+        car_ga_array = [[[],[],[]]]
         ga_array = np.array(genom.reshape(setting.car_num, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
@@ -248,13 +258,13 @@ class VW():
               #"collision::",collision,
               #"path_length::",all_path_length)
         
-        f = open("data_generation_pathlength.txt","a",encoding="UTF-8")
-        f.writelines('\n')
-        f.writelines(str(all_path_length))
+        # f = open("data_generation_pathlength.txt","a",encoding="UTF-8")
+        # f.writelines('\n')
+        # f.writelines(str(all_path_length))
 
-        f = open("data_generation_fitness.txt","a",encoding="UTF-8")
-        f.writelines('\n')
-        f.writelines(str(all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000))
+        # f = open("data_generation_fitness.txt","a",encoding="UTF-8")
+        # f.writelines('\n')
+        # f.writelines(str(all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 1000000))
 
         return all_path_length * (total_num_obstacles / (4 * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list  
 
@@ -356,15 +366,11 @@ class VW():
         
         for i in range(len(two_steps_list)):
             car_ga_array[0][two_steps_list[i]] = list(ga_array[0][i])
-
-        print(car_ga_array)
-
         # print("vw"+str(car_ga_array))
 
-        VWsize = (setting.VWfield / (setting.VWnum **2)) 
+        VWsize = (setting.VWfield / (setting.two_VWnum **2)) 
         #print("VWsize:", VWsize)
 
-        #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0], VWsize)
 
