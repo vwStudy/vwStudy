@@ -305,7 +305,7 @@ if __name__ == '__main__':
     populist=setting.population_size #8
     generation = setting.generation_size #8
     genom_size= setting.genom_size
-    with open('./data_folder/comon_onestep.csv', 'a', encoding='utf-8', newline='') as f:
+    with open('./data_folder/comon_onestep_3×3.csv', 'a', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         for _ in range(4):
             for _ in range(4):

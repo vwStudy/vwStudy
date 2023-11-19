@@ -143,7 +143,8 @@ class VW():
         GeneticalAlgorism用の関数
         """
         #print("genom2::::::", genom)
-        car_ga_array = [[[],[],[],[],[],[],[],[],[]]]
+        #car_ga_array = [[[],[],[],[],[],[],[],[],[]]]
+        car_ga_array = [[[],[],[]]]
         ga_array = np.array(genom.reshape(setting.car_num, setting.VWnum, setting.VWnum))
         for i in range(len(ga_array)):
             for j in range(len(ga_array[i])):
