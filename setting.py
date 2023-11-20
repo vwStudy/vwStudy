@@ -48,6 +48,8 @@ generation_size = 8
 
 two_steps_population_size = 20
 two_steps_generation_size = 20
+
+two_VWnum = 3
 #genom_size = ((VWnum**2) * car_num)
 
 crossover_rate = 1.0 #クロスオーバー発生率

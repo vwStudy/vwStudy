@@ -2,9 +2,9 @@ import csv
 
 
 def read_csv():
-    with open('./data_folder/comon_onestep_3×3.csv') as f:
+    with open('./data_folder/individual_twostep.csv') as f:
         contents = f.readlines()
-        with open('./data_folder/comon_onestep_3×3_avg.csv', 'a', encoding='utf-8', newline='') as e:
+        with open('./data_folder/individual_twostep_avg.csv', 'a', encoding='utf-8', newline='') as e:
             writer = csv.writer(e)
             gene_size = 8
             popu_size = 8
@@ -28,8 +28,8 @@ def read_csv():
                     path_length_list.append(float(path_length[2]))
 
                 elif 'popu' in content:
-                    if 1<float(path_length_list[gene_size-1]):
-                        sum_path_length += float(path_length_list[gene_size-1])
+                    if 1<float(path_length_list[gene_size//2-1]):
+                        sum_path_length += float(path_length_list[gene_size//2-1])
                         print(path_length_list)
                     
                     path_length_list = []
@@ -40,7 +40,7 @@ def read_csv():
                 #     path_length_list = []
 
                 elif '""' in content:
-                    sum_path_length += float(path_length_list[gene_size-1])
+                    sum_path_length += float(path_length_list[gene_size//2-1])
                     avg_path_length = sum_path_length/10
                     avg_time = sum_time/10
                     writer.writerow(["gene_size:",gene_size])
