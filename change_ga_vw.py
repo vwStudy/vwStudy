@@ -243,11 +243,10 @@ class VW():
         while(flag1==False and flag2==False and flag3==False and flag4==False):
             #print(car1_position)
             car1_position, flag1, num1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1)
-            print("car1posi", car1_position)
-            position2, flag2, num2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2)
-            position3, flag3, num3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3)
+            car2_position, flag2, num2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2)
+            car3_position, flag3, num3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3)
             #print("car3posi",car3_position)
-            position4, flag4, num4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4)
+            car4_position, flag4, num4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4)
             
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -282,7 +281,7 @@ class VW():
 
         #print("collision::"+str(collision))
 
-        total_num_obstacles = len(car_VW_list)
+        total_num_obstacles = len(car_VW_list)/4
         #print(total_num_obstacles)
         
         #print("collision::"+str(collision))
@@ -414,14 +413,14 @@ class VW():
         #print("VW_line_list:" , len(car_vw_line_list))
 
         car_VW_list = combining_vw(car_VW_list)
-        car_vw_line_list = combining_vw(car_vw_line_list)
+        # car_vw_line_list = combining_vw(car_vw_line_list)
 
         #print("combined" , len(car_VW_list))
         #print("combined" , len(car_vw_line_list))
 
         #CarAgentにODを設定
-        # cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
-        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), )
+        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
+        
         # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
         # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
 
@@ -452,29 +451,57 @@ class VW():
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
 
+
+        flag1 = False 
+        flag2 = False
+        flag3 = False
+        flag4 = False
+        collision = 0
+        num1 = 0
+        num2 = 0
+        num3 = 0
+        num4 = 0 
+        car1_start_position = setting.car1_STARTtoGOAL[0].copy()
+        car2_start_position = setting.car2_STARTtoGOAL[0].copy()
+        car3_start_position = setting.car3_STARTtoGOAL[0].copy()
+        car4_start_position = setting.car4_STARTtoGOAL[0].copy()
+        car1_position = car1_start_position
+        car2_position = car2_start_position
+        car3_position = car3_start_position
+        car4_position = car4_start_position
+
+        while(flag1==False and flag2==False and flag3==False and flag4==False):
+            #print(car1_position)
+            car1_position, flag1, num1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1)
+            car2_position, flag2, num2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2)
+            car3_position, flag3, num3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3)
+            #print("car3posi",car3_position)
+            car4_position, flag4, num4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4)
+            
+            #car1_position=position1.copy()
+            collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
+
         cars_path_list = []
         car_path_tmp_list = []
         for path in car1_shortest_path:
             #print("car1 :",car1_vertex_list[path])
             car_path_tmp_list.append(car1_vertex_list[path])
         cars_path_list.append(car_path_tmp_list)
-        
+        car_path_tmp_list = []
         for path in car2_shortest_path:
             #print("car2 :",car2_vertex_list[path])
             car_path_tmp_list.append(car2_vertex_list[path])
         cars_path_list.append(car_path_tmp_list)
-        
+        car_path_tmp_list = []
         for path in car3_shortest_path:
             #print("car3 :",car3_vertex_list[path])
             car_path_tmp_list.append(car3_vertex_list[path])
         cars_path_list.append(car_path_tmp_list)
-
+        car_path_tmp_list = []
         for path in car4_shortest_path:
             #print("car4 :",car4_vertex_list[path])
             car_path_tmp_list.append(car4_vertex_list[path])
         cars_path_list.append(car_path_tmp_list)
-        
-        collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
 
         #print("collision::"+str(collision))
 
@@ -544,7 +571,7 @@ class Environment():
                                        
     #     return collision
 
-    def collision_CarToCar(car1,car2,car3,car4,collision):
+    def collision_CarToCar(car1, car2, car3, car4, collision):
         # """
         
         # 車同士の衝突判定
@@ -714,7 +741,7 @@ class Environment():
         collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         collision_checker3to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         
-        print("hannkkei",r)
+        # print("hannkkei",r)
         if collision_checker1to2 <= r:
             collision += 1
         elif collision_checker1to3 <= r:
@@ -807,10 +834,10 @@ class CarAgent():
 
             if abs(node[0] - car_position[0]) == 0:
                 car_position[0] += setting.speed
-                print(98)
+                
             elif abs(node[1] - car_position[1]) == 0:
                 car_position[1] += setting.speed
-                print(99)
+                
             else:
                 rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]))
                 # print("carposi0",car_position[0])
@@ -826,7 +853,7 @@ class CarAgent():
                     # car_position[1] -= 100
 
                     if car_position[0] <= node[0] and car_position[1] <= node[1]:
-                        print(1000)
+                        
                         car_position[0] = node[0]
                         car_position[1] = node[1]
                         num+=1
@@ -841,7 +868,7 @@ class CarAgent():
                     # car_position[1] -= 100
 
                     if car_position[0] >= node[0] and car_position[1] <= node[1]:
-                        print(1003)
+                        
                         car_position[0] = node[0]
                         car_position[1] = node[1]
                         num+=1
@@ -856,7 +883,7 @@ class CarAgent():
                     # car_position[1] += 100
 
                     if car_position[0] <= node[0] and car_position[1] >= node[1]:
-                        print(1004)
+                        
                         car_position[0] = node[0]
                         car_position[1] = node[1]
                         num+=1
@@ -868,7 +895,7 @@ class CarAgent():
                     car_position[1] += np.sin(rad) * setting.speed
 
                     if car_position[0] >= node[0] and car_position[1] >= node[1]:
-                        print(1005)
+                        
                         car_position[0] = node[0]
                         car_position[1] = node[1]
                         num+=1

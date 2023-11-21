@@ -87,18 +87,19 @@ def create_generation_two(popu_size, genoms, two_steps_list, zeros_list, fitness
 def cross_uniform(parent1_genom, parent2_genom):
     new_child1 = []
     new_child2 = []
+
     for par1, par2 in zip(parent1_genom, parent2_genom):
-        #print("par1::::", par1)
-        #print("par2::::", par2)
-        if np.random.rand() <= setting.change_rate:
-            new_child2.append(par1)
-            new_child1.append(par2)
-        else:
+        if np.random.rand() >= setting.change_rate:
             new_child1.append(par1)
             new_child2.append(par2)
 
+        else:
+            new_child1.append(par2)
+            new_child2.append(par1)
+
+
     new_child1 = np.array(new_child1)
-    new_child2 = np.array(new_child2) 
+    new_child2 = np.array(new_child2)
     children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array(new_child1)))
     children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array(new_child2)))
     return children1, children2
@@ -154,16 +155,24 @@ def crossover(selected_gene_list,populations):
     '''交叉の関数'''
     # if setting.population_size % 2:
     #     selected_gene_individual.append(selected_gene_individual[0])
-    children = []
-    parent1 = selected_gene_list[0]
-    parent2 = selected_gene_list[1]
 
-    for _ in range(int(len(populations)/2)):
-        if np.random.rand() <= setting.crossover_rate:
-            children1, children2 = cross_uniform(parent1.genom, parent2.genom)
-        else:
-            children1, children2 = parent1, parent2
-        
+    children = []
+    for i in range(len(populations)//2):
+        cnt1=0
+        cnt2=0
+        parent1 = selected_gene_list[i][0]
+        parent2 = selected_gene_list[i][1]
+        # if np.random.rand() <= setting.crossover_rate:
+        children1, children2 = cross_uniform(parent1.genom, parent2.genom)
+        for i, genom in enumerate(parent1.genom):
+            if children1.genom[i] == genom:
+                cnt1+=1
+        print("haming1", cnt1)
+        for i, genom in enumerate(parent2.genom):
+            if children1.genom[i] == genom:
+                cnt2+=1
+        print("haming2", cnt2)
+
         children.extend([children1,children2])
     
     #print("children::",children)
@@ -173,51 +182,89 @@ def crossover_two_steps(selected_gene_list,populations):
     '''交叉の関数'''
     # if setting.population_size % 2:
     #     selected_gene_individual.append(selected_gene_individual[0])
-    children = []
-    parent1 = selected_gene_list[0]
-    parent2 = selected_gene_list[1]
 
-    for _ in range(int(len(populations)/2)):
-        if np.random.rand() <= setting.crossover_rate:
-            children1, children2 = cross_uniform_two_steps(parent1.genom, parent2.genom)
-        else:
-            children1, children2 = parent1, parent2
-        
+    children = []
+    for i in range(len(populations)//2):
+        cnt1=0
+        cnt2=0
+        parent1 = selected_gene_list[i][0]
+        parent2 = selected_gene_list[i][1]
+        # if np.random.rand() <= setting.crossover_rate:
+        children1, children2 = cross_uniform_two_steps(parent1.genom, parent2.genom)
+        for i, genom in enumerate(parent1.genom):
+            if children1.genom[i] == genom:
+                cnt1+=1
+        print("haming1", cnt1)
+        for i, genom in enumerate(parent2.genom):
+            if children1.genom[i] == genom:
+                cnt2+=1
+        print("haming2", cnt2)
+
         children.extend([children1,children2])
     
-    print("children::",children)
+    #print("children::",children)
     return children
 
 
 def select_tonament(population_list):
     selected_gene_list = []
+    select = []
+    winner = []
+    toname = len(population_list)-2
     # #[for socre in population_list.get_fitness()]
     # selected_gene_list.append(population_list[score_popu.index(min(score_popu))])
     # population_list.pop(score_popu.index(min(score_popu)))
     # score_popu = [popu_dict.update(score.get_id()=score.get_fitness()) for score in population_list]
-    sorted_popu = sorted(population_list, key=lambda x : x.get_fitness())[:len(population_list)//2]
+    # popu = population_list
+    # #for _ in range(len(population_list)//2):
+    # while toname > 1:
+    #     for _ in range(2):
+    #         num = random.randint(0,len(popu))
+    #         select.append(popu.pop(num))
+        
+    #     if select[0].get_fitness() >= select[1].get_fitness():
+    #         winner.append(select[0])
+    #     else:
+    #         winner.append(select[1])
+        
+    #     select=[]
+    #     toname -= 1
 
-    ###トーナメント
-    #上位50%のpopulationをとる
-    #とってきた中からランダムで二つとり、評価値で比較し小さい方を採用していって最終的に二つまで絞る
-  
-    toname_list = [[] for i in range(int(len(sorted_popu)/2))]
-    random.shuffle(sorted_popu)
-    for battle in toname_list:
-        battle.append(sorted_popu.pop())
-        battle.append(sorted_popu.pop())
+
+
+    # sorted_popu = sorted(population_list, key=lambda x : x.get_fitness())[:len(population_list)//2]
+
+    # ###トーナメント
+    # #上位50%のpopulationをとる
+    # #とってきた中からランダムで二つとり、評価値で比較し小さい方を採用していって最終的に二つまで絞る
+    for _ in range(len(population_list)//2):
+        
+        # sorted_popu = sorted(population_list, key=lambda x : x.get_fitness())[:len(population_list)//2]
+        sorted_popu = sorted(population_list, key=lambda x : x.get_fitness())
+        #print("sort",sorted_popu)
+
+        toname_list = [[] for i in range(int(len(sorted_popu)/2))]
+        random.shuffle(sorted_popu)
+        # print("sort_shuffle",sorted_popu)
+        for battle in toname_list:
+            battle.append(sorted_popu.pop())
+            battle.append(sorted_popu.pop())
+        
+        while len(toname_list) > 1:
+            winner_list = []
+            for i in range(int(len(toname_list)/2)):
+                winner_list.append([])
+                for j in range(2):
+                    battle = toname_list.pop()
+                    #print("batle",battle)
+                    winner_list[i].append(min(battle, key=lambda x : x.get_fitness()))
+                    
+            toname_list = winner_list
+            #print(toname_list)
+        selected_gene_list.append(toname_list[0])
     
-    while len(toname_list) > 1:
-        winner_list = []
-        for i in range(int(len(toname_list)/2)):
-            winner_list.append([])
-            for j in range(2):
-                battle = toname_list.pop()
-                winner_list[i].append(min(battle, key=lambda x : x.get_fitness()))
-        toname_list = winner_list
-    
-    selected_gene_list = toname_list[0]
-    print(selected_gene_list)
+    #print("selectttt", selected_gene_list)
+    #print(len(selected_gene_list))
     
     # '''選択の関数(ルーレット方式)'''
     # weights = [ind.get_fitness() for ind in population_list]
@@ -237,7 +284,7 @@ def select_tonament(population_list):
     return selected_gene_list
         
 def mutate(children):
-    MUTATION_PB = 0.1
+    MUTATION_PB = 0.2
     for num_children in range(len(children)):
         if np.random.rand() < MUTATION_PB:# 一定の確率で突然変異させる
             
@@ -257,10 +304,30 @@ def ga_solve(populations, gene_size):
         #print("best::",best)
         generation_list.append(populations)
         selected = select_tonament(populations)
+        
+            # print("population1",selected[i][0].genom)
+            # print("population2",selected[i][1].genom)
+        
         children = crossover(selected, populations)
+        
+        # for i, genom in enumerate(selected[i][0].genom):
+        #     if children1.genom[i] == genom:
+        #         cnt1+=1
+        # for i, genom in enumerate(parent2.genom):
+        #     if children1.genom[i] == genom:
+        #         cnt2+=1
+
+        
+        
+        # print("population1a",selected[0].genom)
+        # print("population2a",selected[1].genom)
+            # print("children1::", children[0].genom)
+            # print("children2::", children[1].genom)
+        print(" ")
         #print("len_children::",len(children))
         children = mutate(children)
         populations = children
+        #print("new_popu", populations[0].genom)
         #print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
         # populations[selected[1]] = children[1]
@@ -430,11 +497,11 @@ if __name__ == '__main__':
     populist=setting.population_size #8
     generation = setting.generation_size #8
     genom_size= setting.genom_size
-    with open('./data_folder/test.csv', 'a', encoding='utf-8', newline='') as f:
+    with open('./data_folder/comp.csv', 'a', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         for _ in range(4):
             for _ in range(4):
-                for _ in range(1):
+                for _ in range(10):
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
