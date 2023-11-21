@@ -1,7 +1,7 @@
 import numpy as np
 import setting
 import random
-import change_ga_vw
+import change_ga_vw_test
 import matplotlib.pyplot as plt
 import csv
 import time
@@ -99,28 +99,28 @@ def cross_uniform(parent1_genom, parent2_genom):
 
     new_child1 = np.array(new_child1)
     new_child2 = np.array(new_child2) 
-    children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array(new_child1)))
-    children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array(new_child2)))
+    children1 = Individual(new_child1, change_ga_vw_test.VW.single_GA_function(np.array(new_child1)))
+    children2 = Individual(new_child2, change_ga_vw_test.VW.single_GA_function(np.array(new_child2)))
     return children1, children2
 
-def cross_uniform_two_steps(parent1_genom, parent2_genom):
-    new_child1 = []
-    new_child2 = []
-    for par1, par2 in zip(parent1_genom, parent2_genom):
-        #print("par1::::", par1)
-        #print("par2::::", par2)
-        if np.random.rand() <= setting.change_rate:
-            new_child2.append(par1)
-            new_child1.append(par2)
-        else:
-            new_child1.append(par1)
-            new_child2.append(par2)
+# def cross_uniform_two_steps(parent1_genom, parent2_genom):
+#     new_child1 = []
+#     new_child2 = []
+#     for par1, par2 in zip(parent1_genom, parent2_genom):
+#         #print("par1::::", par1)
+#         #print("par2::::", par2)
+#         if np.random.rand() <= setting.change_rate:
+#             new_child2.append(par1)
+#             new_child1.append(par2)
+#         else:
+#             new_child1.append(par1)
+#             new_child2.append(par2)
 
-    new_child1 = np.array(new_child1)
-    new_child2 = np.array(new_child2) 
-    children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
-    children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
-    return children1, children2
+#     new_child1 = np.array(new_child1)
+#     new_child2 = np.array(new_child2) 
+#     children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
+#     children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
+#     return children1, children2
 
 # def crossover(selected1, selected2, popu_size):
 #     children = []
@@ -166,7 +166,7 @@ def crossover(selected_gene_list,populations):
         
         children.extend([children1,children2])
     
-    #print("children::",children)
+    print("children::",children)
     return children
 
 def crossover_two_steps(selected_gene_list,populations):
@@ -258,10 +258,10 @@ def ga_solve(populations, gene_size):
         generation_list.append(populations)
         selected = select_tonament(populations)
         children = crossover(selected, populations)
-        #print("len_children::",len(children))
+        print("len_children::",len(children))
         children = mutate(children)
         populations = children
-        #print("len_populations::", len(populations))
+        print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
         # populations[selected[1]] = children[1]
         #print("gengelation", i)
@@ -269,8 +269,8 @@ def ga_solve(populations, gene_size):
     # f.writelines("vw4*4,gene:16,popu:16")
     # f.close()
     for i in range(len(best)):
-        #print("best::",best[i].get_fitness())
-        #print("best_vw::", best[i].genom)
+        print("best::",best[i].get_fitness())
+        print("best_vw::", best[i].genom)
         print("best_path::", best[i].get_all_path_length())
 
         # f = open("testttt.txt","a",encoding="UTF-8")
@@ -284,7 +284,7 @@ def ga_solve(populations, gene_size):
     # min(best, key=Individual.get_fitness)
     return best
 
-def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list = []):
+#def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list = []):
     best = []
     generation_list = []
     for i in range(gene_size):
@@ -297,13 +297,13 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
         generation_list.append(populations)
         selected = select_tonament(populations)
         children = crossover_two_steps(selected, populations)
-        #print("len_children::",len(children))
+        print("len_children::",len(children))
         children = mutate(children)
         if two_steps_list and zeros_list:
             for i in range(len(children)):
                 children[i].set_fitness(change_ga_vw.VW.two_steps_ga_function(children[i].genom, two_steps_list, zeros_list))
         populations = children
-        # print("len_populations::", len(populations))
+        print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
         # populations[selected[1]] = children[1]
         #print("gengelation", i)
@@ -311,8 +311,8 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
     # f.writelines("vw4*4,gene:16,popu:16")
     # f.close()
     for i in range(len(best)):
-        # print("best::",best[i].get_fitness())
-        # print("best_vw::", best[i].genom)
+        print("best::",best[i].get_fitness())
+        print("best_vw::", best[i].genom)
         print("best_path::", best[i].get_all_path_length())
 
         # f = open("testttt.txt","a",encoding="UTF-8")
@@ -327,32 +327,32 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
     return best
 
 def main(popu_size, gene_size, genom_size):
-    fitness = change_ga_vw.VW.single_GA_function
+    fitness = change_ga_vw_test.VW.single_GA_function
     
     populations = create_generation(popu_size, genom_size, fitness)
     # print("populations", populations)インスタンスが入ってる1次元リスト
     return ga_solve(populations, gene_size)
 
-def main_two_steps(popu_size, gene_size, genom_size):
-    fitness = change_ga_vw.VW.single_GA_function
+# def main_two_steps(popu_size, gene_size, genom_size):
+#     fitness = change_ga_vw.VW.single_GA_function
     
-    populations = create_generation(popu_size, genom_size, fitness)
-    # print("populations", populations)インスタンスが入ってる1次元リスト
-    best =  ga_solve(populations, gene_size//2)
-    best_gene = min(best, key=Individual.get_fitness)
-    writer.writerow(["best_one_steps::",best_gene.genom])
-    zeros_list = [[[0] * (setting.two_VWnum)**2] * 9]
+#     populations = create_generation(popu_size, genom_size, fitness)
+#     # print("populations", populations)インスタンスが入ってる1次元リスト
+#     best =  ga_solve(populations, gene_size//2)
+#     best_gene = min(best, key=Individual.get_fitness)
+#     writer.writerow(["best_one_steps::",best_gene.genom])
+#     zeros_list = [[[0] * (setting.two_VWnum)**2] * 9]
 
-    two_steps_list = []
-    for index, cell in enumerate(best_gene.genom):
-        if cell == 1:
-            two_steps_list.append(index)
+#     two_steps_list = []
+#     for index, cell in enumerate(best_gene.genom):
+#         if cell == 1:
+#             two_steps_list.append(index)
 
-    genom_size = len(two_steps_list) * ((setting.two_VWnum) ** 2)
+#     genom_size = len(two_steps_list) * ((setting.two_VWnum) ** 2)
         
-    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw.VW.two_steps_ga_function)
+#     populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw.VW.two_steps_ga_function)
     
-    return ga_solve_two_steps(populations, gene_size//2, two_steps_list, zeros_list)
+#     return ga_solve_two_steps(populations, gene_size//2, two_steps_list, zeros_list)
     
 
 #def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list):
@@ -364,44 +364,44 @@ def main_two_steps(popu_size, gene_size, genom_size):
     populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list)
     return ga_solve(populations, gene_size, popu_size)
 
-def create_graph_best(best):
-    l = []
-    for gene in best:
-        l.append(gene.get_all_path_length())
+# def create_graph_best(best):
+#     l = []
+#     for gene in best:
+#         l.append(gene.get_all_path_length())
 
-    left  = [x for x in range(len(best))]
-    height = l
-    plt.plot(left, height)
-    plt.show()
+#     left  = [x for x in range(len(best))]
+#     height = l
+#     plt.plot(left, height)
+#     plt.show()
 
-def create_graph_best_all_path_length(best):
-    l = []
-    for gene in best:
-        l.append(gene.get_all_path_length())
+# def create_graph_best_all_path_length(best):
+#     l = []
+#     for gene in best:
+#         l.append(gene.get_all_path_length())
 
-    left  = [x for x in range(len(best))]
-    height = l
-    plt.plot(left, height)
+#     left  = [x for x in range(len(best))]
+#     height = l
+#     plt.plot(left, height)
     
-    plt.savefig("./fig/" + str(setting.VWnum) + "x" + str(setting.VWnum) + "_pop" + str(setting.population_size) + "_gen" + str(setting.generation_size) + ".png")
+#     plt.savefig("./fig/" + str(setting.VWnum) + "x" + str(setting.VWnum) + "_pop" + str(setting.population_size) + "_gen" + str(setting.generation_size) + ".png")
     
-    plt.show()
+#     plt.show()
 
-def create_graph_generations(genelation_list, genelation_number):
-    l = []
-    for gene in genelation_list[genelation_number]:
-        l.append(gene.get_all_path_length())
+# def create_graph_generations(genelation_list, genelation_number):
+#     l = []
+#     for gene in genelation_list[genelation_number]:
+#         l.append(gene.get_all_path_length())
 
-    left  = [x for x in range(len(genelation_list[genelation_number]))]
-    height = l
-    plt.plot(left, height)
-    plt.show()
+#     left  = [x for x in range(len(genelation_list[genelation_number]))]
+#     height = l
+#     plt.plot(left, height)
+#     plt.show()
 
-def create_graph(x_list):
-    left  = [x for x in range(len(x_list))]
-    height = x_list
-    plt.plot(left, height)
-    plt.show()
+# def create_graph(x_list):
+#     left  = [x for x in range(len(x_list))]
+#     height = x_list
+#     plt.plot(left, height)
+#     plt.show()
 
 if __name__ == '__main__':
     # populist=setting.population_size #8
@@ -434,7 +434,7 @@ if __name__ == '__main__':
         writer = csv.writer(f)
         for _ in range(4):
             for _ in range(4):
-                for _ in range(1):
+                for _ in range(10):
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
@@ -446,7 +446,6 @@ if __name__ == '__main__':
                     for i in range(len(best)):
                         writer.writerow(["best_length:", best[i].get_all_path_length()])
                         writer.writerow(["best_evo:", best[i].get_fitness()])
-                        writer.writerow(["best_collision:", best[i].get_collision()])
                         writer.writerow(["best_genom:", best[i].genom])
                         writer.writerow(["best_cars_path:", best[i].get_cars_path()])
                 generation*=2

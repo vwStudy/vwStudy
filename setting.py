@@ -13,22 +13,22 @@ import random
 
 ##VWの設置範囲 n*n
 # VWfield :int = 102
-VWfield :int = 125
+VWfield :int = 125 + 10
 
 ##VWの設置範囲の開始位置(左上座標)
 #VWfield_x :int = 399
 # VWfield_y :int = 199
-VWfield_x :int = 399 + 10 #左上の壁の角のx座標 + 車の幅の半分
-VWfield_y :int = 182 + 10 #左上の壁の角のx座標 + 車の幅の半分
+VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
+VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 3
+VWnum :int = 9
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
 
 ##車のスピード
-speed :float = 1
+speed :float = 8
 
 #car_num :int = 4
 
@@ -43,8 +43,8 @@ car_num :int = 1
 # car_num :int = 8
 
 genom_size = VWnum**2 * car_num
-population_size = 8
-generation_size = 8
+population_size = 16
+generation_size = 16
 
 two_steps_population_size = 20
 two_steps_generation_size = 20
@@ -159,8 +159,8 @@ wall = [[0,0],[0,0], #左上の壁
 ##車両のスタート位置
 car1_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
 car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
-car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
-car4_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
+car3_STARTtoGOAL : float = [[576,255],[324,255]] #右から左へ
+car4_STARTtoGOAL : float = [[455,376],[455,124]] #下から上へ
 
 
 
