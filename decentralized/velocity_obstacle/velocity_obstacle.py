@@ -16,15 +16,27 @@ ROBOT_RADIUS = 20#0.5
 VMAX = 50 #2
 VMIN = 5 #0.2
 
-# def calculate_path_length(robot_state_history):
-#     total_length = 0.0
-#     for i in range(1, len(robot_state_history[0])):
-#         position = robot_state_history[:2, i]
-#         prev_position = robot_state_history[:2, i - 1]
-#         step_distance = np.linalg.norm(position - prev_position)
-#         total_length += step_distance
-#     return total_length
+def calculate_path_length(robot_state_history, start_position, goal_position):
+    total_length = 0.0
+    for i in range(0, len(robot_state_history[0])):
+        if i == 0:
+            position = robot_state_history[:2, i]
+            prev_position = start_position
+        
+        else:
+            position = robot_state_history[:2, i]
+            prev_position = robot_state_history[:2, i - 1]
+        
+        step_distance = np.linalg.norm(position - prev_position)
+        total_length += step_distance
+    
+    #goal地点追加
+    position = goal_position
+    prev_position = robot_state_history[:2, len(robot_state_history[0])-1]
+    step_distance = np.linalg.norm(position - prev_position)
+    total_length += step_distance
 
+    return total_length
 
 def simulate(filename):
     #obstacles = create_obstacles(SIM_TIME, NUMBER_OF_TIMESTEPS)
@@ -76,14 +88,20 @@ def simulate(filename):
         robot_state_history3[:4, i] = robot_state3
         robot_state_history4[:4, i] = robot_state4
 
-    plot_robot_and_obstacles(
-        robot_state_history, robot_state_history2, robot_state_history3, robot_state_history4, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
-    
-    # robot1_path_length = calculate_path_length(robot_state_history)
-    # robot2_path_length = calculate_path_length(robot_state_history2)
-    # robot3_path_length = calculate_path_length(robot_state_history3)
-    # robot4_path_length = calculate_path_length(robot_state_history4)
+    robot1_path_length = calculate_path_length(robot_state_history, [0, 300], [900, 300])
+    robot2_path_length = calculate_path_length(robot_state_history2, [450, 600], [450, 0])
+    robot3_path_length = calculate_path_length(robot_state_history3, [900, 300], [0, 300])
+    robot4_path_length = calculate_path_length(robot_state_history4, [450, 0], [450, 600])
 
+    print("経路長1",robot1_path_length)
+    print("総経路2",robot2_path_length)
+    print("総経路3",robot3_path_length)
+    print("総経路4",robot4_path_length)
+
+    print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
+
+    # plot_robot_and_obstacles(
+    #     robot_state_history, robot_state_history2, robot_state_history3, robot_state_history4, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
 
 def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
     pA = robot[:2]
