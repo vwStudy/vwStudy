@@ -320,20 +320,20 @@ class Environment():
             car1_angle_change_list.append(angle_change)        
 
         for i in range(len(car2_node_move_list)):
-            position = car1_node_move_list[i]
-            pre_position = car1_node_move_list[i-1]
+            position = car2_node_move_list[i]
+            pre_position = car2_node_move_list[i-1]
             angle_change = calculate_angle_change(position, pre_position)
             car2_angle_change_list.append(angle_change)
 
         for i in range(len(car3_node_move_list)):
-            position = car1_node_move_list[i]
-            pre_position = car1_node_move_list[i-1]
+            position = car3_node_move_list[i]
+            pre_position = car3_node_move_list[i-1]
             angle_change = calculate_angle_change(position, pre_position)
             car3_angle_change_list.append(angle_change)
 
         for i in range(len(car4_node_move_list)):
-            position = car1_node_move_list[i]
-            pre_position = car1_node_move_list[i-1]
+            position = car4_node_move_list[i]
+            pre_position = car4_node_move_list[i-1]
             angle_change = calculate_angle_change(position, pre_position)
             car4_angle_change_list.append(angle_change)                        
 
