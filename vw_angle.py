@@ -71,10 +71,10 @@ class VW():
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
-        car1_vw_line_list.extend(wall_line_list)
-        car2_vw_line_list.extend(wall_line_list)
-        car3_vw_line_list.extend(wall_line_list)
-        car4_vw_line_list.extend(wall_line_list)
+        # car1_vw_line_list.extend(wall_line_list)
+        # car2_vw_line_list.extend(wall_line_list)
+        # car3_vw_line_list.extend(wall_line_list)
+        # car4_vw_line_list.extend(wall_line_list)
 
         # print(car1_VW_list)
 
@@ -313,31 +313,89 @@ class Environment():
         car3_angle_change_list = []
         car4_angle_change_list = []
 
+        #座標からそれぞれの移動の角度を取得するプログラム
+        # for i in range(len(car1_node_move_list)):
+        #     position = car1_node_move_list[i]
+        #     pre_position = car1_node_move_list[i-1]
+        #     angle_change = calculate_angle_change(position, pre_position)
+        #     car1_angle_change_list.append(angle_change)        
+
+        # for i in range(len(car2_node_move_list)):
+        #     position = car2_node_move_list[i]
+        #     pre_position = car2_node_move_list[i-1]
+        #     angle_change = calculate_angle_change(position, pre_position)
+        #     car2_angle_change_list.append(angle_change)
+
+        # for i in range(len(car3_node_move_list)):
+        #     position = car3_node_move_list[i]
+        #     pre_position = car3_node_move_list[i-1]
+        #     angle_change = calculate_angle_change(position, pre_position)
+        #     car3_angle_change_list.append(angle_change)
+
+        # for i in range(len(car4_node_move_list)):
+        #     position = car4_node_move_list[i]
+        #     pre_position = car4_node_move_list[i-1]
+        #     angle_change = calculate_angle_change(position, pre_position)
+        #     car4_angle_change_list.append(angle_change)   
+
+        #角度変化量の合計を取得するプログラム    
         for i in range(len(car1_node_move_list)):
             position = car1_node_move_list[i]
             pre_position = car1_node_move_list[i-1]
-            angle_change = calculate_angle_change(position, pre_position)
-            car1_angle_change_list.append(angle_change)        
+            if i == 0:
+                angle_change = calculate_angle_change(position, pre_position)
+            else:
+                pre_angle = car1_angle_change_list[i-1]
+                moved_angle = calculate_angle_change(position, pre_position)
+                angle_change = moved_angle - pre_angle
+
+            car1_angle_change_list.append(angle_change)
+            sum_car1_angle_change = np.sum(car1_angle_change_list)
 
         for i in range(len(car2_node_move_list)):
             position = car2_node_move_list[i]
             pre_position = car2_node_move_list[i-1]
-            angle_change = calculate_angle_change(position, pre_position)
+            if i == 0:
+                angle_change = calculate_angle_change(position, pre_position)
+            else:
+                pre_angle = car2_angle_change_list[i-1]
+                moved_angle = calculate_angle_change(position, pre_position)
+                angle_change = moved_angle - pre_angle
+
             car2_angle_change_list.append(angle_change)
+            sum_car2_angle_change = np.sum(car2_angle_change_list)
 
         for i in range(len(car3_node_move_list)):
             position = car3_node_move_list[i]
             pre_position = car3_node_move_list[i-1]
-            angle_change = calculate_angle_change(position, pre_position)
+            if i == 0:
+                angle_change = calculate_angle_change(position, pre_position)
+            else:
+                pre_angle = car3_angle_change_list[i-1]
+                moved_angle = calculate_angle_change(position, pre_position)
+                angle_change = moved_angle - pre_angle
+
             car3_angle_change_list.append(angle_change)
+            sum_car3_angle_change = np.sum(car3_angle_change_list)
 
         for i in range(len(car4_node_move_list)):
             position = car4_node_move_list[i]
             pre_position = car4_node_move_list[i-1]
-            angle_change = calculate_angle_change(position, pre_position)
-            car4_angle_change_list.append(angle_change)                        
+            if i == 0:
+                angle_change = calculate_angle_change(position, pre_position)
+            else:
+                pre_angle = car4_angle_change_list[i-1]
+                moved_angle = calculate_angle_change(position, pre_position)
+                angle_change = moved_angle - pre_angle
 
-        print(car1_angle_change_list)    
+            car4_angle_change_list.append(angle_change)
+            sum_car4_angle_change = np.sum(car4_angle_change_list)
+
+        #変化量
+        print("car1角度変化量",abs(sum_car1_angle_change))
+        print("car2角度変化量",abs(sum_car2_angle_change))
+        print("car3角度変化量",abs(sum_car3_angle_change))
+        print("car4角度変化量",abs(sum_car4_angle_change))
 
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
