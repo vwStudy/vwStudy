@@ -9,7 +9,7 @@ from utils.multi_robot_plot import plot_robot_and_obstacles
 from utils.control import compute_desired_velocity
 import numpy as np
 
-SIM_TIME = 18.#5
+SIM_TIME = 9.#5
 TIMESTEP = 0.1
 NUMBER_OF_TIMESTEPS = int(SIM_TIME/TIMESTEP)
 ROBOT_RADIUS = 20#0.5
@@ -38,18 +38,56 @@ def calculate_path_length(robot_state_history, start_position, goal_position):
 
     return total_length
 
+def calculate_degree(robot_state_history, start_position, goal_position):
+
+    robot_move_degree_list = [0]
+    cnt = 0
+    for i in range(0, len(robot_state_history[0])):
+        if i == 0:
+            position = robot_state_history[:2, i]
+            prev_position = start_position
+            after_position = robot_state_history[:2, i + 1]
+        elif i == len(robot_state_history[0])-1:
+            position = robot_state_history[:2, i]
+            prev_position = robot_state_history[:2, i - 1]
+            after_position = goal_position
+
+        else:
+            position = robot_state_history[:2, i]
+            prev_position = robot_state_history[:2, i - 1]
+            after_position = robot_state_history[:2, i + 1]
+        
+        prev_vector = position - prev_position
+        after_vector = after_position - position
+
+        if after_vector[0] == 0 or prev_vector[0] == 0 or after_vector[1] == 0 or prev_vector[1] == 0:
+            continue
+        else:
+            robot_move_cos1 = (prev_vector[0]*after_vector[0] + prev_vector[1]*after_vector[1])
+            robot_move_cos2 = (np.sqrt((prev_vector[0])**2+(prev_vector[1])**2)*np.sqrt((after_vector[0])**2+(after_vector[1])**2))
+            
+            robot_move_extension_degree = (robot_move_cos1/robot_move_cos2)*(180/np.pi)
+            #print(robot_move_extension_degree)
+            robot_move_degree=round(180-robot_move_extension_degree, 3)
+        
+        if robot_move_degree != robot_move_degree_list[cnt]:
+            robot_move_degree_list.append(robot_move_degree)
+            cnt += 1
+
+    return robot_move_degree_list
+
 def simulate(filename):
     #obstacles = create_obstacles(SIM_TIME, NUMBER_OF_TIMESTEPS)
 
-    start = np.array([0, 300, 0, 0])
-    start2 = np.array([450, 600, 0, 0])
-    start3 = np.array([900, 300, 0, 0])
-    start4 = np.array([450, 0, 0, 0])
+    start = np.array([257.0, 250.0, 0, 0])
+    start2 = np.array([450.0, 147.0, 0, 0])
+    start3 = np.array([642.0, 250.0, 0, 0])
+    start4 = np.array([450.0, 363.0, 0, 0])
 
-    goal = np.array([900, 300, 0, 0])
-    goal2 = np.array([450, 0, 0, 0])
-    goal3 = np.array([0, 300, 0, 0])
-    goal4 = np.array([450, 600, 0, 0])
+    goal = np.array([642.0, 250.0, 0, 0])
+    goal2 = np.array([450.0, 363.0, 0, 0])
+    goal3 = np.array([257.0, 250.0, 0, 0])
+    goal4 = np.array([450.0, 147.0, 0, 0])
 
     robot_state = start
     robot_state2 = start2
@@ -88,20 +126,30 @@ def simulate(filename):
         robot_state_history3[:4, i] = robot_state3
         robot_state_history4[:4, i] = robot_state4
 
-    robot1_path_length = calculate_path_length(robot_state_history, [0, 300], [900, 300])
-    robot2_path_length = calculate_path_length(robot_state_history2, [450, 600], [450, 0])
-    robot3_path_length = calculate_path_length(robot_state_history3, [900, 300], [0, 300])
-    robot4_path_length = calculate_path_length(robot_state_history4, [450, 0], [450, 600])
+    robot1_path_length = calculate_path_length(robot_state_history, [257.0, 250.0], [642.0, 250.0])
+    robot2_path_length = calculate_path_length(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
+    robot3_path_length = calculate_path_length(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
+    robot4_path_length = calculate_path_length(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
 
-    print("経路長1",robot1_path_length)
-    print("総経路2",robot2_path_length)
-    print("総経路3",robot3_path_length)
-    print("総経路4",robot4_path_length)
+    ###角度が変わったlistを返して、変わった角度の平均なのか最大値なのか、最小値なのかを比較する？
+    robot1_degree_list = calculate_degree(robot_state_history, [257.0, 250.0],[642.0, 250.0])
+    robot2_degree_list = calculate_degree(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
+    robot3_degree_list = calculate_degree(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
+    robot4_degree_list = calculate_degree(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
+    
+    # print("経路長1",robot1_path_length)
+    # print("総経路2",robot2_path_length)
+    # print("総経路3",robot3_path_length)
+    # print("総経路4",robot4_path_length)
+    # print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
+    
+    print("総角度1：", robot1_degree_list)
+    print("総角度2：", robot2_degree_list)
+    print("総角度3：", robot3_degree_list)
+    print("総角度4：", robot4_degree_list)
 
-    print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
-
-    # plot_robot_and_obstacles(
-    #     robot_state_history, robot_state_history2, robot_state_history3, robot_state_history4, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
+    plot_robot_and_obstacles(
+         robot_state_history, robot_state_history2, robot_state_history3, robot_state_history4, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
 
 def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
     pA = robot[:2]
