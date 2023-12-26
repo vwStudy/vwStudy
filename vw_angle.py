@@ -314,82 +314,90 @@ class Environment():
         car4_angle_change_list = []
 
         #座標からそれぞれの移動の角度を取得するプログラム
-        # for i in range(len(car1_node_move_list)):
+        # for i in range(1, len(car1_node_move_list)-1):
         #     position = car1_node_move_list[i]
         #     pre_position = car1_node_move_list[i-1]
-        #     angle_change = calculate_angle_change(position, pre_position)
+        #     move_position = car1_node_move_list[i+1]
+
+        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
         #     car1_angle_change_list.append(angle_change)        
 
-        # for i in range(len(car2_node_move_list)):
+        # for i in range(1, len(car2_node_move_list)-1):
         #     position = car2_node_move_list[i]
         #     pre_position = car2_node_move_list[i-1]
-        #     angle_change = calculate_angle_change(position, pre_position)
-        #     car2_angle_change_list.append(angle_change)
+        #     move_position = car2_node_move_list[i+1]
 
-        # for i in range(len(car3_node_move_list)):
+        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
+        #     car2_angle_change_list.append(angle_change) 
+ 
+        # for i in range(1, len(car3_node_move_list)-1):
         #     position = car3_node_move_list[i]
         #     pre_position = car3_node_move_list[i-1]
-        #     angle_change = calculate_angle_change(position, pre_position)
-        #     car3_angle_change_list.append(angle_change)
+        #     move_position = car3_node_move_list[i+1]
 
-        # for i in range(len(car4_node_move_list)):
+        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
+        #     car3_angle_change_list.append(angle_change)  
+
+        # for i in range(1, len(car4_node_move_list)-1):
         #     position = car4_node_move_list[i]
         #     pre_position = car4_node_move_list[i-1]
-        #     angle_change = calculate_angle_change(position, pre_position)
+        #     move_position = car4_node_move_list[i+1]
+
+        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
         #     car4_angle_change_list.append(angle_change)   
 
         #角度変化量の合計を取得するプログラム    
-        for i in range(len(car1_node_move_list)):
+        for i in range(1, len(car1_node_move_list)-1):
             position = car1_node_move_list[i]
             pre_position = car1_node_move_list[i-1]
-            if i == 0:
-                angle_change = calculate_angle_change(position, pre_position)
+            move_position = car1_node_move_list[i+1]
+            if i == 1:
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
             else:
-                pre_angle = car1_angle_change_list[i-1]
-                moved_angle = calculate_angle_change(position, pre_position)
+                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
+                car1_angle_change_list.append(angle_change)
+                pre_angle = moved_angle
+        sum_car1_angle_change = np.sum(car1_angle_change_list)
 
-            car1_angle_change_list.append(angle_change)
-            sum_car1_angle_change = np.sum(car1_angle_change_list)
-
-        for i in range(len(car2_node_move_list)):
+        for i in range(1, len(car2_node_move_list)-1):
             position = car2_node_move_list[i]
             pre_position = car2_node_move_list[i-1]
-            if i == 0:
-                angle_change = calculate_angle_change(position, pre_position)
+            move_position = car2_node_move_list[i+1]
+            if i == 1:
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
             else:
-                pre_angle = car2_angle_change_list[i-1]
-                moved_angle = calculate_angle_change(position, pre_position)
+                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
+                car2_angle_change_list.append(angle_change)
+                pre_angle = moved_angle
+        sum_car2_angle_change = np.sum(car2_angle_change_list)
 
-            car2_angle_change_list.append(angle_change)
-            sum_car2_angle_change = np.sum(car2_angle_change_list)
-
-        for i in range(len(car3_node_move_list)):
+        for i in range(1, len(car3_node_move_list)-1):
             position = car3_node_move_list[i]
             pre_position = car3_node_move_list[i-1]
-            if i == 0:
-                angle_change = calculate_angle_change(position, pre_position)
+            move_position = car3_node_move_list[i+1]
+            if i == 1:
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
             else:
-                pre_angle = car3_angle_change_list[i-1]
-                moved_angle = calculate_angle_change(position, pre_position)
+                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
+                car3_angle_change_list.append(angle_change)
+                pre_angle = moved_angle
+        sum_car3_angle_change = np.sum(car3_angle_change_list)
 
-            car3_angle_change_list.append(angle_change)
-            sum_car3_angle_change = np.sum(car3_angle_change_list)
-
-        for i in range(len(car4_node_move_list)):
+        for i in range(1, len(car4_node_move_list)-1):
             position = car4_node_move_list[i]
             pre_position = car4_node_move_list[i-1]
-            if i == 0:
-                angle_change = calculate_angle_change(position, pre_position)
+            move_position = car4_node_move_list[i+1]
+            if i == 1:
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
             else:
-                pre_angle = car4_angle_change_list[i-1]
-                moved_angle = calculate_angle_change(position, pre_position)
+                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-
-            car4_angle_change_list.append(angle_change)
-            sum_car4_angle_change = np.sum(car4_angle_change_list)
+                car4_angle_change_list.append(angle_change)
+                pre_angle = moved_angle
+        sum_car4_angle_change = np.sum(car4_angle_change_list)
 
         #変化量
         print("car1角度変化量",abs(sum_car1_angle_change))
@@ -520,18 +528,26 @@ class Execution():
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
         return shortest_path, shortest_length
 
-def calculate_angle_change(current_coords, previous_coords):
+def calculate_two_vec_angle(pre_position, position, move_position):
+    #配列に変換
+    pre_position = np.array(pre_position)
+    position = np.array(position)
+    move_position = np.array(move_position)
+    
     # NumPy配列に変換
-    current_coords = np.array(current_coords)
-    previous_coords = np.array(previous_coords)
+    vec_a = np.array(position-pre_position)
+    vec_b = np.array(move_position-position)
 
-    # 座標の差分を計算
-    delta_coords = current_coords - previous_coords
+    # 内積を計算
+    inner = np.inner(vec_a, vec_b)
 
-    # arctan2を使用して角度を計算
-    angle_radians = np.arctan2(delta_coords[1], delta_coords[0])
+    # 長さを計算
+    vec_a_norm = np.linalg.norm(vec_a)
+    vec_b_norm = np.linalg.norm(vec_b)
 
-    return angle_radians
+    theta = np.arccos(inner/(vec_a_norm*vec_b_norm))
+
+    return theta
 
 def main():
     solution_list = []
