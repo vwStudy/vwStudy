@@ -1,6 +1,6 @@
 ###パラメーター####
 ##generation世代数,popuration遺伝子数
-params = {'max_num_iteration': 10, 'population_size': 10} 
+params = {'max_num_iteration': 5, 'population_size': 7} 
 ##canvasの座標は1px単位
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
 ##VWの設置範囲 n*n
