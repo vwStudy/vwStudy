@@ -40,13 +40,14 @@ def calculate_path_length(robot_state_history, start_position, goal_position):
 
 def calculate_degree(robot_state_history, start_position, goal_position):
 
-    robot_move_degree_list = [0]
-    cnt = 0
+    change_angle_list = [0]
+    prev_angle = 0
     for i in range(0, len(robot_state_history[0])):
         if i == 0:
             position = robot_state_history[:2, i]
             prev_position = start_position
             after_position = robot_state_history[:2, i + 1]
+
         elif i == len(robot_state_history[0])-1:
             position = robot_state_history[:2, i]
             prev_position = robot_state_history[:2, i - 1]
@@ -60,21 +61,27 @@ def calculate_degree(robot_state_history, start_position, goal_position):
         prev_vector = position - prev_position
         after_vector = after_position - position
 
+        prev_vector = np.array(prev_vector)
+        after_vector = np.array(after_vector)
+        
         if after_vector[0] == 0 or prev_vector[0] == 0 or after_vector[1] == 0 or prev_vector[1] == 0:
             continue
         else:
-            robot_move_cos1 = (prev_vector[0]*after_vector[0] + prev_vector[1]*after_vector[1])
-            robot_move_cos2 = (np.sqrt((prev_vector[0])**2+(prev_vector[1])**2)*np.sqrt((after_vector[0])**2+(after_vector[1])**2))
-            
-            robot_move_extension_degree = (robot_move_cos1/robot_move_cos2)*(180/np.pi)
-            #print(robot_move_extension_degree)
-            robot_move_degree=round(180-robot_move_extension_degree, 3)
-        
-        if robot_move_degree != robot_move_degree_list[cnt]:
-            robot_move_degree_list.append(robot_move_degree)
-            cnt += 1
+            #robot_move_cos1 = (prev_vector[0]*after_vector[0] + prev_vector[1]*after_vector[1])
+            inner = np.inner(prev_vector, after_vector)
+            #robot_move_cos2 = (np.sqrt((prev_vector[0])**2+(prev_vector[1])**2)*np.sqrt((after_vector[0])**2+(after_vector[1])**2))
+            norm = np.linalg.norm(prev_vector) * np.linalg.norm(after_vector)
 
-    return robot_move_degree_list
+            cos_theta = inner/norm
+            after_angle = np.rad2deg(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
+            after_angle = abs(after_angle)
+        
+            if after_angle not in change_angle_list:
+                change_angle_list.append(after_angle)
+
+    print("chaann", change_angle_list)
+    sum_change_angle = sum(change_angle_list)
+    return sum_change_angle
 
 def simulate(filename):
     #obstacles = create_obstacles(SIM_TIME, NUMBER_OF_TIMESTEPS)
@@ -132,21 +139,22 @@ def simulate(filename):
     robot4_path_length = calculate_path_length(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
 
     ###角度が変わったlistを返して、変わった角度の平均なのか最大値なのか、最小値なのかを比較する？
-    robot1_degree_list = calculate_degree(robot_state_history, [257.0, 250.0],[642.0, 250.0])
-    robot2_degree_list = calculate_degree(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
-    robot3_degree_list = calculate_degree(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
-    robot4_degree_list = calculate_degree(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
+    sum_change_angle1 = calculate_degree(robot_state_history, [257.0, 250.0],[642.0, 250.0])
+    sum_change_angle2 = calculate_degree(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
+    sum_change_angle3 = calculate_degree(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
+    sum_change_angle4 = calculate_degree(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
     
-    # print("経路長1",robot1_path_length)
-    # print("総経路2",robot2_path_length)
-    # print("総経路3",robot3_path_length)
-    # print("総経路4",robot4_path_length)
-    # print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
+    print("経路長1",robot1_path_length)
+    print("総経路2",robot2_path_length)
+    print("総経路3",robot3_path_length)
+    print("総経路4",robot4_path_length)
+    print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
     
-    print("総角度1：", robot1_degree_list)
-    print("総角度2：", robot2_degree_list)
-    print("総角度3：", robot3_degree_list)
-    print("総角度4：", robot4_degree_list)
+    print("総角度1：", sum_change_angle1)
+    print("総角度2：", sum_change_angle2)
+    print("総角度3：", sum_change_angle3)
+    print("総角度4：", sum_change_angle4)
+    print("総経角度：",sum_change_angle1 + sum_change_angle2 + sum_change_angle3 + sum_change_angle4)
 
     plot_robot_and_obstacles(
          robot_state_history, robot_state_history2, robot_state_history3, robot_state_history4, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
