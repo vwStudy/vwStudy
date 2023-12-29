@@ -1,0 +1,765 @@
+
+one_steps_best::,[1 0 1 1 0 0 1 0 0]
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1 0 1 1 1 1 0 0 0 1 0]
+fitness::,9031687.489288092
+all_path_length::,1043.2095238877682
+num_obstacles::,15
+genom::,[0 1 0 0 0 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,9024487.446303302
+all_path_length::,1036.5056636318286
+num_obstacles::,11
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 1]
+fitness::,8025384.656078852
+all_path_length::,1025.6426698526022
+num_obstacles::,11
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,8023076.960071684
+all_path_length::,1025.6426698526022
+num_obstacles::,10
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,8023076.960071684
+all_path_length::,1025.6426698526022
+num_obstacles::,10
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,8023076.960071684
+all_path_length::,1025.6426698526022
+num_obstacles::,10
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,8023076.960071684
+all_path_length::,1025.6426698526022
+num_obstacles::,10
+genom::,[0 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0]
+fitness::,8023076.960071684
+all_path_length::,1025.6426698526022
+num_obstacles::,10
+
+one_steps_best::,[0 0 0 1 1 0 0 0 0]
+genom::,[0 1 1 1 0 1 1 0 0 0 0 0 1 1 1 1 0 1]
+fitness::,8036876.868405198
+all_path_length::,1024.357455699935
+num_obstacles::,10
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7027395.873754466
+all_path_length::,1014.6619909061515
+num_obstacles::,7
+genom::,[0 1 1 1 0 0 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7022829.894795388
+all_path_length::,1014.6619909061515
+num_obstacles::,6
+genom::,[0 1 1 1 0 0 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7022829.894795388
+all_path_length::,1014.6619909061515
+num_obstacles::,6
+genom::,[0 1 1 1 0 0 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7022829.894795388
+all_path_length::,1014.6619909061515
+num_obstacles::,6
+genom::,[0 1 1 1 0 0 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7022829.894795388
+all_path_length::,1014.6619909061515
+num_obstacles::,6
+genom::,[0 1 1 1 0 0 0 0 0 0 0 0 1 0 1 1 0 0]
+fitness::,7022829.894795388
+all_path_length::,1014.6619909061515
+num_obstacles::,6
+
+one_steps_best::,[0 0 0 0 1 0 1 0 0]
+genom::,[0 1 1 0 1 1 0 1 0 0 0 1 1 0 0 0 1 1]
+fitness::,1034437.6557610608
+all_path_length::,1020.3749855129104
+num_obstacles::,9
+genom::,[1 1 1 0 0 1 0 0 0 0 0 0 1 1 1 1 1 1]
+fitness::,1037282.4545472626
+all_path_length::,1035.6237374239606
+num_obstacles::,10
+genom::,[0 1 1 0 1 1 0 0 0 0 0 1 1 0 0 1 1 1]
+fitness::,1034436.4589795962
+all_path_length::,1020.339525321367
+num_obstacles::,9
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+genom::,[0 0 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 1]
+fitness::,1031863.4600344017
+all_path_length::,1011.5384137905323
+num_obstacles::,8
+
+one_steps_best::,[1 0 1 0 0 1 0 1 1]
+genom::,"[1 1 0 0 1 0 1 0 0 1 0 1 0 1 1 1 0 0 0 0 1 0 1 0 0 0 0 0 1 0 1 1 0 1 1 0 1
+ 1 0 1 0 0 0 0 0]"
+fitness::,1032328.9667025633
+all_path_length::,1056.502179822331
+num_obstacles::,19
+genom::,"[1 1 0 1 1 0 0 0 1 1 0 0 0 1 1 0 1 0 0 1 1 0 0 1 0 0 0 1 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1031145.8057063441
+all_path_length::,1048.6803268129318
+num_obstacles::,19
+genom::,"[1 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1027574.7068933628
+all_path_length::,1056.502179822331
+num_obstacles::,16
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+genom::,"[0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 0 0 0 0 0 0 0]"
+fitness::,1026472.7840041086
+all_path_length::,1050.507301750342
+num_obstacles::,15
+
+one_steps_best::,[0 0 0 0 1 0 1 0 0]
+genom::,[0 0 1 1 0 1 1 0 0 0 0 1 0 1 1 1 0 1]
+fitness::,1031863.9074714205
+all_path_length::,1011.5526181403334
+num_obstacles::,9
+genom::,[0 0 1 0 0 0 0 0 1 0 0 1 1 1 1 1 0 0]
+fitness::,1025037.3267092747
+all_path_length::,1011.6091599706924
+num_obstacles::,7
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+genom::,[0 0 1 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0]
+fitness::,1020483.2925848231
+all_path_length::,1011.5206214727477
+num_obstacles::,6
+
+one_steps_best::,[1 1 0 0 1 0 1 0 0]
+genom::,[0 0 0 0 0 0 0 1 0 0 0 0 1 0 1 1 1 1 0 1 0 0 0 1 1 1 1 0 0 1 1 1 0 1 1 1]
+fitness::,1030994.9619968589
+all_path_length::,1020.4102715015272
+num_obstacles::,17
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 1 0 1 0 1 1 1 1 0 1 1 1]
+fitness::,1024153.1216283158
+all_path_length::,1022.3543546377061
+num_obstacles::,12
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+genom::,[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 1 0 1 1 1]
+fitness::,1020663.3079979059
+all_path_length::,1020.4102715015272
+num_obstacles::,10
+
