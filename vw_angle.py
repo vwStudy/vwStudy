@@ -361,7 +361,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car1_angle_change_list.append(angle_change)
+                if moved_angle not in car1_angle_change_list:
+                    car1_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
 
             else:
@@ -371,8 +372,10 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car1_angle_change_list.append(angle_change)
+                if moved_angle not in car1_angle_change_list:
+                    car1_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
+
         sum_car1_angle_change = np.sum(car1_angle_change_list)
 
         for i in range(len(car2_node_move_list)-1):
@@ -389,7 +392,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car2_angle_change_list.append(angle_change)
+                if moved_angle not in car2_angle_change_list:
+                    car2_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
 
             else:
@@ -399,7 +403,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car2_angle_change_list.append(angle_change)
+                if moved_angle not in car2_angle_change_list:
+                    car2_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
         sum_car2_angle_change = np.sum(car2_angle_change_list)
 
@@ -417,7 +422,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car3_angle_change_list.append(angle_change)
+                if moved_angle not in car3_angle_change_list:
+                    car3_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
 
             else:
@@ -427,7 +433,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car3_angle_change_list.append(angle_change)
+                if moved_angle not in car3_angle_change_list:
+                    car3_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
         sum_car3_angle_change = np.sum(car3_angle_change_list)
 
@@ -445,7 +452,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car4_angle_change_list.append(angle_change)
+                if moved_angle not in car4_angle_change_list:
+                    car4_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
 
             else:
@@ -455,7 +463,8 @@ class Environment():
 
                 moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
                 angle_change = moved_angle - pre_angle
-                car4_angle_change_list.append(angle_change)
+                if moved_angle not in car4_angle_change_list:
+                    car4_angle_change_list.append(angle_change)
                 pre_angle = moved_angle
         sum_car4_angle_change = np.sum(car4_angle_change_list)
 
