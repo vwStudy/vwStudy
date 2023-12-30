@@ -313,159 +313,110 @@ class Environment():
         car3_angle_change_list = []
         car4_angle_change_list = []
 
-        #座標からそれぞれの移動の角度を取得するプログラム
-        # for i in range(1, len(car1_node_move_list)-1):
-        #     position = car1_node_move_list[i]
-        #     pre_position = car1_node_move_list[i-1]
-        #     move_position = car1_node_move_list[i+1]
-
-        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
-        #     car1_angle_change_list.append(angle_change)        
-
-        # for i in range(1, len(car2_node_move_list)-1):
-        #     position = car2_node_move_list[i]
-        #     pre_position = car2_node_move_list[i-1]
-        #     move_position = car2_node_move_list[i+1]
-
-        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
-        #     car2_angle_change_list.append(angle_change) 
- 
-        # for i in range(1, len(car3_node_move_list)-1):
-        #     position = car3_node_move_list[i]
-        #     pre_position = car3_node_move_list[i-1]
-        #     move_position = car3_node_move_list[i+1]
-
-        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
-        #     car3_angle_change_list.append(angle_change)  
-
-        # for i in range(1, len(car4_node_move_list)-1):
-        #     position = car4_node_move_list[i]
-        #     pre_position = car4_node_move_list[i-1]
-        #     move_position = car4_node_move_list[i+1]
-
-        #     angle_change = calculate_two_vec_angle(pre_position, position, move_position)
-        #     car4_angle_change_list.append(angle_change)   
-
-        #角度変化量の合計を取得するプログラム  
+        #傾きが変わった際に角度変化量の合計を取得するプログラム 
         for i in range(len(car1_node_move_list)-1):
+            position = car1_node_move_list[i]
             if i == 0:
-                position = car1_node_move_list[i]
                 pre_position = setting.car1_STARTtoGOAL[0]
                 move_position = car1_node_move_list[i+1]
+                current_slope = calculate_slope(pre_position, position)
                 pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-
+                continue
+            
             elif i == len(car1_node_move_list)-1:
                 position = car1_node_move_list[i]
-                pre_position = car1_node_move_list[i-1]
                 move_position = setting.car1_STARTtoGOAL[1]
 
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car1_angle_change_list:
-                    car1_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+            move_slope = calculate_slope(position, move_position)
 
-            else:
-                position = car1_node_move_list[i]
-                pre_position = car1_node_move_list[i-1]
-                move_position = car1_node_move_list[i+1]
-
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car1_angle_change_list:
+            if move_slope != current_slope:
+                current_slope = move_slope
+                move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                angle_change = abs(move_angle - pre_angle)
+                if angle_change not in car1_angle_change_list:
                     car1_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+                pre_position = position
+                pre_angle = move_angle
 
         sum_car1_angle_change = np.sum(car1_angle_change_list)
 
         for i in range(len(car2_node_move_list)-1):
+            position = car2_node_move_list[i]
             if i == 0:
-                position = car2_node_move_list[i]
                 pre_position = setting.car2_STARTtoGOAL[0]
                 move_position = car2_node_move_list[i+1]
+                current_slope = calculate_slope(pre_position, position)
                 pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-
+                continue
+            
             elif i == len(car2_node_move_list)-1:
                 position = car2_node_move_list[i]
-                pre_position = car2_node_move_list[i-1]
                 move_position = setting.car2_STARTtoGOAL[1]
 
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car2_angle_change_list:
-                    car2_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+            move_slope = calculate_slope(position, move_position)
 
-            else:
-                position = car2_node_move_list[i]
-                pre_position = car2_node_move_list[i-1]
-                move_position = car2_node_move_list[i+1]
-
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car2_angle_change_list:
+            if move_slope != current_slope:
+                current_slope = move_slope
+                move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                angle_change = abs(move_angle - pre_angle)
+                if angle_change not in car2_angle_change_list:
                     car2_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+                pre_position = position
+                pre_angle = move_angle
+
         sum_car2_angle_change = np.sum(car2_angle_change_list)
 
         for i in range(len(car3_node_move_list)-1):
+            position = car3_node_move_list[i]
             if i == 0:
-                position = car3_node_move_list[i]
                 pre_position = setting.car3_STARTtoGOAL[0]
                 move_position = car3_node_move_list[i+1]
+                current_slope = calculate_slope(pre_position, position)
                 pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-
+                continue
+            
             elif i == len(car3_node_move_list)-1:
                 position = car3_node_move_list[i]
-                pre_position = car3_node_move_list[i-1]
                 move_position = setting.car3_STARTtoGOAL[1]
 
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car3_angle_change_list:
-                    car3_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+            move_slope = calculate_slope(position, move_position)
 
-            else:
-                position = car3_node_move_list[i]
-                pre_position = car3_node_move_list[i-1]
-                move_position = car3_node_move_list[i+1]
-
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car3_angle_change_list:
+            if move_slope != current_slope:
+                current_slope = move_slope
+                move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                angle_change = abs(move_angle - pre_angle)
+                if angle_change not in car3_angle_change_list:
                     car3_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+                pre_position = position
+                pre_angle = move_angle
+
         sum_car3_angle_change = np.sum(car3_angle_change_list)
 
         for i in range(len(car4_node_move_list)-1):
+            position = car4_node_move_list[i]
             if i == 0:
-                position = car4_node_move_list[i]
                 pre_position = setting.car4_STARTtoGOAL[0]
                 move_position = car4_node_move_list[i+1]
+                current_slope = calculate_slope(pre_position, position)
                 pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-
+                car4_angle_change_list.append(pre_angle)
+                continue
+            
             elif i == len(car4_node_move_list)-1:
                 position = car4_node_move_list[i]
-                pre_position = car4_node_move_list[i-1]
                 move_position = setting.car4_STARTtoGOAL[1]
 
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car4_angle_change_list:
-                    car4_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+            move_slope = calculate_slope(position, move_position)
 
-            else:
-                position = car4_node_move_list[i]
-                pre_position = car4_node_move_list[i-1]
-                move_position = car4_node_move_list[i+1]
-
-                moved_angle = calculate_two_vec_angle(pre_position, position, move_position)
-                angle_change = moved_angle - pre_angle
-                if moved_angle not in car4_angle_change_list:
+            if move_slope != current_slope:
+                current_slope = move_slope
+                move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                angle_change = abs(move_angle - pre_angle)
+                if angle_change not in car4_angle_change_list:
                     car4_angle_change_list.append(angle_change)
-                pre_angle = moved_angle
+                pre_position = position
+                pre_angle = move_angle
+
         sum_car4_angle_change = np.sum(car4_angle_change_list)
 
         #変化量
@@ -618,6 +569,17 @@ def calculate_two_vec_angle(pre_position, position, move_position):
     after_angle = abs(np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0))))
 
     return after_angle
+
+def calculate_slope(pre_position, position):
+    if (position[1]-pre_position[1]) != 0.0 and (position[0]-pre_position[0]) != 0.0:
+        print((position[1]-pre_position[1]))
+        slope = (position[1]-pre_position[1]) / (position[0]-pre_position[0])
+
+    else:
+        slope = 0
+
+    return slope
+    
 
 def main():
     solution_list = []
