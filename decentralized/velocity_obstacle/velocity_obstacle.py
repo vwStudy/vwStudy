@@ -9,10 +9,12 @@ from utils.multi_robot_plot import plot_robot_and_obstacles
 from utils.control import compute_desired_velocity
 import numpy as np
 
-SIM_TIME = 50.#5
+#SIM_TIME = 13.#5
+SIM_TIME = 30
 TIMESTEP = 0.1
 NUMBER_OF_TIMESTEPS = int(SIM_TIME/TIMESTEP)
-ROBOT_RADIUS = 15#0.5
+#ROBOT_RADIUS = 15#0.5
+ROBOT_RADIUS = 15
 VMAX = 30 #2
 VMIN = 3 #0.2
 
@@ -38,76 +40,71 @@ def calculate_path_length(robot_state_history, start_position, goal_position):
 
     return total_length
 
+def calculate_speed_difference(velocity, prev_velo, speed_deff):
+    speed = round(np.linalg.norm(velocity), 3)
+    #print("spe",speed)
+    #print("abs",abs(speed-prev_velo))
+    speed_deff += (abs(speed - prev_velo))
+    prev_velo=speed
+    return prev_velo, speed_deff
+
+
+
 def calculate_degree(robot_state_history, start_position, goal_position):
 
-    
-    change_trend_line_list = []
-    sum_change_angle = 0
-    cnt = 0
+    pos = [0, 0]
+    prev_pos = [0, 0]
+    after_pos = [0, 0]
+    change_trend_line_list = [0]
+    sum_change_angle = 0.0
     vector = [0, 0]
+    
     for i in range(0, len(robot_state_history[0])-1):
+        pos = robot_state_history[:2, i]
+        prev_pos = robot_state_history[:2, i - 1]
+        after_pos = robot_state_history[:2, i + 1]
 
         if i == 0:
-            position = robot_state_history[:2, i]
-            prev_position = start_position
-            after_position = robot_state_history[:2, i + 1]
+            prev_pos = start_position
+    
+        #ゴール判定をどうするか,途中でもprev_posとposが同じだった場合がある可能性がある。。
+        elif float(pos[0]) == float(prev_pos[0]) or float(pos[1]) == float(prev_pos[1]):            
+            after_pos = goal_position
 
-        # elif robot_state_history[:2,i][0] == robot_state_history[:2,i-1][0]:
-        #     position = robot_state_history[:2, i]
-        #     prev_position = robot_state_history[:2, i - 1]
-        #     after_position = goal_position
-
-        else:
-            position = robot_state_history[:2, i]
-            prev_position = robot_state_history[:2, i - 1]
-            after_position = robot_state_history[:2, i + 1]
-
-        prev_vector = position - prev_position
-        after_vector = after_position - position
-
-        if any(prev_vector==0.000) or any(after_vector==0.000):
-            continue
-        
-        ##方向が変わった(角度が生まれた)判定を傾きをつかって角度が変わった判別する
-        prev_trend = (position[1] - prev_position[1])/(position[0] - prev_position[0])
-        after_trend = (after_position[1] - position[1])/(after_position[0] - position[0])
-
-        prev_trend = round(prev_trend, 3)
-        after_trend = round(after_trend,3)
-        ###prev_trendがnanになる理由は分母分子が0になるときがあるから
-
-        ##たぶんこのコードじゃダメで傾きが連続で変わった場合の処理を考える
-        if after_trend==prev_trend:
-            vector += prev_vector
-            cnt=0
-        elif after_trend!=prev_trend:
-            cnt+=1
-            if cnt<2:
+        prev_vector = pos - prev_pos
+        after_vector = after_pos - pos
+        print("trest_vector", prev_vector)
+        if float(prev_vector[0]) != 0.0 and float(prev_vector[1]) != 0.0 and float(after_vector[0]) != 0.0 and float(after_vector[1]) != 0.0:
+            prev_trend = round(prev_vector[1]/prev_vector[0], 5)
+            after_trend = round(after_vector[1]/after_vector[0], 5)
+            #print("test_trend", prev_trend)
+            if after_trend==prev_trend:
+                vector += prev_vector
+            
+            elif after_trend!=prev_trend:
                 vector += prev_vector
                 change_trend_line_list.append(vector)
-                vector=[0, 0]
+                print("chage_trend",change_trend_line_list)
+                vector = [0, 0]
 
-            else:
-                #change_trend_line_list.pop()
-                vector += prev_vector
-                
-    
-    ##ここから求めた直線の長さから角度を求める
-    for i in range(len(change_trend_line_list)-1):    
+        if float(pos[0]) == float(prev_pos[0]) or float(pos[1]) == float(prev_pos[1]):
+            break
+        
+    ##ここから求めた直線の長さから角度を求める         
+    for i in range(1, len(change_trend_line_list)-1):
         line1 = change_trend_line_list[i]
-        line2 = change_trend_line_list[i+1] 
-        print("line1",line1)
-        print("line2",line2)
+        line2 = change_trend_line_list[i+1]
+
         inner = np.inner(line1, line2)
         norm = np.linalg.norm(line1) * np.linalg.norm(line2)
-        print("inner", inner)
-        print("norm", norm)
+
         cos_theta = inner/norm
         change_angle = abs(np.rad2deg(np.arccos(np.clip(cos_theta, -1.0, 1.0))))
-        sum_change_angle+=change_angle
-        print("change", change_angle)
-    print("line_list", change_trend_line_list)
-    
+
+        ###numpyの型が原因で足すことができてないというか
+        sum_change_angle+=float(change_angle)
+        #print("test_angle", change_angle)
+        #print("test1",sum_change_angle)
     return sum_change_angle
 
 def simulate(filename):
@@ -122,6 +119,16 @@ def simulate(filename):
     goal2 = np.array([450.0, 363.0, 0, 0])
     goal3 = np.array([257.0, 250.0, 0, 0])
     goal4 = np.array([450.0, 147.0, 0, 0])
+    
+    # start = np.array([257.0, 250.0, 0, 0])
+    # start2 = np.array([450.0, 147.0, 0, 0])
+    # start3 = np.array([642.0, 250.0, 0, 0])
+    # start4 = np.array([450.0, 532.0, 0, 0])
+
+    # goal = np.array([642.0, 250.0, 0, 0])
+    # goal2 = np.array([450.0, 532.0, 0, 0])
+    # goal3 = np.array([257.0, 250.0, 0, 0])
+    # goal4 = np.array([450.0, 147.0, 0, 0])
 
     robot_state = start
     robot_state2 = start2
@@ -132,6 +139,14 @@ def simulate(filename):
     robot_state_history3 = np.empty((4, NUMBER_OF_TIMESTEPS))
     robot_state_history4 = np.empty((4, NUMBER_OF_TIMESTEPS))
 
+    # prev_velo1=0
+    # prev_velo2=0
+    # prev_velo3=0
+    # prev_velo4=0
+    # speed_deff1 = 0
+    # speed_deff2 = 0
+    # speed_deff3 = 0
+    # speed_deff4 = 0
     for i in range(NUMBER_OF_TIMESTEPS):
         v_desired = compute_desired_velocity(robot_state, goal, ROBOT_RADIUS, VMAX)
         v_desired2 = compute_desired_velocity(robot_state2, goal2, ROBOT_RADIUS, VMAX)
@@ -139,16 +154,16 @@ def simulate(filename):
         v_desired4 = compute_desired_velocity(robot_state4, goal4, ROBOT_RADIUS, VMAX)
         
         control_vel = compute_velocity(
-            robot_state, robot_state2, robot_state3, robot_state4, v_desired)
+            robot_state, robot_state3, robot_state2, robot_state4, v_desired)
   
         control_vel2 = compute_velocity(
-            robot_state2, robot_state, robot_state3, robot_state4, v_desired2)
-      
+            robot_state2, robot_state4, robot_state3, robot_state, v_desired2)
+
         control_vel3 = compute_velocity(
             robot_state3, robot_state, robot_state2, robot_state4, v_desired3)
         
         control_vel4 = compute_velocity(
-            robot_state4, robot_state2, robot_state3, robot_state, v_desired4)
+            robot_state4, robot_state, robot_state2, robot_state3, v_desired4)
 
         robot_state = update_state(robot_state, control_vel)
         robot_state2 = update_state(robot_state2, control_vel2)
@@ -160,26 +175,45 @@ def simulate(filename):
         robot_state_history3[:4, i] = robot_state3
         robot_state_history4[:4, i] = robot_state4
 
-    robot1_path_length = calculate_path_length(robot_state_history, [257.0, 250.0], [642.0, 250.0])
-    robot2_path_length = calculate_path_length(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
-    robot3_path_length = calculate_path_length(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
-    robot4_path_length = calculate_path_length(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
 
+        # ##スピードの差は1台だけ少しの差が出た
+        # prev_velo1, speed_deff1 = calculate_speed_difference(control_vel, prev_velo1, speed_deff1)
+        # prev_velo2, speed_deff2 = calculate_speed_difference(control_vel2, prev_velo2, speed_deff2)
+        # prev_velo3, speed_deff3 = calculate_speed_difference(control_vel3, prev_velo3, speed_deff3)
+        # prev_velo4, speed_deff4 = calculate_speed_difference(control_vel4, prev_velo4, speed_deff4)
+
+
+    #総経路長を算出している
+    #robot1_path_length = calculate_path_length(robot_state_history, [257.0, 250.0], [642.0, 250.0])
+    #robot2_path_length = calculate_path_length(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
+    #robot3_path_length = calculate_path_length(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
+    #robot4_path_length = calculate_path_length(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
+
+    #移動した位置の差をノルムにして、算出する関数を作る
+    # sum_speed_deff1 = sum(speed_deff1)
+    # print("deff1", sum_speed_deff1)
+    # sum_speed_deff2 = sum(speed_deff2)
+    # print("deff2", sum_speed_deff2)
+    # sum_speed_deff3 = sum(speed_deff3)
+    # print("deff3", sum_speed_deff3)
+    # sum_speed_deff4 = sum(speed_deff4)
+    # print("deff4", sum_speed_deff4)
+        
     ###角度が変わったlistを返して、変わった角度の平均なのか最大値なのか、最小値なのかを比較する？
-    #sum_change_angle1 = calculate_degree(robot_state_history, [257.0, 250.0],[642.0, 250.0])
-    #sum_change_angle2 = calculate_degree(robot_state_history2, [450.0, 147.0],[450.0, 363.0])
-    sum_change_angle3 = calculate_degree(robot_state_history3, [642.0, 250.0],[257.0, 250.0])
-    #sum_change_angle4 = calculate_degree(robot_state_history4,[450.0, 363.0],[450.0, 147.0])
+    #sum_change_angle1 = calculate_degree(robot_state_history, start[:2], goal[:2])
+    sum_change_angle2 = calculate_degree(robot_state_history2, start2[:2], goal2[:2])
+    #sum_change_angle3 = calculate_degree(robot_state_history3, start3[:2], goal3[:2])
+    #sum_change_angle4 = calculate_degree(robot_state_history4, start4[:2], goal4[:2])
     
     # print("経路長1",robot1_path_length)
     # print("総経路2",robot2_path_length)
     # print("総経路3",robot3_path_length)
     # print("総経路4",robot4_path_length)
-    # print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
+    #print("総経路長：",robot1_path_length + robot2_path_length + robot3_path_length + robot4_path_length)
     
-    # print("総角度1：", sum_change_angle1)
-    # print("総角度2：", sum_change_angle2)
-    # print("総角度3：", sum_change_angle3)
+    #print("総角度1：", sum_change_angle1)
+    #print("総角度2：", sum_change_angle2)
+    #print("総角度3：", sum_change_angle3)
     # print("総角度4：", sum_change_angle4)
     # print("総経角度：",sum_change_angle1 + sum_change_angle2 + sum_change_angle3 + sum_change_angle4)
 
@@ -214,12 +248,12 @@ def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
         dispA1_4 = pA - pA4
 
         distBA = np.linalg.norm(dispA1_2)
-        distBA2 = np.linalg.norm(dispA1_3)
-        distBA3 = np.linalg.norm(dispA1_4)
+        # distBA2 = np.linalg.norm(dispA1_3)
+        # distBA3 = np.linalg.norm(dispA1_4)
 
         thetaBA = np.arctan2(dispA1_2[1], dispA1_2[0])
-        thetaBA2 = np.arctan2(dispA1_3[1], dispA1_3[0])
-        thetaBA3 = np.arctan2(dispA1_4[1], dispA1_4[0])
+        # thetaBA2 = np.arctan2(dispA1_3[1], dispA1_3[0])
+        # thetaBA3 = np.arctan2(dispA1_4[1], dispA1_4[0])
 
         if 2.2 * ROBOT_RADIUS > distBA:
             distBA = 2.2*ROBOT_RADIUS
@@ -227,17 +261,17 @@ def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
         phi_left = thetaBA + phi_obst
         phi_right = thetaBA - phi_obst
 
-        if 2.2 * ROBOT_RADIUS > distBA2:
-            distBA2 = 2.2*ROBOT_RADIUS
-        phi_obst2 = np.arcsin(2.2*ROBOT_RADIUS/distBA2)
-        phi_left2 = thetaBA2 + phi_obst2
-        phi_right2 = thetaBA2 - phi_obst2
+        # if 2.2 * ROBOT_RADIUS > distBA2:
+        #     distBA2 = 2.2*ROBOT_RADIUS
+        # phi_obst2 = np.arcsin(2.2*ROBOT_RADIUS/distBA2)
+        # phi_left2 = thetaBA2 + phi_obst2
+        # phi_right2 = thetaBA2 - phi_obst2
 
-        if 2.2 * ROBOT_RADIUS > distBA3:
-            distBA3 = 2.2*ROBOT_RADIUS
-        phi_obst3 = np.arcsin(2.2*ROBOT_RADIUS/distBA3)
-        phi_left3 = thetaBA3 + phi_obst3
-        phi_right3 = thetaBA3 - phi_obst3
+        # if 2.2 * ROBOT_RADIUS > distBA3:
+        #     distBA3 = 2.2*ROBOT_RADIUS
+        # phi_obst3 = np.arcsin(2.2*ROBOT_RADIUS/distBA3)
+        # phi_left3 = thetaBA3 + phi_obst3
+        # phi_right3 = thetaBA3 - phi_obst3
 
         # VO
         translation = vA2
@@ -248,21 +282,21 @@ def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
         Amat[i*2 + 1, :] = Atemp
         bvec[i*2 + 1] = btemp
 
-        translation2 = vA3
-        Atemp2, btemp2 = create_constraints(translation2, phi_left2, "left")
-        Amat2[i*2, :] = Atemp2
-        bvec2[i*2] = btemp2
-        Atemp2, btemp2 = create_constraints(translation2, phi_right2, "right")
-        Amat2[i*2 + 1, :] = Atemp2
-        bvec2[i*2 + 1] = btemp2
+        # translation2 = vA3
+        # Atemp2, btemp2 = create_constraints(translation2, phi_left2, "left")
+        # Amat2[i*2, :] = Atemp2
+        # bvec2[i*2] = btemp2
+        # Atemp2, btemp2 = create_constraints(translation2, phi_right2, "right")
+        # Amat2[i*2 + 1, :] = Atemp2
+        # bvec2[i*2 + 1] = btemp2
 
-        translation3 = vA4
-        Atemp3, btemp3 = create_constraints(translation3, phi_left3, "left")
-        Amat3[i*2, :] = Atemp3
-        bvec3[i*2] = btemp3
-        Atemp3, btemp3 = create_constraints(translation3, phi_right3, "right")
-        Amat3[i*2 + 1, :] = Atemp3
-        bvec3[i*2 + 1] = btemp3
+        # translation3 = vA4
+        # Atemp3, btemp3 = create_constraints(translation3, phi_left3, "left")
+        # Amat3[i*2, :] = Atemp3
+        # bvec3[i*2] = btemp3
+        # Atemp3, btemp3 = create_constraints(translation3, phi_right3, "right")
+        # Amat3[i*2 + 1, :] = Atemp3
+        # bvec3[i*2 + 1] = btemp3
 
     # Create search-space
     th = np.linspace(0, 2*np.pi, 20)
@@ -300,7 +334,7 @@ def compute_velocity(robot, sub_robot1, sub_robot2, sub_robot3, v_desired):
     # norm = np.linalg.norm(diffs, axis=0)
     # min_index = np.where(norm == np.amin(norm))[0][0]
     # cmd_vel3 = (v_satisfying_constraints[:, min_index])
-
+    #print("cmd_",cmd_vel)
 
     return cmd_vel
 
@@ -334,7 +368,6 @@ def create_constraints(translation, angle, side):
 
     A = line[:2]
     b = -line[2]
-
     return A, b
 
 
@@ -343,9 +376,8 @@ def translate_line(line, translation):
     matrix[2, :2] = -translation[:2]
     return matrix @ line
 
-
 def update_state(x, v):
     new_state = np.empty((4))
     new_state[:2] = x[:2] + v * TIMESTEP
     new_state[-2:] = v
-    return new_state
+    return new_state 
