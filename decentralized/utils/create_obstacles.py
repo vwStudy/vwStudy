@@ -1,30 +1,40 @@
 import numpy as np
 
+
+car1_STARTtoGOAL : float = [[257.0, 250.0],[642.0, 250.0]]##左車
+car2_STARTtoGOAL : float = [[450.0, 147.0],[450.0, 363.0]]##上車 
+car3_STARTtoGOAL : float = [[642.0, 250.0],[257.0, 250.0]]##右車
+car4_STARTtoGOAL : float = [[450.0, 363.0],[450.0, 147.0]]
+
+
 def create_obstacles(sim_time, num_timesteps):
     # Obstacle 1
-    v = -2
-    p0 = np.array([5, 12])
-    obst = create_robot(p0, v, np.pi/2, sim_time,
-                        num_timesteps).reshape(4, num_timesteps, 1)
+    v = -30
+    #p0 = np.array([5, 12])
+    p0 = np.array([450.0, 363.0])
+    obst = create_robot(p0, v, np.pi/2, sim_time, num_timesteps).reshape(4, num_timesteps, 1)
     obstacles = obst
+    
     # Obstacle 2
-    v = 2
-    p0 = np.array([0, 5])
-    obst = create_robot(p0, v, 0, sim_time, num_timesteps).reshape(
-        4, num_timesteps, 1)
+    v = 30
+    #p0 = np.array([-2, 6])
+    p0 = np.array([257.0, 250.0])
+    obst = create_robot(p0, v, 0, sim_time, num_timesteps).reshape(4, num_timesteps, 1)
     obstacles = np.dstack((obstacles, obst))
+    
     # Obstacle 3
-    v = 2
-    p0 = np.array([10, 10])
-    obst = create_robot(p0, v, -np.pi * 3 / 4, sim_time, num_timesteps).reshape(4,
-                                                                                num_timesteps, 1)
+    v = 30
+    #p0 = np.array([10, 5])
+    #p0 = np.array([640.0, 262.0])
+    p0 = np.array([642.0, 250.0])
+    obst = create_robot(p0, v, np.pi, sim_time, num_timesteps).reshape(4, num_timesteps, 1)
     obstacles = np.dstack((obstacles, obst))
     # Obstacle 4
-    v = 2
-    p0 = np.array([7.5, 2.5])
-    obst = create_robot(p0, v, np.pi * 3 / 4, sim_time, num_timesteps).reshape(4,
-                                                                               num_timesteps, 1)
-    obstacles = np.dstack((obstacles, obst))
+    # v = 2
+    # p0 = np.array([7.5, 2.5])
+    # obst = create_robot(p0, v, np.pi * 3 / 4, sim_time, num_timesteps).reshape(4,
+    #                                                                            num_timesteps, 1)
+    # obstacles = np.dstack((obstacles, obst))
 
     return obstacles
 
