@@ -589,7 +589,7 @@ def main():
 
     solution = ga_model.result
     
-    print("sol"+str(solution))
+    # print("sol"+str(solution))
     #print(str(setting.VWnum) + "vw")
     
     #for key, value in setting.params.items():
