@@ -9,7 +9,7 @@ from utils.create_obstacles import create_obstacles
 from utils.control import compute_desired_velocity
 import numpy as np
 
-SIM_TIME = 50.
+SIM_TIME = 15.
 TIMESTEP = 0.1
 NUMBER_OF_TIMESTEPS = int(SIM_TIME/TIMESTEP)
 #ROBOT_RADIUS = 0.5
@@ -18,6 +18,69 @@ ROBOT_RADIUS = 12.5
 # VMIN = 0.2
 VMAX = 30
 VMIN = 3
+
+
+def calculate_degree(robot_state_history, start_position, goal_position):
+
+    pos = [0, 0]
+    prev_pos = [0, 0]
+    after_pos = [0, 0]
+    change_trend_line_list = [0]
+    sum_change_angle = 0.0
+    vector = [0, 0]
+    degrees_list = []
+    
+    for i in range(0, len(robot_state_history[0])-1):
+        pos = robot_state_history[:2, i]
+        prev_pos = robot_state_history[:2, i - 1]
+        after_pos = robot_state_history[:2, i + 1]
+        if i == 0:
+            prev_pos = start_position
+    
+        #ゴール判定をどうするか,途中でもprev_posとposが同じだった場合がある可能性がある。。
+        elif float(pos[0]) == float(prev_pos[0]) or float(pos[1]) == float(prev_pos[1]):            
+            print("testttttt")
+            after_pos = goal_position
+
+        # pos[0] = round(float(pos[0]),5)
+        # pos[1] = round(float(pos[1]),5)
+        # prev_pos[0] = round(float(prev_pos[0]), 5)
+        # prev_pos[1] = round(float(prev_pos[1]), 5)
+        # after_pos[0] = round(float(after_pos[0]), 5)
+        # after_pos[1] = round(float(after_pos[1]), 5)
+        prev_vector = pos - prev_pos
+        after_vector = after_pos - pos
+        
+        if float(prev_vector[0]) != 0.0 and float(prev_vector[1]) != 0.0 and float(after_vector[0]) != 0.0 and float(after_vector[1]) != 0.0:
+
+            # print("prev", prev_pos)    
+            # print("pos",pos)
+            
+            #print("prev_vector", prev_vector)
+            dot = np.dot(prev_vector, after_vector)
+            prev_line = np.linalg.norm(prev_vector)
+            after_line = np.linalg.norm(after_vector)
+
+            prev_line = round(prev_line, 5)
+            after_line = round(after_line, 5)
+
+            theta = dot/(prev_line*after_line)
+            
+            if (np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0)))) <= 1.0e-01:
+                #degrees_list.append(np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0))))
+                continue
+            else:
+                degrees_list.append(np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0))))
+
+        if float(pos[0]) == float(prev_pos[0]) or float(pos[1]) == float(prev_pos[1]):
+            print("aaaaaaaaaaaaaaaa")
+            break
+        
+        print("test", sum(degrees_list))
+        print("test1",max(degrees_list))
+        print("test2",min(degrees_list))
+
+    return degrees_list
 
 
 def simulate(filename):
@@ -34,9 +97,11 @@ def simulate(filename):
         robot_state = update_state(robot_state, control_vel)
         robot_state_history[:4, i] = robot_state
 
+    degrees = calculate_degree(robot_state_history, start[:2], goal[:2])
+    
     plot_robot_and_obstacles(
         robot_state_history, obstacles, ROBOT_RADIUS, NUMBER_OF_TIMESTEPS, SIM_TIME, filename)
-
+    
 
 def compute_velocity(robot, obstacles, v_desired):
     pA = robot[:2]
