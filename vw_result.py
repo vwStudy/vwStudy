@@ -42,17 +42,12 @@ class VW():
                     obstacles_line_list.extend([[VW_LeftUp, VW_LeftDown], [VW_LeftUp, VW_RightUp], [VW_RightUp, VW_RightDown], [VW_RightDown, VW_LeftDown]])
         return obstacles_vertex_list, obstacles_line_list
 
-    def GA_function(p):
+    def GA_result():
         """
         GeneticalAlgorism用の関数
         """
 
         car_ga_array = [[], [], [], []]
-        for car_number in range(setting.car_num):
-            car_ga_array[car_number].extend([[], [], [], []]) 
-            for i in range(setting.VWnum):
-                for j in range(setting.VWnum):
-                    car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
 
         print("vw"+str(car_ga_array))
 
@@ -121,10 +116,10 @@ class VW():
         total_num_obstacles = len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4
         #print(total_num_obstacles)
         
-        #print("collision::"+str(collision))
+        print("collision::"+str(collision))
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
-        # print("all_len::"+str(all_path_length))
+        print("all_len::"+str(all_path_length))
 
         return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 100000
     
@@ -308,119 +303,119 @@ class Environment():
 
         #同じ速度で動いた場合の予測地点のlistが存在する場合、同じindexで車同士の距離が閾値以下になった時、衝突したといえる
                 
-        # car1_angle_change_list = []
-        # car2_angle_change_list = []
-        # car3_angle_change_list = []
-        # car4_angle_change_list = []
+        car1_angle_change_list = []
+        car2_angle_change_list = []
+        car3_angle_change_list = []
+        car4_angle_change_list = []
 
-        # #傾きが変わった際に角度変化量の合計を取得するプログラム 
-        # for i in range(len(car1_node_move_list)-1):
-        #     position = car1_node_move_list[i]
-        #     if i == 0:
-        #         pre_position = setting.car1_STARTtoGOAL[0]
-        #         move_position = car1_node_move_list[i+1]
-        #         pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #         continue
+        #傾きが変わった際に角度変化量の合計を取得するプログラム 
+        for i in range(len(car1_node_move_list)-1):
+            position = car1_node_move_list[i]
+            if i == 0:
+                pre_position = setting.car1_STARTtoGOAL[0]
+                move_position = car1_node_move_list[i+1]
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                continue
             
-        #     elif i == len(car1_node_move_list)-1:
-        #         move_position = setting.car1_STARTtoGOAL[1]
+            elif i == len(car1_node_move_list)-1:
+                move_position = setting.car1_STARTtoGOAL[1]
             
-        #     else:
-        #         move_position = car1_node_move_list[i+1]
+            else:
+                move_position = car1_node_move_list[i+1]
 
-        #     move_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #     angle_change = abs(move_angle - pre_angle)
-        #     if angle_change > 0.0:
-        #         car1_angle_change_list.append(angle_change)
-        #     pre_position = position.copy()
-        #     pre_angle = move_angle.copy()
+            move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+            angle_change = abs(move_angle - pre_angle)
+            if angle_change > 0.0:
+                car1_angle_change_list.append(angle_change)
+            pre_position = position.copy()
+            pre_angle = move_angle.copy()
 
-        # sum_car1_angle_change = np.sum(car1_angle_change_list)
+        sum_car1_angle_change = np.sum(car1_angle_change_list)
 
-        # for i in range(len(car2_node_move_list)-1):
-        #     position = car2_node_move_list[i]
-        #     if i == 0:
-        #         pre_position = setting.car2_STARTtoGOAL[0]
-        #         move_position = car2_node_move_list[i+1]
-        #         pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #         continue
+        for i in range(len(car2_node_move_list)-1):
+            position = car2_node_move_list[i]
+            if i == 0:
+                pre_position = setting.car2_STARTtoGOAL[0]
+                move_position = car2_node_move_list[i+1]
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                continue
             
-        #     elif i == len(car2_node_move_list)-1:
-        #         move_position = setting.car2_STARTtoGOAL[1]
+            elif i == len(car2_node_move_list)-1:
+                move_position = setting.car2_STARTtoGOAL[1]
             
-        #     else:
-        #         move_position = car2_node_move_list[i+1]
+            else:
+                move_position = car2_node_move_list[i+1]
 
-        #     move_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #     angle_change = abs(move_angle - pre_angle)
-        #     if angle_change > 0.0:
-        #         car2_angle_change_list.append(angle_change)
-        #     pre_position = position.copy()
-        #     pre_angle = move_angle.copy()
+            move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+            angle_change = abs(move_angle - pre_angle)
+            if angle_change > 0.0:
+                car2_angle_change_list.append(angle_change)
+            pre_position = position.copy()
+            pre_angle = move_angle.copy()
 
-        # sum_car2_angle_change = np.sum(car2_angle_change_list)
+        sum_car2_angle_change = np.sum(car2_angle_change_list)
 
-        # for i in range(len(car3_node_move_list)-1):
-        #     position = car3_node_move_list[i]
-        #     if i == 0:
-        #         pre_position = setting.car3_STARTtoGOAL[0]
-        #         move_position = car3_node_move_list[i+1]
-        #         pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #         continue
+        for i in range(len(car3_node_move_list)-1):
+            position = car3_node_move_list[i]
+            if i == 0:
+                pre_position = setting.car3_STARTtoGOAL[0]
+                move_position = car3_node_move_list[i+1]
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                continue
             
-        #     elif i == len(car3_node_move_list)-1:
-        #         move_position = setting.car3_STARTtoGOAL[1]
+            elif i == len(car3_node_move_list)-1:
+                move_position = setting.car3_STARTtoGOAL[1]
 
-        #     else:
-        #         move_position = car3_node_move_list[i+1]
+            else:
+                move_position = car3_node_move_list[i+1]
 
-        #     move_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #     angle_change = abs(move_angle - pre_angle)
-        #     if angle_change > 0.0:
-        #         car3_angle_change_list.append(angle_change)
-        #     pre_position = position.copy()
-        #     pre_angle = move_angle.copy()
+            move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+            angle_change = abs(move_angle - pre_angle)
+            if angle_change > 0.0:
+                car3_angle_change_list.append(angle_change)
+            pre_position = position.copy()
+            pre_angle = move_angle.copy()
 
-        # sum_car3_angle_change = np.sum(car3_angle_change_list)
+        sum_car3_angle_change = np.sum(car3_angle_change_list)
 
-        # for i in range(len(car4_node_move_list)-1):
-        #     position = car4_node_move_list[i]
-        #     if i == 0:
-        #         pre_position = setting.car4_STARTtoGOAL[0]
-        #         move_position = car4_node_move_list[i+1]
-        #         pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #         continue
+        for i in range(len(car4_node_move_list)-1):
+            position = car4_node_move_list[i]
+            if i == 0:
+                pre_position = setting.car4_STARTtoGOAL[0]
+                move_position = car4_node_move_list[i+1]
+                pre_angle = calculate_two_vec_angle(pre_position, position, move_position)
+                continue
             
-        #     elif i == len(car4_node_move_list)-1:
-        #         move_position = setting.car4_STARTtoGOAL[1]
+            elif i == len(car4_node_move_list)-1:
+                move_position = setting.car4_STARTtoGOAL[1]
             
-        #     else:
-        #         move_position = car4_node_move_list[i+1]
+            else:
+                move_position = car4_node_move_list[i+1]
 
-        #     move_angle = calculate_two_vec_angle(pre_position, position, move_position)
-        #     angle_change = abs(move_angle - pre_angle)
-        #     if angle_change > 0.0:
-        #         car4_angle_change_list.append(angle_change)
-        #     pre_position = position.copy()
-        #     pre_angle = move_angle.copy()
+            move_angle = calculate_two_vec_angle(pre_position, position, move_position)
+            angle_change = abs(move_angle - pre_angle)
+            if angle_change > 0.0:
+                car4_angle_change_list.append(angle_change)
+            pre_position = position.copy()
+            pre_angle = move_angle.copy()
 
-        # sum_car4_angle_change = np.sum(car4_angle_change_list)
+        sum_car4_angle_change = np.sum(car4_angle_change_list)
 
-        # #変化量
-        # print("car1角度変化量",sum_car1_angle_change)
-        # print("car2角度変化量",sum_car2_angle_change)
-        # print("car3角度変化量",sum_car3_angle_change)
-        # print("car4角度変化量",sum_car4_angle_change)
-        # print("\n")
-        # print("car1最大方向変換量",max(car1_angle_change_list,default=0))
-        # print("car2最大方向変換量",max(car2_angle_change_list,default=0))
-        # print("car3最大方向変換量",max(car3_angle_change_list,default=0))
-        # print("car4最大方向変換量",max(car4_angle_change_list,default=0))
-        # print("\n")
-        # print("car1最小方向変換量",min(car1_angle_change_list,default=0))
-        # print("car2最小方向変換量",min(car2_angle_change_list,default=0))
-        # print("car3最小方向変換量",min(car3_angle_change_list,default=0))
-        # print("car4最小方向変換量",min(car4_angle_change_list,default=0))
+        #変化量
+        print("car1角度変化量",sum_car1_angle_change)
+        print("car2角度変化量",sum_car2_angle_change)
+        print("car3角度変化量",sum_car3_angle_change)
+        print("car4角度変化量",sum_car4_angle_change)
+        print("\n")
+        print("car1最大方向変換量",max(car1_angle_change_list,default=0))
+        print("car2最大方向変換量",max(car2_angle_change_list,default=0))
+        print("car3最大方向変換量",max(car3_angle_change_list,default=0))
+        print("car4最大方向変換量",max(car4_angle_change_list,default=0))
+        print("\n")
+        print("car1最小方向変換量",min(car1_angle_change_list,default=0))
+        print("car2最小方向変換量",min(car2_angle_change_list,default=0))
+        print("car3最小方向変換量",min(car3_angle_change_list,default=0))
+        print("car4最小方向変換量",min(car4_angle_change_list,default=0))
 
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
@@ -572,25 +567,8 @@ def calculate_two_vec_angle(pre_position, position, move_position):
     return after_angle
 
 def main():
-    solution_list = []
+    VW.GA_result()
 
-    varbound_list = [[0,2]] * (setting.VWnum**2 * setting.car_num) #この中にGAで出た値を入れていく,[0, 2]は0~1の値が入るという意味
-
-    varbound = np.array(varbound_list)
-
-    ga_model = ga(function=VW.GA_function,
-            dimension=((setting.VWnum**2) * setting.car_num),
-            variable_type='real',
-            variable_boundaries=varbound,
-            algorithm_parameters=setting.params
-    )
-    ga_model.run(no_plot=True,)
-
-    convergence = ga_model.report
-    #print(convergence)
-
-    solution = ga_model.result
-    
     # print("sol"+str(solution))
     #print(str(setting.VWnum) + "vw")
     
