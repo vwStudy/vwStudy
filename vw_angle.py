@@ -591,15 +591,15 @@ def main():
 
     solution = ga_model.result
     
-    # print("sol"+str(solution))
+    print("sol"+str(solution))
     #print(str(setting.VWnum) + "vw")
     
     #for key, value in setting.params.items():
     #    print(str(key) + "：" + str(value))
-    # for i in solution['variable']:
-    #     i = round(i ,8)
-    #     solution_list.append(i)
-    # print(solution_list)
+    for i in solution['variable']:
+        i = round(i ,8)
+        solution_list.append(i)
+    print(solution_list)
     #print((solution['variable']),"2222") # x, y の最適値
     #print(solution['score'],"最小値") # x, y の最適値での関数の値
     
@@ -645,4 +645,5 @@ def main():
     # f.close()
 
 if __name__ == '__main__':
-    main()
+    for i in range(9):
+        main()
