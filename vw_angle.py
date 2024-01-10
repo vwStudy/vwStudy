@@ -54,8 +54,6 @@ class VW():
                 for j in range(setting.VWnum):
                     car_ga_array[car_number][i].append(int(p[i+j*setting.VWnum+(setting.VWnum**2)*car_number]))
 
-        print("vw"+str(car_ga_array))
-
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         car1_VW_list, car1_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
@@ -116,7 +114,7 @@ class VW():
         
         collision = Environment.collision_CarToCar(car1_vertex_list, car1_shortest_path, car2_vertex_list, car2_shortest_path, car3_vertex_list, car3_shortest_path, car4_vertex_list, car4_shortest_path)
 
-        print("collision::"+str(collision))
+        # print("collision::"+str(collision))
 
         total_num_obstacles = len(car1_VW_list)/4 + len(car2_VW_list)/4 + len(car3_VW_list)/4 + len(car4_VW_list)/4
         #print(total_num_obstacles)
