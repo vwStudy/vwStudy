@@ -2,6 +2,7 @@ import numpy as np
 import networkx as nx
 import copy
 import random
+import math
 
 from geneticalgorithm2 import geneticalgorithm2 as ga
 import setting
@@ -47,17 +48,10 @@ class VW():
         GeneticalAlgorism用の関数
         """
 
-        car_ga_array =  [0.95394092,0.32638747,0.62951449,0.68862633,1.58230982,0.11117865,
-                         0.69011241,0.8024665,0.59441322,0.53293419,0.13238574,0.10709129,
-                         0.4924744,0.88331912,0.33285595,0.8149054,0.81185787,0.90230496,
-                         0.76008251,0.25448005,0.38512129,0.20690119,0.00948735,0.21779996,
-                         0.93518623,0.84251979,0.92812543,0.81557177,0.82470476,1.43237769,
-                         0.5344263,0.40931041,0.80838366,0.47463274,0.47045373,0.68640619,
-                         0.45150593,1.29678416,0.45203873,0.12055006,0.11030944,0.30580622,
-                         0.0583547,0.36621225,0.78585185,0.51563377,0.91172058,0.93167751,
-                         0.75169879,0.30172922,0.26601599,0.14771787,0.96226065,0.69703354,
-                         1.25704819,0.35830109,0.62089749,1.20146743,0.74268029,0.81178741,
-                         0.81989564,0.4777311,0.19192118,0.8499515]
+        car_ga_array = [0.59263706, 0.06698528, 0.69375835, 0.49133201, 0.93120231, 0.84081507, 0.42666916, 0.79612783, 0.17855842, 0.70579236, 0.70686261, 0.20185822, 0.31708471, 0.82149014, 0.56809179, 1.21374254, 0.95725634, 0.49866767, 0.80388176, 0.6159939, 1.43746721, 0.71708183, 0.12678999, 0.04159864, 0.42192127, 0.92951497, 1.39690846, 0.08229538, 0.65550315, 0.2060676, 0.5215497, 0.6442582, 0.27098917, 0.70816144, 0.55324946, 0.54057356, 0.94482958, 0.0297383, 0.8103082, 0.60269087, 0.85189024, 0.84180424, 0.76131899, 0.77306329, 0.16770184, 0.14899878, 0.81369423, 0.64665438, 0.317459, 0.2353062, 0.66866999, 0.67433124, 1.42678294, 0.49566645, 0.27436525, 0.62493962, 0.29960966, 0.74608127, 0.70626298, 0.0080638, 0.72766523, 0.75261143, 0.53665279, 0.70804869]   
+        print(len(car_ga_array))
+        for i in range(len(car_ga_array)):
+            car_ga_array[i] = math.floor(car_ga_array[i])
 
         car_ga_array = np.reshape(np.array(car_ga_array),(4,4,4))
 
@@ -430,37 +424,39 @@ class Environment():
         print("car3最小方向変換量",min(car3_angle_change_list,default=0))
         print("car4最小方向変換量",min(car4_angle_change_list,default=0))
 
+        collision_size = 13
+
         for index, move_pos in enumerate(car1_node_move_list):
             if index <= len(car2_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car2_node_move_list[index][0] - move_pos[0])**2) + ((car2_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
             
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
         
         for index, move_pos in enumerate(car2_node_move_list):
             if index <= len(car3_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car3_node_move_list[index][0] - move_pos[0])**2) + ((car3_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
             
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
         
         for index, move_pos in enumerate(car3_node_move_list):
             if index <= len(car4_node_move_list)-1: 
                 carTocar_distance = np.sqrt(((car4_node_move_list[index][0] - move_pos[0])**2) + ((car4_node_move_list[index][1] - move_pos[1])**2))
-                if carTocar_distance <= 12:
+                if carTocar_distance <= collision_size:
                     collision += 1
 
         #print("collision::"+str(collision))    
@@ -592,7 +588,7 @@ def calculate_degree(robot_state_history, start_position, goal_position):
     
         #ゴール判定をどうするか,途中でもprev_posとposが同じだった場合がある可能性がある。。
         elif float(pos[0]) == float(prev_pos[0]) and float(pos[1]) == float(prev_pos[1]):            
-            print("testttttt")
+            # print("testttttt")
             after_pos = np.array(goal_position.copy())
 
         # pos[0] = round(float(pos[0]),5)
@@ -601,7 +597,7 @@ def calculate_degree(robot_state_history, start_position, goal_position):
         # prev_pos[1] = round(float(prev_pos[1]), 5)
         # after_pos[0] = round(float(after_pos[0]), 5)
         # after_pos[1] = round(float(after_pos[1]), 5)
-        print(pos, prev_pos, after_pos)
+        # print(pos, prev_pos, after_pos)
         prev_vector = pos - prev_pos
         after_vector = after_pos - pos
         
@@ -630,11 +626,11 @@ def calculate_degree(robot_state_history, start_position, goal_position):
         if float(pos[0]) == float(prev_pos[0]) and float(pos[1]) == float(prev_pos[1]):
             break
 
-        print("degrees",degrees_list)
+        # print("degrees",degrees_list)
         
-        print("test", sum(degrees_list))
-        print("test1",max(degrees_list,default=0))
-        print("test2",min(degrees_list,default=0))
+        # print("test", sum(degrees_list))
+        # print("test1",max(degrees_list,default=0))
+        # print("test2",min(degrees_list,default=0))
 
     return degrees_list
 
