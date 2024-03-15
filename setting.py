@@ -30,6 +30,8 @@ VWsize :int = VWfield/VWnum
 ##車のスピード
 speed :float = 8
 
+car_angle :int = 8
+
 #car_num :int = 4
 
 ##車の縦幅

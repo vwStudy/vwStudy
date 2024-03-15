@@ -231,6 +231,10 @@ class VW():
         num2 = 0
         num3 = 0
         num4 = 0 
+        move_count1 = 0
+        move_count2 = 0
+        move_count3 = 0
+        move_count4 = 0
         car1_start_position = setting.car1_STARTtoGOAL[0].copy()
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
@@ -242,11 +246,11 @@ class VW():
 
         while(flag1==False and flag2==False and flag3==False and flag4==False):
             #print(car1_position)
-            car1_position, flag1, num1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1)
-            car2_position, flag2, num2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2)
-            car3_position, flag3, num3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3)
+            car1_position, flag1, num1, move_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1)
+            car2_position, flag2, num2, move_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2)
+            car3_position, flag3, num3, move_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3)
             #print("car3posi",car3_position)
-            car4_position, flag4, num4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4)
+            car4_position, flag4, num4, move_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4)
             
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -461,6 +465,10 @@ class VW():
         num2 = 0
         num3 = 0
         num4 = 0 
+        move_count1 = 0
+        move_count2 = 0
+        move_count3 = 0
+        move_count4 = 0
         car1_start_position = setting.car1_STARTtoGOAL[0].copy()
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
@@ -472,11 +480,12 @@ class VW():
 
         while(flag1==False and flag2==False and flag3==False and flag4==False):
             #print(car1_position)
-            car1_position, flag1, num1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1)
-            car2_position, flag2, num2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2)
-            car3_position, flag3, num3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3)
+            
+            car1_position, flag1, num1, move_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1)
+            car2_position, flag2, num2, move_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2)
+            car3_position, flag3, num3, move_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3)
             #print("car3posi",car3_position)
-            car4_position, flag4, num4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4)
+            car4_position, flag4, num4, move_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4)
             
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -821,9 +830,10 @@ class CarAgent():
         self.goal_flag = False
         self.car_width = setting.car_width #根拠のある数値にする
 
-    def car_move(self, car_vertex_list, car_shortest_path, car_position, num):
+    def car_move(self, car_vertex_list, car_shortest_path, car_position, num, move_count):
 
-        
+        #車両の変化可能角度
+        car_angle = setting.car_angle
         #node = car_vertex_list[car_shortest_path[num]]
         
         if num >= len(car_shortest_path):
@@ -831,6 +841,18 @@ class CarAgent():
         
         elif num < len(car_shortest_path):
             node = car_vertex_list[car_shortest_path[num]]
+            
+            if len(car_shortest_path) > num+2:
+                after_node = car_vertex_list[car_shortest_path[num+1]]
+                angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
+                
+                need_move = length/setting.speed
+                #次のノード
+                carb_rate = angle/car_angle
+            
+            else:
+                need_move = 100
+                carb_rate = 0
 
             if abs(node[0] - car_position[0]) == 0:
                 car_position[0] += setting.speed
@@ -839,7 +861,11 @@ class CarAgent():
                 car_position[1] += setting.speed
                 
             else:
-                rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]))
+                if (need_move - move_count) >= carb_rate:
+                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0])) + car_angle
+
+                else:
+                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]))
                 # print("carposi0",car_position[0])
                 # print("carposi1",car_position[1])
                 # print("node0",node[0])
@@ -905,10 +931,14 @@ class CarAgent():
         # elif car_position[0] == node[0] and car_position[1] == node[1]:
         #     if len(car_shortest_path-1):
         #        self.flag = True
-        
+            if move_count <= need_move:
+                move_count += 1
+            
+            else:
+                move_count = 0
 
         # print("caaaaaaaa", car_position)    
-        return car_position ,self.goal_flag, num
+        return car_position ,self.goal_flag, num, move_count
 
 class Execution():
     def set_obstacle(self):
@@ -1012,7 +1042,7 @@ class Execution():
 #     return two_steps_best, two_steps_best_gene, genelation_list
     
 def main():
-    best, best_gene, genelation_list = ga.main()
+    best, best_gene, genelation_list = ga.main(setting.population_size,setting.generation_size,setting.genom_size)
     # print("genom::" , best_gene.genom)
     # print("fitness::" , best_gene.get_fitness())
     # print("collision::" , best_gene.get_collision())
@@ -1046,6 +1076,33 @@ def combining_vw(Vw_list):
     """
     seen = []
     return [position for position in Vw_list if position not in seen and not seen.append(position)]
+
+def calculate_two_vec_angle(pre_position, position, move_position):
+    #配列に変換
+    pre_position = np.array(pre_position)
+    position = np.array(position)
+    move_position = np.array(move_position)
+    
+    # NumPy配列に変換
+    vec_a = np.array(position-pre_position)
+    vec_b = np.array(move_position-position)
+
+    # 内積を計算
+    inner = np.inner(vec_a, vec_b)
+
+    # 長さを計算
+    vec_a_norm = np.linalg.norm(vec_a)
+    vec_b_norm = np.linalg.norm(vec_b)
+
+    vec_a_norm = round(vec_a_norm,5)
+    vec_b_norm = round(vec_b_norm,5)
+
+    theta = inner/(vec_a_norm*vec_b_norm)
+
+    after_angle = np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0)))
+
+    return after_angle, vec_a_norm
+
 
 if __name__ == '__main__':
     sum_fitness = 0
