@@ -235,6 +235,14 @@ class VW():
         move_count2 = 0
         move_count3 = 0
         move_count4 = 0
+        need_move1 = 0
+        need_move2 = 0
+        need_move3 = 0
+        need_move4 = 0
+        carb_rate1 = 0
+        carb_rate2 = 0
+        carb_rate3 = 0
+        carb_rate4 = 0
         car1_start_position = setting.car1_STARTtoGOAL[0].copy()
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
@@ -246,11 +254,11 @@ class VW():
 
         while(flag1==False and flag2==False and flag3==False and flag4==False):
             #print(car1_position)
-            car1_position, flag1, num1, move_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1)
-            car2_position, flag2, num2, move_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2)
-            car3_position, flag3, num3, move_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3)
+            car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
+            car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
+            car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
             #print("car3posi",car3_position)
-            car4_position, flag4, num4, move_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4)
+            car4_position, flag4, num4, move_count4,need_move4, carb_rate4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4)
             
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -469,6 +477,14 @@ class VW():
         move_count2 = 0
         move_count3 = 0
         move_count4 = 0
+        need_move1 = 0
+        need_move2 = 0
+        need_move3 = 0
+        need_move4 = 0
+        carb_rate1 = 0
+        carb_rate2 = 0
+        carb_rate3 = 0
+        carb_rate4 = 0
         car1_start_position = setting.car1_STARTtoGOAL[0].copy()
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
@@ -481,11 +497,11 @@ class VW():
         while(flag1==False and flag2==False and flag3==False and flag4==False):
             #print(car1_position)
             
-            car1_position, flag1, num1, move_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1)
-            car2_position, flag2, num2, move_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2)
-            car3_position, flag3, num3, move_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3)
+            car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
+            car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
+            car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
             #print("car3posi",car3_position)
-            car4_position, flag4, num4, move_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4)
+            car4_position, flag4, num4, move_count4,need_move4, carb_rate4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4)
             
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -830,7 +846,9 @@ class CarAgent():
         self.goal_flag = False
         self.car_width = setting.car_width #根拠のある数値にする
 
-    def car_move(self, car_vertex_list, car_shortest_path, car_position, num, move_count):
+    def car_move(self, car_vertex_list, car_shortest_path, car_position, num, move_count, need_move, carb_rate):
+
+        next_num = 0
 
         #車両の変化可能角度
         car_angle = setting.car_angle
@@ -841,18 +859,18 @@ class CarAgent():
         
         elif num < len(car_shortest_path):
             node = car_vertex_list[car_shortest_path[num]]
-            
-            if len(car_shortest_path) > num+2:
-                after_node = car_vertex_list[car_shortest_path[num+1]]
-                angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
+            if num == 0:
+                if len(car_shortest_path) > num+2:
+                    after_node = car_vertex_list[car_shortest_path[num+1]]
+                    angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
                 
-                need_move = length/setting.speed
-                #次のノード
-                carb_rate = angle/car_angle
+                    need_move = length/setting.speed
+                    #次のノード
+                    carb_rate = angle/car_angle
             
-            else:
-                need_move = 100
-                carb_rate = 0
+                else:
+                    need_move = 100
+                    carb_rate = 0
 
             if abs(node[0] - car_position[0]) == 0:
                 car_position[0] += setting.speed
@@ -882,7 +900,7 @@ class CarAgent():
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
-                        num+=1
+                        next_num= num + 1
                         # print("node1", node)
                     
                 elif car_position[0] < node[0] and car_position[1] > node[1]:
@@ -897,7 +915,7 @@ class CarAgent():
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
-                        num+=1
+                        next_num= num + 1
                         # print("node2", node)
 
                 elif car_position[0] > node[0] and car_position[1] < node[1]:
@@ -912,7 +930,7 @@ class CarAgent():
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
-                        num+=1
+                        next_num= num + 1
                         # print("node3", node)
 
                 elif car_position[0] < node[0] and car_position[1] < node[1]:
@@ -924,7 +942,7 @@ class CarAgent():
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
-                        num+=1
+                        next_num= num + 1
                         # print("node5", node)
             
 
@@ -936,9 +954,27 @@ class CarAgent():
             
             else:
                 move_count = 0
+            
+            if num >= next_num:
+                next_num = num
+            
+            else:
+                next_num = num + 1
+                if len(car_shortest_path) > next_num+2:
+                    after_node = car_vertex_list[car_shortest_path[next_num+1]]
+                    angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[next_num+2]])
+                
+                    need_move = length/setting.speed
+                    #次のノード
+                    carb_rate = angle/car_angle
+            
+                else:
+                    need_move = 100
+                    carb_rate = 0
+            
 
         # print("caaaaaaaa", car_position)    
-        return car_position ,self.goal_flag, num, move_count
+        return car_position ,self.goal_flag, next_num, move_count, need_move, carb_rate
 
 class Execution():
     def set_obstacle(self):
