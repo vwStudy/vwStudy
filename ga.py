@@ -349,7 +349,10 @@ def ga_solve(populations, gene_size):
     # f.writelines('\n')
     # f.writelines('\n')
     # min(best, key=Individual.get_fitness)
-    return best
+    
+    best_gene = 0
+    
+    return best, best_gene, generation_list
 
 def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list = []):
     best = []
@@ -493,7 +496,6 @@ if __name__ == '__main__':
     #             generation *= 2
     #         populist *= 2
     #         generation = setting.generation_size
-
     populist=setting.population_size #8
     generation = setting.generation_size #8
     genom_size= setting.genom_size

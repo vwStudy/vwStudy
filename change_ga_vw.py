@@ -253,7 +253,7 @@ class VW():
         car4_position = car4_start_position
 
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            #print(car1_position)
+            print(car1_position)
             car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
             car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
             car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
@@ -896,7 +896,7 @@ class CarAgent():
                     # car_position[0] -= 100
                     # car_position[1] -= 100
 
-                    if car_position[0] <= node[0] and car_position[1] <= node[1]:
+                    if car_position[0] <= node[0] or car_position[1] <= node[1]:
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
@@ -911,14 +911,14 @@ class CarAgent():
                     # car_position[0] += 100
                     # car_position[1] -= 100
 
-                    if car_position[0] >= node[0] and car_position[1] <= node[1]:
+                    if car_position[0] >= node[0] or car_position[1] <= node[1]:
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
                         next_num= num + 1
                         # print("node2", node)
 
-                elif car_position[0] > node[0] and car_position[1] < node[1]:
+                elif car_position[0] > node[0] or car_position[1] < node[1]:
                     
                     car_position[0] -= np.cos(rad) * setting.speed
                     car_position[1] += np.sin(rad) * setting.speed
@@ -926,7 +926,7 @@ class CarAgent():
                     # car_position[0] -= 100
                     # car_position[1] += 100
 
-                    if car_position[0] <= node[0] and car_position[1] >= node[1]:
+                    if car_position[0] <= node[0] or car_position[1] >= node[1]:
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
@@ -938,7 +938,7 @@ class CarAgent():
                     car_position[0] += np.cos(rad) * setting.speed
                     car_position[1] += np.sin(rad) * setting.speed
 
-                    if car_position[0] >= node[0] and car_position[1] >= node[1]:
+                    if car_position[0] >= node[0] or car_position[1] >= node[1]:
                         
                         car_position[0] = node[0]
                         car_position[1] = node[1]
