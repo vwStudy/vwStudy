@@ -253,16 +253,15 @@ class VW():
         car4_position = car4_start_position
 
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            #print(car1_position)
             car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
             car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
             car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
-            #print("car3posi",car3_position)
             car4_position, flag4, num4, move_count4,need_move4, carb_rate4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4)
-            
+
+            print(car1_position)    
             #car1_position=position1.copy()
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
-            
+        
 
         cars_path_list = []
         car_path_tmp_list = []
@@ -862,13 +861,14 @@ class CarAgent():
                 if len(car_shortest_path) > num+2:
                     after_node = car_vertex_list[car_shortest_path[num+1]]
                     angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
-                
+                    curve_angle = 180-angle
+
                     need_move = length/setting.speed
                     #次のノード
-                    carb_rate = angle/car_angle
+                    carb_rate = curve_angle/car_angle
             
                 else:
-                    need_move = 100
+                    need_move = -1
                     carb_rate = 0
 
             if abs(node[0] - car_position[0]) == 0:
@@ -1153,47 +1153,48 @@ if __name__ == '__main__':
     time_diff = end - start
     #print("time:" , time_diff)
     sum_time += time_diff
+    print(best_gene)
     
-    ga.create_graph_best_all_path_length(best)
-    # ga.create_graph_best_fitness(best)
+    # ga.create_graph_best_all_path_length(best)
+    # # ga.create_graph_best_fitness(best)
         
-        #結果のファイルへの書き込み処理      
-    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
-    f.writelines('\n')
-    f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size))
-    f.writelines('\n')
-    f.writelines("genom::" + str(best_gene.genom))
-    f.writelines('\n')
-    f.writelines("fitness::"+str(best_gene.get_fitness()))
-    f.writelines('\n')
-    f.writelines("collision::"+str(best_gene.get_collision()))
-    f.writelines('\n')
-    f.writelines("path_length::"+str(best_gene.get_all_path_length()))
-    f.writelines('\n')
-    f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
-    f.writelines('\n')
-    sum_fitness += best_gene.get_fitness()
-    sum_collision += best_gene.get_collision()
-    sum_all_path_length += best_gene.get_all_path_length()
-    sum_total_num_obstacles += best_gene.get_total_num_obstacles()
-    # for i in best:
-    #     print(len(best))
-    #     f.writelines("\n")
-    #     f.writelines(str(i.get_all_path_length()))
+    #     #結果のファイルへの書き込み処理      
+    # f = open('data_test_ga.txt', 'a', encoding='UTF-8')
+    # f.writelines('\n')
+    # f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size))
+    # f.writelines('\n')
+    # f.writelines("genom::" + str(best_gene.genom))
+    # f.writelines('\n')
+    # f.writelines("fitness::"+str(best_gene.get_fitness()))
+    # f.writelines('\n')
+    # f.writelines("collision::"+str(best_gene.get_collision()))
+    # f.writelines('\n')
+    # f.writelines("path_length::"+str(best_gene.get_all_path_length()))
+    # f.writelines('\n')
+    # f.writelines("total_num_obstacles::"+str(int(best_gene.get_total_num_obstacles())))
+    # f.writelines('\n')
+    # sum_fitness += best_gene.get_fitness()
+    # sum_collision += best_gene.get_collision()
+    # sum_all_path_length += best_gene.get_all_path_length()
+    # sum_total_num_obstacles += best_gene.get_total_num_obstacles()
+    # # for i in best:
+    # #     print(len(best))
+    # #     f.writelines("\n")
+    # #     f.writelines(str(i.get_all_path_length()))
     
-    ave_fitness = sum_fitness/100
-    ave_collision = sum_collision/100
-    ave_all_path_length = sum_all_path_length/100
-    ave_total_num_obstacles = sum_total_num_obstacles/100
-    ave_time = sum_time/100
-    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
-    f.writelines('\n')
-    f.writelines("ave_fitness::"+str(ave_fitness))
-    f.writelines('\n')
-    f.writelines("ave_collision::"+str(ave_collision))
-    f.writelines('\n')
-    f.writelines("ave_path_length::"+str(ave_all_path_length))
-    f.writelines('\n')
-    f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    f.writelines('\n')
-    f.writelines("ave_time::" + str(ave_time))
+    # ave_fitness = sum_fitness/100
+    # ave_collision = sum_collision/100
+    # ave_all_path_length = sum_all_path_length/100
+    # ave_total_num_obstacles = sum_total_num_obstacles/100
+    # ave_time = sum_time/100
+    # f = open('data_test_ga.txt', 'a', encoding='UTF-8')
+    # f.writelines('\n')
+    # f.writelines("ave_fitness::"+str(ave_fitness))
+    # f.writelines('\n')
+    # f.writelines("ave_collision::"+str(ave_collision))
+    # f.writelines('\n')
+    # f.writelines("ave_path_length::"+str(ave_all_path_length))
+    # f.writelines('\n')
+    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
+    # f.writelines('\n')
+    # f.writelines("ave_time::" + str(ave_time))
