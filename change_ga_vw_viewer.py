@@ -129,21 +129,23 @@ class VW():
 
         cars_position = [[]] * 4
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            #print(car1_position)
+            print(car1_position)
             car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
             car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
             car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
             car4_position, flag4, num4, move_count4, need_move4, carb_rate4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4)
             
-            # cars_position[0].append(car1_position)
-            cars_position[1].append(car2_position)
+            cars_position[0].append(car1_position.copy())
+            print(cars_position[0])
+            # cars_position[1].append(car2_position)
             # cars_position[2].append(car3_position)
             # cars_position[3].append(car4_position)
 
             #car1_position=position1.copy()
+            # print(car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
 
-        # print(cars_position)
+        print(cars_position)
 
         cars_path_list = []
         car_path_tmp_list = []
