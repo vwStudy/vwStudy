@@ -22,7 +22,7 @@ VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
 VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 5
+VWnum :int = 9
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -30,7 +30,7 @@ VWsize :int = VWfield/VWnum
 ##車のスピード
 speed :float = 8
 
-car_angle :int = 32
+car_angle :int = 40
 
 #car_num :int = 4
 

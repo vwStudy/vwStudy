@@ -1,6 +1,8 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import math
 
 import ga
 import setting
@@ -55,10 +57,11 @@ class VW():
                 l = list(ga_array[i][j])
                 car_ga_array[i][j] = l
 
-        print(car_ga_array)
-
         car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
         combine_vw_start= time.time()
+        print(car_VW_list)
+        plot_VW_list = car_VW_list[0::4]
+        print(plot_VW_list)
         car_VW_list = combining_vw(car_VW_list)
         # car_vw_line_list = combining_vw(car_vw_line_list)
         combine_vw_end = time.time()
@@ -126,26 +129,27 @@ class VW():
         car2_position = car2_start_position
         car3_position = car3_start_position
         car4_position = car4_start_position
+        move_count = 0
+        curve_count1 = 0
+        curve_count2 = 0
+        curve_count3 = 0
+        curve_count4 = 0
 
-        cars_position = [[]] * 4
+        cars_position_list = [[],[],[],[]]
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            print(car1_position)
-            car1_position, flag1, num1, move_count1, need_move1, carb_rate1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1)
-            car2_position, flag2, num2, move_count2, need_move2, carb_rate2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2)
-            car3_position, flag3, num3, move_count3, need_move3, carb_rate3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3)
-            car4_position, flag4, num4, move_count4, need_move4, carb_rate4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4)
-            
-            cars_position[0].append(car1_position.copy())
-            print(cars_position[0])
-            # cars_position[1].append(car2_position)
-            # cars_position[2].append(car3_position)
-            # cars_position[3].append(car4_position)
-
+            car1_position, flag1, num1, move_count1, need_move1, carb_rate1, curve_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1, curve_count1)
+            car2_position, flag2, num2, move_count2, need_move2, carb_rate2, curve_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2, curve_count2)
+            car3_position, flag3, num3, move_count3, need_move3, carb_rate3, curve_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3, curve_count3)
+            car4_position, flag4, num4, move_count4, need_move4, carb_rate4, curve_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4, curve_count4)
+            move_count += 1
+            if move_count >= 5:
+                cars_position_list[0].append(car1_position.copy())
+                cars_position_list[1].append(car2_position.copy())
+                cars_position_list[2].append(car3_position.copy())
+                cars_position_list[3].append(car4_position.copy())
             #car1_position=position1.copy()
             # print(car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
-
-        print(cars_position)
 
         cars_path_list = []
         car_path_tmp_list = []
@@ -177,7 +181,7 @@ class VW():
         #全ての経路長を足す
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
 
-        return cars_position
+        return cars_position_list, plot_VW_list, wall_edge_list
 
 
 class Environment():
@@ -253,12 +257,11 @@ class CarAgent():
         self.goal_flag = False
         self.car_width = setting.car_width #根拠のある数値にする
 
-    def car_move(self, car_vertex_list, car_shortest_path, car_position, num, move_count, need_move, carb_rate):
+    def car_move(self, car_vertex_list, car_shortest_path, car_position, num, move_count, need_move, curve_rate, curve_count):
         next_num = 0
 
         #車両の変化可能角度
         car_angle = setting.car_angle
-        #node = car_vertex_list[car_shortest_path[num]]
         
         if num >= len(car_shortest_path):
             self.goal_flag = True
@@ -268,16 +271,28 @@ class CarAgent():
             if num == 0:
                 if len(car_shortest_path) > num+2:
                     after_node = car_vertex_list[car_shortest_path[num+1]]
-                    angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
-                    curve_angle = 180-angle
+                    curve_angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
+                    # curve_angle = 180-curve_angle
+                    print("curve_angle",curve_angle)
+                    print("curve_rate",curve_rate)
+                    if curve_angle <= car_angle:
+                        car_angle = curve_angle
+                    
+                    else:
+                        car_angle = setting.car_angle
 
-                    need_move = length/setting.speed
-                    #次のノード
-                    carb_rate = curve_angle/car_angle
+                    need_move = math.ceil(length/setting.speed)
+                    print(int(need_move))
+
+                    if curve_rate <= 0:
+                        curve_rate = 0
+                    
+                    else:
+                        curve_rate = math.ceil(curve_angle/car_angle)
             
                 else:
                     need_move = -1
-                    carb_rate = 0
+                    curve_rate = 0
 
             if abs(node[0] - car_position[0]) == 0:
                 car_position[0] += setting.speed
@@ -286,8 +301,9 @@ class CarAgent():
                 car_position[1] += setting.speed
                 
             else:
-                if (need_move - move_count) >= carb_rate:
-                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0])) + car_angle
+                if (need_move - move_count) <= curve_rate and curve_rate - curve_count != 0:
+                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0])) + np.deg2rad(car_angle)
+                    curve_count += 1
 
                 else:
                     rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]))
@@ -300,87 +316,75 @@ class CarAgent():
                     car_position[0] -= np.cos(rad) * setting.speed
                     car_position[1] -= np.sin(rad) * setting.speed
                     
-                    # car_position[0] -= 100
-                    # car_position[1] -= 100
-
-                    if car_position[0] <= node[0] and car_position[1] <= node[1]:
+                    if car_position[0] <= node[0] or car_position[1] <= node[1]:
                         
-                        car_position[0] = node[0]
-                        car_position[1] = node[1]
                         next_num= num + 1
-                        # print("node1", node)
                     
                 elif car_position[0] < node[0] and car_position[1] > node[1]:
                 
                     car_position[0] += np.cos(rad) * setting.speed
                     car_position[1] -= np.sin(rad) * setting.speed
 
-                    # car_position[0] += 100
-                    # car_position[1] -= 100
-
-                    if car_position[0] >= node[0] and car_position[1] <= node[1]:
+                    if car_position[0] >= node[0] or car_position[1] <= node[1]:
                         
-                        car_position[0] = node[0]
-                        car_position[1] = node[1]
                         next_num= num + 1
-                        # print("node2", node)
 
                 elif car_position[0] > node[0] and car_position[1] < node[1]:
                     
                     car_position[0] -= np.cos(rad) * setting.speed
                     car_position[1] += np.sin(rad) * setting.speed
 
-                    # car_position[0] -= 100
-                    # car_position[1] += 100
-
-                    if car_position[0] <= node[0] and car_position[1] >= node[1]:
+                    if car_position[0] <= node[0] or car_position[1] >= node[1]:
                         
-                        car_position[0] = node[0]
-                        car_position[1] = node[1]
                         next_num= num + 1
-                        # print("node3", node)
 
                 elif car_position[0] < node[0] and car_position[1] < node[1]:
                     
                     car_position[0] += np.cos(rad) * setting.speed
                     car_position[1] += np.sin(rad) * setting.speed
 
-                    if car_position[0] >= node[0] and car_position[1] >= node[1]:
+                    if car_position[0] >= node[0] or car_position[1] >= node[1]:
                         
-                        car_position[0] = node[0]
-                        car_position[1] = node[1]
                         next_num= num + 1
-                        # print("node5", node)
-            
 
         # elif car_position[0] == node[0] and car_position[1] == node[1]:
         #     if len(car_shortest_path-1):
         #        self.flag = True
-            if move_count <= need_move:
-                move_count += 1
-            
-            else:
-                move_count = 0
+            move_count += 1
             
             if num >= next_num:
                 next_num = num
             
             else:
                 next_num = num + 1
-                if len(car_shortest_path) > next_num+2:
-                    after_node = car_vertex_list[car_shortest_path[next_num+1]]
-                    angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[next_num+2]])
-                
-                    need_move = length/setting.speed
-                    #次のノード
-                    carb_rate = angle/car_angle
+                curve_count = 0
+                if len(car_shortest_path) > num+2:
+                    after_node = car_vertex_list[car_shortest_path[num+1]]
+                    curve_angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
+                    # curve_angle = 180-curve_angle
+                    print("curve_angle",curve_angle)
+                    print("curve_rate",curve_rate)
+                    if curve_angle <= car_angle:
+                        car_angle = curve_angle
+                    
+                    else:
+                        car_angle = setting.car_angle
+
+                    need_move = math.ceil(length/setting.speed)
+                    print(int(need_move))
+
+                    if curve_rate <= 0:
+                        curve_rate = 0
+                    
+                    else:
+                        curve_rate = math.ceil(curve_angle/car_angle)
             
                 else:
-                    need_move = 100
-                    carb_rate = 0
+                    need_move = -1
+                    curve_rate = 0
 
-        print("caaaaaaaa", car_position)    
-        return car_position ,self.goal_flag, next_num, move_count, need_move, carb_rate
+        # print("caaaaaaaa", car_position)    
+        return car_position ,self.goal_flag, next_num, move_count, need_move, curve_rate, curve_count
 
 class Execution():
     def set_obstacle(self):
@@ -446,23 +450,66 @@ class Execution():
         return shortest_path, shortest_length
 
 def main():
-    solution = np.array([1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1])
-    cars_position_list = VW.vw_result(solution)
-    x = [[]] * 4
-    y = [[]] * 4
-    for car_number in range(4):
-        x[car_number] = [cars_position_list[car_number][i][0] for i in range(len(cars_position_list[car_number]))]
-        y[car_number] = [cars_position_list[car_number][i][1] for i in range(len(cars_position_list[car_number]))]
-    
-    plt.figure()
-    plt.plot(x[0], y[0])
-    # plt.figure()
-    # plt.plot(x[1], y[1])
-    # plt.figure()
-    # plt.plot(x[2], y[2])
-    # plt.figure()
-    # plt.plot(x[3], y[3])
+    solution = np.array([0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0])
+    cars_position_list, plot_vw_list, wall_edge_list = VW.vw_result(solution)
 
+    # plt.figure()
+    # plt.title("car1")
+    x = []
+    y = []
+    print(setting.VWsize)
+    for i in range(len(cars_position_list[0])):
+        x.append(cars_position_list[0][i][0])
+        y.append(cars_position_list[0][i][1])
+    for j in range(len(plot_vw_list)):
+        vw = patches.Rectangle(plot_vw_list[j], setting.VWsize, setting.VWsize)
+
+    # a = plt.plot(x, y)
+
+    # plt.figure()
+    # plt.title("car2")
+    x1 = []
+    y1 = []
+    for i in range(len(cars_position_list[1])):
+        x1.append(cars_position_list[1][i][0])
+        y1.append(cars_position_list[1][i][1])
+    # b = plt.plot(x1, y1)
+
+    # plt.figure()
+    # plt.title("car3")
+    x2 = []
+    y2 = []
+    for i in range(len(cars_position_list[2])):
+        x2.append(cars_position_list[2][i][0])
+        y2.append(cars_position_list[2][i][1])
+    # c = plt.plot(x2, y2)
+
+    # plt.figure()
+    # plt.title("car4")
+    x3 = []
+    y3 = []
+    for i in range(len(cars_position_list[3])):
+        x3.append(cars_position_list[3][i][0])
+        y3.append(cars_position_list[3][i][1])
+    # d = plt.plot(x3, y3)
+
+    fig_all_path = plt.figure()
+    plt.title("all_path")
+    ax = plt.axes()
+    ax.set_aspect('equal', 'datalim')
+    plt.plot(x,y)
+    plt.plot(x1,y1)
+    plt.plot(x2,y2)
+    plt.plot(x3,y3)
+    wall_x = []
+    wall_y = []
+    for i in range(len(wall_edge_list)):
+        wall_x.append(wall_edge_list[i][0])
+        wall_y.append(wall_edge_list[i][1])
+    plt.scatter(wall_x,wall_y)
+    for j in range(len(plot_vw_list)):
+        vw = patches.Rectangle(plot_vw_list[j], setting.VWsize, setting.VWsize)
+        ax.add_patch(vw)
     plt.show()
 
 
