@@ -12,8 +12,8 @@ import random
 ##車線の幅を3.5mだと考え，幅17pxとする
 
 ##VWの設置範囲 n*n
-# VWfield :int = 102
-VWfield :int = 125 + 10
+VWfield :int = 102
+# VWfield :int = 125+10
 
 ##VWの設置範囲の開始位置(左上座標)
 #VWfield_x :int = 399
@@ -30,12 +30,12 @@ VWsize :int = VWfield/VWnum
 ##車のスピード
 speed :float = 8
 
-car_angle :int = 40
+car_angle :int = 8
 
 #car_num :int = 4
 
 ##車の縦幅
-car_length :float = 25
+car_length :float = 8
  
 ##車の横幅
 car_width :float = 20
@@ -131,8 +131,8 @@ change_rate = 0.5 #ユニフォームクロスオーバーの際の確率
 #------- 車  --------
 wall_edge_list = [[399,182], #左上の壁の角1,2
                  [501,182], #右上の壁の角1,2
-                 [399,318], #左下の壁の角1,2
-                 [501,318]] #右下の壁の角1,2
+                 [399,284], #左下の壁の角1,2
+                 [501,284]] #右下の壁の角1,2
 
 wall_line_list = [[[0,182],[399,182]],[[399,0],[399,182]] #左上の壁の辺
                  ,[[501,182],[900,182]],[[501,0],[501,182]] #右上の壁の辺

@@ -1150,6 +1150,7 @@ if __name__ == '__main__':
     #print("time:" , time_diff)
     sum_time += time_diff
     print(best_gene)
+    print(list(best_gene))
     
     # ga.create_graph_best_all_path_length(best)
     # # ga.create_graph_best_fitness(best)
