@@ -141,12 +141,10 @@ class VW():
             car2_position, flag2, num2, move_count2, need_move2, carb_rate2, curve_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2, curve_count2)
             car3_position, flag3, num3, move_count3, need_move3, carb_rate3, curve_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3, curve_count3)
             car4_position, flag4, num4, move_count4, need_move4, carb_rate4, curve_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4, curve_count4)
-            move_count += 1
-            if move_count >= 4:
-                cars_position_list[0].append(car1_position.copy())
-                cars_position_list[1].append(car2_position.copy())
-                cars_position_list[2].append(car3_position.copy())
-                cars_position_list[3].append(car4_position.copy())
+            cars_position_list[0].append(car1_position.copy())
+            cars_position_list[1].append(car2_position.copy())
+            cars_position_list[2].append(car3_position.copy())
+            cars_position_list[3].append(car4_position.copy())
             #car1_position=position1.copy()
             # print(car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
@@ -274,7 +272,6 @@ class CarAgent():
                     curve_angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
                     curve_angle = 180-curve_angle
                     print("curve_angle",curve_angle)
-                    print("curve_rate",curve_rate)
                     if curve_angle <= car_angle:
                         car_angle = curve_angle
                     
@@ -283,29 +280,75 @@ class CarAgent():
 
                     need_move = math.ceil(length/setting.speed)
                     print(int(need_move))
-
-                    if curve_rate <= 0:
-                        curve_rate = 0
                     
-                    else:
-                        curve_rate = math.ceil(curve_angle/car_angle)
-            
-                else:
-                    need_move = 1000000000
-                    curve_rate = 0
+                    curve_rate = math.ceil(curve_angle/car_angle)
+                    print("curve_rate",curve_rate)
 
-            if abs(node[0] - car_position[0]) == 0:
-                car_position[0] += setting.speed
-                
-            elif abs(node[1] - car_position[1]) == 0:
+            if node[0] - car_position[0] == 0 and (node[1] - car_position[1]) >= 0:
                 car_position[1] += setting.speed
+                if car_position[1] >= node[1]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif node[0] - car_position[0] == 0 and (node[1] - car_position[1]) <= 0:
+                car_position[1] -= setting.speed
+                if car_position[1] <= node[1]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif node[1] - car_position[1] == 0 and (node[0] - car_position[0]) >= 0:
+                car_position[0] += setting.speed
+                if car_position[0] <= node[0]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif node[1] - car_position[1] == 0 and (node[0] - car_position[0]) <= 0:
+                car_position[0] -= setting.speed
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                    
+            elif abs(node[0] - car_position[0]) == 0 and (node[1] - car_position[1]) >= 0 and (need_move - move_count) <= curve_rate and (curve_rate - curve_count) != 0:
+                car_position[1] += setting.speed * np.sin(np.arctan(np.deg2rad(car_angle)))
+                curve_count += 1
+                if car_position[1] >= node[1]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif abs(node[0] - car_position[0]) == 0 and (node[1] - car_position[1]) <= 0 and (need_move - move_count) <= curve_rate and (curve_rate - curve_count) != 0:
+                car_position[1] -= setting.speed * np.sin(np.arctan(np.deg2rad(car_angle)))
+                curve_count += 1
+                if car_position[1] <= node[1]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif abs(node[1] - car_position[1]) == 0 and (node[0] - car_position[0]) >= 0 and (need_move - move_count) <= curve_rate and (curve_rate - curve_count) != 0:
+                car_position[0] += setting.speed *  np.cos(np.arctan(np.deg2rad(car_angle)))
+                curve_count += 1
+                if car_position[0] <= node[0]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
+                
+            elif abs(node[1] - car_position[1]) == 0 and (node[0] - car_position[0]) <= 0 and (need_move - move_count) <= curve_rate and (curve_rate - curve_count) != 0:
+                car_position[0] -= setting.speed * np.cos(np.arctan(np.deg2rad(car_angle)))
+                curve_count += 1
+                if car_position[0] >= node[0]:
+                    car_position[0] = node[0]
+                    car_position[1] = node[1]
+                    next_num = num + 1
                 
             else:
-                if (need_move - move_count) <= curve_rate and curve_rate - curve_count != 0:
-                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0])) + np.deg2rad(car_angle)
+                if (need_move - move_count) <= curve_rate and (curve_rate - curve_count) != 0:
+                    rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]) - np.deg2rad(car_angle))
                     curve_count += 1
 
-                else:
                     rad = np.arctan(abs(node[1] - car_position[1])/abs(node[0] - car_position[0]))
                 # print("carposi0",car_position[0])
                 # print("carposi1",car_position[1])
@@ -318,6 +361,9 @@ class CarAgent():
                     
                     if car_position[0] <= node[0] and car_position[1] <= node[1]:
                         
+                        car_position[0] = node[0]
+                        car_position[1] = node[1]
+                        
                         next_num= num + 1
                     
                 elif car_position[0] < node[0] and car_position[1] > node[1]:
@@ -326,6 +372,9 @@ class CarAgent():
                     car_position[1] -= np.sin(rad) * setting.speed
 
                     if car_position[0] >= node[0] and car_position[1] <= node[1]:
+                        
+                        car_position[0] = node[0]
+                        car_position[1] = node[1]
                         
                         next_num= num + 1
 
@@ -336,6 +385,9 @@ class CarAgent():
 
                     if car_position[0] <= node[0] and car_position[1] >= node[1]:
                         
+                        car_position[0] = node[0]
+                        car_position[1] = node[1]
+                        
                         next_num= num + 1
 
                 elif car_position[0] < node[0] and car_position[1] < node[1]:
@@ -344,6 +396,9 @@ class CarAgent():
                     car_position[1] += np.sin(rad) * setting.speed
 
                     if car_position[0] >= node[0] and car_position[1] >= node[1]:
+                        
+                        car_position[0] = node[0]
+                        car_position[1] = node[1]
                         
                         next_num= num + 1
 
@@ -361,27 +416,17 @@ class CarAgent():
                 if len(car_shortest_path) > num+2:
                     after_node = car_vertex_list[car_shortest_path[num+1]]
                     curve_angle, length = calculate_two_vec_angle(node, after_node, car_vertex_list[car_shortest_path[num+2]])
-                    # curve_angle = 180-curve_angle
+                    curve_angle = 180-curve_angle
                     print("curve_angle",curve_angle)
                     print("curve_rate",curve_rate)
+                    
                     if curve_angle <= car_angle:
                         car_angle = curve_angle
-                    
-                    else:
-                        car_angle = setting.car_angle
 
                     need_move = math.ceil(length/setting.speed)
                     print(int(need_move))
-
-                    if curve_rate <= 0:
-                        curve_rate = 0
                     
-                    else:
-                        curve_rate = math.ceil(curve_angle/car_angle)
-            
-                else:
-                    need_move = 100000000
-                    curve_rate = 0
+                    curve_rate = math.ceil(curve_angle/car_angle)
 
         # print("caaaaaaaa", car_position)    
         return car_position ,self.goal_flag, next_num, move_count, need_move, curve_rate, curve_count
@@ -450,7 +495,7 @@ class Execution():
         return shortest_path, shortest_length
 
 def main():
-    solution = np.array([1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0])
+    solution = np.array([0,0,1,0,0, 0,0,1,0,0, 1,1,1,1,1, 0,0,1,0,0, 0,0,1,0,0])
     cars_position_list, plot_vw_list, wall_edge_list = VW.vw_result(solution)
 
     # plt.figure()
@@ -496,7 +541,7 @@ def main():
     fig_all_path = plt.figure()
     plt.title("all_path")
     ax = plt.axes()
-    ax.set_aspect('equal')
+    ax.set_aspect('equal', "datalim")
     plt.plot(x,y)
     plt.plot(x1,y1)
     plt.plot(x2,y2)
