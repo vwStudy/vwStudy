@@ -2,7 +2,7 @@ import numpy as np
 import networkx as nx
 import itertools
 
-import ga_tester
+import ga
 import setting
 
 import time
