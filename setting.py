@@ -160,9 +160,9 @@ wall = [[0,0],[0,0], #左上の壁
 
 ##車両のスタート位置
 car1_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
-car2_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
-car3_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
-car4_STARTtoGOAL : float = [[469,376],[469,124]] #下から上へ
+car2_STARTtoGOAL : float = [[450,124],[450,376]] 
+car3_STARTtoGOAL : float = [[576,269],[324,269]] #右から左へ
+car4_STARTtoGOAL : float = [[469,376],[469,124]]
 
 
 
