@@ -43,6 +43,7 @@ class VW():
                     
                     obstacles_vertex_list.extend([VW_LeftUp, VW_LeftDown, VW_RightUp, VW_RightDown])
                     obstacles_line_list.extend([[VW_LeftUp, VW_LeftDown], [VW_LeftUp, VW_RightUp], [VW_RightUp, VW_RightDown], [VW_RightDown, VW_LeftDown]])
+
         return obstacles_vertex_list, obstacles_line_list
 
     def single_GA_function(genom):
@@ -60,7 +61,6 @@ class VW():
         car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0])
         combine_vw_start= time.time()
         # print(car_VW_list)
-        plot_VW_list = car_VW_list[0::4]
         # print(plot_VW_list)
         car_VW_list = combining_vw(car_VW_list)
         # car_vw_line_list = combining_vw(car_vw_line_list)
@@ -70,6 +70,10 @@ class VW():
         cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
 
         wall_edge_list, wall_line_list = Environment.set_wall()
+
+        print(car_vw_line_list)
+        car_vw_line_list.extend(wall_line_list)
+        print(car_vw_line_list)
 
         create_vertex_start = time.time()
         #頂点のlistを作成
@@ -109,21 +113,30 @@ class VW():
         #経路追従処理
         bezier_time_start = time.time()
         car1_point = []
+
         for i in range(len(car1_shortest_path)):
             car1_point.append(car1_vertex_list[car1_shortest_path[i]])
             
+            if i+3 <= len(car1_shortest_path)-1:
+                cross_point = line_cross_point(car1_vertex_list[car1_shortest_path[i]],car1_vertex_list[car1_shortest_path[i+1]],car1_vertex_list[car1_shortest_path[i+2]],car1_vertex_list[car1_shortest_path[i+3]])
+                car1_point.append(list(cross_point))
+
         px1, py1 = bezie_curve(car1_point)
         car1_path = []
-        for i in range(0,len(px1)):
+        for i in range(len(px1)):
             # if i == 0 or i//setting.speed == 0 or i == len(px1)-1:
             car1_path.append([px1[i],py1[i]])
             car1_length += np.linalg.norm(np.array(car1_path[i]) - np.array(car1_path[i-1]))
 
-        print("car1_path",car1_path,"car1_path_len",len(car1_path), "car1_length",car1_length)
+        # print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
 
         car2_point = []
         for i in range(len(car2_shortest_path)):
             car2_point.append(car2_vertex_list[car2_shortest_path[i]])
+        
+            if i+3 <= len(car2_shortest_path)-1:
+                cross_point = line_cross_point(car2_vertex_list[car2_shortest_path[i]],car2_vertex_list[car2_shortest_path[i+1]],car2_vertex_list[car2_shortest_path[i+2]],car2_vertex_list[car2_shortest_path[i+3]])
+                car2_point.append(list(cross_point))
 
         px2, py2 = bezie_curve(car2_point)
         car2_path = []
@@ -135,6 +148,9 @@ class VW():
         car3_point = []
         for i in range(len(car3_shortest_path)):
             car3_point.append(car3_vertex_list[car3_shortest_path[i]])
+            if i+3 <= len(car3_shortest_path)-1:
+                cross_point = line_cross_point(car3_vertex_list[car3_shortest_path[i]],car3_vertex_list[car3_shortest_path[i+1]],car3_vertex_list[car3_shortest_path[i+2]],car3_vertex_list[car3_shortest_path[i+3]])
+                car3_point.append(list(cross_point))
 
         px3, py3 = bezie_curve(car3_point)
         car3_path = []
@@ -142,20 +158,23 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px3)-1:
             car3_path.append([px3[i],py3[i]])
             car3_length += np.linalg.norm(np.array(car3_path[i]) - np.array(car3_path[i-1]))
-        
-        print("car3_path",car3_path,"car3_path_len",len(car3_path))
 
         car4_point = []
         for i in range(len(car4_shortest_path)):
             car4_point.append(car4_vertex_list[car4_shortest_path[i]])
+            if i+3 <= len(car4_shortest_path)-1:
+                cross_point = line_cross_point(car4_vertex_list[car4_shortest_path[i]],car4_vertex_list[car4_shortest_path[i+1]],car4_vertex_list[car4_shortest_path[i+2]],car4_vertex_list[car4_shortest_path[i+3]])
+                car4_point.append(list(cross_point))
 
         px4, py4 = bezie_curve(car4_point)
         car4_path = []
         for i in range(0,len(px4)):
             # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
-                car4_path.append([px4[i],py4[i]])
+            car4_path.append([px4[i],py4[i]])
+            car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
         bezier_time_end = time.time()
         bezier_time = bezier_time_end - bezier_time_start
+
 
         flag1 = False 
         flag2 = False
@@ -246,10 +265,10 @@ class VW():
         car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge_list)
 
         #可視グラフ, ダイクストラ法を実行
-        car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list)
-        car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list)
-        car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list)
-        car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list)
+        car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list, wall_line_list)
+        car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list, wall_line_list)
+        car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list, wall_line_list)
+        car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list, wall_line_list)
 
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
@@ -365,7 +384,7 @@ class Environment():
         """
         
         """
-        wall_edge_list = []
+        # wall_edge_list = []
         #設置する壁の考慮すべきエッジをlistにまとめる
         wall_edge_list = setting.wall_edge_list
 
@@ -432,10 +451,10 @@ class CarAgent():
         if num >= (len(car_path)-1):
             self.goal_flag = True
         
-        elif num < (len(car_path)-1):
+        elif num < (len(car_path)):
             node = car_path[num+1]
 
-            if  num+2 < len(car_path):
+            if num+2 < len(car_path):
                 after_angle = calculate_two_vec_angle(car_position, node, car_path[num + 2])
                 if after_angle > setting.car_angle:
                     shurp_curve = True
@@ -528,7 +547,7 @@ class Execution():
         self.Obstacle_3 = Environment()
         self.Obstacle_4 = Environment()
 
-    def visibility_graph(vertex_list, obstacle_line_list):
+    def visibility_graph(vertex_list, obstacle_line_list, wall_line_list):
 
         """
     
@@ -551,12 +570,12 @@ class Execution():
                     #外積による線分交差判定
                     s = (vertex_v[0] - vertex_u[0])*(obstacle_Line[0][1] - vertex_u[1]) - (obstacle_Line[0][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])#外積の計算
                     t = (vertex_v[0] - vertex_u[0])*(obstacle_Line[1][1] - vertex_u[1]) - (obstacle_Line[1][0] - vertex_u[0]) * (vertex_v[1] - vertex_u[1])
-                    
+           
                     if s * t < 0:
                         #障害物との衝突が検出された時点で障害物と衝突判定のfor文を抜ける
                         cross = True
                         continue
-                
+
                 if cross == False:
                     #衝突が発生しなかった場合、経路長を計算し追加
                     Line.append(np.sqrt(((vertex_v[0] - vertex_u[0])**2 + (vertex_v[1] - vertex_u[1])**2)))
@@ -648,6 +667,25 @@ def bezie_curve(Q):
         px += np.dot(B[i], Q[i][0])
         py += np.dot(B[i], Q[i][1])
     return px, py
+
+def line_cross_point(P0, P1, Q0, Q1):
+    x0, y0 = P0
+    x1, y1 = P1
+    x2, y2 = Q0
+    x3, y3 = Q1
+    a0 = x1 - x0; b0 = y1 - y0
+    a2 = x3 - x2; b2 = y3 - y2
+
+    d = a0*b2 - a2*b0
+    if d == 0:
+        # two lines are parallel
+        return None
+
+    # s = sn/d
+    sn = b2 * (x2-x0) - a2 * (y2-y0)
+    # t = tn/d
+    #tn = b0 * (x2-x0) - a0 * (y2-y0)
+    return x0 + a0*sn/d, y0 + b0*sn/d
 
 
 if __name__ == '__main__':
