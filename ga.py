@@ -505,6 +505,7 @@ if __name__ == '__main__':
         for _ in range(4):
             for _ in range(4):
                 for _ in range(5):
+                    writer.writerow([])
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
