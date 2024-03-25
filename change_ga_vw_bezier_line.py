@@ -176,10 +176,10 @@ class VW():
         shurp_curve = False
     
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            car1_position, flag1, num1 = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
-            car2_position, flag2, num2 = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
-            car3_position, flag3, num3 = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
-            car4_position, flag4, num4 = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
+            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
+            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
+            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
+            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
             # print("car1_position", car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
 
@@ -188,7 +188,165 @@ class VW():
         all_path_length = car1_length + car2_length + car3_length + car4_length
         print(all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles)
 
-        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + collision * 1000000, collision, all_path_length, total_num_obstacles  
+        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles
+
+    def two_steps_GA_function(genom,two_steps_list,zeros_list):
+        """
+        2段階目single,GeneticalAlgorism用の関数
+        """
+
+        ga_array = np.array(genom.reshape(1, len(two_steps_list), 9))
+
+        car_ga_array = zeros_list
+        
+        for i in range(len(two_steps_list)):
+            car_ga_array[0][two_steps_list[i]] = list(ga_array[0][i])
+        # print("vw"+str(car_ga_array))
+
+        VWsize = (setting.VWfield / (setting.two_VWnum **2)) 
+        #print("VWsize:", VWsize)
+
+        #遺伝的アルゴリズムの結果に対しVWを設置
+        car_VW_list, car_vw_line_list = VW.set_virtual_wall(car_ga_array[0], VWsize)
+
+        #print("VW_list" , len(car_VW_list))
+        #print("VW_line_list:" , len(car_vw_line_list))
+
+        car_VW_list = combining_vw(car_VW_list)
+        # car_vw_line_list = combining_vw(car_vw_line_list)
+
+        #print("combined" , len(car_VW_list))
+        #print("combined" , len(car_vw_line_list))
+
+        #CarAgentにODを設定
+        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
+        
+        # print(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1])
+        # print(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1])
+
+        wall_edge_list, wall_line_list = Environment.set_wall()
+
+        # car1_vw_line_list.extend(wall_line_list)
+        # car2_vw_line_list.extend(wall_line_list)
+        # car3_vw_line_list.extend(wall_line_list)
+        # car4_vw_line_list.extend(wall_line_list)
+
+
+        # print(car1_VW_list)
+        
+        #頂点のlistを作成
+        car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
+        car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge_list)
+        car3_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[2], wall_edge_list)
+        car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge_list)
+
+        #可視グラフ, ダイクストラ法を実行
+        car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list)
+        car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list)
+        car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list)
+        car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list)
+
+        car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
+        car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
+        car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
+        car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
+
+
+        flag1 = False 
+        flag2 = False
+        flag3 = False
+        flag4 = False
+        collision = 0
+        num1 = 0
+        num2 = 0
+        num3 = 0
+        num4 = 0 
+        move_count1 = 0
+        move_count2 = 0
+        move_count3 = 0
+        move_count4 = 0
+        need_move1 = 0
+        need_move2 = 0
+        need_move3 = 0
+        need_move4 = 0
+        carb_rate1 = 0
+        carb_rate2 = 0
+        carb_rate3 = 0
+        carb_rate4 = 0
+        car1_start_position = setting.car1_STARTtoGOAL[0].copy()
+        car2_start_position = setting.car2_STARTtoGOAL[0].copy()
+        car3_start_position = setting.car3_STARTtoGOAL[0].copy()
+        car4_start_position = setting.car4_STARTtoGOAL[0].copy()
+        car1_position = car1_start_position
+        car2_position = car2_start_position
+        car3_position = car3_start_position
+        car4_position = car4_start_position
+        curve_count1 = 0
+        curve_count2 = 0
+        curve_count3 = 0
+        curve_count4 = 0
+
+        while(flag1==False and flag2==False and flag3==False and flag4==False):
+            car1_position, flag1, num1, move_count1, need_move1, carb_rate1, curve_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1, curve_count1)
+            car2_position, flag2, num2, move_count2, need_move2, carb_rate2, curve_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2, curve_count2)
+            car3_position, flag3, num3, move_count3, need_move3, carb_rate3, curve_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3, curve_count3)
+            car4_position, flag4, num4, move_count4, need_move4, carb_rate4, curve_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4, curve_count4)
+            #car1_position=position1.copy()
+            collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
+
+        cars_path_list = []
+        car_path_tmp_list = []
+        for path in car1_shortest_path:
+            #print("car1 :",car1_vertex_list[path])
+            car_path_tmp_list.append(car1_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        car_path_tmp_list = []
+        for path in car2_shortest_path:
+            #print("car2 :",car2_vertex_list[path])
+            car_path_tmp_list.append(car2_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        car_path_tmp_list = []
+        for path in car3_shortest_path:
+            #print("car3 :",car3_vertex_list[path])
+            car_path_tmp_list.append(car3_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+        car_path_tmp_list = []
+        for path in car4_shortest_path:
+            #print("car4 :",car4_vertex_list[path])
+            car_path_tmp_list.append(car4_vertex_list[path])
+        cars_path_list.append(car_path_tmp_list)
+
+        #print("collision::"+str(collision))
+
+        total_num_obstacles = len(car_VW_list)/4
+        #print(total_num_obstacles)
+        
+        #print("collision::"+str(collision))
+        #全ての経路長を足す
+        all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
+        # print("all_len::"+str(all_path_length))
+
+        return all_path_length * (total_num_obstacles / (setting.car_num * ((len(two_steps_list)*((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
+
+    def two_steps_ga_setting(best):
+        """
+        GeneticalAlgorism用の関数
+        """
+
+        two_steps_list = []
+
+        for index, cell in enumerate(best):
+            if cell == 1:
+                two_steps_list.append(index)
+        
+        # print(two_steps_list)
+        
+        two_VWnum = 3
+        gene_size = len(two_steps_list) * setting.VWnum
+        VWsize = setting.VWsize/two_VWnum
+        zeros_list = [[[0] * (two_VWnum)**2] * 9]
+
+        return two_steps_list, zeros_list
 
 
 class Environment():
@@ -272,7 +430,7 @@ class CarAgent():
         elif num < (len(car_path)-1):
             node = car_path[num+1]
 
-            if car_path[num+2]:
+            if  num+2 < len(car_path):
                 after_angle = calculate_two_vec_angle(car_position, node, car_path[num + 2])
                 if after_angle > setting.car_angle:
                     shurp_curve = True
@@ -457,10 +615,9 @@ def calculate_two_vec_angle(pre_position, position, move_position):
     theta = inner/(vec_a_norm*vec_b_norm)
 
     after_angle = np.rad2deg(np.arccos(np.clip(theta, -1.0, 1.0)))
-    print("after_angle",after_angle)
+    # print("after_angle",after_angle)
 
-    return after_angle, vec_a_norm
-
+    return after_angle
 ###
 #ベジェ曲線を描く関数
 ###

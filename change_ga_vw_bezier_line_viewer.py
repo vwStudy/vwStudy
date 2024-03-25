@@ -71,6 +71,8 @@ class VW():
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
+        # car_vw_line_list.extend(wall_line_list)
+
         create_vertex_start = time.time()
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
@@ -89,7 +91,7 @@ class VW():
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list)
         visibility_end = time.time()
         visibility_time_diff = visibility_end - visibility_start
-        #print("visibility::",visibility_time_diff)
+        print("visibility::",visibility_time_diff)
         
         dijkstra_start = time.time()
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
@@ -98,7 +100,7 @@ class VW():
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
         dijkstra_end = time.time()
         dijkstra_time_diff = dijkstra_end - dijkstra_start
-        #print("dijkstra::",dijkstra_time_diff)  
+        print("dijkstra::",dijkstra_time_diff)  
 
         #ベジェ曲線の長さを格納
         car1_length = 0
@@ -107,6 +109,7 @@ class VW():
         car4_length = 0
 
         #経路追従処理
+        bezier_time_start = time.time()
         car1_point = []
         for i in range(len(car1_shortest_path)):
             car1_point.append(car1_vertex_list[car1_shortest_path[i]])
@@ -118,7 +121,7 @@ class VW():
             car1_path.append([px1[i],py1[i]])
             car1_length += np.linalg.norm(np.array(car1_path[i]) - np.array(car1_path[i-1]))
 
-        print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
+        # print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
 
         car2_point = []
         for i in range(len(car2_shortest_path)):
@@ -130,8 +133,6 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px2)-1:
             car2_path.append([px2[i],py2[i]])
             car2_length += np.linalg.norm(np.array(car2_path[i]) - np.array(car2_path[i-1]))
-
-        print("car2_path",car2_path,"car2_path_len",len(car2_path),"car2_length",car2_length)
 
         car3_point = []
         for i in range(len(car3_shortest_path)):
@@ -154,6 +155,9 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
             car4_path.append([px4[i],py4[i]])
             car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
+        bezier_time_end = time.time()
+        bezier_time = bezier_time_end - bezier_time_start
+        print(bezier_time)
 
         flag1 = False 
         flag2 = False
@@ -425,7 +429,7 @@ class Execution():
         return shortest_path, shortest_length
 
 def main():
-    solution = np.array([0, 1, 0, 1, 0, 0, 0, 0, 0])
+    solution = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0])
     cars_position_list, plot_vw_list, wall_edge_list, car1_vertex_list, car1_shortest_path, car1_path, px1, py1, car2_path, px2, py2, car3_path, px3, py3, car4_path, px4, py4 = VW.vw_result(solution)
     # plt.figure()
     # plt.title("car1")

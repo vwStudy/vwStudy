@@ -1,7 +1,7 @@
 import numpy as np
 import setting
 import random
-import change_ga_vw
+import change_ga_vw_bezier_line
 import matplotlib.pyplot as plt
 import csv
 import time
@@ -15,7 +15,7 @@ class Individual:
         self.set_fitness(self.fitness)
     
     def set_fitness(self, fitness):
-        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles, self.cars_path = fitness
+        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles = fitness
 
     def get_fitness(self):
         return self.fitness
@@ -100,8 +100,8 @@ def cross_uniform(parent1_genom, parent2_genom):
 
     new_child1 = np.array(new_child1)
     new_child2 = np.array(new_child2)
-    children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array(new_child1)))
-    children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array(new_child2)))
+    children1 = Individual(new_child1, change_ga_vw_bezier_line.VW.single_GA_function(np.array(new_child1)))
+    children2 = Individual(new_child2, change_ga_vw_bezier_line.VW.single_GA_function(np.array(new_child2)))
     return children1, children2
 
 def cross_uniform_two_steps(parent1_genom, parent2_genom):
@@ -119,8 +119,8 @@ def cross_uniform_two_steps(parent1_genom, parent2_genom):
 
     new_child1 = np.array(new_child1)
     new_child2 = np.array(new_child2) 
-    children1 = Individual(new_child1, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
-    children2 = Individual(new_child2, change_ga_vw.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
+    children1 = Individual(new_child1, change_ga_vw_bezier_line.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
+    children2 = Individual(new_child2, change_ga_vw_bezier_line.VW.single_GA_function(np.array([0,0,0,0,0,0,0,0,0])))
     return children1, children2
 
 # def crossover(selected1, selected2, popu_size):
@@ -369,7 +369,7 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
         children = mutate(children)
         if two_steps_list and zeros_list:
             for i in range(len(children)):
-                children[i].set_fitness(change_ga_vw.VW.two_steps_ga_function(children[i].genom, two_steps_list, zeros_list))
+                children[i].set_fitness(change_ga_vw_bezier_line.VW.two_steps_ga_function(children[i].genom, two_steps_list, zeros_list))
         populations = children
         # print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
@@ -395,14 +395,14 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
     return best
 
 def main(popu_size, gene_size, genom_size):
-    fitness = change_ga_vw.VW.single_GA_function
+    fitness = change_ga_vw_bezier_line.VW.single_GA_function
     
     populations = create_generation(popu_size, genom_size, fitness)
     # print("populations", populations)インスタンスが入ってる1次元リスト
     return ga_solve(populations, gene_size)
 
 def main_two_steps(popu_size, gene_size, genom_size):
-    fitness = change_ga_vw.VW.single_GA_function
+    fitness = change_ga_vw_bezier_line.VW.single_GA_function
     
     populations = create_generation(popu_size, genom_size, fitness)
     # print("populations", populations)インスタンスが入ってる1次元リスト
@@ -418,7 +418,7 @@ def main_two_steps(popu_size, gene_size, genom_size):
 
     genom_size = len(two_steps_list) * ((setting.two_VWnum) ** 2)
         
-    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw.VW.two_steps_ga_function)
+    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw_bezier_line.VW.two_steps_ga_function)
     
     return ga_solve_two_steps(populations, gene_size//2, two_steps_list, zeros_list)
     
