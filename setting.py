@@ -22,7 +22,7 @@ VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
 VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 3
+VWnum :int = 9
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -171,11 +171,13 @@ wall_line_list = [[[0,0],[0,182]],[[0,0],[399,0]],[[399,0],[399,182]],[[399,182]
 # car3_STARTtoGOAL : float = [[900,250],[450,500]] #右から下へ
 # car4_STARTtoGOAL : float = [[424.5,500],[900,224.5]] #下から右へ
 
-##車両のスタート位置
 car1_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
 car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
-car3_STARTtoGOAL : float = [[576,269],[324,269]] #右から左へ
-car4_STARTtoGOAL : float = [[469,376],[469,124]] #下から上へ
+# car3_STARTtoGOAL : float = [[576,269],[324,269]] #右から左へ
+# car4_STARTtoGOAL : float = [[469,376],[469,124]] #下から上へ
+
+car3_STARTtoGOAL : float = [[576,255],[324,255]] #右から左へ
+car4_STARTtoGOAL : float = [[455,376],[455,124]] #下から上へ
 
 # #右左折を含む実験
 # 右折

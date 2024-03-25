@@ -71,10 +71,6 @@ class VW():
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
-        print(car_vw_line_list)
-        car_vw_line_list.extend(wall_line_list)
-        print(car_vw_line_list)
-
         create_vertex_start = time.time()
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
@@ -87,10 +83,10 @@ class VW():
 
         visibility_start = time.time()
         #可視グラフ, ダイクストラ法を実行
-        car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list)
-        car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list)
-        car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list)
-        car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list)
+        car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list, wall_line_list)
+        car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list, wall_line_list)
+        car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list, wall_line_list)
+        car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list, wall_line_list)
         visibility_end = time.time()
         visibility_time_diff = visibility_end - visibility_start
         #print("visibility::",visibility_time_diff)
@@ -402,7 +398,7 @@ class Environment():
         collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         collision_checker3to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         
-        # print("hannkkei",r)
+        print("hannkkei",r)
         if collision_checker1to2 <= r:
             collision += 1
         elif collision_checker1to3 <= r:
