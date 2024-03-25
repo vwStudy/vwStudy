@@ -15,7 +15,7 @@ class Individual:
         self.set_fitness(self.fitness)
     
     def set_fitness(self, fitness):
-        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles = fitness
+        self.fitness, self.collision, self.all_path_length, self.total_num_obstacles, self.create_path_time_dic= fitness
 
     def get_fitness(self):
         return self.fitness
@@ -31,6 +31,9 @@ class Individual:
 
     def get_cars_path(self):
         return self.cars_path
+    
+    def get_create_path_time_dic(self):
+        return self.create_path_time_dic
 
 def create_generation(popu_size, genoms, fitness):
     #popu_size:1世代の個体数
@@ -350,7 +353,7 @@ def ga_solve(populations, gene_size):
     # f.writelines('\n')
     # min(best, key=Individual.get_fitness)
     
-    return best, best_popu.genom, generation_list
+    return best, best_popu, generation_list
 
 def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list = []):
     best = []

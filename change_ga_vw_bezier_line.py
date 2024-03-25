@@ -107,6 +107,7 @@ class VW():
         car4_length = 0
 
         #経路追従処理
+        bezier_time_start = time.time()
         car1_point = []
         for i in range(len(car1_shortest_path)):
             car1_point.append(car1_vertex_list[car1_shortest_path[i]])
@@ -153,6 +154,8 @@ class VW():
         for i in range(0,len(px4)):
             # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
                 car4_path.append([px4[i],py4[i]])
+        bezier_time_end = time.time()
+        bezier_time = bezier_time_end - bezier_time_start
 
         flag1 = False 
         flag2 = False
@@ -185,10 +188,12 @@ class VW():
 
         total_num_obstacles = len(car_VW_list)/4
 
+        create_path_time_dic = {"vis_graph_time": visibility_time_diff, "dijkstra_time": dijkstra_time_diff, "bezier_time": bezier_time, "create_path_time": visibility_time_diff + dijkstra_time_diff + bezier_time}
+
         all_path_length = car1_length + car2_length + car3_length + car4_length
         print(all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles)
 
-        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles
+        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles, create_path_time_dic
 
     def two_steps_GA_function(genom,two_steps_list,zeros_list):
         """
@@ -326,7 +331,7 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * ((len(two_steps_list)*((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
+        return all_path_length * (total_num_obstacles / (setting.car_num * ((len(two_steps_list)*((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list, 
 
     def two_steps_ga_setting(best):
         """
@@ -651,16 +656,65 @@ if __name__ == '__main__':
     sum_all_path_length = 0
     sum_total_num_obstacles = 0
     sum_time = 0
-    # for i in range(100):
-    start = time.time()
-    best, best_gene, genelation_list = main()
-    end = time.time()
+    sum_create_path_time = 0
+    for i in range(5):
+        start = time.time()
+        best, best_popu, genelation_list = main()
+        end = time.time()
 
-    time_diff = end - start
-    #print("time:" , time_diff)
-    sum_time += time_diff
-    for i in best:
-        print(i.get_fitness())
-    print(best_gene)
-    print(list(best_gene))
-    
+        time_diff = end - start
+        #print("time:" , time_diff)
+        sum_time += time_diff
+        for i in best:
+            print(i.get_fitness())
+        print(best)
+        print(best_popu)
+        print(best_popu.get_create_path_time_dic()["create_path_time"])
+            
+        #結果のファイルへの書き込み処理      
+        f = open('data_test_ga.txt', 'a', encoding='UTF-8')
+        f.writelines('\n')
+        f.writelines("population_size::" + str(setting.population_size) + "," + "generation_size::" + str(setting.generation_size))
+        f.writelines('\n')
+        f.writelines("genom::" + str(best_popu.genom))
+        f.writelines('\n')
+        f.writelines("fitness::"+str(best_popu.get_fitness()))
+        f.writelines('\n')
+        f.writelines("collision::"+str(best_popu.get_collision()))
+        f.writelines('\n')
+        f.writelines("path_length::"+str(best_popu.get_all_path_length()))
+        f.writelines('\n')
+        f.writelines("total_num_obstacles::"+str(int(best_popu.get_total_num_obstacles())))
+        f.writelines('\n')
+        f.writelines("create_path_time::"+str((best_popu.get_create_path_time_dic()["create_path_time"])))
+        f.writelines('\n')
+        
+        sum_fitness += best_popu.get_fitness()
+        sum_collision += best_popu.get_collision()
+        sum_all_path_length += best_popu.get_all_path_length()
+        sum_total_num_obstacles += best_popu.get_total_num_obstacles()
+        sum_create_path_time += best_popu.get_create_path_time_dic()["create_path_time"]
+        # for i in best:
+        #     print(len(best))
+        #     f.writelines("\n")
+        #     f.writelines(str(i.get_all_path_length()))
+        
+    ave_fitness = sum_fitness/5
+    ave_collision = sum_collision/5
+    ave_all_path_length = sum_all_path_length/5
+    ave_total_num_obstacles = sum_total_num_obstacles/5
+    ave_time = sum_time/5
+    avg_create_path_time = sum_create_path_time/5
+    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
+    f.writelines('\n')
+    f.writelines("ave_fitness::"+str(ave_fitness))
+    f.writelines('\n')
+    f.writelines("ave_collision::"+str(ave_collision))
+    f.writelines('\n')
+    f.writelines("ave_path_length::"+str(ave_all_path_length))
+    f.writelines('\n')
+    f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
+    f.writelines('\n')
+    f.writelines("ave_time::" + str(ave_time))
+    f.writelines('\n')
+    f.writelines("ave_create_path_time::" + str(avg_create_path_time))
