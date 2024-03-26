@@ -115,7 +115,8 @@ class VW():
             
             if i+3 <= len(car1_shortest_path)-1:
                 cross_point = line_cross_point(car1_vertex_list[car1_shortest_path[i]],car1_vertex_list[car1_shortest_path[i+1]],car1_vertex_list[car1_shortest_path[i+2]],car1_vertex_list[car1_shortest_path[i+3]])
-                car1_point.append(list(cross_point))
+                if cross_point != None:
+                    car1_point.append(list(cross_point))
 
         px1, py1 = bezie_curve(car1_point)
         car1_path = []
@@ -132,7 +133,8 @@ class VW():
         
             if i+3 <= len(car2_shortest_path)-1:
                 cross_point = line_cross_point(car2_vertex_list[car2_shortest_path[i]],car2_vertex_list[car2_shortest_path[i+1]],car2_vertex_list[car2_shortest_path[i+2]],car2_vertex_list[car2_shortest_path[i+3]])
-                car2_point.append(list(cross_point))
+                if cross_point != None:
+                    car2_point.append(list(cross_point))
 
         px2, py2 = bezie_curve(car2_point)
         car2_path = []
@@ -146,7 +148,8 @@ class VW():
             car3_point.append(car3_vertex_list[car3_shortest_path[i]])
             if i+3 <= len(car3_shortest_path)-1:
                 cross_point = line_cross_point(car3_vertex_list[car3_shortest_path[i]],car3_vertex_list[car3_shortest_path[i+1]],car3_vertex_list[car3_shortest_path[i+2]],car3_vertex_list[car3_shortest_path[i+3]])
-                car3_point.append(list(cross_point))
+                if cross_point != None:
+                    car3_point.append(list(cross_point))
 
         px3, py3 = bezie_curve(car3_point)
         car3_path = []
@@ -160,7 +163,8 @@ class VW():
             car4_point.append(car4_vertex_list[car4_shortest_path[i]])
             if i+3 <= len(car4_shortest_path)-1:
                 cross_point = line_cross_point(car4_vertex_list[car4_shortest_path[i]],car4_vertex_list[car4_shortest_path[i+1]],car4_vertex_list[car4_shortest_path[i+2]],car4_vertex_list[car4_shortest_path[i+3]])
-                car4_point.append(list(cross_point))
+                if cross_point != None:
+                    car4_point.append(list(cross_point))
 
         px4, py4 = bezie_curve(car4_point)
         car4_path = []
