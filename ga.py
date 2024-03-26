@@ -509,8 +509,8 @@ if __name__ == '__main__':
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
-                    best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
-                    # best, best_popu, generation_list =main(populist, generation , genom_size)
+                    #best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
+                    best, best_popu, generation_list =main(populist, generation , genom_size)
                     end = time.time()
                     diff = end - start
                     writer.writerow(["time:", diff])

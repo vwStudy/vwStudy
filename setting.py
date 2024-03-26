@@ -176,8 +176,8 @@ car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
 # car3_STARTtoGOAL : float = [[576,269],[324,269]] #右から左へ
 # car4_STARTtoGOAL : float = [[469,376],[469,124]] #下から上へ
 
-car3_STARTtoGOAL : float = [[576,255],[324,255]] #右から左へ
-car4_STARTtoGOAL : float = [[455,376],[455,124]] #下から上へ
+car3_STARTtoGOAL : float = [[576,260],[324,260]] #右から左へ
+car4_STARTtoGOAL : float = [[460,376],[460,124]] #下から上へ
 
 # #右左折を含む実験
 # 右折
