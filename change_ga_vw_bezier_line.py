@@ -254,24 +254,112 @@ class VW():
 
         # print(car1_VW_list)
         
+        create_vertex_start = time.time()
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
         car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge_list)
         car3_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[2], wall_edge_list)
         car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge_list)
+        create_vertex_end = time.time()
+        vertex_time_diff = create_vertex_end - create_vertex_start
+        #print("vertex::",vertex_time_diff)
 
+        visibility_start = time.time()
         #可視グラフ, ダイクストラ法を実行
         car1_vis_graph = Execution.visibility_graph(car1_vertex_list, car_vw_line_list, wall_line_list)
         car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list, wall_line_list)
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list, wall_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list, wall_line_list)
-
+        visibility_end = time.time()
+        visibility_time_diff = visibility_end - visibility_start
+        #print("visibility::",visibility_time_diff)
+        
+        dijkstra_start = time.time()
         car1_shortest_path, car1_shortest_length = Execution.dijkstra(car1_vis_graph)
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
+        dijkstra_end = time.time()
+        dijkstra_time_diff = dijkstra_end - dijkstra_start
+        #print("dijkstra::",dijkstra_time_diff)  
 
+        
+        #ベジェ曲線の長さを格納
+        car1_length = 0
+        car2_length = 0
+        car3_length = 0
+        car4_length = 0
 
+        #経路追従処理
+        bezier_time_start = time.time()
+        car1_point = []
+
+        for i in range(len(car1_shortest_path)):
+            car1_point.append(car1_vertex_list[car1_shortest_path[i]])
+            
+            if i+3 <= len(car1_shortest_path)-1:
+                cross_point = line_cross_point(car1_vertex_list[car1_shortest_path[i]],car1_vertex_list[car1_shortest_path[i+1]],car1_vertex_list[car1_shortest_path[i+2]],car1_vertex_list[car1_shortest_path[i+3]])
+                if cross_point != None:
+                    car1_point.append(list(cross_point))
+
+        px1, py1 = bezie_curve(car1_point)
+        car1_path = []
+        for i in range(len(px1)):
+            # if i == 0 or i//setting.speed == 0 or i == len(px1)-1:
+            car1_path.append([px1[i],py1[i]])
+            car1_length += np.linalg.norm(np.array(car1_path[i]) - np.array(car1_path[i-1]))
+
+        # print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
+
+        car2_point = []
+        for i in range(len(car2_shortest_path)):
+            car2_point.append(car2_vertex_list[car2_shortest_path[i]])
+        
+            if i+3 <= len(car2_shortest_path)-1:
+                cross_point = line_cross_point(car2_vertex_list[car2_shortest_path[i]],car2_vertex_list[car2_shortest_path[i+1]],car2_vertex_list[car2_shortest_path[i+2]],car2_vertex_list[car2_shortest_path[i+3]])
+                if cross_point != None:
+                    car2_point.append(list(cross_point))
+
+        px2, py2 = bezie_curve(car2_point)
+        car2_path = []
+        for i in range(0,len(px2)):
+            # if i == 0 or i//setting.speed == 0 or i == len(px2)-1:
+            car2_path.append([px2[i],py2[i]])
+            car2_length += np.linalg.norm(np.array(car2_path[i]) - np.array(car2_path[i-1]))
+
+        car3_point = []
+        for i in range(len(car3_shortest_path)):
+            car3_point.append(car3_vertex_list[car3_shortest_path[i]])
+            if i+3 <= len(car3_shortest_path)-1:
+                cross_point = line_cross_point(car3_vertex_list[car3_shortest_path[i]],car3_vertex_list[car3_shortest_path[i+1]],car3_vertex_list[car3_shortest_path[i+2]],car3_vertex_list[car3_shortest_path[i+3]])
+                if cross_point != None:
+                    car3_point.append(list(cross_point))
+
+        px3, py3 = bezie_curve(car3_point)
+        car3_path = []
+        for i in range(0,len(px3)):
+            # if i == 0 or i//setting.speed == 0 or i == len(px3)-1:
+            car3_path.append([px3[i],py3[i]])
+            car3_length += np.linalg.norm(np.array(car3_path[i]) - np.array(car3_path[i-1]))
+
+        car4_point = []
+        for i in range(len(car4_shortest_path)):
+            car4_point.append(car4_vertex_list[car4_shortest_path[i]])
+            if i+3 <= len(car4_shortest_path)-1:
+                cross_point = line_cross_point(car4_vertex_list[car4_shortest_path[i]],car4_vertex_list[car4_shortest_path[i+1]],car4_vertex_list[car4_shortest_path[i+2]],car4_vertex_list[car4_shortest_path[i+3]])
+                if cross_point != None:
+                    car4_point.append(list(cross_point))
+
+        px4, py4 = bezie_curve(car4_point)
+        car4_path = []
+        for i in range(0,len(px4)):
+            # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
+            car4_path.append([px4[i],py4[i]])
+            car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
+        bezier_time_end = time.time()
+        bezier_time = bezier_time_end - bezier_time_start
+
+        
         flag1 = False 
         flag2 = False
         flag3 = False
@@ -281,18 +369,6 @@ class VW():
         num2 = 0
         num3 = 0
         num4 = 0 
-        move_count1 = 0
-        move_count2 = 0
-        move_count3 = 0
-        move_count4 = 0
-        need_move1 = 0
-        need_move2 = 0
-        need_move3 = 0
-        need_move4 = 0
-        carb_rate1 = 0
-        carb_rate2 = 0
-        carb_rate3 = 0
-        carb_rate4 = 0
         car1_start_position = setting.car1_STARTtoGOAL[0].copy()
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
@@ -301,52 +377,26 @@ class VW():
         car2_position = car2_start_position
         car3_position = car3_start_position
         car4_position = car4_start_position
-        curve_count1 = 0
-        curve_count2 = 0
-        curve_count3 = 0
-        curve_count4 = 0
-
+        
+        #急カーブかを判定
+        shurp_curve = False
+    
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            car1_position, flag1, num1, move_count1, need_move1, carb_rate1, curve_count1 = cars_tuple[0].car_move(car1_vertex_list, car1_shortest_path, car1_position, num1, move_count1, need_move1, carb_rate1, curve_count1)
-            car2_position, flag2, num2, move_count2, need_move2, carb_rate2, curve_count2 = cars_tuple[1].car_move(car2_vertex_list, car2_shortest_path, car2_position, num2, move_count2, need_move2, carb_rate2, curve_count2)
-            car3_position, flag3, num3, move_count3, need_move3, carb_rate3, curve_count3 = cars_tuple[2].car_move(car3_vertex_list, car3_shortest_path, car3_position, num3, move_count3, need_move3, carb_rate3, curve_count3)
-            car4_position, flag4, num4, move_count4, need_move4, carb_rate4, curve_count4 = cars_tuple[3].car_move(car4_vertex_list, car4_shortest_path, car4_position, num4, move_count4, need_move4, carb_rate4, curve_count4)
-            #car1_position=position1.copy()
+            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
+            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
+            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
+            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
+            # print("car1_position", car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
 
-        cars_path_list = []
-        car_path_tmp_list = []
-        for path in car1_shortest_path:
-            #print("car1 :",car1_vertex_list[path])
-            car_path_tmp_list.append(car1_vertex_list[path])
-        cars_path_list.append(car_path_tmp_list)
-        car_path_tmp_list = []
-        for path in car2_shortest_path:
-            #print("car2 :",car2_vertex_list[path])
-            car_path_tmp_list.append(car2_vertex_list[path])
-        cars_path_list.append(car_path_tmp_list)
-        car_path_tmp_list = []
-        for path in car3_shortest_path:
-            #print("car3 :",car3_vertex_list[path])
-            car_path_tmp_list.append(car3_vertex_list[path])
-        cars_path_list.append(car_path_tmp_list)
-        car_path_tmp_list = []
-        for path in car4_shortest_path:
-            #print("car4 :",car4_vertex_list[path])
-            car_path_tmp_list.append(car4_vertex_list[path])
-        cars_path_list.append(car_path_tmp_list)
-
-        #print("collision::"+str(collision))
-
         total_num_obstacles = len(car_VW_list)/4
-        #print(total_num_obstacles)
-        
-        #print("collision::"+str(collision))
-        #全ての経路長を足す
-        all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
-        # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * ((len(two_steps_list)*((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list, 
+        create_path_time_dic = {"vis_graph_time": visibility_time_diff, "dijkstra_time": dijkstra_time_diff, "bezier_time": bezier_time, "create_path_time": visibility_time_diff + dijkstra_time_diff + bezier_time}
+
+        all_path_length = car1_length + car2_length + car3_length + car4_length
+        print(all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles)
+
+        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles, create_path_time_dic
 
     def two_steps_ga_setting(best):
         """
@@ -388,7 +438,7 @@ class Environment():
         return wall_edge_list, wall_line_list
 
     def collision_CarToCar(car1, car2, car3, car4, collision):
-        r = np.sqrt((setting.car_length/2)**2 + (setting.car_width/2)**2)
+        r = np.sqrt((setting.car_length/2)**2 + (setting.car_length/2)**2)
 
 
         collision_checker1to2 = np.sqrt((car2[0]-car1[0])**2 + (car2[1]-car1[1])**2)
@@ -398,7 +448,7 @@ class Environment():
         collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         collision_checker3to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
         
-        print("hannkkei",r)
+        # print("hannkkei",r)
         if collision_checker1to2 <= r:
             collision += 1
         elif collision_checker1to3 <= r:

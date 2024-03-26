@@ -301,7 +301,7 @@ def ga_solve(populations, gene_size):
     for i in range(gene_size):
         
         best_popu = min(populations, key=Individual.get_fitness)
-        #print("best_pouuu", best_popu.genom)
+        # print("best_pouuu", best_popu.genom)
         best.append(best_popu)
         #print("all_path_length::",best_popu.get_all_path_length())
         #print("best::",best)
@@ -326,7 +326,7 @@ def ga_solve(populations, gene_size):
         # print("population2a",selected[1].genom)
             # print("children1::", children[0].genom)
             # print("children2::", children[1].genom)
-        print(" ")
+        # print(" ")
         #print("len_children::",len(children))
         children = mutate(children)
         populations = children
@@ -372,7 +372,7 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
         children = mutate(children)
         if two_steps_list and zeros_list:
             for i in range(len(children)):
-                children[i].set_fitness(change_ga_vw_bezier_line.VW.two_steps_ga_function(children[i].genom, two_steps_list, zeros_list))
+                children[i].set_fitness(change_ga_vw_bezier_line.VW.two_steps_GA_function(children[i].genom, two_steps_list, zeros_list))
         populations = children
         # print("len_populations::", len(populations))
         #print("len_populations::", len(populations))
@@ -395,7 +395,7 @@ def ga_solve_two_steps(populations, gene_size, two_steps_list = [], zeros_list =
     # f.writelines('\n')
     # f.writelines('\n')
     # min(best, key=Individual.get_fitness)
-    return best
+    return best, best_popu, generation_list
 
 def main(popu_size, gene_size, genom_size):
     fitness = change_ga_vw_bezier_line.VW.single_GA_function
@@ -409,7 +409,7 @@ def main_two_steps(popu_size, gene_size, genom_size):
     
     populations = create_generation(popu_size, genom_size, fitness)
     # print("populations", populations)インスタンスが入ってる1次元リスト
-    best =  ga_solve(populations, gene_size//2)
+    best, best_popu, generation_list =  ga_solve(populations, gene_size//2)
     best_gene = min(best, key=Individual.get_fitness)
     writer.writerow(["best_one_steps::",best_gene.genom])
     zeros_list = [[[0] * (setting.two_VWnum)**2] * 9]
@@ -421,7 +421,7 @@ def main_two_steps(popu_size, gene_size, genom_size):
 
     genom_size = len(two_steps_list) * ((setting.two_VWnum) ** 2)
         
-    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw_bezier_line.VW.two_steps_ga_function)
+    populations = create_generation_two(popu_size, genom_size, two_steps_list, zeros_list, change_ga_vw_bezier_line.VW.two_steps_GA_function)
     
     return ga_solve_two_steps(populations, gene_size//2, two_steps_list, zeros_list)
     
@@ -509,18 +509,18 @@ if __name__ == '__main__':
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
-                    #best=main_two_steps(populist, generation , genom_size)
+                    # best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
                     best, best_popu, generation_list =main(populist, generation , genom_size)
                     end = time.time()
                     diff = end - start
                     writer.writerow(["time:", diff])
                     for i in range(len(best)):
-                        writer.writerow(["best_length:", best_popu.get_all_path_length()])
-                        writer.writerow(["best_evo:", best_popu.get_fitness()])
-                        writer.writerow(["best_collision:", best_popu.get_collision()])
-                        writer.writerow(["best_genom:", best_popu.genom])
+                        writer.writerow(["best_length:", best[i].get_all_path_length()])
+                        writer.writerow(["best_evo:", best[i].get_fitness()])
+                        writer.writerow(["best_collision:", best[i].get_collision()])
+                        writer.writerow(["best_genom:", best[i].genom])
                         # writer.writerow(["best_cars_path:", best_popu.get_cars_path()])
-                        writer.writerow(["best_create_path_time:",best_popu.get_create_path_time_dic()["create_path_time"]])
+                        writer.writerow(["best_create_path_time:",best[i].get_create_path_time_dic()["create_path_time"]])
                 generation*=2
                 writer.writerow([""])
 
