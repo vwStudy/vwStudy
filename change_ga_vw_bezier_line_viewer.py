@@ -72,7 +72,7 @@ class VW():
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
-        # car_vw_line_list.extend(wall_line_list)
+        car_vw_line_list.extend(wall_line_list)
 
         create_vertex_start = time.time()
         #頂点のlistを作成

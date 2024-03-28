@@ -292,7 +292,8 @@ def mutate(children):
         if np.random.rand() < MUTATION_PB:# 一定の確率で突然変異させる
             
             random_number = np.random.randint(0, setting.genom_size)
-            children[num_children].genom[random_number] = abs(children[num_children].genom[random_number] - 1)
+            if children[num_children].genom != []:
+                children[num_children].genom[random_number] = abs(children[num_children].genom[random_number] - 1)
     return children
 
 def ga_solve(populations, gene_size):
@@ -509,7 +510,7 @@ if __name__ == '__main__':
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
-                    #best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
+                    # best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
                     best, best_popu, generation_list =main(populist, generation , genom_size)
                     end = time.time()
                     diff = end - start
