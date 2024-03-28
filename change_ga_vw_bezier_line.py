@@ -294,7 +294,7 @@ class VW():
         #急カーブかを判定
         shurp_curve = False
     
-        while(flag1==False and flag2==False and flag3==False and flag4==False, flag5==False, flag6==False, flag7==False, flag8==False):
+        while(flag1==False and flag2==False and flag3==False and flag4==False and flag5==False and flag6==False and flag7==False and flag8==False):
             car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
             car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
             car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
@@ -306,7 +306,7 @@ class VW():
             # print("car1_position", car1_position)
             collision = Environment.collision_CarToCar_8car(car1_position, car2_position, car3_position, car4_position, car5_position, car6_position, car7_position, car8_position, collision)
 
-        total_num_obstacles = len(car_VW_list)/4
+        total_num_obstacles = len(car_VW_list)/8
 
         create_path_time_dic = {"vis_graph_time": visibility_time_diff, "dijkstra_time": dijkstra_time_diff, "bezier_time": bezier_time, "create_path_time": visibility_time_diff + dijkstra_time_diff + bezier_time}
 
