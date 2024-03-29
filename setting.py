@@ -30,7 +30,7 @@ VWsize :int = VWfield/VWnum
 ##車のスピード
 speed :float = 8
 
-car_angle :int = 35
+car_angle :int = 32
 
 #car_num :int = 4
 
@@ -201,12 +201,21 @@ wall_line_list = [[[0,0],[0,182]],[[0,0],[399,0]],[[399,0],[399,182]],[[399,182]
 
 
 
-car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
-car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
-car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
-car4_STARTtoGOAL : float = [[424.5,376],[424.5,124]] #下から上へ
+# car1_STARTtoGOAL : float = [[324,224.5],[576,224.5]] #左から右へ
+# car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
+# car3_STARTtoGOAL : float = [[576,250],[324,250]] #右から左へ
+# car4_STARTtoGOAL : float = [[424.5,376],[424.5,124]] #下から上へ
 
-car5_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
+# car5_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
+# car6_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
+# car7_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
+# car8_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
+
+car1_STARTtoGOAL : float = [[324,250],[576,250]] #左から右へ
+car2_STARTtoGOAL : float = [[450,124],[450,376]] #上から下へ
+car3_STARTtoGOAL : float = [[576,260],[324,260]] #右から左へ
+car4_STARTtoGOAL : float = [[460,376],[460,124]] #下から上へ
+car5_STARTtoGOAL : float = [[324,270],[576,270]] #左から右へ
 car6_STARTtoGOAL : float = [[424.5,124],[424.5,376]] #上から下へ
 car7_STARTtoGOAL : float = [[576,224.5],[324,224.5]] #右から左へ
-car8_STARTtoGOAL : float = [[450,376],[450,124]] #下から上へ
+car8_STARTtoGOAL : float = [[4700,376],[470,124]] #下から上へ
