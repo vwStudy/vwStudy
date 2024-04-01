@@ -67,22 +67,22 @@ class VW():
         combine_vw_end = time.time()
         combine_time_diff = combine_vw_end - combine_vw_start
 
-        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]),CarAgent(setting.car5_STARTtoGOAL[0],setting.car5_STARTtoGOAL[1]),CarAgent(setting.car6_STARTtoGOAL[0],setting.car6_STARTtoGOAL[1]),CarAgent(setting.car7_STARTtoGOAL[0],setting.car7_STARTtoGOAL[1]),CarAgent(setting.car8_STARTtoGOAL[0],setting.car8_STARTtoGOAL[1]))
+        cars_tuple = (CarAgent(setting.car1_STARTtoGOAL[0],setting.car1_STARTtoGOAL[1]), CarAgent(setting.car2_STARTtoGOAL[0],setting.car2_STARTtoGOAL[1]), CarAgent(setting.car3_STARTtoGOAL[0],setting.car3_STARTtoGOAL[1]), CarAgent(setting.car4_STARTtoGOAL[0],setting.car4_STARTtoGOAL[1]))
+        # ,CarAgent(setting.car5_STARTtoGOAL[0],setting.car5_STARTtoGOAL[1]),CarAgent(setting.car6_STARTtoGOAL[0],setting.car6_STARTtoGOAL[1]),CarAgent(setting.car7_STARTtoGOAL[0],setting.car7_STARTtoGOAL[1]),CarAgent(setting.car8_STARTtoGOAL[0],setting.car8_STARTtoGOAL[1]))
 
         wall_edge_list, wall_line_list = Environment.set_wall()
 
         # car_vw_line_list.extend(wall_line_list)
-        
         create_vertex_start = time.time()
         #頂点のlistを作成
         car1_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[0], wall_edge_list)
         car2_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[1], wall_edge_list)
         car3_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[2], wall_edge_list)
         car4_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[3], wall_edge_list)
-        car5_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[4], wall_edge_list)
-        car6_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[5], wall_edge_list)
-        car7_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[6], wall_edge_list)
-        car8_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[7], wall_edge_list)
+        # car5_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[4], wall_edge_list)
+        # car6_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[5], wall_edge_list)
+        # car7_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[6], wall_edge_list)
+        # car8_vertex_list = Environment.set_vertex_list(car_VW_list, cars_tuple[7], wall_edge_list)
         
         create_vertex_end = time.time()
         vertex_time_diff = create_vertex_end - create_vertex_start
@@ -94,10 +94,10 @@ class VW():
         car2_vis_graph = Execution.visibility_graph(car2_vertex_list, car_vw_line_list, wall_line_list)
         car3_vis_graph = Execution.visibility_graph(car3_vertex_list, car_vw_line_list, wall_line_list)
         car4_vis_graph = Execution.visibility_graph(car4_vertex_list, car_vw_line_list, wall_line_list)
-        car5_vis_graph = Execution.visibility_graph(car5_vertex_list, car_vw_line_list, wall_line_list)
-        car6_vis_graph = Execution.visibility_graph(car6_vertex_list, car_vw_line_list, wall_line_list)
-        car7_vis_graph = Execution.visibility_graph(car7_vertex_list, car_vw_line_list, wall_line_list)
-        car8_vis_graph = Execution.visibility_graph(car8_vertex_list, car_vw_line_list, wall_line_list)
+        # car5_vis_graph = Execution.visibility_graph(car5_vertex_list, car_vw_line_list, wall_line_list)
+        # car6_vis_graph = Execution.visibility_graph(car6_vertex_list, car_vw_line_list, wall_line_list)
+        # car7_vis_graph = Execution.visibility_graph(car7_vertex_list, car_vw_line_list, wall_line_list)
+        # car8_vis_graph = Execution.visibility_graph(car8_vertex_list, car_vw_line_list, wall_line_list)
         visibility_end = time.time()
         visibility_time_diff = visibility_end - visibility_start
         #print("visibility::",visibility_time_diff)
@@ -107,10 +107,10 @@ class VW():
         car2_shortest_path, car2_shortest_length = Execution.dijkstra(car2_vis_graph)
         car3_shortest_path, car3_shortest_length = Execution.dijkstra(car3_vis_graph)
         car4_shortest_path, car4_shortest_length = Execution.dijkstra(car4_vis_graph)
-        car5_shortest_path, car5_shortest_length = Execution.dijkstra(car5_vis_graph)
-        car6_shortest_path, car6_shortest_length = Execution.dijkstra(car6_vis_graph)
-        car7_shortest_path, car7_shortest_length = Execution.dijkstra(car7_vis_graph)
-        car8_shortest_path, car8_shortest_length = Execution.dijkstra(car8_vis_graph)
+        # car5_shortest_path, car5_shortest_length = Execution.dijkstra(car5_vis_graph)
+        # car6_shortest_path, car6_shortest_length = Execution.dijkstra(car6_vis_graph)
+        # car7_shortest_path, car7_shortest_length = Execution.dijkstra(car7_vis_graph)
+        # car8_shortest_path, car8_shortest_length = Execution.dijkstra(car8_vis_graph)
         
         dijkstra_end = time.time()
         dijkstra_time_diff = dijkstra_end - dijkstra_start
@@ -193,67 +193,67 @@ class VW():
             car4_path.append([px4[i],py4[i]])
             car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
 
-        car5_point = []
-        for i in range(len(car5_shortest_path)):
-            car5_point.append(car5_vertex_list[car5_shortest_path[i]])
-            if i+3 <= len(car5_shortest_path)-1:
-                cross_point = line_cross_point(car5_vertex_list[car5_shortest_path[i]],car5_vertex_list[car5_shortest_path[i+1]],car5_vertex_list[car5_shortest_path[i+2]],car5_vertex_list[car5_shortest_path[i+3]])
-                if cross_point != None:
-                    car5_point.append(list(cross_point))
+        # car5_point = []
+        # for i in range(len(car5_shortest_path)):
+        #     car5_point.append(car5_vertex_list[car5_shortest_path[i]])
+        #     if i+3 <= len(car5_shortest_path)-1:
+        #         cross_point = line_cross_point(car5_vertex_list[car5_shortest_path[i]],car5_vertex_list[car5_shortest_path[i+1]],car5_vertex_list[car5_shortest_path[i+2]],car5_vertex_list[car5_shortest_path[i+3]])
+        #         if cross_point != None:
+        #             car5_point.append(list(cross_point))
 
-        px5, py5 = bezie_curve(car5_point)
-        car5_path = []
-        for i in range(0,len(px5)):
-            # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
-            car5_path.append([px5[i],py5[i]])
-            car5_length += np.linalg.norm(np.array(car5_path[i]) - np.array(car5_path[i-1]))
-        bezier_time_end = time.time()
-        bezier_time = bezier_time_end - bezier_time_start
+        # px5, py5 = bezie_curve(car5_point)
+        # car5_path = []
+        # for i in range(0,len(px5)):
+        #     # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
+        #     car5_path.append([px5[i],py5[i]])
+        #     car5_length += np.linalg.norm(np.array(car5_path[i]) - np.array(car5_path[i-1]))
+        # bezier_time_end = time.time()
+        # bezier_time = bezier_time_end - bezier_time_start
 
-        car6_point = []
-        for i in range(len(car6_shortest_path)):
-            car6_point.append(car6_vertex_list[car6_shortest_path[i]])
-            if i+3 <= len(car6_shortest_path)-1:
-                cross_point = line_cross_point(car6_vertex_list[car6_shortest_path[i]],car6_vertex_list[car6_shortest_path[i+1]],car6_vertex_list[car6_shortest_path[i+2]],car6_vertex_list[car6_shortest_path[i+3]])
-                if cross_point != None:
-                    car6_point.append(list(cross_point))
+        # car6_point = []
+        # for i in range(len(car6_shortest_path)):
+        #     car6_point.append(car6_vertex_list[car6_shortest_path[i]])
+        #     if i+3 <= len(car6_shortest_path)-1:
+        #         cross_point = line_cross_point(car6_vertex_list[car6_shortest_path[i]],car6_vertex_list[car6_shortest_path[i+1]],car6_vertex_list[car6_shortest_path[i+2]],car6_vertex_list[car6_shortest_path[i+3]])
+        #         if cross_point != None:
+        #             car6_point.append(list(cross_point))
 
-        px6, py6 = bezie_curve(car6_point)
-        car6_path = []
-        for i in range(0,len(px6)):
-            # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
-            car6_path.append([px6[i],py6[i]])
-            car6_length += np.linalg.norm(np.array(car6_path[i]) - np.array(car6_path[i-1]))
+        # px6, py6 = bezie_curve(car6_point)
+        # car6_path = []
+        # for i in range(0,len(px6)):
+        #     # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
+        #     car6_path.append([px6[i],py6[i]])
+        #     car6_length += np.linalg.norm(np.array(car6_path[i]) - np.array(car6_path[i-1]))
 
-        car7_point = []
-        for i in range(len(car7_shortest_path)):
-            car7_point.append(car7_vertex_list[car7_shortest_path[i]])
-            if i+3 <= len(car7_shortest_path)-1:
-                cross_point = line_cross_point(car7_vertex_list[car7_shortest_path[i]],car7_vertex_list[car7_shortest_path[i+1]],car7_vertex_list[car7_shortest_path[i+2]],car7_vertex_list[car7_shortest_path[i+3]])
-                if cross_point != None:
-                    car7_point.append(list(cross_point))
+        # car7_point = []
+        # for i in range(len(car7_shortest_path)):
+        #     car7_point.append(car7_vertex_list[car7_shortest_path[i]])
+        #     if i+3 <= len(car7_shortest_path)-1:
+        #         cross_point = line_cross_point(car7_vertex_list[car7_shortest_path[i]],car7_vertex_list[car7_shortest_path[i+1]],car7_vertex_list[car7_shortest_path[i+2]],car7_vertex_list[car7_shortest_path[i+3]])
+        #         if cross_point != None:
+        #             car7_point.append(list(cross_point))
 
-        px7, py7 = bezie_curve(car7_point)
-        car7_path = []
-        for i in range(0,len(px7)):
-            # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
-            car7_path.append([px7[i],py7[i]])
-            car7_length += np.linalg.norm(np.array(car7_path[i]) - np.array(car7_path[i-1]))
+        # px7, py7 = bezie_curve(car7_point)
+        # car7_path = []
+        # for i in range(0,len(px7)):
+        #     # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
+        #     car7_path.append([px7[i],py7[i]])
+        #     car7_length += np.linalg.norm(np.array(car7_path[i]) - np.array(car7_path[i-1]))
             
-        car8_point = []
-        for i in range(len(car8_shortest_path)):
-            car8_point.append(car8_vertex_list[car8_shortest_path[i]])
-            if i+3 <= len(car8_shortest_path)-1:
-                cross_point = line_cross_point(car8_vertex_list[car8_shortest_path[i]],car8_vertex_list[car8_shortest_path[i+1]],car8_vertex_list[car8_shortest_path[i+2]],car8_vertex_list[car8_shortest_path[i+3]])
-                if cross_point != None:
-                    car8_point.append(list(cross_point))
+        # car8_point = []
+        # for i in range(len(car8_shortest_path)):
+        #     car8_point.append(car8_vertex_list[car8_shortest_path[i]])
+        #     if i+3 <= len(car8_shortest_path)-1:
+        #         cross_point = line_cross_point(car8_vertex_list[car8_shortest_path[i]],car8_vertex_list[car8_shortest_path[i+1]],car8_vertex_list[car8_shortest_path[i+2]],car8_vertex_list[car8_shortest_path[i+3]])
+        #         if cross_point != None:
+        #             car8_point.append(list(cross_point))
 
-        px8, py8 = bezie_curve(car8_point)
-        car8_path = []
-        for i in range(0,len(px8)):
-            # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
-            car8_path.append([px8[i],py8[i]])
-            car8_length += np.linalg.norm(np.array(car8_path[i]) - np.array(car8_path[i-1]))
+        # px8, py8 = bezie_curve(car8_point)
+        # car8_path = []
+        # for i in range(0,len(px8)):
+        #     # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
+        #     car8_path.append([px8[i],py8[i]])
+        #     car8_length += np.linalg.norm(np.array(car8_path[i]) - np.array(car8_path[i-1]))
         bezier_time_end = time.time()
         bezier_time = bezier_time_end - bezier_time_start
 
@@ -278,18 +278,18 @@ class VW():
         car2_start_position = setting.car2_STARTtoGOAL[0].copy()
         car3_start_position = setting.car3_STARTtoGOAL[0].copy()
         car4_start_position = setting.car4_STARTtoGOAL[0].copy()
-        car5_start_position = setting.car5_STARTtoGOAL[0].copy()
-        car6_start_position = setting.car6_STARTtoGOAL[0].copy()
-        car7_start_position = setting.car7_STARTtoGOAL[0].copy()
-        car8_start_position = setting.car8_STARTtoGOAL[0].copy()
+        # car5_start_position = setting.car5_STARTtoGOAL[0].copy()
+        # car6_start_position = setting.car6_STARTtoGOAL[0].copy()
+        # car7_start_position = setting.car7_STARTtoGOAL[0].copy()
+        # car8_start_position = setting.car8_STARTtoGOAL[0].copy()
         car1_position = car1_start_position
         car2_position = car2_start_position
         car3_position = car3_start_position
         car4_position = car4_start_position
-        car5_position = car5_start_position
-        car6_position = car6_start_position
-        car7_position = car7_start_position
-        car8_position = car8_start_position
+        # car5_position = car5_start_position
+        # car6_position = car6_start_position
+        # car7_position = car7_start_position
+        # car8_position = car8_start_position
         
         #急カーブかを判定
         shurp_curve = False
@@ -299,14 +299,15 @@ class VW():
             car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
             car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
             car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
-            car5_position, flag5, num5, shurp_curve = cars_tuple[4].car_move(car5_path, car5_position, num5, shurp_curve, car5_length)
-            car6_position, flag6, num6, shurp_curve = cars_tuple[5].car_move(car6_path, car6_position, num6, shurp_curve, car6_length)
-            car7_position, flag7, num7, shurp_curve = cars_tuple[6].car_move(car7_path, car7_position, num7, shurp_curve, car7_length)
-            car8_position, flag8, num8, shurp_curve = cars_tuple[7].car_move(car8_path, car8_position, num8, shurp_curve, car8_length)
+            # car5_position, flag5, num5, shurp_curve = cars_tuple[4].car_move(car5_path, car5_position, num5, shurp_curve, car5_length)
+            # car6_position, flag6, num6, shurp_curve = cars_tuple[5].car_move(car6_path, car6_position, num6, shurp_curve, car6_length)
+            # car7_position, flag7, num7, shurp_curve = cars_tuple[6].car_move(car7_path, car7_position, num7, shurp_curve, car7_length)
+            # car8_position, flag8, num8, shurp_curve = cars_tuple[7].car_move(car8_path, car8_position, num8, shurp_curve, car8_length)
             # print("car1_position", car1_position)
-            collision = Environment.collision_CarToCar_8car(car1_position, car2_position, car3_position, car4_position, car5_position, car6_position, car7_position, car8_position, collision)
+            # collision = Environment.collision_CarToCar_8car(car1_position, car2_position, car3_position, car4_position, car5_position, car6_position, car7_position, car8_position, collision)
+            collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
 
-        total_num_obstacles = len(car_VW_list)/8
+        total_num_obstacles = len(car_VW_list)/4
 
         create_path_time_dic = {"vis_graph_time": visibility_time_diff, "dijkstra_time": dijkstra_time_diff, "bezier_time": bezier_time, "create_path_time": visibility_time_diff + dijkstra_time_diff + bezier_time}
 
@@ -806,6 +807,9 @@ class Execution():
                 #障害物との交差しているかのFlagを立てる
                 cross = False
 
+                if (index == 0 and goal_index == 1) or (index == 1 and goal_index == 0):
+                    cross = True
+
                 #全ての障害物の各辺に対し
                 for obstacle_Line in obstacle_line_list: #O(n)
 
@@ -980,22 +984,22 @@ if __name__ == '__main__':
         #     f.writelines("\n")
         #     f.writelines(str(i.get_all_path_length()))
         
-    ave_fitness = sum_fitness/5
-    ave_collision = sum_collision/5
-    ave_all_path_length = sum_all_path_length/5
-    ave_total_num_obstacles = sum_total_num_obstacles/5
-    ave_time = sum_time/5
-    avg_create_path_time = sum_create_path_time/5
-    f = open('data_test_ga.txt', 'a', encoding='UTF-8')
-    f.writelines('\n')
-    f.writelines("ave_fitness::"+str(ave_fitness))
-    f.writelines('\n')
-    f.writelines("ave_collision::"+str(ave_collision))
-    f.writelines('\n')
-    f.writelines("ave_path_length::"+str(ave_all_path_length))
-    f.writelines('\n')
-    f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
-    f.writelines('\n')
-    f.writelines("ave_time::" + str(ave_time))
-    f.writelines('\n')
-    f.writelines("ave_create_path_time::" + str(avg_create_path_time))
+    # ave_fitness = sum_fitness/5
+    # ave_collision = sum_collision/5
+    # ave_all_path_length = sum_all_path_length/5
+    # ave_total_num_obstacles = sum_total_num_obstacles/5
+    # ave_time = sum_time/5
+    # avg_create_path_time = sum_create_path_time/5
+    # f = open('data_test_ga.txt', 'a', encoding='UTF-8')
+    # f.writelines('\n')
+    # f.writelines("ave_fitness::"+str(ave_fitness))
+    # f.writelines('\n')
+    # f.writelines("ave_collision::"+str(ave_collision))
+    # f.writelines('\n')
+    # f.writelines("ave_path_length::"+str(ave_all_path_length))
+    # f.writelines('\n')
+    # f.writelines("ave_total_num_obstacles::"+str(ave_total_num_obstacles))
+    # f.writelines('\n')
+    # f.writelines("ave_time::" + str(ave_time))
+    # f.writelines('\n')
+    # f.writelines("ave_create_path_time::" + str(avg_create_path_time))

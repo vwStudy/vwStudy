@@ -1,0 +1,736 @@
+
+popu_size,8
+gene_size,8
+time:,7.1251380443573
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 0 0]
+best_create_path_time:,0.010692596435546875
+
+popu_size,8
+gene_size,8
+time:,7.930279970169067
+best_length:,811.013430218619
+best_evo:,135.16890503643648
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 1 0]
+best_create_path_time:,0.02245330810546875
+
+popu_size,8
+gene_size,8
+time:,7.014520168304443
+best_length:,781.6595497374346
+best_evo:,86.85106108193717
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 0 0]
+best_create_path_time:,0.016045570373535156
+
+popu_size,8
+gene_size,8
+time:,7.316863536834717
+best_length:,811.013430218619
+best_evo:,90.11260335762432
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 1 0]
+best_create_path_time:,0.012542486190795898
+
+popu_size,8
+gene_size,8
+time:,6.7145490646362305
+best_length:,811.013430218619
+best_evo:,90.11260335762432
+best_collision:,0
+best_genom:,[0 0 0 0 0 1 0 1 0]
+best_create_path_time:,0.012316465377807617
+""
+
+popu_size,8
+gene_size,16
+time:,12.978758096694946
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 1 0 0 0 0 0]
+best_create_path_time:,0.012976646423339844
+
+popu_size,8
+gene_size,16
+time:,12.479705810546875
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.007192373275756836
+
+popu_size,8
+gene_size,16
+time:,13.220094203948975
+best_length:,824.9956602845479
+best_evo:,91.66618447606086
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01795673370361328
+
+popu_size,8
+gene_size,16
+time:,14.04266095161438
+best_length:,811.013430218619
+best_evo:,135.16890503643648
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 1 1 0]
+best_create_path_time:,0.021651506423950195
+
+popu_size,8
+gene_size,16
+time:,12.26484727859497
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.00996851921081543
+""
+
+popu_size,8
+gene_size,32
+time:,23.414405584335327
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010709047317504883
+
+popu_size,8
+gene_size,32
+time:,23.10148549079895
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010970592498779297
+
+popu_size,8
+gene_size,32
+time:,23.934667348861694
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013057708740234375
+
+popu_size,8
+gene_size,32
+time:,22.348198652267456
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017388105392456055
+
+popu_size,8
+gene_size,32
+time:,23.742595911026
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011956214904785156
+""
+
+popu_size,8
+gene_size,64
+time:,45.33182764053345
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010970830917358398
+
+popu_size,8
+gene_size,64
+time:,46.29741907119751
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009971141815185547
+
+popu_size,8
+gene_size,64
+time:,45.479161500930786
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01096653938293457
+
+popu_size,8
+gene_size,64
+time:,45.5422945022583
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 0 0]
+best_create_path_time:,0.013468503952026367
+
+popu_size,8
+gene_size,64
+time:,47.68631625175476
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.015956878662109375
+""
+
+popu_size,16
+gene_size,8
+time:,13.901049375534058
+best_length:,784.470274759877
+best_evo:,87.16336386220856
+best_collision:,0
+best_genom:,[0 0 0 1 0 0 0 0 0]
+best_create_path_time:,0.01784825325012207
+
+popu_size,16
+gene_size,8
+time:,12.529195547103882
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010829687118530273
+
+popu_size,16
+gene_size,8
+time:,13.740160703659058
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.023190021514892578
+
+popu_size,16
+gene_size,8
+time:,13.717451572418213
+best_length:,781.6595497374346
+best_evo:,86.85106108193717
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 0 0]
+best_create_path_time:,0.014995098114013672
+
+popu_size,16
+gene_size,8
+time:,13.10868525505066
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01097416877746582
+""
+
+popu_size,16
+gene_size,16
+time:,23.424819231033325
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013710498809814453
+
+popu_size,16
+gene_size,16
+time:,23.23164987564087
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009976387023925781
+
+popu_size,16
+gene_size,16
+time:,24.59122657775879
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017958879470825195
+
+popu_size,16
+gene_size,16
+time:,23.47729182243347
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.00997018814086914
+
+popu_size,16
+gene_size,16
+time:,24.390618801116943
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010672569274902344
+""
+
+popu_size,16
+gene_size,32
+time:,47.61439776420593
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010529518127441406
+
+popu_size,16
+gene_size,32
+time:,46.4996075630188
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013384819030761719
+
+popu_size,16
+gene_size,32
+time:,45.60856747627258
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017976760864257812
+
+popu_size,16
+gene_size,32
+time:,45.73928213119507
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.012575864791870117
+
+popu_size,16
+gene_size,32
+time:,47.68367099761963
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.028233051300048828
+""
+
+popu_size,16
+gene_size,64
+time:,89.4203748703003
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010933876037597656
+
+popu_size,16
+gene_size,64
+time:,87.9413673877716
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 1 0 0]
+best_create_path_time:,0.012256622314453125
+
+popu_size,16
+gene_size,64
+time:,89.51689147949219
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017844200134277344
+
+popu_size,16
+gene_size,64
+time:,88.39945197105408
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01086115837097168
+
+popu_size,16
+gene_size,64
+time:,90.54715299606323
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.015424013137817383
+""
+
+popu_size,32
+gene_size,8
+time:,26.923882007598877
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.007978677749633789
+
+popu_size,32
+gene_size,8
+time:,26.646013736724854
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009478569030761719
+
+popu_size,32
+gene_size,8
+time:,25.525453805923462
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.00993967056274414
+
+popu_size,32
+gene_size,8
+time:,25.829052209854126
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009972572326660156
+
+popu_size,32
+gene_size,8
+time:,25.532188653945923
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.0141448974609375
+""
+
+popu_size,32
+gene_size,16
+time:,47.31102967262268
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010811328887939453
+
+popu_size,32
+gene_size,16
+time:,170.39415669441223
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009144306182861328
+
+popu_size,32
+gene_size,16
+time:,44.742048501968384
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.008008241653442383
+
+popu_size,32
+gene_size,16
+time:,40.70435857772827
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011687040328979492
+
+popu_size,32
+gene_size,16
+time:,48.13180375099182
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010136842727661133
+""
+
+popu_size,32
+gene_size,32
+time:,91.448312997818
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013822078704833984
+
+popu_size,32
+gene_size,32
+time:,91.93081068992615
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 1 0 0 0 0]
+best_create_path_time:,0.027866125106811523
+
+popu_size,32
+gene_size,32
+time:,91.55366611480713
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017303943634033203
+
+popu_size,32
+gene_size,32
+time:,90.27297639846802
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013636350631713867
+
+popu_size,32
+gene_size,32
+time:,93.73976182937622
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011009693145751953
+""
+
+popu_size,32
+gene_size,64
+time:,179.24100494384766
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.010936975479125977
+
+popu_size,32
+gene_size,64
+time:,179.22001576423645
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01140451431274414
+
+popu_size,32
+gene_size,64
+time:,174.4751033782959
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01170039176940918
+
+popu_size,32
+gene_size,64
+time:,176.68933486938477
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011005401611328125
+
+popu_size,32
+gene_size,64
+time:,176.59679436683655
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009972810745239258
+""
+
+popu_size,64
+gene_size,8
+time:,50.44550704956055
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011970043182373047
+
+popu_size,64
+gene_size,8
+time:,10242.536071777344
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.019945621490478516
+
+popu_size,64
+gene_size,8
+time:,50.63845181465149
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009974002838134766
+
+popu_size,64
+gene_size,8
+time:,53.55397582054138
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.009353399276733398
+
+popu_size,64
+gene_size,8
+time:,58.235185384750366
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.012089252471923828
+""
+
+popu_size,64
+gene_size,16
+time:,102.76956295967102
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.01528477668762207
+
+popu_size,64
+gene_size,16
+time:,102.34448504447937
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.007855653762817383
+
+popu_size,64
+gene_size,16
+time:,99.98516368865967
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011924028396606445
+
+popu_size,64
+gene_size,16
+time:,102.99070024490356
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 1 0]
+best_create_path_time:,0.010820388793945312
+
+popu_size,64
+gene_size,16
+time:,102.08832573890686
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.018151521682739258
+""
+
+popu_size,64
+gene_size,32
+time:,194.90278005599976
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 1 0 0]
+best_create_path_time:,0.012960195541381836
+
+popu_size,64
+gene_size,32
+time:,191.58428049087524
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 1]
+best_create_path_time:,0.015461444854736328
+
+popu_size,64
+gene_size,32
+time:,193.2524778842926
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011559486389160156
+
+popu_size,64
+gene_size,32
+time:,195.7715036869049
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.013254880905151367
+
+popu_size,64
+gene_size,32
+time:,4257.842210054398
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.017985820770263672
+""
+
+popu_size,64
+gene_size,64
+time:,379.792644739151
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.012598276138305664
+
+popu_size,64
+gene_size,64
+time:,374.85980224609375
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.011568069458007812
+
+popu_size,64
+gene_size,64
+time:,321.78905749320984
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.006012439727783203
+
+popu_size,64
+gene_size,64
+time:,182.9323194026947
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 0 0 0 0]
+best_create_path_time:,0.0069539546966552734
+
+popu_size,64
+gene_size,64
+time:,183.78624820709229
+best_length:,784.470274759877
+best_evo:,0.0
+best_collision:,0
+best_genom:,[0 0 0 0 0 1 0 0 0]
+best_create_path_time:,0.005984067916870117
+""
