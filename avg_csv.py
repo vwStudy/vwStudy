@@ -2,9 +2,9 @@ import csv
 
 
 def read_csv():
-    with open('./data_folder/交差点環境2段階3_3_8台.csv') as f:
+    with open('./data_folder/3_3_4_1.csv') as f:
         contents = f.readlines()
-        with open('./data_folder/交差点環境2段階3_3_8台.csv', 'a', encoding='utf-8', newline='') as e:
+        with open('./data_folder/3_3_4_1.csv', 'a', encoding='utf-8', newline='') as e:
             writer = csv.writer(e)
             gene_size = 8
             popu_size = 8

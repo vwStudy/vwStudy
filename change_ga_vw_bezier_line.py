@@ -846,6 +846,7 @@ class Execution():
 
         #最短経路と距離をダイクストラ法により求める
         shortest_path = nx.dijkstra_path(nx_Graph,origin_node,destination_node)
+        
         shortest_length = nx.dijkstra_path_length(nx_Graph,origin_node,destination_node)
 
         return shortest_path, shortest_length

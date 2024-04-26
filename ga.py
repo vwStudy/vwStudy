@@ -518,7 +518,7 @@ if __name__ == '__main__':
                         writer.writerow(["time:", diff])
                         writer.writerow(["best_length:", best[i].get_all_path_length()])
                         writer.writerow(["best_evo:", best[i].get_fitness()])
-                        writer.writerow(["best_collision:", best[i].get_collision()])
+                        writer.writerow(["best_collision:", best[i].get_collision()+setting.generation_size])
                         writer.writerow(["best_genom:", best[i].genom])
                         # writer.writerow(["best_cars_path:", best_popu.get_cars_path()])
                         writer.writerow(["best_create_path_time:",best[i].get_create_path_time_dic()["create_path_time"]])
