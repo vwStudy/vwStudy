@@ -151,7 +151,7 @@ class VW():
             if i == 0 or i == len(car1_path)-1:
                 car1_shortest_path.append(car1_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car1_shortest_path.append(car1_path[i])
             
 
@@ -179,7 +179,7 @@ class VW():
             if i == 0 or i == len(car2_path)-1:
                 car2_shortest_path.append(car2_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car2_shortest_path.append(car2_path[i])
             
 
@@ -204,7 +204,7 @@ class VW():
             if i == 0 or i == len(car3_path)-1:
                 car3_shortest_path.append(car3_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car3_shortest_path.append(car3_path[i])
             
 
@@ -229,7 +229,7 @@ class VW():
             if i == 0 or i == len(car4_path)-1:
                 car4_shortest_path.append(car4_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car4_shortest_path.append(car4_path[i])
             
 
@@ -493,7 +493,7 @@ class VW():
             if i == 0 or i == len(car2_path)-1:
                 car2_shortest_path.append(car2_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car2_shortest_path.append(car2_path[i])
 
         car3_point = []
@@ -541,7 +541,7 @@ class VW():
             if i == 0 or i == len(car4_path)-1:
                 car4_shortest_path.append(car4_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car4_shortest_path.append(car4_path[i])
 
         bezier_time_end = time.time()
