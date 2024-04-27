@@ -587,11 +587,11 @@ class VW():
         len_two_steps_list = len(two_steps_list)
 
         if len_two_steps_list == 0:
-            len_two_steps_list = 1
+            len_two_steps_list = 100
 
         print(all_path_length * (total_num_obstacles / (setting.car_num * (len_two_steps_list *((setting.VWnum) ** 2)))) + collision * 1000000)
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * (len_two_steps_list *((setting.VWnum) ** 2)))) + collision * 1000000, collision, all_path_length, total_num_obstacles, create_path_time_dic
+        return (all_path_length * (total_num_obstacles / (setting.car_num * (len_two_steps_list *((setting.VWnum) ** 2)))) + collision * 1000000), collision, all_path_length, total_num_obstacles, create_path_time_dic
 
     def two_steps_ga_setting(best):
         """
@@ -638,9 +638,9 @@ class Environment():
         collision_checker1to2 = np.sqrt((car2[0]-car1[0])**2 + (car2[1]-car1[1])**2)
         collision_checker1to3 = np.sqrt((car3[0]-car1[0])**2 + (car3[1]-car1[1])**2)
         collision_checker1to4 = np.sqrt((car4[0]-car1[0])**2 + (car4[1]-car1[1])**2)
-        collision_checker2to3 = np.sqrt((car2[0]-car3[0])**2 + (car2[1]-car3[1])**2)
-        collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
-        collision_checker3to4 = np.sqrt((car3[0]-car4[0])**2 + (car3[1]-car4[1])**2)
+        collision_checker2to3 = np.sqrt((car3[0]-car2[0])**2 + (car3[1]-car2[1])**2)
+        collision_checker2to4 = np.sqrt((car4[0]-car2[0])**2 + (car4[1]-car2[1])**2)
+        collision_checker3to4 = np.sqrt((car4[0]-car3[0])**2 + (car4[1]-car3[1])**2)
         
         # print("hannkkei",r)
         if collision_checker1to2 <= r:
