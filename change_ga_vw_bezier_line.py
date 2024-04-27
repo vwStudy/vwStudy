@@ -517,7 +517,7 @@ class VW():
             if i == 0 or i == len(car3_path)-1:
                 car3_shortest_path.append(car3_path[i])
             
-            elif i//setting.speed == 0:
+            elif i%setting.speed == 0:
                 car3_shortest_path.append(car3_path[i])
 
         car4_point = []
