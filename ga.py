@@ -427,7 +427,7 @@ def main_two_steps(popu_size, gene_size, genom_size):
     return ga_solve_two_steps(populations, gene_size//2, two_steps_list, zeros_list)
     
 
-#def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list):
+def set_paramater_ga(popu_size,gene_size,genom_size, two_steps_list, zeros_list):
     popu_size = popu_size#1世代の遺伝子数
     gene_size = gene_size#世代数
     genom_size = genom_size#遺伝子の長さ
@@ -510,22 +510,22 @@ if __name__ == '__main__':
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
-                    best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
-                    # best, best_popu, generation_list =main(populist, generation , genom_size)
+                    # best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
+                    best, best_popu, generation_list =main(populist, generation , genom_size)
                     end = time.time()
                     diff = end - start
                     for  i in range(len(best)):
                         writer.writerow(["time:", diff])
                         writer.writerow(["gen_best_length:", best[i].get_all_path_length()])
                         writer.writerow(["gen_best_evo:", best[i].get_fitness()])
-                        writer.writerow(["gen_best_collision:", best[i].get_collision()+setting.generation_size])
+                        writer.writerow(["gen_best_collision:", best[i].get_collision()])
                         writer.writerow(["gen_best_genom:", best[i].genom])
                         # writer.writerow(["best_cars_path:", best_popu.get_cars_path()])
                         writer.writerow(["gen_best_create_path_time:",best[i].get_create_path_time_dic()["create_path_time"]])
                     writer.writerow(["time:", diff])
                     writer.writerow(["best_length:", best_popu.get_all_path_length()])
                     writer.writerow(["best_evo:", best_popu.get_fitness()])
-                    writer.writerow(["best_collision:", best_popu.get_collision()+setting.generation_size])
+                    writer.writerow(["best_collision:", best_popu.get_collision()])
                     writer.writerow(["best_genom:", best_popu.genom])
                     # writer.writerow(["best_cars_path:", best_popu.get_cars_path()])
                     writer.writerow(["best_create_path_time:",best_popu.get_create_path_time_dic()["create_path_time"]])
