@@ -145,6 +145,16 @@ class VW():
             car1_path.append([px1[i],py1[i]])
             car1_length += np.linalg.norm(np.array(car1_path[i]) - np.array(car1_path[i-1]))
 
+        car1_shortest_path = []
+
+        for i in range(len(car1_path)):
+            if i == 0 or i == len(car1_path)-1:
+                car1_shortest_path.append(car1_path[i])
+            
+            elif i//setting.speed == 0:
+                car1_shortest_path.append(car1_path[i])
+            
+
         # print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
 
         car2_point = []
@@ -163,6 +173,16 @@ class VW():
             car2_path.append([px2[i],py2[i]])
             car2_length += np.linalg.norm(np.array(car2_path[i]) - np.array(car2_path[i-1]))
 
+        car2_shortest_path = []
+
+        for i in range(len(car2_path)):
+            if i == 0 or i == len(car2_path)-1:
+                car2_shortest_path.append(car2_path[i])
+            
+            elif i//setting.speed == 0:
+                car2_shortest_path.append(car2_path[i])
+            
+
         car3_point = []
         for i in range(len(car3_shortest_path)):
             car3_point.append(car3_vertex_list[car3_shortest_path[i]])
@@ -177,6 +197,16 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px3)-1:
             car3_path.append([px3[i],py3[i]])
             car3_length += np.linalg.norm(np.array(car3_path[i]) - np.array(car3_path[i-1]))
+        
+        car3_shortest_path = []
+
+        for i in range(len(car3_path)):
+            if i == 0 or i == len(car3_path)-1:
+                car3_shortest_path.append(car3_path[i])
+            
+            elif i//setting.speed == 0:
+                car3_shortest_path.append(car3_path[i])
+            
 
         car4_point = []
         for i in range(len(car4_shortest_path)):
@@ -192,6 +222,16 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
             car4_path.append([px4[i],py4[i]])
             car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
+
+        car4_shortest_path = []
+
+        for i in range(len(car4_path)):
+            if i == 0 or i == len(car4_path)-1:
+                car4_shortest_path.append(car4_path[i])
+            
+            elif i//setting.speed == 0:
+                car4_shortest_path.append(car4_path[i])
+            
 
         # car5_point = []
         # for i in range(len(car5_shortest_path)):
@@ -295,10 +335,10 @@ class VW():
         shurp_curve = False
     
         while(flag1==False and flag2==False and flag3==False and flag4==False and flag5==False and flag6==False and flag7==False and flag8==False):
-            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
-            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
-            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
-            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
+            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_shortest_path, car1_position, num1, shurp_curve, car1_length)
+            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_shortest_path, car2_position, num2, shurp_curve, car2_length)
+            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_shortest_path, car3_position, num3, shurp_curve, car3_length)
+            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_shortest_path, car4_position, num4, shurp_curve, car4_length)
             # car5_position, flag5, num5, shurp_curve = cars_tuple[4].car_move(car5_path, car5_position, num5, shurp_curve, car5_length)
             # car6_position, flag6, num6, shurp_curve = cars_tuple[5].car_move(car6_path, car6_position, num6, shurp_curve, car6_length)
             # car7_position, flag7, num7, shurp_curve = cars_tuple[6].car_move(car7_path, car7_position, num7, shurp_curve, car7_length)
@@ -415,6 +455,19 @@ class VW():
             car1_path.append([px1[i],py1[i]])
             car1_length += np.linalg.norm(np.array(car1_path[i]) - np.array(car1_path[i-1]))
 
+        car1_shortest_path = []
+
+        for i in range(len(car1_path)):
+            if i == 0 or i == len(car1_path)-1:
+                car1_shortest_path.append(car1_path[i])
+            
+            elif i%setting.speed == 0:
+                car1_shortest_path.append(car1_path[i])
+
+        # print("car1_path",len(car1_path))
+        # print("car1_shortest_path",len(car1_shortest_path))
+            
+
         # print("car1_path",car1_path,"car1_path_len",len(car1_path),"car1_length",car1_length)
 
         car2_point = []
@@ -433,6 +486,16 @@ class VW():
             car2_path.append([px2[i],py2[i]])
             car2_length += np.linalg.norm(np.array(car2_path[i]) - np.array(car2_path[i-1]))
 
+        
+        car2_shortest_path = []
+
+        for i in range(len(car2_path)):
+            if i == 0 or i == len(car2_path)-1:
+                car2_shortest_path.append(car2_path[i])
+            
+            elif i//setting.speed == 0:
+                car2_shortest_path.append(car2_path[i])
+
         car3_point = []
         for i in range(len(car3_shortest_path)):
             car3_point.append(car3_vertex_list[car3_shortest_path[i]])
@@ -448,6 +511,15 @@ class VW():
             car3_path.append([px3[i],py3[i]])
             car3_length += np.linalg.norm(np.array(car3_path[i]) - np.array(car3_path[i-1]))
 
+        car3_shortest_path = []
+
+        for i in range(len(car3_path)):
+            if i == 0 or i == len(car3_path)-1:
+                car3_shortest_path.append(car3_path[i])
+            
+            elif i//setting.speed == 0:
+                car3_shortest_path.append(car3_path[i])
+
         car4_point = []
         for i in range(len(car4_shortest_path)):
             car4_point.append(car4_vertex_list[car4_shortest_path[i]])
@@ -462,6 +534,16 @@ class VW():
             # if i == 0 or i//setting.speed == 0 or i == len(px4)-1:
             car4_path.append([px4[i],py4[i]])
             car4_length += np.linalg.norm(np.array(car4_path[i]) - np.array(car4_path[i-1]))
+        
+        car4_shortest_path = []
+
+        for i in range(len(car4_path)):
+            if i == 0 or i == len(car4_path)-1:
+                car4_shortest_path.append(car4_path[i])
+            
+            elif i//setting.speed == 0:
+                car4_shortest_path.append(car4_path[i])
+
         bezier_time_end = time.time()
         bezier_time = bezier_time_end - bezier_time_start
 
@@ -488,10 +570,10 @@ class VW():
         shurp_curve = False
     
         while(flag1==False and flag2==False and flag3==False and flag4==False):
-            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_path, car1_position, num1, shurp_curve, car1_length)
-            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_path, car2_position, num2, shurp_curve, car2_length)
-            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_path, car3_position, num3, shurp_curve, car3_length)
-            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_path, car4_position, num4, shurp_curve, car4_length)
+            car1_position, flag1, num1, shurp_curve = cars_tuple[0].car_move(car1_shortest_path, car1_position, num1, shurp_curve, car1_length)
+            car2_position, flag2, num2, shurp_curve = cars_tuple[1].car_move(car2_shortest_path, car2_position, num2, shurp_curve, car2_length)
+            car3_position, flag3, num3, shurp_curve = cars_tuple[2].car_move(car3_shortest_path, car3_position, num3, shurp_curve, car3_length)
+            car4_position, flag4, num4, shurp_curve = cars_tuple[3].car_move(car4_shortest_path, car4_position, num4, shurp_curve, car4_length)
             # print("car1_position", car1_position)
             collision = Environment.collision_CarToCar(car1_position, car2_position, car3_position, car4_position, collision)
 
@@ -500,9 +582,16 @@ class VW():
         create_path_time_dic = {"vis_graph_time": visibility_time_diff, "dijkstra_time": dijkstra_time_diff, "bezier_time": bezier_time, "create_path_time": visibility_time_diff + dijkstra_time_diff + bezier_time}
 
         all_path_length = car1_length + car2_length + car3_length + car4_length
-        print(all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles)
+        # print(all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles)
 
-        return all_path_length * (total_num_obstacles / (1 * (setting.VWnum ** 2))) + (collision * 1000000) + (shurp_curve * 1000000), collision, all_path_length, total_num_obstacles, create_path_time_dic
+        len_two_steps_list = len(two_steps_list)
+
+        if len_two_steps_list == 0:
+            len_two_steps_list = 1
+
+        print(all_path_length * (total_num_obstacles / (setting.car_num * (len_two_steps_list *((setting.VWnum) ** 2)))) + collision * 1000000)
+
+        return all_path_length * (total_num_obstacles / (setting.car_num * (len_two_steps_list *((setting.VWnum) ** 2)))) + collision * 1000000, collision, all_path_length, total_num_obstacles, create_path_time_dic
 
     def two_steps_ga_setting(best):
         """
@@ -546,13 +635,12 @@ class Environment():
     def collision_CarToCar(car1, car2, car3, car4, collision):
         r = np.sqrt((setting.car_length/2)**2 + (setting.car_width/2)**2)
 
-
         collision_checker1to2 = np.sqrt((car2[0]-car1[0])**2 + (car2[1]-car1[1])**2)
         collision_checker1to3 = np.sqrt((car3[0]-car1[0])**2 + (car3[1]-car1[1])**2)
         collision_checker1to4 = np.sqrt((car4[0]-car1[0])**2 + (car4[1]-car1[1])**2)
         collision_checker2to3 = np.sqrt((car2[0]-car3[0])**2 + (car2[1]-car3[1])**2)
         collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
-        collision_checker3to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
+        collision_checker3to4 = np.sqrt((car3[0]-car4[0])**2 + (car3[1]-car4[1])**2)
         
         # print("hannkkei",r)
         if collision_checker1to2 <= r:
