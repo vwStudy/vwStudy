@@ -2,9 +2,9 @@ import csv
 
 
 def read_csv():
-    with open('./data_folder/3_3_4_1.csv') as f:
+    with open('./data_folder/T字路3_3.csv') as f:
         contents = f.readlines()
-        with open('./data_folder/3_3_4_1.csv', 'a', encoding='utf-8', newline='') as e:
+        with open('./data_folder/T字路3_3.csv', 'a', encoding='utf-8', newline='') as e:
             writer = csv.writer(e)
             gene_size = 8
             popu_size = 8
@@ -17,14 +17,14 @@ def read_csv():
             sum_create_path_time = 0
 
             for content in contents:
-                if 'time' in content:
+                if 'time' in content and 'gen_best' not in content:
                     # 分割
                     time = content.partition(',')
                     # 後ろの部分が欲しい場合は[2]
                     sum_time += float(time[2])
                     #print(sum_time)
 
-                elif 'best_length' in content:
+                elif 'best_length' in content and 'gen_best' not in content:
                     # 分割
                     path_length = content.partition(',')
                     # 後ろの部分が欲しい場合は[2]
@@ -32,27 +32,27 @@ def read_csv():
                     path_length_list.append(float(path_length[2]))
                     # sum_path_length += float(path_length[2])
 
-                elif 'best_collision' in content:
+                elif 'best_collision' in content and 'gen_best' not in content:
                     # 分割
                     collision = content.partition(',')
                     # 後ろの部分が欲しい場合は[2]
                     collision_list.append(float(collision[2]))
                     sum_collision += int(collision[2])
                 
-                elif 'best_evo' in content:
+                elif 'best_evo' in content and 'gen_best' not in content:
                     # 分割
                     best_evo = content.partition(',')
                     # 後ろの部分が欲しい場合は[2]
                     best_evo_list.append(float(best_evo[2]))
                     sum_evo += float(best_evo[2])
                 
-                elif 'best_ge' in content:
+                elif 'best_genom' in content and 'gen_best' not in content:
                     best_genom = content.partition(',')
-                    for i in range(len(best_genom)):
+                    for i in range(len(best_genom[2])):
                         if best_genom[2][i] == "1":
                             sum_obstacle_num += 1
                 
-                elif 'best_create' in content:
+                elif 'best_create' in content and 'gen_best' not in content:
                     # 分割
                     best_create_path_time = content.partition(',')
                     print(best_create_path_time)
@@ -62,8 +62,8 @@ def read_csv():
                     sum_create_path_time += float(best_create_path_time[2])
                     
                 elif 'popu' in content:
-                    if 1<float(path_length_list[gene_size//2-1]):
-                        sum_path_length += float(path_length_list[gene_size//2-1])
+                    if 1<float(path_length_list[gene_size%2-1]):
+                        sum_path_length += float(path_length_list[gene_size%2-1])
                         # print(path_length_list)
                     
                     path_length_list = []
@@ -79,7 +79,7 @@ def read_csv():
                 #     path_length_list = []
 
                 elif '""' in content:
-                    sum_path_length += float(path_length_list[gene_size//2-1])
+                    sum_path_length += float(path_length_list[gene_size%2-1])
                     avg_path_length = sum_path_length/5
                     avg_time = sum_time/5
                     avg_create_path_time = sum_create_path_time/5
