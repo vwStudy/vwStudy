@@ -501,7 +501,7 @@ if __name__ == '__main__':
     populist=setting.population_size #8
     generation = setting.generation_size #8
     genom_size= setting.genom_size
-    with open('./data_folder/comp.csv', 'a', encoding='utf-8', newline='') as f:
+    with open('./data_folder/5way_.csv', 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         for _ in range(4):
             for _ in range(4):
@@ -510,8 +510,8 @@ if __name__ == '__main__':
                     writer.writerow(["popu_size", populist])
                     writer.writerow(["gene_size", generation])
                     start = time.time()
-                    # best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
-                    best, best_popu, generation_list =main(populist, generation , genom_size)
+                    best, best_popu, generation_list =main_two_steps(populist, generation , genom_size)
+                    #best, best_popu, generation_list =main(populist, generation , genom_size)
                     end = time.time()
                     diff = end - start
                     for  i in range(len(best)):
