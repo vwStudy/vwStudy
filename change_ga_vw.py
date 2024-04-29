@@ -404,7 +404,7 @@ class VW():
     #     print(all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 100000)
     #     return all_path_length * (total_num_obstacles / (setting.car_num * (setting.VWnum ** 2))) + collision * 100000, collision, all_path_length
     
-    def two_steps_ga_function(genom,two_steps_list,zeros_list):
+    def two_steps_GA_function(genom,two_steps_list,zeros_list):
         """
         2段階目single,GeneticalAlgorism用の関数
         """
@@ -540,7 +540,12 @@ class VW():
         all_path_length = car1_shortest_length + car2_shortest_length + car3_shortest_length + car4_shortest_length
         # print("all_len::"+str(all_path_length))
 
-        return all_path_length * (total_num_obstacles / (setting.car_num * ((len(two_steps_list)*((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
+        len_two_steps_list = len(two_steps_list)
+
+        if len_two_steps_list == 0:
+            len_two_steps_list = 1
+
+        return all_path_length * (total_num_obstacles / (setting.car_num * ((len_two_steps_list *((setting.VWnum) ** 2))))) + collision * 1000000, collision, all_path_length, total_num_obstacles, cars_path_list
 
     def two_steps_ga_setting(best):
         """
@@ -760,13 +765,12 @@ class Environment():
         #collision_checker = (setting.car_width/2) + 2 #当たり判定の大きさ
         r = np.sqrt((setting.car_length/2)**2 + (setting.car_width/2)**2)
 
-
         collision_checker1to2 = np.sqrt((car2[0]-car1[0])**2 + (car2[1]-car1[1])**2)
         collision_checker1to3 = np.sqrt((car3[0]-car1[0])**2 + (car3[1]-car1[1])**2)
         collision_checker1to4 = np.sqrt((car4[0]-car1[0])**2 + (car4[1]-car1[1])**2)
         collision_checker2to3 = np.sqrt((car2[0]-car3[0])**2 + (car2[1]-car3[1])**2)
         collision_checker2to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
-        collision_checker3to4 = np.sqrt((car2[0]-car4[0])**2 + (car2[1]-car4[1])**2)
+        collision_checker3to4 = np.sqrt((car3[0]-car4[0])**2 + (car3[1]-car4[1])**2)
         
         # print("hannkkei",r)
         if collision_checker1to2 <= r:

@@ -633,7 +633,7 @@ class Environment():
         return wall_edge_list, wall_line_list
 
     def collision_CarToCar(car1, car2, car3, car4, collision):
-        r = np.sqrt((setting.car_length/2)**2 + (setting.car_width/2)**2)/2
+        r = np.sqrt((setting.car_length/2)**2 + (setting.car_width/2)**2)
 
         collision_checker1to2 = np.sqrt((car2[0]-car1[0])**2 + (car2[1]-car1[1])**2)
         collision_checker1to3 = np.sqrt((car3[0]-car1[0])**2 + (car3[1]-car1[1])**2)
