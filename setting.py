@@ -23,7 +23,7 @@ VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
 VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 5
+VWnum :int = 6
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum

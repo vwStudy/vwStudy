@@ -63,7 +63,7 @@ class Car:
         for car in other_cars:
             if car != self:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
-                if car_distance < 1.5*self.radius:
+                if car_distance < 1.8*self.radius:
                     next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
                     potential_step[1] += next_y
@@ -159,29 +159,35 @@ class Obstacle:
 
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
-        x=3
-        y=27
+        #6*6(30,30)
+        #x=2.5
+        #y=27.5
+        #5*5(30,30)
+        x=2.5
+        y=27.5
+        #5*5(20,20)
         #x = 2
         #y = 18
-        obs_radius = 3
+        obs_radius = 2.5
         obs_list = []
-        obstacle_array = np.array(genom.reshape(5, 5))
+        obstacle_array = np.array(genom.reshape(6,6))
         total_num_obstacles = 0
-        for i in range(5):
-            for j in range(5):
+        for i in range(6):
+            for j in range(6):
                 if obstacle_array[i][j] >= 1:
-                    if obstacle_array[0][2] >= 1 or obstacle_array[2][0] >= 1 or obstacle_array[2][4] >= 1 or obstacle_array[4][2] >= 1:
-                        obstacle_array[0][2] = 0
-                        obstacle_array[2][0] = 0
-                        obstacle_array[2][4] = 0
-                        obstacle_array[4][2] = 0
-                    else: 
-                        obs_list.append(Obstacle(np.array([x,y]), obs_radius))
-                        total_num_obstacles += 1
-  
-                x += 6
-            y -= 6
-            x = 3
+                    # if obstacle_array[0][2] >= 1 or obstacle_array[2][0] >= 1 or obstacle_array[2][4] >= 1 or obstacle_array[4][2] >= 1:
+                    #     obstacle_array[0][2] = 0
+                    #     obstacle_array[2][0] = 0
+                    #     obstacle_array[2][4] = 0
+                    #     obstacle_array[4][2] = 0
+                    # else: 
+                    #     obs_list.append(Obstacle(np.array([x,y]), obs_radius))
+                    #     total_num_obstacles += 1
+                    obs_list.append(Obstacle(np.array([x,y]), obs_radius))
+                    total_num_obstacles += 1
+                x += 5
+            y -= 5
+            x = 2.5
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
@@ -200,9 +206,9 @@ class Obstacle:
         #     print("obs",obs.position)
         len_obs = len(obs_list) + 1.0
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
-        return sum(distances) + car_collision_count * 100000000 + obstacle_collision_count * 1000000 + (1/len_obs)*1000, collision_counts, distances
+        return sum(distances) + car_collision_count * 100000000 + obstacle_collision_count * 1000000 + (1/len_obs)*100, collision_counts, distances
 class Simulation:
-    def __init__(self, num_cars=10, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
+    def __init__(self, num_cars=15, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
         self.num_cars = num_cars
         self.step_size = step_size
         self.car_radius = car_radius
@@ -228,7 +234,9 @@ class Simulation:
             #rand_posi_nega = random.random()
             #rand_nega = random.random()
             
-            if random.random()>0.5:
+            rand1 =random.random()
+            rand2 =random.random()
+            if rand1>0.5:
                 #左側スタート
                 start_pos = np.array([0.0,15.0+rand_posi])
                 #右側ゴール
@@ -243,6 +251,11 @@ class Simulation:
                 goal_pos = np.array([14.0+rand_posi2,0.0])
                 #右側ゴール
                 #goal_pos = np.array([30.0,12.0+rand_posi2])
+                #5叉路
+                # if rand2>0.5:
+                #     goal_pos = np.array([6.0+rand_posi2,0.0])
+                # else:
+                #     goal_pos = np.array([21.0+rand_posi2,0.0])
                 self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
         
     def update_positions(self, obs_list, interval):
@@ -322,10 +335,13 @@ class Simulation:
         self.trajectory.append([car.position.copy() for car in self.cars_list])
         
     def simulate_movement(self,obs_list):
-        cnt = 5
+        interval = 5
+        cnt=0
         while self.completion_count != self.num_cars:
-            self.update_positions(obs_list,cnt)
+            self.update_positions(obs_list, interval)
+            interval+=1
             cnt+=1
+            if cnt >1000: return
         return np.array(self.trajectory)
 
     def save_data(self,obs_list):

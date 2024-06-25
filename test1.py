@@ -67,7 +67,7 @@ class AnimationVisualizer:
         # 円の大きさを指定
         car_radius = 1
         end_point_radius = 0.2
-        obstacle_radius = 3
+        obstacle_radius = 2.5
 
         self.car_circles = [plt.Circle((0, 0), car_radius, color='blue', fill=True) for _ in range(len(self.trajectory[0]))]
         self.end_circles = [plt.Circle((0, 0), end_point_radius, color='green', fill=True) for _ in range(len(self.trajectory[0]))]
@@ -85,5 +85,7 @@ class AnimationVisualizer:
         plt.show()
 
 if __name__ == "__main__":
+    for _ in range(100000000):
+        continue
     visualizer = AnimationVisualizer('trajectory.npy', 'obstacles.npy', 'end_positions.npy')
     visualizer.animate()
