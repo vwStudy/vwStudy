@@ -22,14 +22,7 @@ class Car:
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
         potential_step = norm_direction * self.step_size
 
-        # for obstacle in obstacles:
-        #         obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-        #         next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
-        #         potential_step[0] += next_x
-        #         potential_step[1] += next_y
-        #         if obs_distance <= obstacle.radius+self.radius:
-        #             self.collision_count += 1
-        # #壁の人工ポテンシャル法
+        #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
             # if obs_distance <= 2*self.radius:
@@ -39,10 +32,6 @@ class Car:
                 potential_step[1] += next_y
             if obs_distance <= obstacle.radius+self.radius:
                 self.collision_count += 1
-        # for obstacle in obstacles:
-        #     obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-        #     if obs_distance <= self.radius:
-        #         self.collision_count += 1
 
         # 新しい位置を更新
         new_position = self.position + potential_step
@@ -70,13 +59,6 @@ class Car:
                 if car_distance <= 2*self.radius:
                     self.collision_count += 1
 
-        # for obstacle in obstacles:
-        #     obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-        #     next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
-        #     potential_step[0] += next_x
-        #     potential_step[1] += next_y
-        #     if obs_distance <= obstacle.radius+self.radius:
-        #         self.collision_count += 1
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             #print("obsss", obstacle.position)
@@ -88,17 +70,11 @@ class Car:
             if obs_distance <= obstacle.radius + self.radius:
                 self.collision_count += 1
 
-        # for obstacle in obstacles:
-        #     obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-        #     if obs_distance <= self.radius:
-        #         self.collision_count += 1
 
         # 新しい位置を更新
         new_position = self.position + potential_step
         move_distance = np.linalg.norm(potential_step)
-        self.distance_travelled += move_distance
-        #print(new_position)
-        #if int(new_position[0]) == int(self.end_position[0]) and int(new_position[1]) == int(self.end_position[1]): 
+        self.distance_travelled += move_distance 
         
         # new_position[0]= round(new_position[0], 2)
         # new_position[1] = round(new_position[1],2)
@@ -107,7 +83,7 @@ class Car:
             self.reached_end = True
         else:
             self.position = new_position
-        #print(self.position)
+        
     # def reset_position(self, start_position, end_position):
     #     self.position = np.array(start_position)
     #     self.start_position = np.array(start_position)
@@ -119,44 +95,12 @@ class Obstacle:
     def __init__(self, position, radius):
         self.position = np.array(position)
         self.radius = radius
-
-    # def set_virtual_wall(GA_list, VWsize = 2):
-    #     size = VWsize
-    #     field_x = 20
-    #     field_y = 20
-    #     # obstacles_vertex_list = []
-    #     # obstacles_line_list = []
-    #     obstacle_list = []
-    #     total_num_obstacles = 0
-    #     n = 1
-    #     x = 2
-    #     y = 18
-    #     #indexにインデックスをdeploy_checkには値(0,1)が入る.
-
-    #     for oneDivisionList in GA_list:
-    #         for deploy_check in oneDivisionList:
-    #             if deploy_check >= 1:
-    #                 total_num_obstacles += 1
-    #                 #左上からvwを配置していく
-    #                 obstacle_list.append(1)
-    #             else:
-    #                 obstacle_list.append(0)
-    #             x += 4
-    #         y -= 4     
-    #     return obstacle_list
     
     def single_GA_function(genom):
         """
         GeneticalAlgorism用の関数
         """
         
-        # car_ga_array = [[[]]*5]
-        # ga_array = np.array(genom.reshape(2, 5, 5))
-        # for i in range(len(ga_array)):
-        #     for j in range(len(ga_array[i])):
-        #         l = list(ga_array[i][j])
-        #         car_ga_array[i][j] = l
-
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         #6*6(30,30)
@@ -214,14 +158,6 @@ class Simulation:
         self.car_radius = car_radius
         self.x_max = x_max
         self.y_max = y_max
-        #self.max_completions = max_completions
-        # self.cars = [Car(np.random.randint(0, 20, size=2), np.random.randint(0, 19, size=2), step_size, car_radius) for _ in range(num_cars)]
-        # self.cars = [(Car(np.array([0,15]), np.array([20,15]), step_size, car_radius))  for _ in range(num_cars)]
-        # self.cars.append(Car(np.array([0,15]), np.array([20,15]), step_size, car_radius))
-        # self.cars.append(Car(np.array([13,20]), np.array([13,0]), step_size, car_radius))
-        #self.obstacles = [Obstacle(np.random.rand(2) * (x_max - 2 * car_radius) + car_radius, car_radius) for _ in range(num_obstacles)]
-        #self.obstacles = [Obstacle(np.array([8+i,8+i]), car_radius) for i in range(num_obstacles)]
-        # self.obstacles = Obstacle.set_virtual_wall
         self.cars_list = []
         self.completion_count = 0
         self.trajectory = []
@@ -231,8 +167,6 @@ class Simulation:
             #スタートゴール用+-ランダム
             rand_posi = random.randint(0, 4)
             rand_posi2 = random.randint(0, 4)
-            #rand_posi_nega = random.random()
-            #rand_nega = random.random()
             
             rand1 =random.random()
             rand2 =random.random()
