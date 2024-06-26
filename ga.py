@@ -184,10 +184,13 @@ populist=setting.population_size #8
 generation = setting.generation_size #8
 genom_size= setting.genom_size
 best, best_popu, generation_list = main(populist, generation , genom_size)
-#print("best",best)
+#print("best",np.array([obstacle.position for obstacle in best]))
 print("best_popu",best_popu.genom)
-# print("generation_lsit",generation_list[0])
-    # np.save('trajectory.npy', np.array(self.trajectory))
+objectVW_test.Obstacle.single_GA_function(best_popu.genom)
+
+
+#np.save('obstacles.npy', np.array([obstacle for obstacle in obs_list]))
+# np.save('trajectory.npy', np.array(self.trajectory))
 # np.save('obstacles.npy', np.array(best_popu.genom))
     # np.save('obstacles.npy', np.array([obstacle.position for obstacle in obs_list]))
     # np.save('end_positions.npy', np.array([car.end_position for car in self.cars]))

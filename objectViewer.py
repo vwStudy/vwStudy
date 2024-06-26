@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+
 class AnimationVisualizer:
-    def __init__(self, trajectory_file='trajectory.npy', obstacles_file='obstacles.npy', end_positions_file='end_positions.npy', line_length=1.0):
+    def __init__(self, trajectory_file='trajectory_test.npy', obstacles_file='obstacles_test.npy', end_positions_file='end_positions_test.npy', line_length=1.0):
         self.trajectory = np.load(trajectory_file)
         self.obstacles = np.load(obstacles_file, allow_pickle=True)
         self.end_positions = np.load(end_positions_file)
@@ -67,7 +68,7 @@ class AnimationVisualizer:
         # 円の大きさを指定
         car_radius = 1
         end_point_radius = 0.2
-        obstacle_radius = 2.5
+        obstacle_radius = 1.5
 
         self.car_circles = [plt.Circle((0, 0), car_radius, color='blue', fill=True) for _ in range(len(self.trajectory[0]))]
         self.end_circles = [plt.Circle((0, 0), end_point_radius, color='green', fill=True) for _ in range(len(self.trajectory[0]))]
@@ -87,5 +88,5 @@ class AnimationVisualizer:
 if __name__ == "__main__":
     for _ in range(100000000):
         continue
-    visualizer = AnimationVisualizer('trajectory.npy', 'obstacles.npy', 'end_positions.npy')
+    visualizer = AnimationVisualizer('trajectory_test.npy', 'obstacles_test.npy', 'end_positions_test.npy')
     visualizer.animate()

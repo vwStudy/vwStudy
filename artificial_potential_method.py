@@ -8,8 +8,6 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   tmp_pot = 0
   potential_max = 1
   potential_min = -1
-  # weight_obst = 0.3
-  # weight_goal = 8
   weight_obst = 0.3
   weight_goal = 8
 
@@ -92,7 +90,7 @@ def car_cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   tmp_pot = 0
   potential_max = 1
   potential_min = -1
-  weight_obst = 0.4
+  weight_obst = 0.2
   weight_goal = 8
 
   # 障害物がないとき(Noneがはいっている)
