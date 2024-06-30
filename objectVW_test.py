@@ -2,6 +2,7 @@ import numpy as np
 import random
 import artificial_potential_method as apm
 import copy
+import setting
 
 class Car:
     def __init__(self, start_position, end_position, step_size=1.0, radius=1.0):
@@ -26,7 +27,7 @@ class Car:
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
             # if obs_distance <= 2*self.radius:
-            if obs_distance < 1.5*obstacle.radius:
+            if obs_distance < 1.4*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -63,7 +64,7 @@ class Car:
         for obstacle in obstacles:
             #print("obsss", obstacle.position)
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance < obstacle.radius + self.radius:
+            if obs_distance < 1.4*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -153,8 +154,9 @@ class Obstacle:
         #     print("obs",obs.position)
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
         #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len_obs)*100, collision_counts, distances
+        vwnum=setting.VWnum
         if len(obs_list)>0:
-            return sum(distances)*100/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000, collision_counts, distances
+            return sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000, collision_counts, distances
         else:
             return sum(distances) + car_collision_count * 10000000 + obstacle_collision_count * 10000000 , collision_counts, distances
 class Simulation:

@@ -68,7 +68,7 @@ class AnimationVisualizer:
         # 円の大きさを指定
         car_radius = 1
         end_point_radius = 0.2
-        obstacle_radius = 1.5
+        obstacle_radius = 3
 
         self.car_circles = [plt.Circle((0, 0), car_radius, color='blue', fill=True) for _ in range(len(self.trajectory[0]))]
         self.end_circles = [plt.Circle((0, 0), end_point_radius, color='green', fill=True) for _ in range(len(self.trajectory[0]))]
