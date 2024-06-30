@@ -86,7 +86,7 @@ class AnimationVisualizer:
         plt.show()
 
 if __name__ == "__main__":
-    for _ in range(100000000):
-        continue
+    # for _ in range(100000000):
+    #     continue
     visualizer = AnimationVisualizer('trajectory_test.npy', 'obstacles_test.npy', 'end_positions_test.npy')
     visualizer.animate()

@@ -9,7 +9,7 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   potential_max = 1
   potential_min = -1
   weight_obst = 0.3
-  weight_goal = 8
+  weight_goal = 7
 
   # 障害物がないとき(Noneがはいっている)
   if obst_target_x == None or obst_target_y == None:

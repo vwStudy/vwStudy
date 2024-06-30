@@ -90,7 +90,7 @@ def select_tonament(population_list):
     select = []
     winner = []
     toname = len(population_list)-2
-  
+   
     # ###トーナメント
     # #上位50%のpopulationをとる
     # #とってきた中からランダムで二つとり、評価値で比較し小さい方を採用していって最終的に二つまで絞る
@@ -186,9 +186,10 @@ genom_size= setting.genom_size
 best, best_popu, generation_list = main(populist, generation , genom_size)
 #print("best",np.array([obstacle.position for obstacle in best]))
 print("best_popu",best_popu.genom)
-objectVW_test.Obstacle.single_GA_function(best_popu.genom)
-
-
+#objectVW_test.Obstacle.single_GA_function(best_popu.genom)
+min_best = min(best, key=Individual.get_fitness)
+objectVW_test.Obstacle.single_GA_function(min_best.genom)
+print("min_best",min_best.genom)
 #np.save('obstacles.npy', np.array([obstacle for obstacle in obs_list]))
 # np.save('trajectory.npy', np.array(self.trajectory))
 # np.save('obstacles.npy', np.array(best_popu.genom))

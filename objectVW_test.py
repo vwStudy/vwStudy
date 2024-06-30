@@ -154,7 +154,7 @@ class Obstacle:
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
         #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len_obs)*100, collision_counts, distances
         if len(obs_list)>0:
-            return sum(distances) + car_collision_count * 10000000 + obstacle_collision_count * 10000000 + (1/len(obs_list))*1000, collision_counts, distances
+            return sum(distances)*100/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000, collision_counts, distances
         else:
             return sum(distances) + car_collision_count * 10000000 + obstacle_collision_count * 10000000 , collision_counts, distances
 class Simulation:
