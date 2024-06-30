@@ -105,23 +105,23 @@ class Obstacle:
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         #10*10
-        # x=1.5
-        # y=28.5
+        x=1.5
+        y=28.5
         #6*6(30,30)
         # x=3
         # y=27
         #5*5(30,30)
-        x=3
-        y=27
+        # x=3
+        # y=27
         #5*5(20,20)
         #x = 2
         #y = 18
-        obs_radius = 3
+        obs_radius = 1.5
         obs_list = []
-        obstacle_array = np.array(genom.reshape(5,5))
+        obstacle_array = np.array(genom.reshape(10,10))
         total_num_obstacles = 0
-        for i in range(5):
-            for j in range(5):
+        for i in range(10):
+            for j in range(10):
                 if obstacle_array[i][j] >= 1:
                     # if obstacle_array[0][2] >= 1 or obstacle_array[2][0] >= 1 or obstacle_array[2][4] >= 1 or obstacle_array[4][2] >= 1:
                     #     obstacle_array[0][2] = 0
@@ -133,9 +133,9 @@ class Obstacle:
                     #     total_num_obstacles += 1
                     obs_list.append(Obstacle(np.array([x,y]), obs_radius))
                     total_num_obstacles += 1
-                x += 6
-            y -= 6
-            x = 3
+                x += 3
+            y -= 3
+            x = 1.5
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
