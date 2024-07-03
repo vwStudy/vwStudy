@@ -64,7 +64,7 @@ class Car:
         for obstacle in obstacles:
             #print("obsss", obstacle.position)
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance < 1.4*obstacle.radius:
+            if obs_distance < 1.5*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -105,23 +105,23 @@ class Obstacle:
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         #10*10
-        x=1.5
-        y=28.5
+        # x=1.5
+        # y=28.5
         #6*6(30,30)
         # x=3
         # y=27
         #5*5(30,30)
-        # x=3
-        # y=27
+        x=3
+        y=27
         #5*5(20,20)
         #x = 2
         #y = 18
-        obs_radius = 1.5
+        obs_radius = 3
         obs_list = []
-        obstacle_array = np.array(genom.reshape(10,10))
+        obstacle_array = np.array(genom.reshape(5,5))
         total_num_obstacles = 0
-        for i in range(10):
-            for j in range(10):
+        for i in range(5):
+            for j in range(5):
                 if obstacle_array[i][j] >= 1:
                     # if obstacle_array[0][2] >= 1 or obstacle_array[2][0] >= 1 or obstacle_array[2][4] >= 1 or obstacle_array[4][2] >= 1:
                     #     obstacle_array[0][2] = 0
@@ -133,9 +133,9 @@ class Obstacle:
                     #     total_num_obstacles += 1
                     obs_list.append(Obstacle(np.array([x,y]), obs_radius))
                     total_num_obstacles += 1
-                x += 3
-            y -= 3
-            x = 1.5
+                x += 6
+            y -= 6
+            x = 3
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
@@ -156,6 +156,7 @@ class Obstacle:
         #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len_obs)*100, collision_counts, distances
         vwnum=setting.VWnum
         if len(obs_list)>0:
+            #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len(obs_list))*1000, collision_counts, distances
             return sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000, collision_counts, distances
         else:
             return sum(distances) + car_collision_count * 10000000 + obstacle_collision_count * 10000000 , collision_counts, distances
@@ -190,9 +191,9 @@ class Simulation:
                 #上側スタート
                 start_pos = np.array([14.0+rand_posi,30.0])
                 #下側ゴール
-                #goal_pos = np.array([14.0+rand_posi2,0.0])
+                goal_pos = np.array([14.0+rand_posi2,0.0])
                 #右側ゴール
-                goal_pos = np.array([30.0,15.0+rand_posi2])
+                #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #5叉路
                 # if rand2>0.5:
                 #     goal_pos = np.array([6.0+rand_posi2,0.0])
