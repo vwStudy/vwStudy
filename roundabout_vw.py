@@ -25,13 +25,12 @@ class Car:
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            # if obs_distance <= 2*self.radius:
+            if obs_distance <= obstacle.radius+self.radius:
+                self.obstacle_collision_count += 1
             if obs_distance < 2*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
-            if obs_distance <= obstacle.radius+self.radius:
-                self.obstacle_collision_count += 1
 
         # 新しい位置を更新
         new_position = self.position + potential_step
@@ -50,26 +49,24 @@ class Car:
 
         #他の車の人工ポテンシャル法
         for car in other_cars:
-            if car != self:
+            if car != self and car.reached_end == False:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
-                if car_distance < 3*self.radius:
+                if car_distance <= 2*self.radius:
+                    self.collision_count += 1
+                if car_distance < 2.7*self.radius:
                     next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
                     potential_step[1] += next_y
-                if car_distance <= 2*self.radius:
-                    self.collision_count += 1
 
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
-            #print("obsss", obstacle.position)
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance < 2*obstacle.radius:
+            if obs_distance <= 2.2*obstacle.radius:
+                self.obstacle_collision_count += 1
+            if obs_distance < 2.5*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
-            if obs_distance <= obstacle.radius + self.radius:
-                self.obstacle_collision_count += 1
-
 
         # 新しい位置を更新
         new_position = self.position + potential_step
@@ -148,7 +145,8 @@ class Obstacle:
             collision_counts = car_collision_count + obstacle_collision_count
         print("car_collision",car_collision_count)
         print("obs_collision",obstacle_collision_count)
-        #print("obs_len",len(obs_list))
+        print("distances",sum(distances))
+        
         # for obs in obs_list:
         #     print("obs",obs.position)
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
@@ -302,8 +300,8 @@ class Simulation:
     def get_collision_counts(self):
         return [(car.collision_count, car.obstacle_collision_count) for car in self.cars_list]
 
-if __name__ == '__main__':
-    genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
-    #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    genom_array = np.array(genom_list)
-    Obstacle.single_GA_function(genom_array)
+# if __name__ == '__main__':
+#     genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
+#     #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+#     genom_array = np.array(genom_list)
+#     Obstacle.single_GA_function(genom_array)
