@@ -176,10 +176,11 @@ class Simulation:
             
             rand1 =random.random()
             rand2 =random.random()
-            if rand1>0.5:
+            if rand1>0.7:
                 #左側スタート
-                # start_pos = np.array([0.0,15.0+rand_posi])
-                start_pos = np.array([0.0,5.0])
+                #start_pos = np.array([0.0,15.0+rand_posi])
+                start_pos = np.array([0.0,15.0])
+                #start_pos = np.array([0.0,5.0])
                 #右側ゴール
                 goal_pos = np.array([30.0,14.0])
                 #下側ゴール
@@ -188,16 +189,19 @@ class Simulation:
             else:
                 #上側スタート
                 #start_pos = np.array([14.0+rand_posi,30.0])
-                start_pos = np.array([4.0,30.0])
+                start_pos = np.array([14.0,30.0])
+                #start_pos = np.array([4.0,30.0])
                 #下側ゴール
-                goal_pos = np.array([14.0,0.0])
+                #goal_pos = np.array([14.0,0.0])
                 #右側ゴール
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #5叉路
-                # if rand2>0.5:
-                #     goal_pos = np.array([6.0+rand_posi2,0.0])
-                # else:
-                #     goal_pos = np.array([21.0+rand_posi2,0.0])
+                if rand2>0.5:
+                    goal_pos = np.array([6.0,0.0])
+                    #goal_pos = np.array([6.0+rand_posi2,0.0])
+                else:
+                    goal_pos = np.array([21.0,0.0])
+                    # goal_pos = np.array([21.0+rand_posi2,0.0])
                 self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
         
     def update_positions(self, obs_list, interval):
@@ -300,8 +304,8 @@ class Simulation:
     def get_collision_counts(self):
         return [(car.collision_count, car.obstacle_collision_count) for car in self.cars_list]
 
-# if __name__ == '__main__':
-#     genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
-#     #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-#     genom_array = np.array(genom_list)
-#     Obstacle.single_GA_function(genom_array)
+if __name__ == '__main__':
+    genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
+    #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    genom_array = np.array(genom_list)
+    Obstacle.single_GA_function(genom_array)
