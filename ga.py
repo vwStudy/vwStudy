@@ -180,6 +180,7 @@ def main(popu_size, gene_size, genom_size):
 
 # if __name__ == '__main__':
 #車10台,10台で遺伝子数64,世代数32同時にゴール2つ良さげな結果
+
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
