@@ -3,6 +3,7 @@ import random
 import artificial_potential_method as apm
 import copy
 import setting
+import csv
 
 class Car:
     def __init__(self, start_position, end_position, step_size=1.0, radius=1.0):
@@ -100,6 +101,7 @@ class Obstacle:
         self.radius = radius
     
     def single_GA_function(genom):
+        
         """
         GeneticalAlgorism用の関数
         """
@@ -107,23 +109,23 @@ class Obstacle:
         #ToDo 以下の処理は変える必要がある
         #遺伝的アルゴリズムの結果に対しVWを設置
         #10*10
-        # x=1.5
-        # y=28.5
+        x=1.5
+        y=28.5
         #6*6(30,30)
         # x=3
         # y=27
         #5*5(30,30)
-        x=3
-        y=27
+        # x=3
+        # y=27
         #5*5(20,20)
         #x = 2
         #y = 18
-        obs_radius = 3
+        obs_radius = 1.5
         obs_list = []
-        obstacle_array = np.array(genom.reshape(5,5))
+        obstacle_array = np.array(genom.reshape(10,10))
         total_num_obstacles = 0
-        for i in range(5):
-            for j in range(5):
+        for i in range(10):
+            for j in range(10):
                 if obstacle_array[i][j] >= 1:
                     # if obstacle_array[0][2] >= 1 or obstacle_array[2][0] >= 1 or obstacle_array[2][4] >= 1 or obstacle_array[4][2] >= 1:
                     #     obstacle_array[0][2] = 0
@@ -135,8 +137,8 @@ class Obstacle:
                     #     total_num_obstacles += 1
                     obs_list.append(Obstacle(np.array([x,y]), obs_radius))
                     total_num_obstacles += 1
-                x += 6
-            y -= 6
+                x += 3
+            y -= 3
             x = 3
         
         simulation = Simulation()
@@ -183,12 +185,12 @@ class Simulation:
             
             rand1 =random.random()
             rand2 =random.random()
-            if rand1>0.7:
+            if rand1>0.5:
             # if cnt<=7: 
                 #左側スタート
                 #start_pos = np.array([0.0,15.0+rand_posi])
-                start_pos = np.array([0.0,15.0])
-                # start_pos = np.array([0.0,5.0])
+                #start_pos = np.array([0.0,15.0])
+                start_pos = np.array([0.0,5.0])
                 #右側ゴール
                 goal_pos = np.array([30.0,14.0])
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
@@ -199,20 +201,20 @@ class Simulation:
             else:
                 #上側スタート
                 #start_pos = np.array([14.0+rand_posi,30.0])
-                start_pos = np.array([14.0,30.0])
-                #start_pos = np.array([4.0,30.0])
+                #start_pos = np.array([14.0,30.0])
+                start_pos = np.array([4.0,30.0])
                 #下側ゴール
                 #goal_pos = np.array([14.0+rand_posi2,0.0])
-                #goal_pos = np.array([14.0,0.0])
+                goal_pos = np.array([14.0,0.0])
                 #右側ゴール
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #5叉路
-                if rand2>0.5:
-                    # goal_pos = np.array([6.0+rand_posi2,0.0])
-                    goal_pos = np.array([6.0,0.0])
-                else:
-                    # goal_pos = np.array([21.0+rand_posi2,0.0])
-                    goal_pos = np.array([21.0,0.0])
+                # if rand2>0.5:
+                #     # goal_pos = np.array([6.0+rand_posi2,0.0])
+                #     goal_pos = np.array([6.0,0.0])
+                # else:
+                #     # goal_pos = np.array([21.0+rand_posi2,0.0])
+                #     goal_pos = np.array([21.0,0.0])
                 self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
         
     def update_positions(self, obs_list, interval):

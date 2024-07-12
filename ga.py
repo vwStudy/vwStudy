@@ -2,6 +2,7 @@ import numpy as np
 import random
 import setting
 import objectVW_test
+import csv
 
 class Individual:
     def __init__(self,genom, fitness):
@@ -183,16 +184,24 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-best, best_popu, generation_list = main(populist, generation , genom_size)
-#print("best",np.array([obstacle.position for obstacle in best]))
-print("best_popu",best_popu.genom)
-#objectVW_test.Obstacle.single_GA_function(best_popu.genom)
-min_best = min(best, key=Individual.get_fitness)
-objectVW_test.Obstacle.single_GA_function(min_best.genom)
-print("min_best",min_best.genom)
-#np.save('obstacles.npy', np.array([obstacle for obstacle in obs_list]))
-# np.save('trajectory.npy', np.array(self.trajectory))
-# np.save('obstacles.npy', np.array(best_popu.genom))
+with open('4叉路ga_10×10.csv', 'w') as f:
+    writer = csv.writer(f)
+    for i in range(15):
+        best, best_popu, generation_list = main(populist, generation , genom_size)
+        #print("best",np.array([obstacle.position for obstacle in best]))
+        print("best_popu",best_popu.genom)
+        #objectVW_test.Obstacle.single_GA_function(best_popu.genom)
+        min_best = min(best, key=Individual.get_fitness)
+        fitness, colision, distances= objectVW_test.Obstacle.single_GA_function(min_best.genom)
+        print("test1",colision)
+        print("test2",sum(distances))
+        print("min_best",min_best.genom)
+        writer.writerow(["colision",colision])
+        writer.writerow(["distances",sum(distances)])
+        writer.writerow(["genom",min_best.genom])
+    #np.save('obstacles.npy', np.array([obstacle for obstacle in obs_list]))
+    # np.save('trajectory.npy', np.array(self.trajectory))
+    # np.save('obstacles.npy', np.array(best_popu.genom))
     # np.save('obstacles.npy', np.array([obstacle.position for obstacle in obs_list]))
     # np.save('end_positions.npy', np.array([car.end_position for car in self.cars]))
 

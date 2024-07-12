@@ -2,6 +2,7 @@ import numpy as np
 import random
 import artificial_potential_method as apm
 import setting
+import csv
 
 class Car:
     def __init__(self, start_position, end_position, step_size=1.0, radius=1.0):
@@ -180,7 +181,7 @@ class Simulation:
                 #左側スタート
                 #start_pos = np.array([0.0,15.0+rand_posi])
                 start_pos = np.array([0.0,15.0])
-                #start_pos = np.array([0.0,5.0])
+                # start_pos = np.array([0.0,5.0])
                 #右側ゴール
                 goal_pos = np.array([30.0,14.0])
                 #下側ゴール
@@ -192,7 +193,7 @@ class Simulation:
                 start_pos = np.array([14.0,30.0])
                 #start_pos = np.array([4.0,30.0])
                 #下側ゴール
-                #goal_pos = np.array([14.0,0.0])
+                # goal_pos = np.array([14.0,0.0])
                 #右側ゴール
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #5叉路
@@ -201,7 +202,7 @@ class Simulation:
                     #goal_pos = np.array([6.0+rand_posi2,0.0])
                 else:
                     goal_pos = np.array([21.0,0.0])
-                    # goal_pos = np.array([21.0+rand_posi2,0.0])
+                    goal_pos = np.array([21.0+rand_posi2,0.0])
                 self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
         
     def update_positions(self, obs_list, interval):
@@ -304,8 +305,17 @@ class Simulation:
     def get_collision_counts(self):
         return [(car.collision_count, car.obstacle_collision_count) for car in self.cars_list]
 
-if __name__ == '__main__':
-    genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
-    #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    genom_array = np.array(genom_list)
-    Obstacle.single_GA_function(genom_array)
+
+with open('5叉路_roundabout.csv', 'a') as f:
+    writer = csv.writer(f)
+    for i in range(15):
+        if __name__ == '__main__':
+            genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
+            #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            genom_array = np.array(genom_list)
+            fitness, colision, distances = Obstacle.single_GA_function(genom_array)
+            print("test1",colision)
+            print("test2",sum(distances))
+            writer.writerow(["colision",colision])
+            writer.writerow(["distances",sum(distances)])
+            
