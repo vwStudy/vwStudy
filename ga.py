@@ -140,6 +140,9 @@ def ga_solve(populations, gene_size):
     for i in range(gene_size):
         
         best_popu = min(populations, key=Individual.get_fitness)
+        # for popu in populations:
+        #     print("popuu",popu.genom)
+        # print("bestttt",best_popu.genom)
         best.append(best_popu)
       
         generation_list.append(populations)
@@ -181,20 +184,23 @@ def main(popu_size, gene_size, genom_size):
 
 # if __name__ == '__main__':
 #車10台,10台で遺伝子数64,世代数32同時にゴール2つ良さげな結果
+
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('4叉路ga_10×10.csv', 'w') as f:
+with open('5×5_newnew5叉路ga.csv', 'w') as f:
     writer = csv.writer(f)
-    for i in range(15):
+    for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
         #print("best",np.array([obstacle.position for obstacle in best]))
-        print("best_popu",best_popu.genom)
         #objectVW_test.Obstacle.single_GA_function(best_popu.genom)
+        #for i in best:
+        #    print("best_best",i.genom)
         min_best = min(best, key=Individual.get_fitness)
         fitness, colision, distances= objectVW_test.Obstacle.single_GA_function(min_best.genom)
-        print("test1",colision)
-        print("test2",sum(distances))
+        print("fitness", fitness)
+        print("colision",colision)
+        print("distance",sum(distances))
         print("min_best",min_best.genom)
         writer.writerow(["colision",colision])
         writer.writerow(["distances",sum(distances)])

@@ -23,7 +23,7 @@ VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
 VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
 
 ##VWの数
-VWnum :int = 10
+VWnum :int = 5
 
 ##VWの大きさ
 VWsize :int = VWfield/VWnum
@@ -46,8 +46,8 @@ car_num :int = 1
 # car_num :int = 8
 
 genom_size = VWnum**2
-population_size = 256
-generation_size = 256
+population_size = 32
+generation_size = 32
 
 two_steps_population_size = 20
 two_steps_generation_size = 20

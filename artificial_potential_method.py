@@ -8,8 +8,12 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   tmp_pot = 0
   potential_max = 1
   potential_min = -1
-  weight_obst = 0.9
-  weight_goal = 0.4
+  # weight_obst = 0.9
+  weight_obst = 0.25
+  # weight_goal = 0.4
+  # weight_goal = 0.5
+  # weight_goal = 15
+  weight_goal = 0.36
 
   # 障害物がないとき(Noneがはいっている)
   if obst_target_x == None or obst_target_y == None:
@@ -19,7 +23,7 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   elif obst_target_x == x and obst_target_y == y:
     obst_pot = potential_max
   else:
-    obst_pot =  1 / math.sqrt(pow((x - obst_target_x), 2) + pow((y - obst_target_y), 2))
+    obst_pot =  1 / np.exp(math.sqrt(pow((x - obst_target_x), 2) + pow((y - obst_target_y), 2)))
     obst_pot += obst_pot * weight_obst
 
   tmp_pot += obst_pot
@@ -90,9 +94,9 @@ def car_cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   tmp_pot = 0
   potential_max = 1
   potential_min = -1
-  weight_obst = 0.7
-  weight_goal = 0.8
-
+  weight_obst = 0.1
+  weight_goal = 1
+  
   # 障害物がないとき(Noneがはいっている)
   if obst_target_x == None or obst_target_y == None:
     obst_pot = 0
