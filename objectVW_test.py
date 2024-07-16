@@ -27,7 +27,7 @@ class Car:
         # #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance < 1.4*obstacle.radius:
+            if obs_distance <= self.radius+obstacle.radius:
                 self.obstacle_collision_count += 1
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
@@ -52,7 +52,7 @@ class Car:
         for car in other_cars:
             if car != self and car.reached_end == False:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
-                if car_distance < 2*self.radius:
+                if car_distance <= 2.5*self.radius:
                     self.collision_count += 1 
                     next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
@@ -61,7 +61,7 @@ class Car:
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance < 1.4*obstacle.radius:
+            if obs_distance <= self.radius+obstacle.radius:
                 self.obstacle_collision_count += 1
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
@@ -74,7 +74,7 @@ class Car:
         
         # new_position[0]= round(new_position[0], 2)
         # new_position[1] = round(new_position[1],2)
-        if np.linalg.norm(new_position - self.end_position) < self.step_size:
+        if np.linalg.norm(new_position - self.end_position) <= 2.5*self.step_size:
             self.position = self.end_position.copy()
             self.reached_end = True
         else:
@@ -163,7 +163,7 @@ class Obstacle:
             #print("test2", sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000)
             return sum(distances) + collision_counts * 10000000 , collision_counts, distances
 class Simulation:
-    def __init__(self, num_cars=15, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
+    def __init__(self, num_cars=30, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
         self.num_cars = num_cars
         self.step_size = step_size
         self.car_radius = car_radius
@@ -179,38 +179,51 @@ class Simulation:
             #スタートゴール用+-ランダム
             rand_posi = random.randint(0, 3)
             rand_posi2 = random.randint(0, 3)
-            
             rand1 =random.random()
             rand2 =random.random()
             # if rand1>0.7:
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #下側ゴール
                 #goal_pos = np.array([14.0+rand_posi2,0.0])
-            #3叉路のパターン
-            if cnt%2==0:
+            #3叉路のパターン(双方方向通行)
+            if cnt%6==0:
                 start_pos = np.array([0.0,15.0])#左側
                 goal_pos = np.array([30.0,14.0])#右側
+            elif cnt%6==1:
+                start_pos = np.array([30.0,15.0])#右側
+                goal_pos = np.array([0.0,14.0])#左側
+            elif cnt%6==2:
+                start_pos = np.array([0.0,15.0])#左側
+                goal_pos = np.array([14.0,30.0])#上側
+            elif cnt%6==3:
+                start_pos = np.array([30.0,15.0])#右側
+                goal_pos = np.array([15.0,30.0])#上側
+            elif cnt%6==4:
+                start_pos = np.array([14.0,30.0])#上側
+                goal_pos = np.array([0.0,15.0])#左側
+            #3叉路のパターン(1方向通行)
+            # if cnt%2==0:
+            #     start_pos = np.array([0.0,15.0])#左側
+            #     goal_pos = np.array([30.0,14.0])#右側
             #5叉路のパターン
             #if cnt%3==1: 
             #    start_pos = np.array([0.0,15.0])#左側
             #    goal_pos = np.array([30.0,14.0])#右側
-                cnt+=1
-                self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
             else:
                 #start_pos = np.array([4.0,30.0])
                 #下側ゴール
                 #goal_pos = np.array([14.0+rand_posi2,0.0])
                 # goal_pos = np.array([15.0,0.0])
                 #3叉路のパターン
-                start_pos = np.array([14.0,30.0])#上側
-                goal_pos = np.array([30.0,14.0])#右側
+                start_pos = np.array([15.0,30.0])#上側
+                goal_pos = np.array([30.0,15.0])#右側
                 #5叉路のパターン
                 # if cnt%3==2:
                 #     goal_pos = np.array([8.0,0.0])#左下
                 # else:
                 #     goal_pos = np.array([21.0,0.0])#右下
-                cnt += 1
-                self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
+            cnt += 1
+            self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
         
     def update_positions(self, obs_list, interval):
         # #乱数を振って閾値以下だったら車を生成

@@ -188,7 +188,7 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('5×5_new5叉路ga.csv', 'w') as f:
+with open('5×5_new3叉路ga.csv', 'w') as f:
     writer = csv.writer(f)
     for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
