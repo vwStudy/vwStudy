@@ -175,12 +175,10 @@ def create_generation(popu_size, genoms, fitness):
     #print("population::", population[0].genom)#8個のインスタンスが入った1次元リストだけど、individualの中にvwnum*2の大きさのリストある
     return population
 
-
 def main(popu_size, gene_size, genom_size):
     fitness = objectVW_test.Obstacle.single_GA_function
     populations = create_generation(popu_size, genom_size, fitness)
     return ga_solve(populations, gene_size)
-
 
 # if __name__ == '__main__':
 #車10台,10台で遺伝子数64,世代数32同時にゴール2つ良さげな結果
@@ -188,7 +186,7 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('10×10_ga_3叉路双方向.csv', 'w') as f:
+with open('10×10_ga_3叉路一方向通行.csv', 'w') as f:
     writer = csv.writer(f)
     for i in range(5):
         best, best_popu, generation_list = main(populist, generation , genom_size)

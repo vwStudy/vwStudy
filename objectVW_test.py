@@ -199,10 +199,10 @@ class Simulation:
             #     goal_pos = np.array([0.0,15.0])#左側
             #3叉路のパターン(1方向通行)
             if cnt%3==0:
-                start_pos = np.array([0.0,15.0])#左側
-                goal_pos = np.array([30.0,14.0])#右側
+                start_pos = np.array([0.0,14.0])#左側
+                goal_pos = np.array([30.0,15.0])#右側
             elif cnt%3==1:
-                start_pos = np.array([30.0,15.0])#右側
+                start_pos = np.array([30.0,14.0])#右側
                 goal_pos = np.array([15.0,30.0])#上側
             #4叉路のパターン(双方向)
             # if cnt%4==0:
