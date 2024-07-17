@@ -135,7 +135,7 @@ class Obstacle:
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
-        print("doing")
+        #print("doing")
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
         simulation.save_data(obs_list)
         collision_counts=0
@@ -157,10 +157,10 @@ class Obstacle:
         vwnum=setting.genom_size
         if len(obs_list)>0:
             #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len(obs_list))*1000, collision_counts, distances
-            #print("test1", sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000)
+            #print("fitness", sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000)
             return sum(distances)*vwnum/len(obs_list) + collision_counts * 10000000, collision_counts, distances
         else:
-            #print("test2", sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000)
+            #print("fitness", sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000)
             return sum(distances) + collision_counts * 10000000 , collision_counts, distances
 class Simulation:
     def __init__(self, num_cars=30, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
@@ -182,25 +182,28 @@ class Simulation:
             # rand1 =random.random()
             # rand2 =random.random()
             #3叉路のパターン(双方方向通行)
-            if cnt%6==0:
-                start_pos = np.array([0.0,15.0])#左側
-                goal_pos = np.array([30.0,14.0])#右側
-            elif cnt%6==1:
-                start_pos = np.array([30.0,15.0])#右側
-                goal_pos = np.array([0.0,14.0])#左側
-            elif cnt%6==2:
-                start_pos = np.array([0.0,15.0])#左側
-                goal_pos = np.array([14.0,30.0])#上側
-            elif cnt%6==3:
-                start_pos = np.array([30.0,15.0])#右側
-                goal_pos = np.array([15.0,30.0])#上側
-            elif cnt%6==4:
-                start_pos = np.array([14.0,30.0])#上側
-                goal_pos = np.array([0.0,15.0])#左側
-            #3叉路のパターン(1方向通行)
-            # if cnt%2==0:
+            # if cnt%6==0:
             #     start_pos = np.array([0.0,15.0])#左側
             #     goal_pos = np.array([30.0,14.0])#右側
+            # elif cnt%6==1:
+            #     start_pos = np.array([30.0,15.0])#右側
+            #     goal_pos = np.array([0.0,14.0])#左側
+            # elif cnt%6==2:
+            #     start_pos = np.array([0.0,15.0])#左側
+            #     goal_pos = np.array([14.0,30.0])#上側
+            # elif cnt%6==3:
+            #     start_pos = np.array([30.0,15.0])#右側
+            #     goal_pos = np.array([15.0,30.0])#上側
+            # elif cnt%6==4:
+            #     start_pos = np.array([14.0,30.0])#上側
+            #     goal_pos = np.array([0.0,15.0])#左側
+            #3叉路のパターン(1方向通行)
+            if cnt%3==0:
+                start_pos = np.array([0.0,15.0])#左側
+                goal_pos = np.array([30.0,14.0])#右側
+            elif cnt%3==1:
+                start_pos = np.array([30.0,15.0])#右側
+                goal_pos = np.array([15.0,30.0])#上側
             #4叉路のパターン(双方向)
             # if cnt%4==0:
             #     start_pos = np.array([0.0,15.0])#左側
@@ -217,10 +220,9 @@ class Simulation:
             #    start_pos = np.array([0.0,15.0])#左側
             #    goal_pos = np.array([30.0,14.0])#右側
             else:
-
                 #3叉路のパターン
-                start_pos = np.array([15.0,30.0])#上側
-                goal_pos = np.array([30.0,15.0])#右側
+                start_pos = np.array([14.0,30.0])#上側
+                goal_pos = np.array([0.0,15.0])#左側
                 #4叉路のパターン
                 # start_pos = np.array([15.0,0.0])#下側
                 # goal_pos = np.array([15.0,30.0])#上側
