@@ -12,21 +12,6 @@
 ##1px=約0.2mmとし、車の全長を約5m全幅を約2mとし、車は25px,10pxとする(1/1000スケール)
 ##車線の幅を3.5mだと考え，幅17pxとする
 
-##VWの設置範囲 n*n
-VWfield :int = 102
-# VWfield :int = 125+10
-
-##VWの設置範囲の開始位置(左上座標)
-#VWfield_x :int = 399
-# VWfield_y :int = 199
-VWfield_x :int = 399 #左上の壁の角のx座標 + 車の幅の半分
-VWfield_y :int = 182 #左上の壁の角のx座標 + 車の幅の半分
-
-##VWの数
-VWnum :int = 5
-
-##VWの大きさ
-VWsize :int = VWfield/VWnum
 
 ##車のスピード
 speed :float = 8
@@ -45,15 +30,13 @@ car_width :float = 20
 car_num :int = 1
 # car_num :int = 8
 
-genom_size = VWnum**2
+##VWの数
+VWnum :int = 10
+
+genom_size = VWnum*(VWnum)
+
 population_size = 128
-generation_size = 128
-
-two_steps_population_size = 20
-two_steps_generation_size = 20
-
-two_VWnum = 3
-#genom_size = ((VWnum**2) * car_num)
+generation_size = 256
 
 crossover_rate = 1.0 #クロスオーバー発生率
 change_rate = 0.5 #ユニフォームクロスオーバーの際の確率
