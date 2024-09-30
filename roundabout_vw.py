@@ -26,9 +26,8 @@ class Car:
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance <= obstacle.radius+self.radius:
+            if obs_distance <= self.radius+obstacle.radius:
                 self.obstacle_collision_count += 1
-            if obs_distance < 2*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -52,9 +51,8 @@ class Car:
         for car in other_cars:
             if car != self and car.reached_end == False:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
-                if car_distance <= 2*self.radius:
-                    self.collision_count += 1
-                if car_distance < 2.7*self.radius:
+                if car_distance <= 2.5*self.radius:
+                    self.collision_count += 1 
                     next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
                     potential_step[1] += next_y
@@ -62,9 +60,8 @@ class Car:
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance <= 2.2*obstacle.radius:
+            if obs_distance <= self.radius+obstacle.radius:
                 self.obstacle_collision_count += 1
-            if obs_distance < 2.5*obstacle.radius:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -76,7 +73,7 @@ class Car:
         
         # new_position[0]= round(new_position[0], 2)
         # new_position[1] = round(new_position[1],2)
-        if np.linalg.norm(new_position - self.end_position) <= 3*self.step_size:
+        if np.linalg.norm(new_position - self.end_position) <= 2.5*self.step_size:
             self.position = self.end_position.copy()
             self.reached_end = True
         else:
@@ -139,27 +136,27 @@ class Obstacle:
         print("doing")
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
         simulation.save_data(obs_list)
-
+        collision_counts=0
         distances = simulation.get_distances()
-        collision_counts = simulation.get_collision_counts()
-        for i, (car_collision_count, obstacle_collision_count) in enumerate(collision_counts):
-            collision_counts = car_collision_count + obstacle_collision_count
-        print("car_collision",car_collision_count)
-        print("obs_collision",obstacle_collision_count)
-        print("distances",sum(distances))
+        collision_counts_list = simulation.get_collision_counts()
+        for i, (car_collision_count, obstacle_collision_count) in enumerate(collision_counts_list):
+            collision_counts += car_collision_count + obstacle_collision_count
+        # print("car_collision",car_collision_count)
+        # print("obs_collision",obstacle_collision_count)
+        # print("distances",sum(distances))
         
         # for obs in obs_list:
         #     print("obs",obs.position)
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
         #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len_obs)*100, collision_counts, distances
-        vwnum=setting.VWnum
+        vwnum=setting.genom_size
         if len(obs_list)>0:
             #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len(obs_list))*1000, collision_counts, distances
             return sum(distances)*vwnum/len(obs_list) + car_collision_count * 10000000 + obstacle_collision_count * 10000000, collision_counts, distances
         else:
             return sum(distances) + car_collision_count * 10000000 + obstacle_collision_count * 10000000 , collision_counts, distances
 class Simulation:
-    def __init__(self, num_cars=15, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
+    def __init__(self, num_cars=30, num_obstacles=25, step_size=1.0, car_radius=1, x_max=30, y_max=30):
         self.num_cars = num_cars
         self.step_size = step_size
         self.car_radius = car_radius
@@ -170,41 +167,63 @@ class Simulation:
         self.trajectory = []
         self.interval_list = []
 
+        cnt=1
         for _ in range(num_cars):
             #スタートゴール用+-ランダム
-            rand_posi = random.randint(0, 3)
-            rand_posi2 = random.randint(0, 3)
-            
-            rand1 =random.random()
-            rand2 =random.random()
-            if rand1>0.7:
-                #左側スタート
-                #start_pos = np.array([0.0,15.0+rand_posi])
-                start_pos = np.array([0.0,15.0])
-                # start_pos = np.array([0.0,5.0])
-                #右側ゴール
-                goal_pos = np.array([30.0,14.0])
-                #下側ゴール
-                #goal_pos = np.array([14.0+rand_posi2,0.0])
-                self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
+            # rand_posi = random.randint(0, 3)
+            # rand_posi2 = random.randint(0, 3)
+            # rand1 =random.random()
+            # rand2 =random.random()
+            #3叉路のパターン(1方向通行)
+            # if cnt%3==0:
+            #     start_pos = np.array([0.0,14.0])#左側
+            #     goal_pos = np.array([30.0,15.0])#右側
+            # elif cnt%3==1:
+            #     start_pos = np.array([30.0,14.0])#右側
+            #     goal_pos = np.array([15.0,30.0])#上側
+            #3叉路のパターン(双方方向通行)
+            if cnt%6==0:
+                start_pos = np.array([0.0,15.0])#左側
+                goal_pos = np.array([30.0,14.0])#右側
+            elif cnt%6==1:
+                start_pos = np.array([30.0,15.0])#右側
+                goal_pos = np.array([0.0,14.0])#左側
+            elif cnt%6==2:
+                start_pos = np.array([0.0,15.0])#左側
+                goal_pos = np.array([14.0,30.0])#上側
+            elif cnt%6==3:
+                start_pos = np.array([30.0,15.0])#右側
+                goal_pos = np.array([15.0,30.0])#上側
+            elif cnt%6==4:
+                start_pos = np.array([14.0,30.0])#上側
+                goal_pos = np.array([0.0,15.0])#左側
             else:
+                #3叉路のパターン(双方向通行)
+                start_pos = np.array([14.0,30.0])#上側
+                goal_pos = np.array([30.0,15.0])#左側
+                #3叉路のパターン(1方向通行)
+                # start_pos = np.array([14.0,30.0])#上側
+                # goal_pos = np.array([0.0,15.0])#左側
+
                 #上側スタート
                 #start_pos = np.array([14.0+rand_posi,30.0])
-                start_pos = np.array([14.0,30.0])
+                #start_pos = np.array([14.0,30.0])
                 #start_pos = np.array([4.0,30.0])
                 #下側ゴール
                 # goal_pos = np.array([14.0,0.0])
                 #右側ゴール
                 #goal_pos = np.array([30.0,15.0+rand_posi2])
                 #5叉路
-                if rand2>0.5:
-                    goal_pos = np.array([6.0,0.0])
-                    #goal_pos = np.array([6.0+rand_posi2,0.0])
-                else:
-                    goal_pos = np.array([21.0,0.0])
-                    goal_pos = np.array([21.0+rand_posi2,0.0])
-                self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
-        
+                # if rand2>0.5:
+                #     goal_pos = np.array([6.0,0.0])
+                #     #goal_pos = np.array([6.0+rand_posi2,0.0])
+                # else:
+                #     goal_pos = np.array([21.0,0.0])
+                #     goal_pos = np.array([21.0+rand_posi2,0.0])
+                # self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
+            cnt += 1
+            self.cars_list.append(Car(start_pos, goal_pos, self.step_size, self.car_radius))
+    
     def update_positions(self, obs_list, interval):
         # #乱数を振って閾値以下だったら車を生成
         # if 0.5 < random.random():
@@ -306,16 +325,39 @@ class Simulation:
         return [(car.collision_count, car.obstacle_collision_count) for car in self.cars_list]
 
 
-with open('5叉路_roundabout.csv', 'a') as f:
+with open('10×10_roundabout_3叉路_双方向通行_new.csv', 'w') as f:
     writer = csv.writer(f)
-    for i in range(15):
+    for i in range(5):
         if __name__ == '__main__':
             #genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
-            genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            # genom_list = [1,1,1,1,0,0,1,1,1,1,
+            #               1,1,1,1,0,0,1,1,1,1,
+            #               1,1,1,1,0,0,1,1,1,1,
+            #               1,1,1,1,0,0,1,1,1,1,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               1,1,1,1,1,1,1,1,1,1,
+            #               1,1,1,1,1,1,1,1,1,1,
+            #               1,1,1,1,1,1,1,1,1,1,
+            #               1,1,1,1,1,1,1,1,1,1]
+            genom_list = [0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,1,1,0,0,0,0,
+                          0,0,0,1,1,1,1,0,0,0,
+                          0,0,0,1,1,1,1,0,0,0,
+                          0,0,0,0,1,1,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0,]
+            
             genom_array = np.array(genom_list)
             fitness, colision, distances = Obstacle.single_GA_function(genom_array)
-            print("test1",colision)
-            print("test2",sum(distances))
+            print("colision",colision)
+            print("distance",sum(distances))
+            writer.writerow(["fitness", fitness])
             writer.writerow(["colision",colision])
             writer.writerow(["distances",sum(distances)])
+            
             

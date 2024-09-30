@@ -186,9 +186,9 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('10×10_ga_3叉路一方向通行.csv', 'w') as f:
+with open('10×10_ga_3叉路双方方向通行_newww.csv', 'w') as f:
     writer = csv.writer(f)
-    for i in range(5):
+    for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
         #print("best",np.array([obstacle.position for obstacle in best]))
         #objectVW_test.Obstacle.single_GA_function(best_popu.genom)
