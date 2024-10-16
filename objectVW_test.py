@@ -1,9 +1,7 @@
 import numpy as np
-import random
 import artificial_potential_method as apm
-import copy
 import setting
-import csv
+
 
 class Car:
     def __init__(self, start_position, end_position, step_size=1.0, radius=1.0):
@@ -13,18 +11,16 @@ class Car:
         self.step_size = step_size
         self.radius = radius
         self.distance_travelled = 0.0
-        self.reached_end = False
+        self.reached = False
         self.collision_count = 0
         self.obstacle_collision_count = 0
-        self.interval = 0
 
 
     def start_update_position(self, obstacles):
         direction = self.end_position - self.position
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
         potential_step = norm_direction * self.step_size
-
-        # #壁の人工ポテンシャル法
+        #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
             if obs_distance <= self.radius+obstacle.radius:
@@ -32,7 +28,6 @@ class Car:
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
-
         # 新しい位置を更新
         new_position = self.position + potential_step
         move_distance = np.linalg.norm(potential_step)
@@ -47,17 +42,15 @@ class Car:
         direction = self.end_position - self.position
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
         potential_step = norm_direction * self.step_size
-
         #他の車の人工ポテンシャル法
         for car in other_cars:
             if car != self and car.reached_end == False:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
                 if car_distance <= 2.5*self.radius:
                     self.collision_count += 1 
-                    next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
+                    next_x, next_y = apm.cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
                     potential_step[1] += next_y
-
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
@@ -135,7 +128,6 @@ class Obstacle:
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
-        print("doing")
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
         simulation.save_data(obs_list)
         collision_counts=0
@@ -144,14 +136,6 @@ class Obstacle:
         # print("te111111_coli",collision_counts_list)
         for i, (car_collision_count, obstacle_collision_count) in enumerate(collision_counts_list):
             collision_counts += car_collision_count + obstacle_collision_count
-            # print("te222_colisi",collision_counts)
-        # print("car_collision",car_collision_count)
-        # print("obs_collision",obstacle_collision_count)
-        # print("collision",collision_counts)
-        # print("distances",sum(distances))
-        #print("obs_len",len(obs_list))
-        # for obs in obs_list:
-        #     print("obs",obs.position)
         #return sum(distances) + collision_counts * 1000000+ (1/len_obs)*10, collision_counts, distances
         #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len_obs)*100, collision_counts, distances
         vwnum=setting.genom_size
@@ -241,7 +225,7 @@ class Simulation:
         #         self.cars.append(Car(np.array([13,20]), np.array([13,0]), self.step_size, self.car_radius))
 
         for i, car in enumerate(self.cars_list):
-            if car.reached_end == True:
+            if car.reached == True:
                 continue
             
             if car.position[0] == car.start_position[0] and car.position[1] == car.start_position[1]:
@@ -254,7 +238,7 @@ class Simulation:
 
             else: car.update_position(self.cars_list, obs_list)
             
-            if car.reached_end == True:
+            if car.reached == True:
                 self.completion_count += 1
                 
             ##以下で再生成
@@ -309,7 +293,7 @@ class Simulation:
         self.trajectory.append([car.position.copy() for car in self.cars_list])
         
     def simulate_movement(self,obs_list):
-        interval = 5
+        interval = 0
         cnt=0
         while self.completion_count != self.num_cars:
             self.update_positions(obs_list, interval)

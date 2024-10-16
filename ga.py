@@ -153,11 +153,7 @@ def ga_solve(populations, gene_size):
         
         children = mutate(children)
         populations = children
-    
-    
-    # for i in range(len(best)):
-    #     #print("best_path::", best[i].get_all_path_length())
-    #     print("")
+        print("generation: ", i)
     return best, best_popu, generation_list
 
 
@@ -188,7 +184,7 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('10×10_newnew3叉路ga.csv', 'w') as f:
+with open('test.csv', 'w') as f:
     writer = csv.writer(f)
     for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
@@ -206,11 +202,6 @@ with open('10×10_newnew3叉路ga.csv', 'w') as f:
         writer.writerow(["colision",colision])
         writer.writerow(["distances",sum(distances)])
         writer.writerow(["genom",min_best.genom])
-    #np.save('obstacles.npy', np.array([obstacle for obstacle in obs_list]))
-    # np.save('trajectory.npy', np.array(self.trajectory))
-    # np.save('obstacles.npy', np.array(best_popu.genom))
-    # np.save('obstacles.npy', np.array([obstacle.position for obstacle in obs_list]))
-    # np.save('end_positions.npy', np.array([car.end_position for car in self.cars]))
 
 # for _ in range(4):
 #     for _ in range(4):
