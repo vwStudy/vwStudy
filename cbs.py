@@ -151,7 +151,7 @@ class AnimationVisualizer:
 
         # エージェントの円形パッチを作成
         self.agent_patches = [
-            Circle(self.starts[i], 0.3, color=f'C{i}') for i in range(self.num_agents)
+            Circle(self.starts[i], 1, color=f'C{i}') for i in range(self.num_agents)
         ]
         for patch in self.agent_patches:
             self.ax.add_patch(patch)
@@ -196,6 +196,8 @@ def visualize_cbs_result(graph, starts, goals):
         print("No solution found")
         return
     visualizer = AnimationVisualizer(graph, paths, starts, goals, obstacles=obstacles)
+    total_path_length = calculate_total_path_length(paths)
+    print(f"Total path length of all agents: {total_path_length}")
     visualizer.save_animation(filename="cbs_simulation.mp4", fps=2)
     visualizer.display_animation()
 
@@ -235,6 +237,18 @@ def generate_grid_graph(size, obstacles=None):
 
     return graph
 
+
+def calculate_total_path_length(paths):
+    """すべてのエージェントの走行経路の総和を計算します。
+
+    Args:
+        paths (list of list of tuple): 各エージェントの経路リスト。
+
+    Returns:
+        int: 走行経路の総和。
+    """
+    return sum(len(path) for path in paths)
+
 # 障害物の位置を定義
 
 obstacles = []
@@ -242,6 +256,9 @@ for y in range(13):
     for x in range(31): 
         obstacles.append((x,y))
 
+for y in range(18,24):
+    for x in range(9,24):
+        obstacles.append((x,y))
 print(obstacles)
 
 
@@ -252,8 +269,8 @@ graph = generate_grid_graph(grid_size, obstacles)
 # エージェント数
 num_agents = 5
 
-starts = [(0, 15), (30, 15)]
-goals = [(30, 14), (0, 14)]
+starts = [(0, 15), (30, 15), (15, 30)]
+goals = [(30, 14), (0, 14), (0, 16)]
 
 # CBS 結果を可視化
 visualize_cbs_result(graph, starts, goals)
