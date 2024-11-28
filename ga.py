@@ -202,7 +202,7 @@ with open('test.csv', 'w') as f:
         writer.writerow(["colision",colision])
         writer.writerow(["distances",sum(distances)])
         writer.writerow(["genom",min_best.genom])
-
+ 
 # for _ in range(4):
 #     for _ in range(4):
         

@@ -70,9 +70,9 @@ class AnimationVisualizer:
         end_point_radius = 0.2
         obstacle_radius = 1.5
 
-        self.car_circles = [plt.Circle((0, 0), car_radius, color='blue', fill=True) for _ in range(len(self.trajectory[0]))]
+        self.car_circles = [plt.Circle((0, 0), car_radius, color='cyan', fill=True) for _ in range(len(self.trajectory[0]))]
         self.end_circles = [plt.Circle((0, 0), end_point_radius, color='green', fill=True) for _ in range(len(self.trajectory[0]))]
-        self.obstacle_circles = [plt.Circle((0, 0), obstacle_radius, color='red', fill=True) for _ in range(len(self.obstacles))]
+        self.obstacle_circles = [plt.Circle((0, 0), obstacle_radius, color='gray', fill=True) for _ in range(len(self.obstacles))]
 
         for circle in self.car_circles + self.end_circles + self.obstacle_circles:
             self.ax.add_patch(circle)
