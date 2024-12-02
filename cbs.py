@@ -151,7 +151,7 @@ class AnimationVisualizer:
 
         # エージェントの円形パッチを作成
         self.agent_patches = [
-            Circle(self.starts[i], 1, color=f'C{i}') for i in range(self.num_agents)
+            Circle(self.starts[i], 0.3, color='blue') for i in range(self.num_agents)
         ]
         for patch in self.agent_patches:
             self.ax.add_patch(patch)
