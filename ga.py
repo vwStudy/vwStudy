@@ -138,7 +138,7 @@ def ga_solve(populations, gene_size):
     best = []
     generation_list = []
     for i in range(gene_size):
-        
+        print("gene:",i)
         best_popu = min(populations, key=Individual.get_fitness)
         # for popu in populations:
         #     print("popuu",popu.genom)

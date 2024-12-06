@@ -142,7 +142,6 @@ class Obstacle:
         
         simulation = Simulation()
         simulation.simulate_movement(obs_list)
-        print("running")
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
         simulation.save_data(obs_list)
         collision_counts=0
