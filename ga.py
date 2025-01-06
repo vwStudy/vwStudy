@@ -2,6 +2,8 @@ import numpy as np
 import random
 import setting
 import objectVW_test
+import roadgene_test1
+import roadgene_test2
 import csv
 
 class Individual:
@@ -50,8 +52,10 @@ def cross_uniform(parent1_genom, parent2_genom):
 
     new_child1 = np.array(new_child1)
     new_child2 = np.array(new_child2)
-    children1 = Individual(new_child1, objectVW_test.Obstacle.single_GA_function(np.array(new_child1)))
-    children2 = Individual(new_child2, objectVW_test.Obstacle.single_GA_function(np.array(new_child2)))
+    children1 = Individual(new_child1, roadgene_test2.Obstacle.single_GA_function(np.array(new_child1)))
+    children2 = Individual(new_child2, roadgene_test2.Obstacle.single_GA_function(np.array(new_child2)))
+    # children1 = Individual(new_child1, objectVW_test.Obstacle.single_GA_function(np.array(new_child1)))
+    # children2 = Individual(new_child2, objectVW_test.Obstacle.single_GA_function(np.array(new_child2)))
     return children1, children2
 
 
@@ -138,7 +142,6 @@ def ga_solve(populations, gene_size):
     best = []
     generation_list = []
     for i in range(gene_size):
-        print("gene:",i)
         best_popu = min(populations, key=Individual.get_fitness)
         # for popu in populations:
         #     print("popuu",popu.genom)
@@ -153,7 +156,7 @@ def ga_solve(populations, gene_size):
         children = mutate(children)
         populations = children
         print("generation", i)
-        print("best_fitness",best_popu.get_fitness())
+        # print("best_fitness",best_popu.get_fitness())
 
     # for i in range(len(best)):
     #     #print("best_path::", best[i].get_all_path_length())
@@ -176,7 +179,8 @@ def create_generation(popu_size, genoms, fitness):
     return population
 
 def main(popu_size, gene_size, genom_size):
-    fitness = objectVW_test.Obstacle.single_GA_function
+    #fitness = objectVW_test.Obstacle.single_GA_function
+    fitness = roadgene_test2.Obstacle.single_GA_function
     populations = create_generation(popu_size, genom_size, fitness)
     return ga_solve(populations, gene_size)
 
@@ -186,7 +190,7 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('10×10_3叉路_双方向.csv', 'w') as f:
+with open('24car_start1goal1_test.csv', 'w') as f:
     writer = csv.writer(f)
     for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
@@ -195,11 +199,12 @@ with open('10×10_3叉路_双方向.csv', 'w') as f:
         #for i in best:
         #    print("best_best",i.genom)
         min_best = min(best, key=Individual.get_fitness)
-        fitness, colision, distances= objectVW_test.Obstacle.single_GA_function(min_best.genom)
-        print("fitness", fitness)
-        print("colision",colision)
-        print("distance",sum(distances))
-        print("min_best",min_best.genom)
+        # fitness, colision, distances= objectVW_test.Obstacle.single_GA_function(min_best.genom)
+        fitness, colision, distances= roadgene_test2.Obstacle.single_GA_function(min_best.genom)
+        # print("fitness", fitness)
+        # print("colision",colision)
+        # print("distance",sum(distances))
+        # print("min_best",min_best.genom)
         writer.writerow(["fitness", fitness])
         writer.writerow(["colision",colision])
         writer.writerow(["distances",sum(distances)])

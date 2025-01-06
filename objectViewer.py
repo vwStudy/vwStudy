@@ -61,18 +61,31 @@ class AnimationVisualizer:
 
     def animate(self):
         fig, self.ax = plt.subplots()
-        self.ax.set_xlim(0, 30)
-        self.ax.set_ylim(0, 30)
+        self.ax.set_xlim(0, 40)
+        self.ax.set_ylim(0, 40)
         self.ax.set_aspect('equal')
         
         # 円の大きさを指定
-        car_radius = 1
+        car_radius = 0.5
         end_point_radius = 0.2
-        obstacle_radius = 1.5
+        obstacle_radius = 0.5
 
-        self.car_circles = [plt.Circle((0, 0), car_radius, color='blue', fill=True) for _ in range(len(self.trajectory[0]))]
+        self.car_circles = [plt.Circle((0, 0), car_radius, color='cyan', fill=True) for _ in range(len(self.trajectory[0]))]
         self.end_circles = [plt.Circle((0, 0), end_point_radius, color='green', fill=True) for _ in range(len(self.trajectory[0]))]
-        self.obstacle_circles = [plt.Circle((0, 0), obstacle_radius, color='red', fill=True) for _ in range(len(self.obstacles))]
+        self.obstacle_circles = [plt.Circle((0, 0), obstacle_radius, color='gray', fill=True) for _ in range(len(self.obstacles))]
+        #目的の棚だけ色を変える。ここで、obstacle_circles内の配列から指定して色を変えれる
+        #障害物のみ数えた要素番号を指定
+        #self.obstacle_circles[10] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[13] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[24] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[33] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[37] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[49] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[55] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        # self.obstacle_circles[72] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+       # self.obstacle_circles[88] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        #self.obstacle_circles[96] = plt.Circle((0, 0), obstacle_radius, color='red', fill=True)
+        #self.obstacle_circles = [plt.Circle((0, 0), obstacle_radius, color='red', fill=True) for _ in range(len(self.check_obstacles))]
 
         for circle in self.car_circles + self.end_circles + self.obstacle_circles:
             self.ax.add_patch(circle)
@@ -88,5 +101,8 @@ class AnimationVisualizer:
 if __name__ == "__main__":
     # for _ in range(100000000):
     #     continue
+    # visualizer = AnimationVisualizer('trajectory_random.npy', 'obstacles_random.npy', 'end_positions_random.npy')
+    # visualizer = AnimationVisualizer('trajectory_roundabout.npy', 'obstacles_roundabout.npy', 'end_positions_roundabout.npy')
+    # visualizer = AnimationVisualizer('trajectory_simple.npy', 'obstacles_simple.npy', 'end_positions_simple.npy')
     visualizer = AnimationVisualizer('trajectory_test.npy', 'obstacles_test.npy', 'end_positions_test.npy')
     visualizer.animate()

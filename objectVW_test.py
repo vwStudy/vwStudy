@@ -22,7 +22,8 @@ class Car:
     def start_update_position(self, obstacles):
         direction = self.end_position - self.position
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
-        potential_step = norm_direction * self.step_size
+        potential_step = norm_direction * self.step_size/1.3
+        #potential_step = norm_direction * self.step_size/2
 
         # #壁の人工ポテンシャル法
         for obstacle in obstacles:
@@ -52,17 +53,16 @@ class Car:
         for car in other_cars:
             if car != self and car.reached_end == False:
                 car_distance = np.linalg.norm(self.position - car.position) + 1e-10
-                if car_distance <= 2.2*self.radius:
+                if car_distance <= 2*self.radius:
                     next_x, next_y = apm.car_cal_route(self.position, self.end_position, car)
                     potential_step[0] += next_x
                     potential_step[1] += next_y
-                if car_distance <= 2*self.radius:
                     self.collision_count += 1                    
                 
         #壁の人工ポテンシャル法
         for obstacle in obstacles:
             obs_distance = np.linalg.norm(self.position - obstacle.position) + 1e-10
-            if obs_distance <= 1.5*(self.radius+obstacle.radius):
+            if obs_distance <= 1.5*(self.radius+obstacle.radius):#1.8でラウンドアバウトはいけたはず
                 next_x, next_y  = apm.cal_route(self.position, self.end_position, obstacle)
                 potential_step[0] += next_x
                 potential_step[1] += next_y
@@ -187,17 +187,21 @@ class Simulation:
             # rand1 =random.random()
             # rand2 =random.random()
             #3叉路のパターン(双方方向通行)
-            if cnt%6==0:
-                start_pos = np.array([0.0,15.0])#左側
+            if cnt%6==1:
+                # start_pos = np.array([0.0,15.0])#左側
+                # goal_pos = np.array([30.0,14.0])#右側
+                start_pos = np.array([0.0,14.0])#左側
                 goal_pos = np.array([30.0,14.0])#右側
                 # start_pos = np.array([0.0,4.0])#左側
                 # goal_pos = np.array([30.0,4.0])#右側
-            elif cnt%6==1:
-                start_pos = np.array([30.0,15.0])#右側
-                goal_pos = np.array([0.0,14.0])#左側
+            elif cnt%6==2:
+                # start_pos = np.array([30.0,15.0])#右側
+                # goal_pos = np.array([0.0,14.0])#左側
+                start_pos = np.array([30.0,16.0])#右側
+                goal_pos = np.array([0.0,16.0])#左側
                 # start_pos = np.array([30.0,5.0])#右側
                 # goal_pos = np.array([0.0,5.0])#左側
-            elif cnt%6==2:
+            elif cnt%6==0:
                 start_pos = np.array([0.0,15.0])#左側
                 goal_pos = np.array([14.0,30.0])#上側
                 # start_pos = np.array([0.0,5.0])#左側
@@ -207,7 +211,7 @@ class Simulation:
                 goal_pos = np.array([15.0,30.0])#上側
                 # start_pos = np.array([30.0,5.0])#右側
                 # goal_pos = np.array([15.0,30.0])#上側
-            elif cnt%6==4:
+            elif cnt%6==5:
                 start_pos = np.array([14.0,30.0])#上側
                 goal_pos = np.array([0.0,15.0])#左側
                 # start_pos = np.array([14.0,30.0])#上側
@@ -336,11 +340,11 @@ class Simulation:
         return np.array(self.trajectory)
 
     def save_data(self,obs_list):
-        np.save('trajectory_test.npy', np.array(self.trajectory))
+        np.save('trajectory.npy', np.array(self.trajectory))
         ##np.save('obstacles.npy', np.array([obstacle.position for obstacle in self.obstacles]))
-        np.save('obstacles_test.npy', np.array([obstacle.position for obstacle in obs_list]))
+        np.save('obstacles.npy', np.array([obstacle.position for obstacle in obs_list]))
         #print("test2",np.array([obstacle.position for obstacle in obs_list]))
-        np.save('end_positions_test.npy', np.array([car.end_position for car in self.cars_list]))
+        np.save('end_positions.npy', np.array([car.end_position for car in self.cars_list]))
 
 
     def get_distances(self):

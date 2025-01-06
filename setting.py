@@ -31,9 +31,11 @@ car_num :int = 1
 # car_num :int = 8
 
 ##VWの数
-VWnum :int = 10
+# VWnum :int = 10
+VWnum :int = 6
 
-genom_size = VWnum*(VWnum)
+# genom_size = VWnum*(VWnum)
+genom_size = 32
 
 population_size = 256
 generation_size = 256

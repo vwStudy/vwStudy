@@ -10,8 +10,7 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   potential_min = -1
   weight_obst = 0.7
   weight_goal = 1
-  # weight_goal = 0.36
-
+  
   # 障害物がないとき(Noneがはいっている)
   if obst_target_x == None or obst_target_y == None:
     obst_pot = 0
@@ -40,6 +39,8 @@ def cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
 def cal_route(pos, goal, obs):
     delt=0.1
     speed=1.0
+    # speed=2
+
     x = pos[0]
     y = pos[1]
     goal_x = goal[0]
@@ -91,7 +92,7 @@ def car_cal_pot(x, y, obst_target_x, obst_target_y, goal_x, goal_y):
   tmp_pot = 0
   potential_max = 1
   potential_min = -1
-  weight_obst = 0.1
+  weight_obst = 0.3
   weight_goal = 1
   
   # 障害物がないとき(Noneがはいっている)

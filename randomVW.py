@@ -316,11 +316,11 @@ class Simulation:
         return np.array(self.trajectory)
 
     def save_data(self,obs_list):
-        np.save('trajectory_roundabout.npy', np.array(self.trajectory))
+        np.save('trajectory_random.npy', np.array(self.trajectory))
         ##np.save('obstacles.npy', np.array([obstacle.position for obstacle in self.obstacles]))
-        np.save('obstacles_roundabout.npy', np.array([obstacle.position for obstacle in obs_list]))
+        np.save('obstacles_random.npy', np.array([obstacle.position for obstacle in obs_list]))
         #print("test2",np.array([obstacle.position for obstacle in obs_list]))
-        np.save('end_positions_roundabout.npy', np.array([car.end_position for car in self.cars_list]))
+        np.save('end_positions_random.npy', np.array([car.end_position for car in self.cars_list]))
 
 
     def get_distances(self):
@@ -330,10 +330,22 @@ class Simulation:
         return [(car.collision_count, car.obstacle_collision_count) for car in self.cars_list]
 
 
-with open('10×10_roundabout_3叉路_双方向通行.csv', 'w') as f:
+with open('10×10_random_3叉路_双方向通行.csv', 'w') as f:
     writer = csv.writer(f)
-    for i in range(10):
+    for i in range(1):
         if __name__ == '__main__':
+
+            # 0と1の数
+            num_zeros = 49
+            num_ones = 51
+
+            # 要素を作成（0を49個、1を51個）
+            array = np.array([0] * num_zeros + [1] * num_ones)
+
+            # 配列をランダムにシャッフル
+            np.random.shuffle(array)
+            genom_list = array.tolist()
+            print(genom_list)
             #genom_list = [0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0]
             #genom_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
             # genom_list = [1,1,1,1,0,0,1,1,1,1,
@@ -346,16 +358,16 @@ with open('10×10_roundabout_3叉路_双方向通行.csv', 'w') as f:
             #               1,1,1,1,1,1,1,1,1,1,
             #               1,1,1,1,1,1,1,1,1,1,
             #               1,1,1,1,1,1,1,1,1,1]
-            genom_list = [0,0,0,0,0,0,0,0,0,0,
-                          0,0,0,0,0,0,0,0,0,0,
-                          0,0,0,0,0,0,0,0,0,0,
-                          0,0,0,0,1,1,0,0,0,0,
-                          0,0,0,1,1,1,1,0,0,0,
-                          0,0,0,1,1,1,1,0,0,0,
-                          0,0,0,0,1,1,0,0,0,0,
-                          0,0,0,0,0,0,0,0,0,0,
-                          0,0,0,0,0,0,0,0,0,0,
-                          0,0,0,0,0,0,0,0,0,0,]
+            # genom_list = [0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,1,1,0,0,0,0,
+            #               0,0,0,1,1,1,1,0,0,0,
+            #               0,0,0,1,1,1,1,0,0,0,
+            #               0,0,0,0,1,1,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,
+            #               0,0,0,0,0,0,0,0,0,0,]
             
             genom_array = np.array(genom_list)
             fitness, colision, distances = Obstacle.single_GA_function(genom_array)
