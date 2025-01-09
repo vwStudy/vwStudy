@@ -24,7 +24,7 @@ class Car:
     def start_update_position(self, obstacles):
         direction = self.check_position - self.position
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
-        potential_step = norm_direction * self.step_size/1.5
+        potential_step = norm_direction * self.step_size/4
         
         # #壁の人工ポテンシャル法
         for obstacle in obstacles:
@@ -187,18 +187,35 @@ class Obstacle:
         total_num_obstacles = 0
 
         for i in genom:
-            a = i%39
-            x = a-0.5
-            if i%39 == 0:
-                b = int(i/39)
-                y = 40.5-b      
-            else:
-                b = int(i/39)
-                y = 39.5-b
+            row = (i - 1) // 40  # 上から何行目か (0-indexed)
+            col = (i - 1) % 40   # 左から何列目か (0-indexed)
+    # 中心座標を計算
+            x = col + 0.5
+            y = 40 - row - 0.5
 
-            obs_list.append(Obstacle(np.array([x,y]), obs_radius, total_num_obstacles))
+            # print(i)
+            # a = i%39
+            # x = a-0.5
+            # if i%39 == 0:
+            #     b = int(i/39)
+            #     y = 40.5-b      
+            # else:
+            #     b = int(i/39)
+            #     y = 39.5-b
+
+            # def is_excluded(x, y):
+            #     return 0 <= x <= 2 and 19 <= y <= 23
+            
+            # for row in range(40):
+            #     for col in range(40):
+            #         x = col + 0.5
+            #         y = 40 - row - 0.5
+            #         if not is_excluded(col, 40 - row - 1):
+            #             obs_list.append(Obstacle(np.array([x,y]), obs_radius, total_num_obstacles))
+            #         else:
+            #             return 
             ##ここで数字と座標を一致させて棚を配置する
-        
+            obs_list.append(Obstacle(np.array([x,y]), obs_radius, total_num_obstacles))
         simulation = Simulation(obs_list)
         simulation.simulate_movement(obs_list)
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
@@ -217,6 +234,7 @@ class Obstacle:
         # if len(obs_list)==728:
             #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len(obs_list))*1000, collision_counts, distances
         return sum(distances) + collision_counts * 10000, collision_counts, distances
+        #return sum(distances) + collision_counts * 10000
         # else:
         #     return sum(distances)*10000000 + collision_counts * 10000000, collision_counts, distances
 class Simulation:
@@ -232,8 +250,8 @@ class Simulation:
         self.interval_list = []
 
         for i in range(len(self.num_cars)):
-            start_pos = np.array([0.0,14.0])#入口
-            goal_pos = np.array([0.0,16.0])#出口
+            start_pos = np.array([0.0,20.0])#入口
+            goal_pos = np.array([0.0,22.0])#出口
             check_pos = obs_list[i].position
 
             self.cars_list.append(Car(start_pos, goal_pos, check_pos, self.car_radius, self.step_size))
@@ -252,7 +270,7 @@ class Simulation:
             
             elif car.position[0] == car.start_position[0] and car.position[1] == car.start_position[1]:
   
-                if interval%10 == 0:
+                if interval%5 == 0:
                     car.start_update_position(obs_list)          
                 else:
                     continue
@@ -267,7 +285,7 @@ class Simulation:
         self.trajectory.append([car.position.copy() for car in self.cars_list])
         
     def simulate_movement(self,obs_list):
-        interval = 10
+        interval = 5
         cnt=0
         while self.completion_count != self.num_cars:
             self.update_positions(obs_list, interval)

@@ -35,10 +35,10 @@ car_num :int = 1
 VWnum :int = 6
 
 # genom_size = VWnum*(VWnum)
-genom_size = 32
+genom_size = 5
 
 population_size = 256
-generation_size = 256
+generation_size = 64
 
 crossover_rate = 1.0 #クロスオーバー発生率
 change_rate = 0.5 #ユニフォームクロスオーバーの際の確率

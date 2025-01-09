@@ -125,8 +125,8 @@ def select_tonament(population_list):
     return selected_gene_list
         
 def mutate(children, gene_size):
-    # MUTATION_PB = 0.6 - 1/gene_size
-    MUTATION_PB = 0.3
+    # MUTATION_PB = 0.7 - 1/gene_size
+    MUTATION_PB = 0.1
     for num_children in range(len(children)):
         if np.random.random() < MUTATION_PB:# 一定の確率で突然変異させる
             random_number = np.random.randint(0, setting.genom_size)
@@ -168,7 +168,7 @@ def create_generation(popu_size, genoms, fitness):
     population = []
     for _ in range(popu_size):
         # rnd = np.random.randint(0, 2, genoms)
-        rnd = np.random.randint(1,1521, genoms)
+        rnd = np.random.randint(1,1600, genoms)
         #rnd = np.zeros(genoms)
         #print(type(rnd))
         individual = Individual(rnd, fitness(rnd))
@@ -189,7 +189,7 @@ def main(popu_size, gene_size, genom_size):
 populist=setting.population_size 
 generation = setting.generation_size 
 genom_size= setting.genom_size
-with open('40×40_start1gaol1_test256×256_mutate.csv', 'w') as f:
+with open('40×40_start1gaol1_testpopu256×gene32.csv', 'w') as f:
     writer = csv.writer(f)
     for i in range(1):
         best, best_popu, generation_list = main(populist, generation , genom_size)
