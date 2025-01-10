@@ -3,14 +3,14 @@ import sys
 import math
 import time
 import setting
-from roadgene_test2 import Obstacle
+from roadgene_test2 import Simulation
 import csv
 
 GEN_MAX = setting.generation_size   # 世代交代数
 POP_SIZE = setting.population_size         # 個体群のサイズ
 ELITE = 1               # エリート保存戦略で残す個体の数
 MUTATE_PROB = 0.1      # 突然変異確率
-N = 5                  # 集合の要素となる最大数の平方値
+N = setting.genom_size                  # 集合の要素となる最大数の平方値
 AREA = 1600
 # TOURNAMENT_SIZE = 30  # トーナメントサイズ
 
@@ -25,8 +25,8 @@ class Individual:
         for i in range(N):
             self.chrom[i] = random.randint(0, RAND_MAX) % AREA + 1
 
-    def evaluate(self): # 適応度を算出する
-        self.fitness = Obstacle.single_GA_function(self.chrom)
+    def evaluate(self,simulation): # 適応度を算出する
+        self.fitness, colision, distances = simulation.single_GA_function(self.chrom)
 
     # p1とp2から一点交叉で作った子にする
     # p1: 親個体1
@@ -73,6 +73,7 @@ class Population:
     def __init__(self):
         self.ind = [None] * POP_SIZE         # 現世代の個体群のメンバ
         self.next_ind = [None] * POP_SIZE    # 次世代の個体群のメンバ
+        self.simulation = Simulation()
         # self.tr_fit = [None] * POP_SIZE    # 適応度を変換した値
 
         for i in range(POP_SIZE):
@@ -84,7 +85,7 @@ class Population:
 
     def evaluate(self): # 個体を評価する
         for i in range(POP_SIZE):
-            self.ind[i].evaluate()
+            self.ind[i].evaluate(self.simulation)
 
         self.sort(0, POP_SIZE - 1)
         
@@ -208,7 +209,7 @@ class Population:
         print(f"\n差：{self.ind[0].fitness}\n")
 
 if __name__ == "__main__":
-    with open('40×40_start1gaol1_testpopu256×gene64.csv', 'w') as f:
+    with open('40×40_start1gaol1_popu256×gene64.csv', 'w') as f:
         writer = csv.writer(f)
         start = time.time()
 
@@ -218,8 +219,9 @@ if __name__ == "__main__":
             print(f"第{i+1}世代：最良適応度{pop.ind[0].fitness}")
 
         pop.print_result()
-        print(time.time() - start)
-        fitness, colision, distances= Obstacle.single_GA_function(pop.ind[0].chrom)
+        print("処理時間：",time.time() - start)
+        fitness, colision, distances= pop.simulation.single_GA_function(pop.ind[0].chrom)
+        pop.simulation.save_data()
         writer.writerow(["fitness", fitness])
         writer.writerow(["colision",colision])
         writer.writerow(["distances",sum(distances)])

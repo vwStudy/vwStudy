@@ -19,20 +19,12 @@ class Car:
         self.obstacle_collision_count = 0
         self.interval = 0
         self.decision = False
-    
-    def reset_parameter(self):
-        self.position = self.start_position
-        self.distance_travelled = 0.0
-        self.reached_end = False
-        self.collision_count = 0
-        self.obstacle_collision_count = 0
-        self.interval = 0
-        self.decision = False
+
 
     def start_update_position(self, obstacles):
         direction = self.check_position - self.position
         norm_direction = direction / (np.linalg.norm(direction) + 1e-10)
-        potential_step = norm_direction * self.step_size
+        potential_step = norm_direction * self.step_size/4
         
         # #壁の人工ポテンシャル法
         for obstacle in obstacles:
@@ -159,36 +151,12 @@ class Car:
 
 
 class Obstacle:
-    def __init__(self, radius, tag):
-        self.position = None
+    def __init__(self, position, radius, tag):
+        self.position = np.array(position)
         self.radius = radius
-        self.tag = tag    
+        self.tag = tag
+        self.simulation = Simulation()
     
-        #return sum(distances) + collision_counts * 10000
-        # else:
-        #     return sum(distances)*10000000 + collision_counts * 10000000, collision_counts, distances
-class Simulation:
-    def __init__(self, step_size=1.0, car_radius=0.5, x_max=40, y_max=40):
-        self.num_cars = setting.genom_size
-        self.step_size = step_size
-        self.car_radius = car_radius
-        self.x_max = x_max
-        self.y_max = y_max
-        self.cars_list = []
-        self.completion_count = 0
-        self.trajectory = []
-        self.interval_list = []
-        self.obs_list = []
-        obs_radius = 0.5
-        total_num_obstacles = 0
-
-        for i in range(self.num_cars):
-            start_pos = np.array([0.0,20.0])#入口
-            goal_pos = np.array([0.0,22.0])#出口
-
-            self.cars_list.append(Car(start_pos, goal_pos, self.car_radius, self.step_size))
-            self.obs_list.append(Obstacle(obs_radius, total_num_obstacles)) 
-
     def single_GA_function(self,genom):
         
         """
@@ -213,16 +181,16 @@ class Simulation:
         #y = 18
         
         # obs_radius = 0.75
-        
+        obs_radius = 0.5
         vw = setting.VWnum
-        self.trajectory = []
+        obs_list = []
         #obstacle_array = np.array()gmeno.reshape(1,1800)
-        
+        total_num_obstacles = 0
 
-        for i, j in enumerate(genom):
-            row = (j - 1) // 40  # 上から何行目か (0-indexed)
-            col = (j - 1) % 40   # 左から何列目か (0-indexed)
-            # 中心座標を計算
+        for i in genom:
+            row = (i - 1) // 40  # 上から何行目か (0-indexed)
+            col = (i - 1) % 40   # 左から何列目か (0-indexed)
+    # 中心座標を計算
             x = col + 0.5
             y = 40 - row - 0.5
 
@@ -248,16 +216,15 @@ class Simulation:
             #         else:
             #             return 
             ##ここで数字と座標を一致させて棚を配置する
-            self.obs_list[i].position = np.array([x, y])
-    
+            obs_list.append(Obstacle(np.array([x,y]), obs_radius, total_num_obstacles))
         #simulation = Simulation(obs_list)
-        self.update_check_pos()
-        self.simulate_movement()
+        self.simulation.update_check_pos(obs_list)
+        self.simulation.simulate_movement(obs_list)
         #遺伝的アルゴリズムの最適解ではなく、一番最後の配列を持ってきている可能性あり
-        # self.save_data()
+        self.simulation.save_data(obs_list)
         collision_counts=0
-        distances = self.get_distances()
-        collision_counts_list = self.get_collision_counts()
+        distances = self.simulation.get_distances()
+        collision_counts_list = self.simulation.get_collision_counts()
         
         for i, (car_collision_count, obstacle_collision_count) in enumerate(collision_counts_list):
             collision_counts += car_collision_count + obstacle_collision_count
@@ -269,19 +236,40 @@ class Simulation:
         # if len(obs_list)==728:
             #return sum(distances) + car_collision_count * 10000 + obstacle_collision_count * 10000 + (1/len(obs_list))*1000, collision_counts, distances
         return sum(distances) + collision_counts * 10000, collision_counts, distances
+        #return sum(distances) + collision_counts * 10000
+        # else:
+        #     return sum(distances)*10000000 + collision_counts * 10000000, collision_counts, distances
+class Simulation:
+    def __init__(self, step_size=1.0, car_radius=0.5, x_max=40, y_max=40):
+        self.num_cars = setting.genom_size
+        self.step_size = step_size
+        self.car_radius = car_radius
+        self.x_max = x_max
+        self.y_max = y_max
+        self.cars_list = []
+        self.completion_count = 0
+        self.trajectory = []
+        self.interval_list = []
+
+        for i in range(len(self.num_cars)):
+            start_pos = np.array([0.0,20.0])#入口
+            goal_pos = np.array([0.0,22.0])#出口
+
+            self.cars_list.append(Car(start_pos, goal_pos, self.car_radius, self.step_size))
+        
+    def update_check_pos(self,obs_list):
+        for i in range(len(self.num_cars)):
+            self.cars_list[i].check_pos = np.array(obs_list[i].position)
+
     
-    def update_check_pos(self):
-        for i in range(self.num_cars):
-            self.cars_list[i].check_position = np.array(self.obs_list[i].position)
-            self.cars_list[i].reset_parameter()
-    
-    def update_positions(self, interval):
+    def update_positions(self, obs_list, interval):
         # #乱数を振って閾値以下だったら車を生成
         # if 0.5 < random.random():
         #     if 0.5 < random.random():
         #         self.cars.append(Car(np.array([0,15]), np.array([20,15]), self.step_size, self.car_radius))
         #     else:    
         #         self.cars.append(Car(np.array([13,20]), np.array([13,0]), self.step_size, self.car_radius))
+
         for i, car in enumerate(self.cars_list):
             if car.reached_end == True:
                 continue
@@ -289,11 +277,11 @@ class Simulation:
             elif car.position[0] == car.start_position[0] and car.position[1] == car.start_position[1]:
   
                 if interval%5 == 0:
-                    car.start_update_position(self.obs_list)          
+                    car.start_update_position(obs_list)          
                 else:
                     continue
 
-            else: car.update_position(self.cars_list, self.obs_list)
+            else: car.update_position(self.cars_list, obs_list)
             
             interval += 1
 
@@ -302,20 +290,19 @@ class Simulation:
         
         self.trajectory.append([car.position.copy() for car in self.cars_list])
         
-    def simulate_movement(self):
+    def simulate_movement(self,obs_list):
         interval = 5
         cnt=0
-        self.completion_count = 0
         while self.completion_count != self.num_cars:
-            self.update_positions(interval)
+            self.update_positions(obs_list, interval)
             interval+=1
             cnt+=1
-            if cnt > setting.genom_size*10+300: break
+            if cnt > setting.genom_size*10+300: return
         return np.array(self.trajectory)
 
-    def save_data(self):
+    def save_data(self, obs_list):
         np.save('trajectory_test.npy', np.array(self.trajectory))
-        np.save('obstacles_test.npy', np.array([obstacle.position for obstacle in self.obs_list]))
+        np.save('obstacles_test.npy', np.array([obstacle.position for obstacle in obs_list]))
         np.save('end_positions_test.npy', np.array([car.end_position for car in self.cars_list]))
 
     def get_distances(self):
