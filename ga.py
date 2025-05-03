@@ -559,6 +559,9 @@ if __name__ == '__main__':
                         # アドホック回避回数を追加
                         writer.writerow(["gen_best_adhoc_count:", best[i].get_adhoc_avoidance_count()])
 
+                    # 最終結果の前に目印を追加
+                    writer.writerow(["===== BEST_LAST_RESULT ====="])
+
                     writer.writerow(["time:", diff])
                     writer.writerow(["best_length:", best_popu.get_all_path_length()])
                     writer.writerow(["best_evo:", best_popu.get_fitness()])

@@ -44,8 +44,8 @@ class SimulationConfig:
         self.road_width = setting.VWfield
         
         # 安全マージン計算のパラメータ
-        self.reaction_time = 0.5
-        self.braking_factor = 0.5
+        self.reaction_time = 0.2
+        self.braking_factor = 0.1
         
         # シミュレーション状態
         self.max_steps = 500
@@ -172,7 +172,7 @@ class CollisionDetector:
                     (v1.position[1] - v2.position[1])**2
                 )
                 
-                if dist < self.config.car_width:
+                if dist < (self.config.car_width/2):
                     collisions += 1
         
         return collisions
