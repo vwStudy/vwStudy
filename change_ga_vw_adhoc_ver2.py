@@ -2231,9 +2231,9 @@ class VW:
             # 適合度計算（固定シナリオ用）
             fitness = (
                 # fixed_result["collisions"] * 100000 +  # 衝突に大きなペナルティ
-                all_path_length * 10 +               # 経路長を最小化
-                fixed_result["adhoc_count"] * 100000 + # アドホック回避にペナルティ
-                total_num_obstacles * 10              # 障害物数を考慮
+                all_path_length *               # 経路長
+                (total_num_obstacles / (1 * (setting.VWnum ** 2))) + # 障害物数を考慮
+                fixed_result["adhoc_count"] * 100000 # アドホック回避にペナルティ
             )
             
             return fitness, fixed_result["collisions"], all_path_length, total_num_obstacles, fixed_result["paths"], fixed_result["adhoc_count"], create_path_time_dic
@@ -2259,11 +2259,10 @@ class VW:
             efficiency = result["steps"] / result["vehicles_arrived"] if result["vehicles_arrived"] > 0 else float('inf')
             
             fitness = (
-                # result["collisions"] * 100000 +
-                (1 - throughput) * 1000 +
-                efficiency * 0.5 +
-                result["adhoc_count"] * 1000000 +
-                total_num_obstacles * 5
+                # result["collisions"] * 100000 +  # 衝突に大きなペナルティ
+                all_path_length *               # 経路長
+                (total_num_obstacles / (1 * (setting.VWnum ** 2))) + # 障害物数を考慮
+                result["adhoc_count"] * 100000 # アドホック回避にペナルティ
             )
             
             return fitness, result["collisions"], all_path_length, total_num_obstacles, [], result["adhoc_count"], create_path_time_dic
